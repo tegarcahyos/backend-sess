@@ -72,10 +72,8 @@ class Organization
         // $type_id = 1;
         // $type_name = "Telkom";
         // $type_code = "T12";
-        // $name = $request[0]->name;
-        // $code = $request[0]->code;
-        $name = $_POST['name'];
-        $code = $_POST['code'];
+        $name = $request[0]->name;
+        $code = $request[0]->code;
 
         $query = "INSERT INTO $tablename (name, code)";
         // $query .= "VALUES ($type_id , '$type_name', '$type_code', '$name', '$code')";
