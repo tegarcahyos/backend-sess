@@ -77,10 +77,10 @@ class Router
     {
         if ($type == 200) {
             $array = array(
-                // 'type' => $type,
-                // 'keterangan' => $keterangan . '',
-                'msg' => $msg,
                 'status' => $status,
+                'type' => $type,
+                'keterangan' => $keterangan . '',
+                'msg' => $msg,
             );
             echo json_encode($array);
         } else if ($type == 203) {
@@ -187,14 +187,11 @@ class Router
 
         try {
             // echo json_encode($result);
-            if ($result) {
-                if ($result == 'Data kosong') {
-                    $this->msg(200, $result, "berhasil", 0);
-                }
-                $this->msg(200, $result, "berhasil", 1);
-            } else {
-                $this->msg(203, $result, "Terjadi Kesalahan", 0);
+            if ($result == 'Data kosong') {
+                $this->msg(200, $result, "berhasil", 0);
             }
+            $this->msg(200, $result, "berhasil", 1);
+
         } catch (\Throwable $th) {
             $this->msg(203, $th, "Terjadi Kesalahan");
             // echo json_encode("terjadi kesalahan");

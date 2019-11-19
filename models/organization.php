@@ -35,14 +35,14 @@ class Organization
                 );
 
                 array_push($data_arr, $data_item);
-                return $data_arr;
+                $msg = $data_arr;
             }
 
         } else {
             $msg = 'Data Kosong';
-            return $msg;
         }
 
+        return $msg;
     }
 
     public function findById($id, $tablename)
