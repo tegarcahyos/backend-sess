@@ -72,16 +72,17 @@ class Organization
         $data = file_get_contents("php://input");
         $request = json_decode($data);
         // die(print_r($request[0]));
-        $type_id = 1;
-        $type_name = "Telkom";
-        $type_code = "T12";
+        // $type_id = 1;
+        // $type_name = "Telkom";
+        // $type_code = "T12";
         // $name = $request[0]->name;
         // $code = $request[0]->code;
         $name = $_POST['name'];
         $code = $_POST['code'];
 
         $query = "INSERT INTO $tablename (organization_type_id, type_name, type_code, name, code)";
-        $query .= "VALUES ($type_id , '$type_name', '$type_code', '$name', '$code')";
+        // $query .= "VALUES ($type_id , '$type_name', '$type_code', '$name', '$code')";
+        $query .= "VALUES ('$name', '$code')";
         // die($query);
         return $this->db->execute($query);
 
