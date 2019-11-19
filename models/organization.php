@@ -38,8 +38,7 @@ class Organization
                 );
 
                 array_push($data_arr, $data_item);
-                $msg = $data_arr;
-                return $msg;
+                return $data_arr;
             }
 
         } else {
