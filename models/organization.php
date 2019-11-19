@@ -82,7 +82,7 @@ class Organization
 
         $query = "INSERT INTO $tablename (organization_type_id, type_name, type_code, name, code)";
         $query .= "VALUES ($type_id , '$type_name', '$type_code', '$name', '$code')";
-        die("Hello World");
+        die($query);
         return $this->db->execute($query);
 
     }
