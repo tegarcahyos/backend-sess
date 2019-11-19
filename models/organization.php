@@ -42,7 +42,7 @@ class Organization
             }
 
         } else {
-            $msg = 0;
+            $msg = 'Data Kosong';
             return $msg;
         }
 
