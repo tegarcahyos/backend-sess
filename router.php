@@ -73,7 +73,7 @@ class Router
         }
     }
 
-    public function msg($type = null, $msg, $keterangan)
+    public function msg($type = null, $msg, $keterangan, $status)
     {
         if ($type == 200) {
             $array = array(
