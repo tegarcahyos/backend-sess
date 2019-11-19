@@ -38,12 +38,13 @@ class Organization
                 );
 
                 array_push($data_arr, $data_item);
-                return $data_arr;
+                $msg = $data_arr;
+                return $msg;
             }
 
         } else {
-            $err = array('data not found');
-            return $err;
+            $msg = 0;
+            return $msg;
         }
 
     }

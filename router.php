@@ -76,12 +76,18 @@ class Router
     public function msg($type = null, $msg, $keterangan)
     {
         if ($type == 200) {
-            $array = array(
-                // 'type' => $type,
-                // 'keterangan' => $keterangan . '',
-                'msg' => $msg,
+            if ($msg == 0) {
+                $array = array(
+                    // 'type' => $type,
+                    // 'keterangan' => $keterangan . '',
+                    'msg' => 'Data Kosong',
 
-            );
+                );
+            } else {
+                $array = array(
+                    'msg' => $msg,
+                );
+            }
             echo json_encode($array);
         } else if ($type == 203) {
             $array = array(
