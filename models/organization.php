@@ -38,15 +38,14 @@ class Organization
                 );
 
                 array_push($data_arr, $data_item);
+                return $data_arr;
             }
 
         } else {
-            echo json_encode(
-                array('message' => 'data not found')
-            );
+            $err = array('message' => 'data not found');
+            return $err;
         }
 
-        return $data_arr;
     }
 
     public function findById($id, $tablename)
