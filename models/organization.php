@@ -30,9 +30,6 @@ class Organization
 
                 $data_item = array(
                     'id' => $id,
-                    'type_id' => $organization_type_id,
-                    'type_name' => $type_name,
-                    'type_code' => $type_code,
                     'name' => $name,
                     'code' => $code,
                 );
