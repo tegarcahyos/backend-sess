@@ -80,7 +80,7 @@ class Router
                 'status' => $status,
                 'type' => $type,
                 'keterangan' => $keterangan . '',
-                'msg' => $msg,
+                'data' => $msg,
             );
             echo json_encode($array);
         } else if ($type == 203) {
