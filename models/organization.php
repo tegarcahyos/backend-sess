@@ -80,10 +80,10 @@ class Organization
         $name = $_POST['name'];
         $code = $_POST['code'];
 
-        $query = "INSERT INTO $tablename (organization_type_id, type_name, type_code, name, code)";
+        $query = "INSERT INTO $tablename (name, code)";
         // $query .= "VALUES ($type_id , '$type_name', '$type_code', '$name', '$code')";
         $query .= "VALUES ('$name', '$code')";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
