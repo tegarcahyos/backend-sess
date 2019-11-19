@@ -76,7 +76,7 @@ class Router
     public function msg($type = null, $msg, $keterangan)
     {
         if ($type == 200) {
-            if ($msg == 0) {
+            if ($msg = 0) {
                 $array = array(
                     // 'type' => $type,
                     // 'keterangan' => $keterangan . '',
