@@ -44,15 +44,14 @@ class UserOrganizationUnit
                 );
 
                 array_push($data_arr, $data_item);
+                $msg = $data_arr;
             }
 
         } else {
-            echo json_encode(
-                array('message' => 'data not found')
-            );
+            $msg = 'Data Kosong';
         }
 
-        return $data_arr;
+        return $msg;
     }
 
     public function find($id, $tablename)

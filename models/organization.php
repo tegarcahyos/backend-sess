@@ -54,9 +54,6 @@ class Organization
 
         $data_item = array(
             'id' => $id,
-            'type_id' => $organization_type_id,
-            'type_name' => $type_name,
-            'type_code' => $type_code,
             'name' => $name,
             'code' => $code,
         );
@@ -87,13 +84,13 @@ class Organization
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        $type_id = 1;
-        $type_name = "Telkom";
-        $type_code = "T12";
+        // $type_id = 1;
+        // $type_name = "Telkom";
+        // $type_code = "T12";
         $name = $request->name;
         $code = $request->code;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "', organization_type_id = '" . $type_id . "', type_code = '" . $type_code . "', type_name = '" . $type_name . "'" . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "'" . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }

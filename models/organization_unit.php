@@ -39,19 +39,17 @@ class OrganizationUnit
                     'parent_code' => $parent_code,
                     'name' => $name,
                     'code' => $code,
-                    'index' => $index,
                 );
 
                 array_push($data_arr, $data_item);
+                $msg = $data_arr;
             }
 
         } else {
-            echo json_encode(
-                array('message' => 'data not found')
-            );
+            $msg = 'Data Kosong';
         }
 
-        return $data_arr;
+        return $msg;
     }
 
     public function findById($id, $tablename)
@@ -71,7 +69,6 @@ class OrganizationUnit
             'parent_code' => $parent_code,
             'name' => $name,
             'code' => $code,
-            'index' => $index,
         );
         return $data_item;
     }
@@ -91,10 +88,9 @@ class OrganizationUnit
         $parent_code = '111';
         $name = $request[0]->name;
         $code = $request[0]->code;
-        $index = $request[0]->index;
 
-        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, parent_id, parent_name, parent_code, name, code, index)";
-        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $parent_id , '$parent_name', '$parent_code', '$name', '$code', '$index')";
+        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, parent_id, parent_name, parent_code, name, code)";
+        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $parent_id , '$parent_name', '$parent_code', '$name', '$code')";
         // die($query);
         return $this->db->execute($query);
 
@@ -112,9 +108,8 @@ class OrganizationUnit
         $parent_code = '111';
         $name = $request->name;
         $code = $request->code;
-        $index = $request->index;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "', index = '" . $index . "', organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "', parent_id = '" . $parent_id . "', parent_code = '" . $parent_code . "', parent_name = '" . $parent_name . "'" . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "', organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "', parent_id = '" . $parent_id . "', parent_code = '" . $parent_code . "', parent_name = '" . $parent_name . "'" . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
