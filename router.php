@@ -189,8 +189,9 @@ class Router
             // echo json_encode($result);
             if ($result == 'Data Kosong') {
                 $this->msg(200, $result, "berhasil", 0);
+            } else {
+                $this->msg(200, $result, "berhasil", 1);
             }
-            $this->msg(200, $result, "berhasil", 1);
 
         } catch (\Throwable $th) {
             $this->msg(203, $th, "Terjadi Kesalahan");
