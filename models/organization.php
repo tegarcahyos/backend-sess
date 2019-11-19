@@ -42,7 +42,7 @@ class Organization
             }
 
         } else {
-            $err = array('message' => 'data not found');
+            $err = array('data not found');
             return $err;
         }
 

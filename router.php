@@ -77,16 +77,16 @@ class Router
     {
         if ($type == 200) {
             $array = array(
-                'type' => $type,
-                'keterangan' => $keterangan . '',
+                // 'type' => $type,
+                // 'keterangan' => $keterangan . '',
                 'msg' => $msg,
 
             );
             echo json_encode($array);
         } else if ($type == 203) {
             $array = array(
-                'type' => $type,
-                'keterangan' => $keterangan . '',
+                // 'type' => $type,
+                // 'keterangan' => $keterangan . '',
                 'error-msg' => $msg,
             );
             echo json_encode($array);
