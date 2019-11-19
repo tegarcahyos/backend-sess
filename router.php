@@ -80,7 +80,7 @@ class Router
                 // 'type' => $type,
                 // 'keterangan' => $keterangan . '',
                 'msg' => $msg,
-
+                'status' => $status,
             );
             echo json_encode($array);
         } else if ($type == 203) {
@@ -88,6 +88,7 @@ class Router
                 // 'type' => $type,
                 // 'keterangan' => $keterangan . '',
                 'error-msg' => $msg,
+                'status' => $status,
             );
             echo json_encode($array);
         } else {
@@ -191,9 +192,9 @@ class Router
                     die("failed");
                 }
 
-                $this->msg(200, $result, "berhasil");
+                $this->msg(200, $result, "berhasil", 1);
             } else {
-                $this->msg(203, $result, "Terjadi Kesalahan");
+                $this->msg(203, $result, "Terjadi Kesalahan", 0);
             }
         } catch (\Throwable $th) {
             $this->msg(203, $th, "Terjadi Kesalahan");
