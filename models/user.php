@@ -35,6 +35,7 @@ class User
                     'name' => $name,
                     'email' => $email,
                     'phone' => $phone,
+                    'role' => $role,
                     'username' => $username,
                     'password' => $password,
                     'external_id' => $external_id,
@@ -66,6 +67,7 @@ class User
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
+            'role' => $role,
             'username' => $username,
             'password' => $password,
             'external_id' => $external_id,
@@ -88,6 +90,7 @@ class User
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
+            'role' => $role,
             'username' => $username,
             'password' => $password,
             'external_id' => $external_id,
@@ -110,6 +113,7 @@ class User
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
+            'role' => $role,
             'username' => $username,
             'password' => $password,
             'external_id' => $external_id,
@@ -129,14 +133,15 @@ class User
         $name = $request[0]->name;
         $email = $request[0]->email;
         $phone = $request[0]->phone;
+        $role = $request[0]->role;
         $username = $request[0]->username;
         $password = $request[0]->password;
         $external_id = 1;
         $status_active = 'false';
         $status_delete = 'false';
 
-        $query = "INSERT INTO $tablename (code, name, email, phone, username, password, external_id, status_active, status_delete)";
-        $query .= "VALUES ('$code' , '$name', '$email', $phone , '$username', '$password', $external_id, '$status_active', '$status_delete')";
+        $query = "INSERT INTO $tablename (code, name, email, phone, role, username, password, external_id, status_active, status_delete)";
+        $query .= "VALUES ('$code' , '$name', '$email', $phone , '$role', '$username', '$password', $external_id, '$status_active', '$status_delete')";
         // die($query);
         return $this->db->execute($query);
 
@@ -152,13 +157,14 @@ class User
         $name = $request[0]->name;
         $email = $request[0]->email;
         $phone = $request[0]->phone;
+        $role = $request[0]->role;
         $username = $request[0]->username;
         $password = $request[0]->password;
         $external_id = 1;
         $status_active = 'false';
         $status_delete = 'false';
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "', email = '" . $email . "', phone = '" . $phone . "', username = '" . $username . "', password = '" . $password . "', external_id = '" . $external_id . "', status_active = '" . $status_active . "', status_delete = '" . $status_delete . "'" . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "', email = '" . $email . "', phone = '" . $phone . "', , role = '" . $role . "' username = '" . $username . "', password = '" . $password . "', external_id = '" . $external_id . "', status_active = '" . $status_active . "', status_delete = '" . $status_delete . "'" . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
