@@ -1,14 +1,14 @@
 <?php
 include "adodb/adodb.inc.php";
 include "models/organization.php";
-include "models/organization_unit.php";
+include "models/unit.php";
 include "models/app.php";
 include "models/page.php";
 include "models/page_layout.php";
 include "models/metric.php";
 include "models/user.php";
-include "models/user_organization.php";
-include "models/user_organization_unit.php";
+include "models/user_role.php";
+include "models/user_unit.php";
 include "models/role.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -115,8 +115,8 @@ class Router
 
                 if ($explodeUrl[0] == 'organization') {
                     $db = new Organization($this->db_connect());
-                } else if ($explodeUrl[0] == 'organization_unit') {
-                    $db = new OrganizationUnit($this->db_connect());
+                } else if ($explodeUrl[0] == 'unit') {
+                    $db = new Unit($this->db_connect());
                 } else if ($explodeUrl[0] == 'app') {
                     $db = new App($this->db_connect());
                 } else if ($explodeUrl[0] == 'page') {
@@ -129,12 +129,12 @@ class Router
 
                 } else if ($explodeUrl[0] == 'users') {
                     $db = new User($this->db_connect());
-                } else if ($explodeUrl[0] == 'user_organization') {
-                    $db = new UserOrganization($this->db_connect());
-                } else if ($explodeUrl[0] == 'user_organization_unit') {
-                    $db = new UserOrganizationUnit($this->db_connect());
+                } else if ($explodeUrl[0] == 'user_unit') {
+                    $db = new UserUnit($this->db_connect());
                 } else if ($explodeUrl[0] == 'role') {
                     $db = new Role($this->db_connect());
+                } else if ($explodeUrl[0] == 'user_role') {
+                    $db = new UserRole($this->db_connect());
                 }
                 if ($explodeUrl[1] == "insert") {
                     // echo "Helo";
@@ -151,8 +151,8 @@ class Router
             if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
                 if ($explodeUrl[0] == 'organization') {
                     $db = new Organization($this->db_connect());
-                } else if ($explodeUrl[0] == 'organization_unit') {
-                    $db = new OrganizationUnit($this->db_connect());
+                } else if ($explodeUrl[0] == 'unit') {
+                    $db = new Unit($this->db_connect());
                 } else if ($explodeUrl[0] == 'app') {
                     $db = new App($this->db_connect());
                 } else if ($explodeUrl[0] == 'page') {
@@ -171,12 +171,12 @@ class Router
                         $username = $explodeUrl[2];
                         $result = $db->findByUsername($username, $explodeUrl[0]);
                     }
-                } else if ($explodeUrl[0] == 'user_organization') {
-                    $db = new UserOrganization($this->db_connect());
-                } else if ($explodeUrl[0] == 'user_organization_unit') {
-                    $db = new UserOrganizationUnit($this->db_connect());
+                } else if ($explodeUrl[0] == 'user_unit') {
+                    $db = new UserUnit($this->db_connect());
                 } else if ($explodeUrl[0] == 'role') {
                     $db = new Role($this->db_connect());
+                } else if ($explodeUrl[0] == 'user_role') {
+                    $db = new UserRole($this->db_connect());
                 }
                 if ($explodeUrl[1] == "get") {
                     $result = $db->get($explodeUrl[0]);
