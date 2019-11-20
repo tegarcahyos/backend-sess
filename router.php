@@ -9,7 +9,7 @@ include "models/metric.php";
 include "models/user.php";
 include "models/user_organization.php";
 include "models/user_organization_unit.php";
-include "models/user_role.php";
+include "models/role.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
 } else {
@@ -133,8 +133,8 @@ class Router
                     $db = new UserOrganization($this->db_connect());
                 } else if ($explodeUrl[0] == 'user_organization_unit') {
                     $db = new UserOrganizationUnit($this->db_connect());
-                } else if ($explodeUrl[0] == 'user_role') {
-                    $db = new UserRole($this->db_connect());
+                } else if ($explodeUrl[0] == 'role') {
+                    $db = new Role($this->db_connect());
                 }
                 if ($explodeUrl[1] == "insert") {
                     // echo "Helo";
@@ -175,8 +175,8 @@ class Router
                     $db = new UserOrganization($this->db_connect());
                 } else if ($explodeUrl[0] == 'user_organization_unit') {
                     $db = new UserOrganizationUnit($this->db_connect());
-                } else if ($explodeUrl[0] == 'user_role') {
-                    $db = new UserRole($this->db_connect());
+                } else if ($explodeUrl[0] == 'role') {
+                    $db = new Role($this->db_connect());
                 }
                 if ($explodeUrl[1] == "get") {
                     $result = $db->get($explodeUrl[0]);
