@@ -3,6 +3,8 @@ include "adodb/adodb.inc.php";
 include "models/organization.php";
 include "models/organization_unit.php";
 include "models/app.php";
+include "models/page.php";
+include "models/page_layout.php";
 include "models/metric.php";
 include "models/user.php";
 include "models/user_organization.php";
@@ -117,6 +119,10 @@ class Router
                     $db = new OrganizationUnit($this->db_connect());
                 } else if ($explodeUrl[0] == 'app') {
                     $db = new App($this->db_connect());
+                } else if ($explodeUrl[0] == 'page') {
+                    $db = new Page($this->db_connect());
+                } else if ($explodeUrl[0] == 'page_layout') {
+                    $db = new PageLayout($this->db_connect());
 
                 } else if ($explodeUrl[0] == 'metric') {
                     $db = new Metric($this->db_connect());
@@ -149,7 +155,10 @@ class Router
                     $db = new OrganizationUnit($this->db_connect());
                 } else if ($explodeUrl[0] == 'app') {
                     $db = new App($this->db_connect());
-
+                } else if ($explodeUrl[0] == 'page') {
+                    $db = new Page($this->db_connect());
+                } else if ($explodeUrl[0] == 'page_layout') {
+                    $db = new PageLayout($this->db_connect());
                 } else if ($explodeUrl[0] == 'metric') {
                     $db = new Metric($this->db_connect());
 
