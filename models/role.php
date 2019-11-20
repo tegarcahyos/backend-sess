@@ -32,7 +32,7 @@ class Role
                 $data_item = array(
                     'id' => $id,
                     'name' => $name,
-                    'description' => $description,
+
                 );
 
                 array_push($data_arr, $data_item);
@@ -56,7 +56,7 @@ class Role
         $data_item = array(
             'id' => $id,
             'name' => $name,
-            'description' => $description,
+
         );
         return $data_item;
     }
@@ -68,10 +68,9 @@ class Role
         //
         $request = json_decode($data);
         $name = $request[0]->name;
-        $description = $request[0]->description;
 
-        $query = "INSERT INTO $tablename (description, name)";
-        $query .= "VALUES ('$description' , '$name')";
+        $query = "INSERT INTO $tablename (name)";
+        $query .= "VALUES ('$name')";
         // die($query);
         return $this->db->execute($query);
 
@@ -84,9 +83,8 @@ class Role
         //
         $request = json_decode($data);
         $name = $request[0]->name;
-        $description = $request[0]->description;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', description = '" . $description . "' WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
