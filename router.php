@@ -158,6 +158,10 @@ class Router
                     $db = new OrganizationRole($this->db_connect());
                 } else if ($explodeUrl[0] == 'unit') {
                     $db = new Unit($this->db_connect());
+                    if ($explodeUrl[1] == "get_by_parent") {
+                        $parent_id = $explodeUrl[2];
+                        $result = $db->getByParent($explodeUrl[0], $parent_id);
+                    }
                 } else if ($explodeUrl[0] == 'app') {
                     $db = new App($this->db_connect());
                 } else if ($explodeUrl[0] == 'page') {

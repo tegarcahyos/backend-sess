@@ -9,12 +9,12 @@ class Unit
         $this->db = $db;
     }
 
-    public function get($tablename)
+    public function getByParent($tablename, $parent_id)
     {
         $query = "SELECT
            *
           FROM
-             $tablename
+             $tablename WHERE parent_id = $parent_id
           ORDER BY
             id ASC";
 
