@@ -69,6 +69,20 @@ class OrganizationRole
         return $data_item;
     }
 
+    public function findByOrgId($organization_id, $tablename)
+    {
+        $query = 'SELECT * FROM ' . $tablename . ' WHERE organization_id = ' . $organization_id . "";
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        extract($row);
+
+        $data_item = array(
+            'id' => $id,
+            'name' => $name,
+        );
+        return $data_item;
+    }
+
     public function insert($tablename)
     {
         // get data input from frontend

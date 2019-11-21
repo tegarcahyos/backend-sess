@@ -156,6 +156,10 @@ class Router
                     $db = new Organization($this->db_connect());
                 } else if ($explodeUrl[0] == 'organization_role') {
                     $db = new OrganizationRole($this->db_connect());
+                    if ($explodeUrl[1] == "get_by_organization_id") {
+                        $organizaiton_id = $explodeUrl[2];
+                        $result = $db->findByOrgId($explodeUrl[0], $organizaiton_id);
+                    }
                 } else if ($explodeUrl[0] == 'unit') {
                     $db = new Unit($this->db_connect());
                     if ($explodeUrl[1] == "get_by_parent") {
@@ -184,6 +188,7 @@ class Router
                     $db = new UserUnit($this->db_connect());
                 } else if ($explodeUrl[0] == 'role') {
                     $db = new Role($this->db_connect());
+                    
                 } else if ($explodeUrl[0] == 'user_role') {
                     $db = new UserRole($this->db_connect());
                 }
