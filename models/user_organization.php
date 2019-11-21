@@ -1,6 +1,6 @@
 <?php
 
-class UserRole
+class UserOrganization
 {
     public $db;
 
@@ -31,10 +31,12 @@ class UserRole
 
                 $data_item = array(
                     'id' => $id,
+                    'organization_id' => $organization_id,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
                     'user_id' => $user_id,
                     'user_name' => $user_name,
-                    'role_id' => $role_id,
-                    'role_name' => $role_name,
+
                 );
 
                 array_push($data_arr, $data_item);
@@ -57,10 +59,12 @@ class UserRole
 
         $data_item = array(
             'id' => $id,
+            'organization_id' => $organization_id,
+            'organization_name' => $organization_name,
+            'organization_code' => $organization_code,
             'user_id' => $user_id,
             'user_name' => $user_name,
-            'role_id' => $role_id,
-            'role_name' => $role_name,
+
         );
         return $data_item;
     }
@@ -70,14 +74,14 @@ class UserRole
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        $request = json_decode($data);
-        $user_id = $request[0]->user_id;
-        $user_name = $request[0]->user_name;
-        $role_id = $request[0]->role_id;
-        $role_name = $request[0]->role_name;
+        $organization_id = $_POST["organization_id"];
+        $organization_name = $_POST["organization_name"];
+        $organization_code = $_POST["organization_code"];
+        $user_id = $_POST["user_id"];
+        $user_name = $_POST["user_name"];
 
-        $query = "INSERT INTO $tablename (role_id, role_name, user_id, user_name)";
-        $query .= "VALUES ('$role_id', '$role_name' , '$user_id', '$user_name')";
+        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, user_id, user_name)";
+        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $user_id , '$user_name')";
         // die($query);
         return $this->db->execute($query);
 
@@ -85,16 +89,13 @@ class UserRole
 
     public function update($id, $tablename)
     {
-        // get data input from frontend
-        $data = file_get_contents("php://input");
-        //
-        $request = json_decode($data);
-        $user_id = $request[0]->user_id;
-        $user_name = $request[0]->user_name;
-        $role_id = $request[0]->role_id;
-        $role_name = $request[0]->role_name;
+        $organization_id = $_POST["organization_id"];
+        $organization_name = $_POST["organization_name"];
+        $organization_code = $_POST["organization_code"];
+        $user_id = $_POST["user_id"];
+        $user_name = $_POST["user_name"];
 
-        $query = "UPDATE " . $tablename . " SET user_id = '" . $user_id . "',user_name = '" . $user_name . "', role_id = '" . $role_id . "', role_name = '" . $role_name . "' WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "', user_id = '" . $user_id . "', user_name = '" . $user_name . "'" . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
