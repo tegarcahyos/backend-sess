@@ -83,7 +83,7 @@ class Unit
         $name = $request[0]->name;
         $code = $request[0]->code;
 
-        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, parent_id, parent_name, parent_code, name, code)";
+        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, parent_id, name, code)";
         $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $parent_id , '$name', '$code')";
         // die($query);
         return $this->db->execute($query);
