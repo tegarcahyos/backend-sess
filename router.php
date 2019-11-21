@@ -1,6 +1,7 @@
 <?php
 include "adodb/adodb.inc.php";
 include "models/organization.php";
+include "models/organization_role.php";
 include "models/unit.php";
 include "models/app.php";
 include "models/page.php";
@@ -115,6 +116,8 @@ class Router
 
                 if ($explodeUrl[0] == 'organization') {
                     $db = new Organization($this->db_connect());
+                } else if ($explodeUrl[0] == 'organization_role') {
+                    $db = new OrganizationRole($this->db_connect());
                 } else if ($explodeUrl[0] == 'unit') {
                     $db = new Unit($this->db_connect());
                 } else if ($explodeUrl[0] == 'app') {
@@ -151,6 +154,8 @@ class Router
             if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
                 if ($explodeUrl[0] == 'organization') {
                     $db = new Organization($this->db_connect());
+                } else if ($explodeUrl[0] == 'organization_role') {
+                    $db = new OrganizationRole($this->db_connect());
                 } else if ($explodeUrl[0] == 'unit') {
                     $db = new Unit($this->db_connect());
                 } else if ($explodeUrl[0] == 'app') {

@@ -1,6 +1,6 @@
 <?php
 
-class Unit
+class OrganizationRole
 {
     public $db;
 
@@ -34,9 +34,9 @@ class Unit
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
-                    'parent_id' => $parent_id,
-                    'name' => $name,
-                    'code' => $code,
+                    'role_id' => $role_id,
+                    'role_name' => $role_name,
+
                 );
 
                 array_push($data_arr, $data_item);
@@ -62,9 +62,9 @@ class Unit
             'organization_id' => $organization_id,
             'organization_name' => $organization_name,
             'organization_code' => $organization_code,
-            'parent_id' => $parent_id,
-            'name' => $name,
-            'code' => $code,
+            'role_id' => $role_id,
+            'role_name' => $role_name,
+
         );
         return $data_item;
     }
@@ -79,12 +79,11 @@ class Unit
         $organization_id = $request[0]->organization_id;
         $organization_name = $request[0]->organization_name;
         $organization_code = $request[0]->organization_code;
-        $parent_id = $request[0]->parent_id;
-        $name = $request[0]->name;
-        $code = $request[0]->code;
+        $role_id = $request[0]->role_id;
+        $role_name = $request[0]->role_name;
 
-        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, parent_id, name, code)";
-        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $parent_id , '$name', '$code')";
+        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, role_id, role_name)";
+        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $role_id , '$role_name')";
         // die($query);
         return $this->db->execute($query);
 
@@ -97,11 +96,10 @@ class Unit
         $organization_id = $request->organization_id;
         $organization_name = $request->organization_name;
         $organization_code = $request->organization_code;
-        $parent_id = $request->parent_id;
-        $name = $request->name;
-        $code = $request->code;
+        $role_id = $request[0]->role_id;
+        $role_name = $request[0]->role_name;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "', organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "', parent_id = '" . $parent_id . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET role_name = '" . $role_name . "', role_id = '" . $role_id . "', organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
