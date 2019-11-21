@@ -78,7 +78,7 @@ class Role
 
         $query = "INSERT INTO $tablename (name, organization_id, organization_name, organization_code,)";
         $query .= "VALUES ('$name', $organization_id , '$organization_name', '$organization_code',)";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
