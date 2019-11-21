@@ -153,7 +153,7 @@ class User
         $status_delete = 'false';
 
         $query = "UPDATE " . $tablename . " SET name = '" . $name . "', email = '" . $email . "', phone = '" . $phone . "', username = '" . $username . "', password = '" . $password . "', external_id = '" . $external_id . "', status_active = '" . $status_active . "', status_delete = '" . $status_delete . "'" . " WHERE id = " . $id;
-        die($query);
+        // die($query);
         return $this->db->execute($query);
     }
 
