@@ -205,7 +205,7 @@ class Router
 
         try {
             // echo json_encode($result);
-            if ($result == 'Data Kosong') {
+            if ($result == [] || $result == 'Data Kosong') {
                 $this->msg(200, $result, "berhasil", 0);
             } else {
                 $this->msg(200, $result, "berhasil", 1);

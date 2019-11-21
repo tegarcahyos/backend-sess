@@ -85,7 +85,7 @@ class Unit
             }
 
         } else {
-            $msg = 'Data Kosong';
+            $msg = [];
         }
 
         return $msg;
