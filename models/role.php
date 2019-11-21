@@ -32,7 +32,9 @@ class Role
                 $data_item = array(
                     'id' => $id,
                     'name' => $name,
-
+                    'organization_id' => $organization_id,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
                 );
 
                 array_push($data_arr, $data_item);
@@ -56,7 +58,9 @@ class Role
         $data_item = array(
             'id' => $id,
             'name' => $name,
-
+            'organization_id' => $organization_id,
+            'organization_name' => $organization_name,
+            'organization_code' => $organization_code,
         );
         return $data_item;
     }
@@ -68,9 +72,12 @@ class Role
         //
         $request = json_decode($data);
         $name = $request[0]->name;
+        $organization_id = $request[0]->organization_id;
+        $organization_name = $request[0]->organization_name;
+        $organization_code = $request[0]->organization_code;
 
-        $query = "INSERT INTO $tablename (name)";
-        $query .= "VALUES ('$name')";
+        $query = "INSERT INTO $tablename (name, organization_id, organization_name, organization_code,)";
+        $query .= "VALUES ('$name', $organization_id , '$organization_name', '$organization_code',)";
         // die($query);
         return $this->db->execute($query);
 
@@ -83,8 +90,11 @@ class Role
         //
         $request = json_decode($data);
         $name = $request->name;
+        $organization_id = $request->organization_id;
+        $organization_name = $request->organization_name;
+        $organization_code = $request->organization_code;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "' WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
