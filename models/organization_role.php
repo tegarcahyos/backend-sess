@@ -89,7 +89,7 @@ class OrganizationRole
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die($request[0]);
+        die(print_r($request[0]));
         // die(json_encode($request));
         $organization_id = $request[0]->organization_id;
         $organization_name = $request[0]->organization_name;
