@@ -69,10 +69,11 @@ class OrganizationRole
         return $data_item;
     }
 
-    public function findByOrgId($organization_id, $tablename)
+    public function findByOrgId($tablename, $organization_id)
     {
         $query = 'SELECT * FROM ' . $tablename . ' WHERE organization_id = ' . $organization_id . "";
         $result = $this->db->execute($query);
+
         $num = $result->rowCount();
 
         if ($num > 0) {
