@@ -141,7 +141,7 @@ class Router
                     $db = new PageLayout($this->core_connect());
                 } else if ($explodeUrl[0] == 'form') {
                     $db = new Form($this->core_connect());
-                } else if ($explodeUrl[0] == 'config_form') {
+                } else if ($explodeUrl[0] == 'config_form_layout') {
                     $db = new ConfigForm($this->core_connect());
                 } else if ($explodeUrl[0] == 'form_page') {
                     $db = new FormPage($this->core_connect());
