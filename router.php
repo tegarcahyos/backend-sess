@@ -149,11 +149,11 @@ class Router
                     $db = new Metric($this->core_connect());
 
                 } else if ($explodeUrl[0] == 'object') {
-                    $db = new Objects($this->core_connect());
                     if ($explodeUrl[1] == "insert_object") {
+                        $db = new Objects($this->core_connect());
                         $result = $db->insert($explodeUrl[0]);
-                        $dbobject = new Objects($this->object_connect());
-                        $result = $dbobject->create_table();
+                        $db = new Objects($this->object_connect());
+                        $result = $db->create_table();
                     }
                 } else if ($explodeUrl[0] == 'users') {
                     $db = new User($this->core_connect());
