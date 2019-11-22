@@ -69,19 +69,10 @@ class Objects
         // $name = $request[0]->name;
         $name = $_POST['name'];
 
-        $query = "INSERT INTO $tablename (name)";
-        $query .= "VALUES ('$name')";
-        // die($query);
-        $this->db->execute($query);
-
-        $name = strtolower($name);
-        $name = str_replace(" ", "_", $name);
-        $query2 = "CREATE TABLE data_$name(
-          id serial PRIMARY KEY,
-          values jsonb,
-       )";
-
-        return $this->db->execute($query2);
+        // $query = "INSERT INTO $tablename (name)";
+        // $query .= "VALUES ('$name')";
+        // // die($query);
+        // return $this->db->execute($query);
 
     }
 
@@ -99,7 +90,7 @@ class Objects
           id serial PRIMARY KEY,
           values jsonb,
        )";
-
+        die($query);
         return $this->db->execute($query);
     }
 
