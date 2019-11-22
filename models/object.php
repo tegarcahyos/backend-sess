@@ -31,7 +31,6 @@ class Objects
                 $data_item = array(
                     'id' => $id,
                     'name' => $name,
-                    'code' => $code,
                 );
 
                 array_push($data_arr, $data_item);
@@ -56,7 +55,6 @@ class Objects
         $data_item = array(
             'id' => $id,
             'name' => $name,
-            'code' => $code,
         );
         return $data_item;
     }
@@ -69,12 +67,11 @@ class Objects
         $request = json_decode($data);
         // die(json_encode($request));
         // $name = $request[0]->name;
-        // $code = $request[0]->code;
+        //
         $name = $_POST['name'];
-        $code = $_POST['code'];
 
-        $query = "INSERT INTO $tablename (name, code)";
-        $query .= "VALUES ('$name', '$code')";
+        $query = "INSERT INTO $tablename (name)";
+        $query .= "VALUES ('$name')";
         // die($query);
         return $this->db->execute($query);
 
@@ -104,9 +101,8 @@ class Objects
         //
         $request = json_decode($data);
         $name = $request[0]->name;
-        $code = $request[0]->code;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "'" . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "'" . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }

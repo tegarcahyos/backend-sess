@@ -190,7 +190,8 @@ class Router
                     $db = new PageLayout($this->core_connect());
                 } else if ($explodeUrl[0] == 'metric') {
                     $db = new Metric($this->core_connect());
-
+                } else if ($explodeUrl[0] == 'object') {
+                    $db = new Objects($this->core_connect());
                 } else if ($explodeUrl[0] == 'users') {
                     $db = new User($this->core_connect());
                     if ($explodeUrl[1] == "find_by_email") {
