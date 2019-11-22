@@ -71,10 +71,9 @@ class ConfigForm
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die($request);
-        // die(json_encode($request));
-        $form_config = $request->form;
-        $form_config = json_encode($form_config);
+        // die($request);
+        $form_config = $request[0]->form;
+        die($form_config);
         // $form_id = $request[0]->form_id;
         // $form_name = $request[0]->form_name;
         // $query = "INSERT INTO $tablename (form_id, form_name, form_config)";
