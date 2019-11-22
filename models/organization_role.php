@@ -71,7 +71,7 @@ class OrganizationRole
 
     public function findByOrgId($tablename, $organization_id)
     {
-        $query = "SELECT * FROM $tablename WHERE 'organization_id' = $organization_id";
+        $query = "SELECT * FROM $tablename WHERE organization_id = $organization_id";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
