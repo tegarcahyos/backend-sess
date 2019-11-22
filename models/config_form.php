@@ -71,6 +71,7 @@ class ConfigForm
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
+        die($request);
         // die(json_encode($request));
         $form_config = $request->form;
         $form_config = json_encode($form_config);
@@ -80,7 +81,7 @@ class ConfigForm
         // $query .= " VALUES ($form_id , '$form_name', '$form_config')";
         $query = "INSERT INTO $tablename (form_config)";
         $query .= " VALUES ($form_config)";
-        die($query);
+        
         return $this->db->execute($query);
 
     }
