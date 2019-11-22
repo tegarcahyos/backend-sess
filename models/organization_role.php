@@ -73,14 +73,34 @@ class OrganizationRole
     {
         $query = 'SELECT * FROM ' . $tablename . ' WHERE organization_id = ' . $organization_id . "";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        extract($row);
+        $num = $result->rowCount();
 
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
-        );
-        return $data_item;
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
+                    'role_id' => $role_id,
+                    'role_name' => $role_name,
+
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
     }
 
     public function insert($tablename)
