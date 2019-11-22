@@ -34,6 +34,9 @@ class UserOrganization
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
+                    'unit_id' => $unit_id,
+                    'unit_name' => $unit_name,
+                    'unit_code' => $unit_code,
                     'user_id' => $user_id,
                     'user_name' => $user_name,
 
@@ -62,6 +65,9 @@ class UserOrganization
             'organization_id' => $organization_id,
             'organization_name' => $organization_name,
             'organization_code' => $organization_code,
+            'unit_id' => $unit_id,
+            'unit_name' => $unit_name,
+            'unit_code' => $unit_code,
             'user_id' => $user_id,
             'user_name' => $user_name,
 
@@ -74,14 +80,18 @@ class UserOrganization
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        $organization_id = $_POST["organization_id"];
-        $organization_name = $_POST["organization_name"];
-        $organization_code = $_POST["organization_code"];
-        $user_id = $_POST["user_id"];
-        $user_name = $_POST["user_name"];
+        $request = json_decode($data);
+        $organization_id = $request[0]->organization_id;
+        $organization_name = $request[0]->organization_name;
+        $organization_code = $request[0]->organization_code;
+        $unit_id = $request[0]->unit_id;
+        $unit_name = $request[0]->unit_name;
+        $unit_code = $request[0]->unit_code;
+        $user_id = $request[0]->user_id;
+        $user_name = $request[0]->user_name;
 
-        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, user_id, user_name)";
-        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $user_id , '$user_name')";
+        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, unit_id, unit_name, unit_code, user_id, user_name)";
+        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $unit_id , '$unit_name', '$unit_code', $user_id , '$user_name')";
         // die($query);
         return $this->db->execute($query);
 
@@ -89,13 +99,19 @@ class UserOrganization
 
     public function update($id, $tablename)
     {
-        $organization_id = $_POST["organization_id"];
-        $organization_name = $_POST["organization_name"];
-        $organization_code = $_POST["organization_code"];
-        $user_id = $_POST["user_id"];
-        $user_name = $_POST["user_name"];
+        $data = file_get_contents("php://input");
+        //
+        $request = json_decode($data);
+        $organization_id = $request[0]->organization_id;
+        $organization_name = $request[0]->organization_name;
+        $organization_code = $request[0]->organization_code;
+        $unit_id = $request[0]->unit_id;
+        $unit_name = $request[0]->unit_name;
+        $unit_code = $request[0]->unit_code;
+        $user_id = $request[0]->user_id;
+        $user_name = $request[0]->user_name;
 
-        $query = "UPDATE " . $tablename . " SET organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "', user_id = '" . $user_id . "', user_name = '" . $user_name . "'" . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "', unit_id = '" . $unit_id . "', unit_code = '" . $unit_code . "', unit_name = '" . $unit_name . "', user_id = '" . $user_id . "', user_name = '" . $user_name . "'" . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
