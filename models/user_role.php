@@ -65,6 +65,39 @@ class UserRole
         return $data_item;
     }
 
+    public function findByUserId($user_id, $tablename)
+    {
+        $query = 'SELECT * FROM ' . $tablename . ' WHERE user_id = ' . $user_id . "";
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'user_id' => $user_id,
+                    'user_name' => $user_name,
+                    'role_id' => $role_id,
+                    'role_name' => $role_name,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
     public function insert($tablename)
     {
         // get data input from frontend
