@@ -70,9 +70,9 @@ class ConfigForm
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        $request = json_decode($data);
+        // $request = json_decode($data);
         // die(json_encode($request));
-        $form_config = $request->form;
+        $form_config = $data->form;
         $form_config = json_encode($form_config);
         // $form_id = $request[0]->form_id;
         // $form_name = $request[0]->form_name;
