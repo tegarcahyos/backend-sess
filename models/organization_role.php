@@ -89,13 +89,13 @@ class OrganizationRole
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        // die(json_encode($request));
+        die(json_encode($request));
         $organization_id = $request[0]->organization_id;
         $organization_name = $request[0]->organization_name;
         $organization_code = $request[0]->organization_code;
         $role_id = $request[0]->role_id;
         $role_name = $request[0]->role_name;
-        die($organization_code);
+
         $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, role_id, role_name)";
         $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $role_id , '$role_name')";
         die($query);
