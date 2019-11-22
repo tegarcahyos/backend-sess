@@ -226,7 +226,7 @@ class Router
 
                 } else if ($explodeUrl[0] == 'user_role') {
                     $db = new UserRole($this->core_connect());
-                    if ($explodeUrl[1] == "find_by_user_id") {
+                    if ($explodeUrl[1] == "get_by_user_id") {
                         $user_id = $explodeUrl[2];
                         $result = $db->findByUserId($user_id, $explodeUrl[0]);
                     }
