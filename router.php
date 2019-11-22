@@ -10,7 +10,7 @@ include "models/metric.php";
 include "models/object.php";
 include "models/user.php";
 include "models/form.php";
-include "models/form_layout.php";
+include "models/config_form.php";
 include "models/form_page.php";
 include "models/user_role.php";
 include "models/user_unit.php";
@@ -141,8 +141,8 @@ class Router
                     $db = new PageLayout($this->core_connect());
                 } else if ($explodeUrl[0] == 'form') {
                     $db = new Form($this->core_connect());
-                } else if ($explodeUrl[0] == 'form_layout') {
-                    $db = new FormLayout($this->core_connect());
+                } else if ($explodeUrl[0] == 'config_form') {
+                    $db = new ConfigForm($this->core_connect());
                 } else if ($explodeUrl[0] == 'form_page') {
                     $db = new FormPage($this->core_connect());
                 } else if ($explodeUrl[0] == 'metric') {
@@ -198,8 +198,8 @@ class Router
                     $db = new PageLayout($this->core_connect());
                 } else if ($explodeUrl[0] == 'form') {
                     $db = new Form($this->core_connect());
-                } else if ($explodeUrl[0] == 'form_layout') {
-                    $db = new FormLayout($this->core_connect());
+                } else if ($explodeUrl[0] == 'config_form') {
+                    $db = new ConfigForm($this->core_connect());
                 } else if ($explodeUrl[0] == 'form_page') {
                     $db = new FormPage($this->core_connect());
                     if ($explodeUrl[1] == "get_by_page_id") {
