@@ -39,7 +39,6 @@ class UserUnit
                     'unit_code' => $unit_code,
                     'user_id' => $user_id,
                     'user_name' => $user_name,
-                    'user_code' => $user_code,
 
                 );
 
@@ -71,7 +70,6 @@ class UserUnit
             'unit_code' => $unit_code,
             'user_id' => $user_id,
             'user_name' => $user_name,
-            'user_code' => $user_code,
 
         );
         return $data_item;
@@ -106,7 +104,6 @@ class UserUnit
                     'unit_code' => $unit_code,
                     'user_id' => $user_id,
                     'user_name' => $user_name,
-                    'user_code' => $user_code,
 
                 );
 
