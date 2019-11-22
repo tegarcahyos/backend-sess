@@ -67,7 +67,6 @@ class Objects
         $request = json_decode($data);
         // die(json_encode($request));
         // $name = $request[0]->name;
-        //
         $name = $_POST['name'];
 
         $query = "INSERT INTO $tablename (name)";
@@ -87,7 +86,7 @@ class Objects
         $name = $_POST['name'];
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
-        $query = "CREATE TABLE $name(
+        $query = "CREATE TABLE data_$name(
           id serial PRIMARY KEY,
           values jsonb,
        )";
