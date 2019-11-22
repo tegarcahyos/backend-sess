@@ -77,7 +77,7 @@ class UserUnit
         return $data_item;
     }
 
-    public function findByUnitId($tablename, $unit_id)
+    public function getByUnitId($tablename, $unit_id)
     {
         $query = "SELECT
            *
