@@ -72,7 +72,7 @@ class ConfigForm
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $form_config = $request.['form_config'][0]->form;
+        $form_config = $request->form;
         die($form_config);
         // $form_id = $request[0]->form_id;
         // $form_name = $request[0]->form_name;
