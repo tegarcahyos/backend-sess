@@ -85,7 +85,8 @@ class Objects
         // die(json_encode($request));
         // $name = $request[0]->name;
         $name = $_POST['name'];
-
+        $name = strtolower($name);
+        $name = str_replace(" ", "_", $name);
         $query = "CREATE TABLE $name(
           id serial PRIMARY KEY,
           values jsonb,
