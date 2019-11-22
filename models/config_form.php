@@ -73,11 +73,13 @@ class ConfigForm
         $request = json_decode($data);
         // die(json_encode($request));
         $form_config = $request[0]->form_config;
-        $form_id = $request[0]->form_id;
-        $form_name = $request[0]->form_name;
+        // $form_id = $request[0]->form_id;
+        // $form_name = $request[0]->form_name;
 
-        $query = "INSERT INTO $tablename (form_id, form_name, form_config)";
-        $query .= " VALUES ($form_id , '$form_name', '$form_config')";
+        // $query = "INSERT INTO $tablename (form_id, form_name, form_config)";
+        // $query .= " VALUES ($form_id , '$form_name', '$form_config')";
+        $query = "INSERT INTO $tablename (form_config)";
+        $query .= " VALUES ('$form_config')";
         // die($query);
         return $this->db->execute($query);
 
