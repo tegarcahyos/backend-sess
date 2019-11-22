@@ -75,7 +75,7 @@ class User
 
     public function findByEmail($email, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE email = ' . $email . "";
+        $query = "SELECT * FROM $tablename WHERE email = $email";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
@@ -96,7 +96,7 @@ class User
 
     public function findByUsername($username, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE username = ' . $username . "";
+        $query = "SELECT * FROM $tablename WHERE username = $username";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
