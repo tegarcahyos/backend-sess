@@ -72,7 +72,16 @@ class Objects
         $query = "INSERT INTO $tablename (name)";
         $query .= "VALUES ('$name')";
         // die($query);
-        return $this->db->execute($query);
+        $this->db->execute($query);
+
+        $name = strtolower($name);
+        $name = str_replace(" ", "_", $name);
+        $query2 = "CREATE TABLE data_$name(
+          id serial PRIMARY KEY,
+          values jsonb,
+       )";
+
+        return $this->db->execute($query2);
 
     }
 

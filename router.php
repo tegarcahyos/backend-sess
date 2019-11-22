@@ -152,7 +152,7 @@ class Router
                     if ($explodeUrl[1] == "insert_object") {
                         $db = new Objects($this->core_connect());
                         $result = $db->insert($explodeUrl[0]);
-                        $result = $db->create_table();
+                        // $result = $db->create_table();
                     }
                 } else if ($explodeUrl[0] == 'users') {
                     $db = new User($this->core_connect());
