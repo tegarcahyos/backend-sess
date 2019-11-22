@@ -9,6 +9,9 @@ include "models/page_layout.php";
 include "models/metric.php";
 include "models/object.php";
 include "models/user.php";
+include "models/form.php";
+include "models/form_layout.php";
+include "models/form_page.php";
 include "models/user_role.php";
 include "models/user_unit.php";
 include "models/role.php";
@@ -136,7 +139,12 @@ class Router
                     $db = new Page($this->core_connect());
                 } else if ($explodeUrl[0] == 'page_layout') {
                     $db = new PageLayout($this->core_connect());
-
+                } else if ($explodeUrl[0] == 'form') {
+                    $db = new Form($this->core_connect());
+                } else if ($explodeUrl[0] == 'form_layout') {
+                    $db = new FormLayout($this->core_connect());
+                } else if ($explodeUrl[0] == 'form_page') {
+                    $db = new FormPage($this->core_connect());
                 } else if ($explodeUrl[0] == 'metric') {
                     $db = new Metric($this->core_connect());
 
@@ -173,8 +181,8 @@ class Router
                 } else if ($explodeUrl[0] == 'organization_role') {
                     $db = new OrganizationRole($this->core_connect());
                     if ($explodeUrl[1] == "get_by_organization_id") {
-                        $organizaiton_id = $explodeUrl[2];
-                        $result = $db->findByOrgId($explodeUrl[0], $organizaiton_id);
+                        $organization_id = $explodeUrl[2];
+                        $result = $db->findByOrgId($explodeUrl[0], $organization_id);
                     }
                 } else if ($explodeUrl[0] == 'unit') {
                     $db = new Unit($this->core_connect());
@@ -188,6 +196,16 @@ class Router
                     $db = new Page($this->core_connect());
                 } else if ($explodeUrl[0] == 'page_layout') {
                     $db = new PageLayout($this->core_connect());
+                } else if ($explodeUrl[0] == 'form') {
+                    $db = new Form($this->core_connect());
+                } else if ($explodeUrl[0] == 'form_layout') {
+                    $db = new FormLayout($this->core_connect());
+                } else if ($explodeUrl[0] == 'form_page') {
+                    $db = new FormPage($this->core_connect());
+                    if ($explodeUrl[1] == "get_by_page_id") {
+                        $page_id = $explodeUrl[2];
+                        $result = $db->findByOrgId($explodeUrl[0], $page_id);
+                    }
                 } else if ($explodeUrl[0] == 'metric') {
                     $db = new Metric($this->core_connect());
                 } else if ($explodeUrl[0] == 'object') {
