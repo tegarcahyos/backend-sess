@@ -98,7 +98,7 @@ class OrganizationRole
 
         $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, role_id, role_name)";
         $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $role_id , '$role_name')";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
