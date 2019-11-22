@@ -73,7 +73,7 @@ class OrganizationRole
     {
         $query = 'SELECT * FROM ' . $tablename . ' WHERE organization_id = ' . $organization_id . "";
         $result = $this->db->execute($query);
-
+        die($result);
         $num = $result->rowCount();
 
         if ($num > 0) {
