@@ -130,11 +130,12 @@ class Unit
 
     }
 
-    public function getUnitByOrgId($tablename, $org_id){
+    public function getUnitByOrgId($tablename, $org_id)
+    {
         $query = "SELECT
            *
           FROM
-             $tablename WHERE org_id = $org_id
+             $tablename WHERE organization_id = $org_id
           ORDER BY
             id ASC";
 
