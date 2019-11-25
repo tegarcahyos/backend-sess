@@ -210,6 +210,8 @@ class Router
                         $page_id = $explodeUrl[2];
                         $result = $db->findByOrgId($explodeUrl[0], $page_id);
                     }
+                } else if ($explodeUrl[0] == 'config_form_layout') {
+                    $db = new ConfigForm($this->core_connect());
                 } else if ($explodeUrl[0] == 'metric') {
                     $db = new Metric($this->core_connect());
                 } else if ($explodeUrl[0] == 'object') {
