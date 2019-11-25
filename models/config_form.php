@@ -50,8 +50,7 @@ class ConfigForm
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
-        die($query);
+        $query = "SELECT * FROM $tablename  WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
