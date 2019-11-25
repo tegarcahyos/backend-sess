@@ -225,9 +225,9 @@ class Router
                     }
                 } else if ($explodeUrl[0] == 'user_unit') {
                     $db = new UserUnit($this->core_connect());
-                    if ($explodeUrl[1] == "get_by_unit") {
-                        $unit_id = $explodeUrl[2];
-                        $result = $db->getByUnitId($explodeUrl[0], $unit_id);
+                    if ($explodeUrl[1] == "get_by_user") {
+                        $user_id = $explodeUrl[2];
+                        $result = $db->getByUserId($explodeUrl[0], $user_id);
                     }
                 } else if ($explodeUrl[0] == 'role') {
                     $db = new Role($this->core_connect());

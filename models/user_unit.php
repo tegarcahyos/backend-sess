@@ -75,13 +75,13 @@ class UserUnit
         return $data_item;
     }
 
-    public function getByUnitId($tablename, $unit_id)
+    public function getByUserId($tablename, $user_id)
     {
         $query = "SELECT
            *
           FROM
              $tablename
-              WHERE unit_id =  $unit_id ";
+              WHERE user_id =  $user_id ";
 
         $result = $this->db->execute($query);
 
