@@ -78,6 +78,7 @@ class ConfigForm
         // $form_name = $request[0]->form_name;
         // $query = "INSERT INTO $tablename (form_id, form_name, form_config)";
         // $query .= " VALUES ($form_id , '$form_name', '$form_config')";
+        die($form_config);
         $implode = implode("", $form_config);
         die($implode);
         $query = "INSERT INTO $tablename (form_config)";
