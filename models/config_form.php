@@ -56,9 +56,9 @@ class ConfigForm
 
         $data_item = array(
             'id' => $id,
+            'form_type_submit' => $form_type_submit,
+            'form_name' => $form_name,
             'data_cfg' => json_decode($form_config),
-            // 'form_id' => $form_id,
-            // 'form_name' => $form_name,
 
         );
 
