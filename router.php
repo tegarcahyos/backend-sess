@@ -143,6 +143,12 @@ class Router
                     $db = new Form($this->core_connect());
                 } else if ($explodeUrl[0] == 'config_form_layout') {
                     $db = new ConfigForm($this->core_connect());
+                    if ($explodeUrl[1] == "insert_form_data") {
+                        $result = $db->insert($explodeUrl[0]);
+                    }else if ($explodeUrl[1] == "insert_form_layout") {
+                        $id_form = $explodeUrl[2];
+                        $result = $db->insert($explodeUrl[0], $id_form);
+                    }
                 } else if ($explodeUrl[0] == 'form_page') {
                     $db = new FormPage($this->core_connect());
                 } else if ($explodeUrl[0] == 'metric') {

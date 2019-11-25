@@ -66,7 +66,7 @@ class ConfigForm
         return $data_item;
     }
 
-    public function insert($tablename)
+    public function insertLayout($tablename, $id)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
@@ -80,9 +80,23 @@ class ConfigForm
         // $query .= " VALUES ($form_id , '$form_name', '$form_config')";
         // $implode = implode(" ", $data);
 
-        $query = "INSERT INTO $tablename (form_config)";
-        // $query .= " VALUES ('[$data_form]'::jsonb)";
-        $query .= " VALUES ('$data_form')";
+        $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = $id";
+        // die($query);
+        return $this->db->execute($query);
+
+    }
+
+    public function insertFormData($tablename)
+    {
+        // get data input from frontend
+        $data = file_get_contents("php://input");
+        //
+        $request = json_decode($data);
+
+        $form_submit_type = $request[0]->form_submit_type;
+        $form_name = $request[0]->form_name;
+        $query = "INSERT INTO $tablename (form_submit_type, form_name)";
+        $query .= " VALUES ($form_submit_type , '$form_name')";
         // die($query);
         return $this->db->execute($query);
 
