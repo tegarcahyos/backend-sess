@@ -80,7 +80,7 @@ class ConfigForm
         // $implode = implode(" ", $data);
 
         $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = $id";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
