@@ -188,6 +188,8 @@ class Router
                     if ($explodeUrl[1] == "get_by_parent") {
                         $parent_id = $explodeUrl[2];
                         $result = $db->getByParent($explodeUrl[0], $parent_id);
+                    } else if ($explodeUrl[1] == "get_leaf_unit") {
+                        $result = $db->getLeafUnit($explodeUrl[0]);
                     }
                 } else if ($explodeUrl[0] == 'app') {
                     $db = new App($this->core_connect());
@@ -223,8 +225,6 @@ class Router
                     if ($explodeUrl[1] == "get_by_unit") {
                         $unit_id = $explodeUrl[2];
                         $result = $db->getByUnitId($explodeUrl[0], $unit_id);
-                    } else if ($explodeUrl[1] == "get_leaf_unit") {
-                        $result = $db->getLeafUnit($explodeUrl[0]);
                     }
                 } else if ($explodeUrl[0] == 'role') {
                     $db = new Role($this->core_connect());
