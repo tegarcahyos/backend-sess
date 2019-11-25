@@ -31,9 +31,10 @@ class ConfigPage
 
                 $data_item = array(
                     'id' => $id,
-                    'value' => $value,
-                    'page_id' => $page_id,
+                    'page_config' => $page_config,
                     'page_name' => $page_name,
+                    'app_id' => $app_id,
+                    'app_name' => $app_name,
 
                 );
 
@@ -50,16 +51,17 @@ class ConfigPage
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
 
         $data_item = array(
             'id' => $id,
-            'value' => $value,
-            'page_id' => $page_id,
+            'page_config' => $page_config,
             'page_name' => $page_name,
+            'app_id' => $app_id,
+            'app_name' => $app_name,
 
         );
         return $data_item;
