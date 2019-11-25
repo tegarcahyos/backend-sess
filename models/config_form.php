@@ -51,6 +51,7 @@ class ConfigForm
     public function findById($id, $tablename)
     {
         $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        die($query);
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
@@ -58,8 +59,8 @@ class ConfigForm
         $data_item = array(
             'id' => $id,
             'form_config' => $form_config,
-            'form_id' => $form_id,
-            'form_name' => $form_name,
+            // 'form_id' => $form_id,
+            // 'form_name' => $form_name,
 
         );
         return $data_item;
