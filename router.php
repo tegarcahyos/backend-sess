@@ -190,6 +190,9 @@ class Router
                         $result = $db->getByParent($explodeUrl[0], $parent_id);
                     } else if ($explodeUrl[1] == "get_leaf_unit") {
                         $result = $db->getLeafUnit($explodeUrl[0]);
+                    } else if ($explodeUrl[1] == "get_by_organization") {
+                        $org_id = $explodeUrl[2];
+                        $result = $db->getUnitByOrgId($explodeUrl[0], $org_id);
                     }
                 } else if ($explodeUrl[0] == 'app') {
                     $db = new App($this->core_connect());
