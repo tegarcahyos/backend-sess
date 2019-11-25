@@ -71,7 +71,7 @@ class ConfigForm
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die(json_encode($request));
+        die(json_encode($request->form_config));
 
         $form_config = $request;
 
