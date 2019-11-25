@@ -65,26 +65,16 @@ class ConfigForm
         return $data_item;
     }
 
-    function subArraysToString($ar, $sep = ', ') {
-        $str = '';
-        foreach ($ar as $val) {
-            $str .= implode($sep, $val);
-            $str .= $sep; // add separator between sub-arrays
-        }
-        $str = rtrim($str, $sep); // remove last separator
-        return $str;
-    }
-
     public function insert($tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        
-        $data_form = $request[0]->form_config;
-        die($this->subArraysToString($data_form));
-        
+
+        $data_form = $request;
+        die(implode("", $data_form));
+
         // $form_id = $request[0]->form_id;
         // $form_name = $request[0]->form_name;
         // $query = "INSERT INTO $tablename (form_id, form_name, form_config)";
