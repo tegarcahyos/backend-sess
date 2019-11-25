@@ -73,7 +73,6 @@ class ConfigForm
         // $request = json_decode($data);
 
         $data_form = $data;
-        die($data_form);
 
         // $form_id = $request[0]->form_id;
         // $form_name = $request[0]->form_name;
@@ -82,7 +81,8 @@ class ConfigForm
         // $implode = implode(" ", $data);
 
         $query = "INSERT INTO $tablename (form_config)";
-        $query .= " VALUES ('[$form_config]'::jsonb)";
+        // $query .= " VALUES ('[$data_form]'::jsonb)";
+        $query .= " VALUES ($data_form)";
         // die($query);
         return $this->db->execute($query);
 
