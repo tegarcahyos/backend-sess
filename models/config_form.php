@@ -79,8 +79,8 @@ class ConfigForm
         // $query .= " VALUES ($form_id , '$form_name', '$form_config')";
         // $implode = implode(" ", $data);
 
-        $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = $id";
-        die($query);
+        $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = '$id'";
+        // die($query);
         return $this->db->execute($query);
 
     }
