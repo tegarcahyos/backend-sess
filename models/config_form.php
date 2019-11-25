@@ -92,10 +92,10 @@ class ConfigForm
         //
         $request = json_decode($data);
 
-        $form_submit_type = $request[0]->form_submit_type;
-        $form_name = $request[0]->form_name;
-        $query = "INSERT INTO $tablename (form_submit_type, form_name)";
-        $query .= " VALUES ($form_submit_type , '$form_name')";
+        $form_type_submit = $request->form_type_submit;
+        $form_name = $request->form_name;
+        $query = "INSERT INTO $tablename (form_type_submit, form_name)";
+        $query .= " VALUES ($form_type_submit , '$form_name')";
         // die($query);
         return $this->db->execute($query);
 
