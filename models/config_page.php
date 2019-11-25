@@ -105,11 +105,10 @@ class ConfigPage
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $page_id = $request->page_id;
         $page_name = $request->page_name;
-        $value = $request->value;
-
-        $query = "UPDATE " . $tablename . " SET value = '" . $value . "', page_id = '" . $page_id . "', page_name = '" . $page_name . "'" . " WHERE id = " . $id;
+        $app_id = $request->app_id;
+        $app_name = $request->app_name;
+        $query = "UPDATE $tablename  SET page_name = '$page_name', app_id = $app_id, app_name = $app_name WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
