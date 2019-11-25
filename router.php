@@ -210,12 +210,6 @@ class Router
                     $db = new Form($this->core_connect());
                 } else if ($explodeUrl[0] == 'config_form') {
                     $db = new ConfigForm($this->core_connect());
-                } else if ($explodeUrl[0] == 'form_page') {
-                    $db = new FormPage($this->core_connect());
-                    if ($explodeUrl[1] == "get_by_page_id") {
-                        $page_id = $explodeUrl[2];
-                        $result = $db->findByOrgId($explodeUrl[0], $page_id);
-                    }
                 } else if ($explodeUrl[0] == 'config_form_layout') {
                     $db = new ConfigForm($this->core_connect());
                 } else if ($explodeUrl[0] == 'metric') {
