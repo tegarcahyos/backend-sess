@@ -83,7 +83,7 @@ class ConfigForm
         $query = "INSERT INTO $tablename (form_config)";
         // $query .= " VALUES ('[$data_form]'::jsonb)";
         $query .= " VALUES ('$data_form')";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
@@ -93,13 +93,15 @@ class ConfigForm
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        $request = json_decode($data);
-        // die(json_encode($request));
-        $form_id = $request->form_id;
-        $form_name = $request->form_name;
-        $form_config = $request->form_config;
+        // $request = json_decode($data);
+        // // die(json_encode($request));
+        // $form_id = $request->form_id;
+        // $form_name = $request->form_name;
+        // $form_config = $request->form_config;
 
-        $query = "UPDATE " . $tablename . " SET form_config = '" . $form_config . "', form_id = '" . $form_id . "', form_name = '" . $form_name . "'" . " WHERE id = " . $id;
+        $data_form = $data;
+        // $query = "UPDATE " . $tablename . " SET form_config = '" . $form_config . "', form_id = '" . $form_id . "', form_name = '" . $form_name . "'" . " WHERE id = " . $id;
+        $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
     }
