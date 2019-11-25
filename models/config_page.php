@@ -105,7 +105,7 @@ class ConfigPage
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $page_name = $request->page_name;
+        $page_name = $request->name;
         $app_id = $request->app_id;
         $app_name = $request->app_name;
         $query = "UPDATE $tablename SET page_name = '$page_name', app_id = $app_id, app_name = '$app_name' WHERE id = '$id'";
