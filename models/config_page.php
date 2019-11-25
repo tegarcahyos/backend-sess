@@ -65,19 +65,32 @@ class PageLayout
         return $data_item;
     }
 
-    public function insert($tablename)
+    public function insertLayout($tablename, $id)
+    {
+        // get data input from frontend
+        $data = file_get_contents("php://input");
+        //
+
+        $data_page = $data;
+
+        $query = "UPDATE  $tablename SET page_config = '$data_page' WHERE id = '$id'";
+        // die($query);
+        return $this->db->execute($query);
+
+    }
+
+    public function insertPageData($tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        // die(json_encode($request));
-        $value = $request[0]->value;
-        $page_id = $request[0]->page_id;
-        $page_name = $request[0]->page_name;
 
-        $query = "INSERT INTO $tablename (page_id, page_name, value)";
-        $query .= " VALUES ($page_id , '$page_name', '$value')";
+        $app_id = $request[0]->app_id;
+        $app_name = $request[0]->app_name;
+        $page_name = $request[0]->name;
+        $query = "INSERT INTO $tablename (app_id, app_name, page_name)";
+        $query .= " VALUES ($app_id , '$app_name', '$page_name')";
         // die($query);
         return $this->db->execute($query);
 

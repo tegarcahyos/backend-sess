@@ -137,8 +137,14 @@ class Router
                     $db = new App($this->core_connect());
                 } else if ($explodeUrl[0] == 'page') {
                     $db = new Page($this->core_connect());
-                } else if ($explodeUrl[0] == 'page_layout') {
+                } else if ($explodeUrl[0] == 'config_page_layout') {
                     $db = new PageLayout($this->core_connect());
+                    if ($explodeUrl[1] == "insert_page_data") {
+                        $result = $db->insertPageData($explodeUrl[0]);
+                    } else if ($explodeUrl[1] == "insert_page_layout") {
+                        $id_page = $explodeUrl[2];
+                        $result = $db->insertLayout($explodeUrl[0], $id_page);
+                    }
                 } else if ($explodeUrl[0] == 'form') {
                     $db = new Form($this->core_connect());
                 } else if ($explodeUrl[0] == 'config_form_layout') {
