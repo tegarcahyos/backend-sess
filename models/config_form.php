@@ -70,6 +70,7 @@ class ConfigForm
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
+        die($data);
         $request = json_decode($data);
 
         $data = $request->form_config;
@@ -79,7 +80,6 @@ class ConfigForm
         // $query = "INSERT INTO $tablename (form_id, form_name, form_config)";
         // $query .= " VALUES ($form_id , '$form_name', '$form_config')";
         // $implode = implode(" ", $data);
-        die(json_encode($data) + "");
 
         $query = "INSERT INTO $tablename (form_config)";
         $query .= " VALUES ('[$form_config]'::jsonb)";
