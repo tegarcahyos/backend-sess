@@ -82,7 +82,7 @@ class ConfigForm
         //
         $request = json_decode($data);
         
-        $data_form = $request->form_config;
+        $data_form = $request[0]->form_config;
         die($this->subArraysToString($data_form));
         
         // $form_id = $request[0]->form_id;
