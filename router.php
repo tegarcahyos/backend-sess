@@ -145,7 +145,7 @@ class Router
                     $db = new ConfigForm($this->core_connect());
                     if ($explodeUrl[1] == "insert_form_data") {
                         $result = $db->insertFormData($explodeUrl[0]);
-                    }else if ($explodeUrl[1] == "insert_form_layout") {
+                    } else if ($explodeUrl[1] == "insert_form_layout") {
                         $id_form = $explodeUrl[2];
                         $result = $db->insertLayout($explodeUrl[0], $id_form);
                     }
