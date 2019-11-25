@@ -32,7 +32,7 @@ class ConfigForm
                 $data_item = array(
                     'id' => $id,
                     'form_name' => $form_name,
-                    'form_submit_type' => $form_submit_type,
+                    'form_type_submit' => $form_type_submit,
 
                 );
 
