@@ -108,7 +108,7 @@ class ConfigPage
         $page_name = $request->page_name;
         $app_id = $request->app_id;
         $app_name = $request->app_name;
-        $query = "UPDATE $tablename  SET page_name = '$page_name', app_id = $app_id, app_name = $app_name WHERE id = '$id'";
+        $query = "UPDATE $tablename SET page_name = '$page_name', app_id = $app_id, app_name = '$app_name' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
