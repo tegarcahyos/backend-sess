@@ -224,7 +224,6 @@ class Router
                         $unit_id = $explodeUrl[2];
                         $result = $db->getByUnitId($explodeUrl[0], $unit_id);
                     } else if ($explodeUrl[1] == "get_leaf_unit") {
-                        $unit_id = $explodeUrl[2];
                         $result = $db->getLeafUnit($explodeUrl[0]);
                     }
                 } else if ($explodeUrl[0] == 'role') {
