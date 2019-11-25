@@ -83,7 +83,7 @@ class ConfigForm
         $query = "INSERT INTO $tablename (form_config)";
         // $query .= " VALUES ('[$data_form]'::jsonb)";
         $query .= " VALUES ($data_form)";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
