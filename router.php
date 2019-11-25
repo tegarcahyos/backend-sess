@@ -239,7 +239,8 @@ class Router
                     }
                 } else if ($explodeUrl[0] == 'role') {
                     $db = new Role($this->core_connect());
-
+                } else if ($explodeUrl[0] == 'config_page_layout') {
+                    $db = new ConfigPage($this->core_connect());
                 } else if ($explodeUrl[0] == 'user_role') {
                     $db = new UserRole($this->core_connect());
                     if ($explodeUrl[1] == "get_by_user_id") {
