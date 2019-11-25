@@ -71,16 +71,15 @@ class ConfigForm
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die(json_encode($request->form_config));
 
-        $form_config = $request;
+        $data = $request->form_config;
 
         // $form_id = $request[0]->form_id;
         // $form_name = $request[0]->form_name;
         // $query = "INSERT INTO $tablename (form_id, form_name, form_config)";
         // $query .= " VALUES ($form_id , '$form_name', '$form_config')";
         
-        $implode = implode("", $form_config);
+        $implode = implode("", $data);
         die($implode);
         $query = "INSERT INTO $tablename (form_config)";
         $query .= " VALUES ('[$form_config]'::jsonb)";
