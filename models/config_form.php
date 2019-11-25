@@ -90,12 +90,12 @@ class ConfigForm
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        // $request = json_decode($data);
-        die($data);
-        $form_type_submit = $request->type;
-        $form_name = $request->name;
-        $query = "INSERT INTO $tablename (form_type_submit, form_name)";
-        $query .= " VALUES ($form_type_submit , '$form_name')";
+        $request = json_decode($data);
+        
+        $form_submit_type = $request[0]->type;
+        $form_name = $request[0]->name;
+        $query = "INSERT INTO $tablename (form_submit_type, form_name)";
+        $query .= " VALUES ($form_submit_type , '$form_name')";
         // die($query);
         return $this->db->execute($query);
 
