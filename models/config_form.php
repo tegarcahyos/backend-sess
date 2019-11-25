@@ -57,7 +57,7 @@ class ConfigForm
 
         $data_item = array(
             'id' => $id,
-            'form_config' => json_decode($form_config),
+            'data_cfg' => json_decode($form_config),
             // 'form_id' => $form_id,
             // 'form_name' => $form_name,
 
@@ -71,7 +71,6 @@ class ConfigForm
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        // $request = json_decode($data);
 
         $data_form = $data;
 
