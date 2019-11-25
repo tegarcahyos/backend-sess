@@ -135,7 +135,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename WHERE organization_id = $org_id
+             $tablename WHERE organization_id = $org_id AND parent_id = 0
           ORDER BY
             id ASC";
 
