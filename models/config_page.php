@@ -1,6 +1,6 @@
 <?php
 
-class PageLayout
+class ConfigPage
 {
     public $db;
 

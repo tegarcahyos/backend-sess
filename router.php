@@ -5,7 +5,7 @@ include "models/organization_role.php";
 include "models/unit.php";
 include "models/app.php";
 include "models/page.php";
-include "models/page_layout.php";
+include "models/config_page.php";
 include "models/metric.php";
 include "models/object.php";
 include "models/user.php";
@@ -138,7 +138,7 @@ class Router
                 } else if ($explodeUrl[0] == 'page') {
                     $db = new Page($this->core_connect());
                 } else if ($explodeUrl[0] == 'config_page_layout') {
-                    $db = new PageLayout($this->core_connect());
+                    $db = new ConfigPage($this->core_connect());
                     if ($explodeUrl[1] == "insert_page_data") {
                         $result = $db->insertPageData($explodeUrl[0]);
                     } else if ($explodeUrl[1] == "insert_page_layout") {
