@@ -313,18 +313,18 @@ class Router
                 $result = $db->delete($id, $explodeUrl[0]);
             }
 
-            try {
-                // echo json_encode($result);
-                if ($result == [] || $result == 'Data Kosong') {
-                    $this->msg(200, $result, "berhasil", 0);
-                } else {
-                    $this->msg(200, $result, "berhasil", 1);
-                }
-
-            } catch (\Throwable $th) {
-                $this->msg(203, $th, "Terjadi Kesalahan");
-                // echo json_encode("terjadi kesalahan");
+        }
+        try {
+            // echo json_encode($result);
+            if ($result == [] || $result == 'Data Kosong') {
+                $this->msg(200, $result, "berhasil", 0);
+            } else {
+                $this->msg(200, $result, "berhasil", 1);
             }
+
+        } catch (\Throwable $th) {
+            $this->msg(203, $th, "Terjadi Kesalahan");
+            // echo json_encode("terjadi kesalahan");
         }
     }
 }
