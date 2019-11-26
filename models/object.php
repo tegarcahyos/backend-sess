@@ -31,6 +31,7 @@ class Objects
                 $data_item = array(
                     'id' => $id,
                     'name' => $name,
+                    'attribute' => $attribute,
                 );
 
                 array_push($data_arr, $data_item);
@@ -55,6 +56,7 @@ class Objects
         $data_item = array(
             'id' => $id,
             'name' => $name,
+            'attribute' => $attribute,
         );
         return $data_item;
     }
@@ -67,10 +69,11 @@ class Objects
         $request = json_decode($data);
         // die(json_encode($request));
         // $name = $request[0]->name;
-        $name = $_POST['name'];
+        $name = $request[0]->name;
+        $attribute = $request[0]->attribute;
 
-        $query = "INSERT INTO $tablename (name)";
-        $query .= "VALUES ('$name')";
+        $query = "INSERT INTO $tablename (name, attribute)";
+        $query .= "VALUES ('$name', '$attribute')";
         // // die($query);
         return $this->db->execute($query);
 
@@ -83,7 +86,7 @@ class Objects
         $request = json_decode($data);
         // die(json_encode($request));
         // $name = $request[0]->name;
-        $name = $_POST['name'];
+        $name = $request[0]->name;
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
         $query = "CREATE TABLE data_$name(
@@ -100,8 +103,9 @@ class Objects
         //
         $request = json_decode($data);
         $name = $request[0]->name;
+        $attribute = $request[0]->attribute;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "'" . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '". $attribute . "' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
