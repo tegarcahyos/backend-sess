@@ -17,29 +17,27 @@ class DB
         // hitung result
         $num = $result->rowCount();
 
-        // jika ada hasil
         if ($num > 0) {
 
             $data_arr = array();
 
             while ($row = $result->fetchRow()) {
                 extract($row);
-                array_push($data_arr, json_decode($value));
+
+                $data_item = array(
+                    'id' => $id,
+                    'name' => $name,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
             }
 
-            $data_item = array(
-                'id' => $id,
-                'value' => $data_arr,
-            );
-
-            // Turn to JSON
         } else {
-            echo json_encode(
-                array('message' => 'data not found')
-            );
+            $msg = 'Data Kosong';
         }
 
-        return $data_arr;
+        return $msg;
     }
 
     public function select_id_get($id, $tablename)

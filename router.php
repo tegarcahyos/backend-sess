@@ -262,43 +262,43 @@ class Router
                 if ($explodeUrl[1] == "select_all_get") {
                     $tablename = $explodeUrl[0];
                     $result = $db->select_all_get($tablename);
-                } else if ($explodeUrl[2] == "select_id_get") {
-                    $tablename = $explodeUrl[1];
-                    $id = $explodeUrl[3];
+                } else if ($explodeUrl[1] == "select_id_get") {
+                    $tablename = $explodeUrl[0];
+                    $id = $explodeUrl[2];
                     $result = $db->select_id_get($id, $tablename);
-                } else if ($explodeUrl[2] == "select_where_get") {
-                    $tablename = $explodeUrl[1];
-                    $attr = $explodeUrl[3];
-                    $value = $explodeUrl[4];
+                } else if ($explodeUrl[1] == "select_where_get") {
+                    $tablename = $explodeUrl[0];
+                    $attr = $explodeUrl[2];
+                    $value = $explodeUrl[3];
                     $result = $db->select_where_get($attr, $value, $tablename);
-                } else if ($explodeUrl[2] == "select_or_where_get") {
-                    $tablename = $explodeUrl[1];
-                    $attr = $explodeUrl[3];
-                    $value = $explodeUrl[4];
+                } else if ($explodeUrl[1] == "select_or_where_get") {
+                    $tablename = $explodeUrl[0];
+                    $attr = $explodeUrl[2];
+                    $value = $explodeUrl[3];
                     $result = $db->select_or_where_get($attr, $value, $tablename);
-                } else if ($explodeUrl[2] == "select_where_like_get") {
-                    $tablename = $explodeUrl[1];
-                    $attr = $explodeUrl[3];
-                    $value = $explodeUrl[4];
+                } else if ($explodeUrl[1] == "select_where_like_get") {
+                    $tablename = $explodeUrl[0];
+                    $attr = $explodeUrl[2];
+                    $value = $explodeUrl[3];
                     $result = $db->select_where_like_get($attr, $value, $tablename);
-                } else if ($explodeUrl[2] == "delete_all_get") {
-                    $tablename = $explodeUrl[1];
-                    $id = $explodeUrl[3];
+                } else if ($explodeUrl[1] == "delete_all_get") {
+                    $tablename = $explodeUrl[0];
+                    $id = $explodeUrl[2];
                     $result = $db->delete_all_get($id, $tablename);
-                } else if ($explodeUrl[2] == "delete_where_get") {
-                    $tablename = $explodeUrl[1];
-                    $attr = $explodeUrl[3];
-                    $value = $explodeUrl[4];
+                } else if ($explodeUrl[1] == "delete_where_get") {
+                    $tablename = $explodeUrl[0];
+                    $attr = $explodeUrl[2];
+                    $value = $explodeUrl[3];
                     $result = $db->delete_where_get($attr, $value, $tablename);
-                } else if ($explodeUrl[2] == 'delete_value_on_attribute') {
-                    $tablename = $explodeUrl[1];
-                    $id = $explodeUrl[3];
-                    $attr = $explodeUrl[4];
+                } else if ($explodeUrl[1] == 'delete_value_on_attribute') {
+                    $tablename = $explodeUrl[0];
+                    $id = $explodeUrl[2];
+                    $attr = $explodeUrl[3];
                     $result = $db->delete_value_on_attribute($id, $attr, $tablename);
-                } else if ($explodeUrl[2] == 'delete_attr_by_id') {
-                    $tablename = $explodeUrl[1];
-                    $id = $explodeUrl[3];
-                    $attr = $explodeUrl[4];
+                } else if ($explodeUrl[1] == 'delete_attr_by_id') {
+                    $tablename = $explodeUrl[0];
+                    $id = $explodeUrl[2];
+                    $attr = $explodeUrl[3];
                     $result = $db->delete_attr_by_id($id, $attr, $tablename);
                 }
 
