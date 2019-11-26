@@ -106,9 +106,9 @@ class Objects
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request[0]->name;
-        $attribute = json_encode($request[0]->attribute);
-        $tbl_name_baru = $request[0]->name;
+        $name = $request->name;
+        $attribute = json_encode($request->attribute);
+        $tbl_name_baru = $request->name;
         $tbl_name_baru = strtolower($tbl_name_baru);
         $tbl_name_baru = str_replace(" ", "_", $tbl_name_baru);
 
