@@ -116,8 +116,7 @@ class Objects
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
         $query_alter = "ALTER TABLE $tbl_name RENAME TO data_$name";
-        die($query_alter);
-        $this->db->execute($query);
+        $this->db->execute($query_alter);
 
         $name = $request[0]->name;
         $attribute = json_encode($request[0]->attribute);
