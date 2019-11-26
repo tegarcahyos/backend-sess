@@ -161,8 +161,8 @@ class Router
             } else if ($explodeUrl[0] == 'metric') {
                 $db = new Metric($this->core_connect());
             } else if ($explodeUrl[0] == 'object') {
+                $db = new Objects($this->core_connect());
                 if ($explodeUrl[1] == "insert_object") {
-                    $db = new Objects($this->core_connect());
                     $result = $db->insert($explodeUrl[0]);
                     $result = $db->create_table();
                 } else if ($explodeUrl[1] == "update_object") {
