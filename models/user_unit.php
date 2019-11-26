@@ -53,7 +53,7 @@ class UserUnit
         return $msg;
     }
 
-    private $parentArray = [""];
+    private $parentArray = [];
     public function getParentUnitBy($id)
     {
         // Jika parent
