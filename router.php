@@ -168,9 +168,9 @@ class Router
                 $db = new UserRole($this->core_connect());
             } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
                 $db = new DB($this->core_connect());
-                if ($explodeUrl[2] == "insert") {
+                if ($explodeUrl[1] == "insert") {
                     $result = $db->insert($explodeUrl[1]);
-                } else if ($explodeUrl[2] == "update_all") {
+                } else if ($explodeUrl[1] == "update_all") {
                     // function ini untuk mengupdate satu table data
                     $tablename = $explodeUrl[1];
                     $attr = $explodeUrl[3];
