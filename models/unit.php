@@ -50,6 +50,27 @@ class Unit
         return $msg;
     }
 
+    private $parentArray = [""];
+    public function getParentUnitBy($id)
+    {
+        // Jika parent
+        if ($id == 0) {
+            // is root
+        } else {
+            // bukan root
+            // select name, parentId by $id,
+            $query = "";
+            //
+            $nameTemp = name;
+            // SUNTIK nama array
+            array_push($parentArray, $nameTemp);
+            // Ambil parent id, buat dicari lagi atasnya
+            $idParentTemp = parentId;
+            // Cari atasnya
+            $this->getParentUnitBy($idParentTemp);
+        }
+    }
+
     public function getByParent($tablename, $parent_id)
     {
         $query = "SELECT
@@ -69,7 +90,8 @@ class Unit
 
             while ($row = $result->fetchRow()) {
                 extract($row);
-
+                // ambil parent parentnya pake $parent_id
+                getParentUnitBy($parent_id);
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
@@ -78,6 +100,7 @@ class Unit
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
+                    'parent_list' => $parentArray,
                 );
 
                 array_push($data_arr, $data_item);
