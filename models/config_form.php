@@ -105,7 +105,7 @@ class ConfigForm
         $object_table = $request[0]->object_table;
         $query = "INSERT INTO $tablename (form_type_submit, form_name, object_id, object_name, object_table)";
         $query .= " VALUES ('$form_type_submit' , '$form_name', $object_id, '$object_name', '$object_table')";
-        die($query);
+        // die($query);
         return $this->db->execute($query);
 
     }
