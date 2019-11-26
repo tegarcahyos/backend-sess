@@ -199,9 +199,7 @@ class DB
     {
         $data = file_get_contents("php://input");
         //
-        die($data);
-        $request = json_decode($data);
-        $values = $request[0]->values;
+        $values = $data[0]->values;
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$values')";
         $this->db->execute($query);
