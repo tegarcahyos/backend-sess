@@ -124,10 +124,10 @@ class Objects
     public function delete_table($tablename, $id)
     {
         $query1 = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
-        extract($query1);
+        die($query1);
         $result = $this->db->execute($query1);
         $row = $result->fetchRow();
-        die($row);
+        extract($row);
         $data = json_encode($row);
         $name = $data->name;
         $name = strtolower($name);
