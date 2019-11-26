@@ -205,7 +205,35 @@ class DB
         // die($query);
         $this->db->execute($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
-        die("id: " . $lastId);
+        $select = "SELECT * FROM $tablename WHERE id = $lastId";
+
+        $result = $this->db->execute($select);
+        $num = $result->rowCount();
+
+        // jika ada hasil
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                    'values' => json_decode($values),
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
 
     }
 
