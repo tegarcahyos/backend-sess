@@ -167,7 +167,7 @@ class Router
             } else if ($explodeUrl[0] == 'user_role') {
                 $db = new UserRole($this->core_connect());
             } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
-                $db = new DB($this->db_connect());
+                $db = new DB($this->core_connect());
                 if ($explodeUrl[2] == "insert") {
                     $result = $db->insert($explodeUrl[1]);
                 } else if ($explodeUrl[2] == "update_all") {
