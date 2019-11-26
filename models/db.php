@@ -200,11 +200,11 @@ class DB
         $data = file_get_contents("php://input");
         //
 
-        $ayam = $data[0]->dataSended;
+        $ayam = $data;
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$ayam')";
-        die($query);
         $this->db->execute($query);
+        die($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
         $select = "SELECT * FROM $tablename WHERE id = $lastId";
 
