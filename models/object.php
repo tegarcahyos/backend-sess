@@ -71,9 +71,10 @@ class Objects
         // $name = $request[0]->name;
         $name = $request[0]->name;
         $attribute = $request[0]->attribute;
-        die(implode("," ,$attribute));
+        // implode("," ,$request[0]->attribute);
         $query = "INSERT INTO $tablename (name, attribute)";
-        $query .= "VALUES ('$name', $attribute)";
+        $query .= "VALUES ('$name', '[$attribute]')";
+        die($query);
         return $this->db->execute($query);
 
     }
