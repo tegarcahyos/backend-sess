@@ -199,11 +199,10 @@ class DB
     {
         $data = file_get_contents("php://input");
         //
-        $request = json_decode($data);
-        die($request[0]);
-        $values = $request[0]->dataSended;
+
+        $ayam = $data[0]->dataSended;
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
-        $query .= "VALUES ('$values')";
+        $query .= "VALUES ('$ayam')";
         $this->db->execute($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
         $select = "SELECT * FROM $tablename WHERE id = $lastId";
