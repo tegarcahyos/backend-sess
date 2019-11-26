@@ -201,8 +201,8 @@ class DB
 
         $values = $_POST['values'];
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
-        $query .= "VALUE ('$values')";
-        die($query);
+        $query .= "VALUES ('$values')";
+        // die($query);
         $this->db->execute($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
         die("id: " . $lastId);
