@@ -116,6 +116,7 @@ class Objects
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
         $query_alter = "ALTER TABLE $tbl_name RENAME TO data_$name";
+        die($query_alter);
         $this->db->execute($query_alter);
 
         $name = $request[0]->name;
@@ -125,7 +126,7 @@ class Objects
         $tbl_name = str_replace(" ", "_", $tbl_name);
 
         $query_update = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name . "' WHERE id = " . $id;
-        // die($query);
+        die($query_update);
         return $this->db->execute($query_update);
     }
 
