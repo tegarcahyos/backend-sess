@@ -235,7 +235,7 @@ class Router
                 $db = new Metric($this->core_connect());
             } else if ($explodeUrl[0] == 'object') {
                 $db = new Objects($this->core_connect());
-                if ($explodeUrl[1] == "delete") {
+                if ($explodeUrl[1] == "delete_object") {
                     $id = $explodeUrl[2];
                     // $result = $db->delete($id, $explodeUrl[0]);
                     $result = $db->delete_table($id, $explodeUrl[0]);
