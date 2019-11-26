@@ -202,6 +202,7 @@ class DB
         $values = $data[0]->values;
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$values')";
+        die($query);
         $this->db->execute($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
         $select = "SELECT * FROM $tablename WHERE id = $lastId";
