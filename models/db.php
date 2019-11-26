@@ -26,7 +26,7 @@ class DB
 
                 $data_item = array(
                     'id' => $id,
-                    'values' => $values,
+                    'values' => json_decode($values),
                 );
 
                 array_push($data_arr, $data_item);
