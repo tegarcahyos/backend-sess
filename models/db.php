@@ -204,8 +204,8 @@ class DB
         $query .= "VALUE ('$values')";
         // die($query);
         $this->db->execute($query);
-        $lastId = $this->db->Insert_ID($tablename, 'id');
-        die("id: " . $lastId);
+        $lastId = $this->db->insert_Id($tablename, 'id');
+        die("id: " . $this->db->insert_Id($tablename, 'id'));
 
     }
 
