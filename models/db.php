@@ -199,10 +199,10 @@ class DB
     {
         $data = file_get_contents("php://input");
         //
-        $values = $data[0]->values;
-        die($values);
+        die($data);
+        $ayam = $data[0]->values;
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
-        $query .= "VALUES ('$values')";
+        $query .= "VALUES ('$ayam')";
         $this->db->execute($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
         $select = "SELECT * FROM $tablename WHERE id = $lastId";
