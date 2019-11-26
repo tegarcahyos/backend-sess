@@ -199,8 +199,8 @@ class DB
     {
         $data = file_get_contents("php://input");
         //
+        die($data[0]);
         $values = $data[0]->values;
-        die($values);
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$values')";
         $this->db->execute($query);
