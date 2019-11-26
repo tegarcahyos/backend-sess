@@ -69,10 +69,10 @@ class Objects
         $request = json_decode($data);
         
         $name = $request[0]->name;
-        $attribute = implode("," ,$request[0]->attribute);
+        $attribute = json_encode($request[0]->attribute);
         // implode("," ,$request[0]->attribute);
         $query = "INSERT INTO $tablename (name, attribute)";
-        $query .= "VALUES ('$name', '[$attribute]')";
+        $query .= "VALUES ('$name', '$attribute')";
         die($query);
         return $this->db->execute($query);
 
