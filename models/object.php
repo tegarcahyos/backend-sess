@@ -129,8 +129,8 @@ class Objects
         $row = $result->fetchRow();
         extract($row);
         $json = json_encode($row);
-        $data = array_push($this->data, $json);
-        die(json_encode($data));
+        array_push($this->data, $json);
+        die(json_encode($this->data));
         $tbl_name = $data->tbl_name;
         $query = "ALTER TABLE  RENAME TO deleted_$name";
         return $this->db->execute($query);
