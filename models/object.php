@@ -107,15 +107,16 @@ class Objects
         //
         $request = json_decode($data);
 
-        $query1 = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
-        $result = $this->db->execute($query1);
+        $query_select = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $result = $this->db->execute($query_select);
         $row = $result->fetchRow();
         extract($row);
         $tbl_name = $row["tbl_name"] ?? null;
         $name = $row["name"] ?? null;
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
-        $query = "ALTER TABLE $tbl_name RENAME TO data_$name";
+        $query_alter = "ALTER TABLE $tbl_name RENAME TO data_$name";
+        die($query_alter);
         $this->db->execute($query);
 
         $name = $request[0]->name;
@@ -124,9 +125,9 @@ class Objects
         $tbl_name = strtolower($tbl_name);
         $tbl_name = str_replace(" ", "_", $tbl_name);
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name . "' WHERE id = " . $id;
+        $query_update = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name . "' WHERE id = " . $id;
         // die($query);
-        return $this->db->execute($query);
+        return $this->db->execute($query_update);
     }
 
     public function delete($id, $tablename)
