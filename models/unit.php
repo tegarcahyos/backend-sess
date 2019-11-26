@@ -63,6 +63,7 @@ class Unit
             //
             $result = $this->db->execute($query);
             $row = $result->fetchRow();
+            extract($row);
             die(json_encode($row));
             $nameTemp = name;
             // SUNTIK nama array
@@ -94,7 +95,7 @@ class Unit
             while ($row = $result->fetchRow()) {
                 extract($row);
                 // ambil parent parentnya pake $parent_id
-                // $this->getParentUnitBy($parent_id);
+                $this->getParentUnitBy($parent_id);
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
@@ -103,7 +104,7 @@ class Unit
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
-                    // 'parent_list' => $this->parentArray,
+                    'parent_list' => $this->parentArray,
                 );
 
                 array_push($data_arr, $data_item);
