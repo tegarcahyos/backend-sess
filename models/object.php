@@ -121,14 +121,14 @@ class Objects
         return $this->db->execute($query);
     }
 
-    public function delete_table($tablename, $id)
+    public function delete_table($id, $tablename)
     {
         $query1 = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
-        die($query1);
         $result = $this->db->execute($query1);
         $row = $result->fetchRow();
         extract($row);
         $data = json_encode($row);
+        die($data);
         $name = $data->name;
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
