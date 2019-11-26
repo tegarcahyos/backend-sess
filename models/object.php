@@ -121,15 +121,17 @@ class Objects
         return $this->db->execute($query);
     }
 
+    private $data = [];
     public function delete_table($id, $tablename)
     {
         $query1 = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
         $result = $this->db->execute($query1);
         $row = $result->fetchRow();
         extract($row);
-        $data = json_encode($row);
+        $json = json_encode($row);
+        $data = array_push($this->data, $json);
+        die($data);
         $tbl_name = $data->tbl_name;
-        die($tbl_name);
         $query = "ALTER TABLE  RENAME TO deleted_$name";
         return $this->db->execute($query);
     }
