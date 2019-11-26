@@ -75,7 +75,7 @@ class Objects
         $tbl_name = str_replace(" ", "_", $tbl_name);
         // implode("," ,$request[0]->attribute);
         $query = "INSERT INTO $tablename (name, attribute, tbl_name)";
-        $query .= "VALUES ('$name', '$attribute', '$tbl_name')";
+        $query .= "VALUES ('$name', '$attribute', 'data_$tbl_name')";
         // die($query);
         return $this->db->execute($query);
 
