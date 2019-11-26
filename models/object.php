@@ -67,13 +67,12 @@ class Objects
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        // die(json_encode($request));
-        // $name = $request[0]->name;
+        
         $name = $request[0]->name;
         $attribute = $request[0]->attribute;
         // implode("," ,$request[0]->attribute);
         $query = "INSERT INTO $tablename (name, attribute)";
-        $query .= "VALUES ('$name', '[$attribute]')";
+        $query .= "VALUES ('$name', ['$attribute'])";
         die($query);
         return $this->db->execute($query);
 
