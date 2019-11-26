@@ -32,6 +32,7 @@ class Objects
                     'id' => $id,
                     'name' => $name,
                     'attribute' => $attribute,
+                    'tbl_name' => $tbl_name,
                 );
 
                 array_push($data_arr, $data_item);
@@ -57,6 +58,7 @@ class Objects
             'id' => $id,
             'name' => $name,
             'attribute' => $attribute,
+            'tbl_name' => $tbl_name,
         );
         return $data_item;
     }
