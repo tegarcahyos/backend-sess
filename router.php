@@ -160,7 +160,6 @@ class Router
                 $db = new ConfigTable($this->core_connect());
             } else if ($explodeUrl[0] == 'metric') {
                 $db = new Metric($this->core_connect());
-
             } else if ($explodeUrl[0] == 'object') {
                 if ($explodeUrl[1] == "insert_object") {
                     $db = new Objects($this->core_connect());
