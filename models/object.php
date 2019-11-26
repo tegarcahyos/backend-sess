@@ -117,7 +117,7 @@ class Objects
         // $this->db->execute($query_alter);
 
         $query_update = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name_baru . "' WHERE id = " . $id;
-        die($query_update);
+        // die($query_update);
         $this->db->execute($query_update);
 
         $query_select = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
@@ -126,7 +126,7 @@ class Objects
         extract($row);
         $tbl_name = $row["tbl_name"] ?? null;
         $query_alter = "ALTER TABLE $tbl_name RENAME TO data_$tbl_name_baru";
-        // return $this->db->execute($query_alter);
+        return $this->db->execute($query_alter);
 
     }
 
