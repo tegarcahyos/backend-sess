@@ -58,35 +58,25 @@ class DB
 
                 $data_item = array(
                     'id' => $id,
-                    'value' => json_decode($value),
+                    'values' => json_decode($values),
                 );
 
                 array_push($data_arr, $data_item);
+                $msg = $data_arr;
             }
 
-            // $data_item is array of data_arr
-            // $data_item = array(
-
-            //     'value' => $data_arr,
-            // );
-            // Turn to JSON
-            // echo json_encode($data_item);
-        }
-        // jika tidak ada hasil
-        else {
-            echo json_encode(
-                array('message' => 'data not found')
-            );
+        } else {
+            $msg = 'Data Kosong';
         }
 
-        return $data_item;
+        return $msg;
     }
 
     public function select_where_get($attr, $val, $tablename)
     {
 
-        $query = "SELECT value FROM $tablename";
-        $value = explode('AND', $val);
+        $query = "SELECT values FROM $tablename";
+        $values = explode('AND', $val);
         $attr = explode('AND', $attr);
         for ($i = 0; $i < count($attr); $i++) {
             if ($i == 0) {
@@ -94,7 +84,7 @@ class DB
             } else {
                 $query .= " AND ";
             }
-            $query .= "value @> '{\"" . $attr[$i] . "\": \"" . $value[$i] . "\"}'";
+            $query .= "values @> '{\"" . $attr[$i] . "\": \"" . $values[$i] . "\"}'";
 
         }
 
@@ -110,11 +100,11 @@ class DB
             while ($row = $result->fetchRow()) {
                 extract($row);
 
-                array_push($arr, json_decode($value));
+                array_push($arr, json_decode($values));
             }
 
             $item = array(
-                'value' => $arr,
+                'values' => $arr,
             );
 
             // echo json_encode($item);
@@ -129,8 +119,8 @@ class DB
     public function select_or_where_get($attr, $val, $tablename)
     {
         // find query
-        $query = "SELECT value FROM $tablename ";
-        $value = explode('OR', $val);
+        $query = "SELECT values FROM $tablename ";
+        $values = explode('OR', $val);
         $attr = explode('OR', $attr);
         for ($i = 0; $i < count($attr); $i++) {
             if ($i == 0) {
@@ -138,7 +128,7 @@ class DB
             } else {
                 $query .= " OR ";
             }
-            $query .= "value @> '{\"" . $attr[$i] . "\": \"" . $value[$i] . "\"}'";
+            $query .= "values @> '{\"" . $attr[$i] . "\": \"" . $values[$i] . "\"}'";
 
         }
 
@@ -154,11 +144,11 @@ class DB
             while ($row = $result->fetchRow()) {
                 extract($row);
 
-                array_push($arr, json_decode($value));
+                array_push($arr, json_decode($values));
             }
 
             $item = array(
-                'value' => $arr,
+                'values' => $arr,
             );
 
             // echo json_encode($item);
@@ -173,9 +163,9 @@ class DB
     public function select_where_like_get($attr, $val, $tablename)
     {
 
-        $query = "SELECT value FROM $tablename ";
+        $query = "SELECT values FROM $tablename ";
 
-        $query .= "value @> '{\"" . $attr . "\": \"" . $val . "\"}'";
+        $query .= "values @> '{\"" . $attr . "\": \"" . $val . "\"}'";
 
         $query_real = str_replace("%20", " ", $query);
         // die($query_real);
@@ -189,11 +179,11 @@ class DB
             while ($row = $result->fetchRow()) {
                 extract($row);
 
-                array_push($arr, json_decode($value));
+                array_push($arr, json_decode($values));
             }
 
             $item = array(
-                'value' => $arr,
+                'values' => $arr,
             );
 
             // echo json_encode($item);
@@ -211,26 +201,26 @@ class DB
 
         $data = $_POST['data'];
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
-        $query .= "VALUES ('$data')";
+        $query .= "values ('$data')";
         // die($query);
         return $this->db->execute($query);
     }
 
     public function update_all($attr, $val, $tablename)
     {
-        // init value baru
-        $this->value = $_POST["value"];
+        // init values baru
+        $this->values = $_POST["values"];
 
-        $condition_value = explode('AND', $val);
+        $condition_values = explode('AND', $val);
         $condition_attr = explode('AND', $attr);
-        $query = "UPDATE  $tablename  SET value = '$this->value'";
+        $query = "UPDATE  $tablename  SET values = '$this->values'";
         for ($i = 0; $i < count($condition_attr); $i++) {
             if ($i == 0) {
 
             } else {
                 $query .= " AND ";
             }
-            $query .= "value @> '{\"" . $condition_attr[$i] . "\": \"" . $condition_value[$i] . "\"}'";
+            $query .= "values @> '{\"" . $condition_attr[$i] . "\": \"" . $condition_values[$i] . "\"}'";
 
         }
         $query_real = str_replace("%20", " ", $query);
@@ -240,11 +230,11 @@ class DB
 
     public function update_id($id, $tablename)
     {
-        // init attribute dan value
+        // init attribute dan values
         $this->attr = $_POST["attr"];
-        $this->value = $_POST["value"];
+        $this->values = $_POST["values"];
 
-        $query = "UPDATE $tablename SET value = value || '{\"" . $this->attr . "\":\"" . $this->value . "\"}' AND id = $id";
+        $query = "UPDATE $tablename SET values = values || '{\"" . $this->attr . "\":\"" . $this->values . "\"}' AND id = $id";
 
         // die($query);
 
@@ -254,19 +244,19 @@ class DB
     public function update_where($attr, $val, $tablename)
     {
         $this->attr = $_POST["attr"];
-        $this->value = $_POST["value"];
+        $this->values = $_POST["values"];
 
-        $condition_value = explode('AND', $val);
+        $condition_values = explode('AND', $val);
         $condition_attr = explode('AND', $attr);
 
-        $query = "UPDATE $tablename SET value = value || '{\"" . $this->attr . "\":\"" . $this->value . "\"}' AND ";
+        $query = "UPDATE $tablename SET values = values || '{\"" . $this->attr . "\":\"" . $this->values . "\"}' AND ";
         for ($i = 0; $i < count($condition_attr); $i++) {
             if ($i == 0) {
 
             } else {
                 $query .= " AND ";
             }
-            $query .= "value @> '{\"" . $condition_attr[$i] . "\": \"" . $condition_value[$i] . "\"}'";
+            $query .= "values @> '{\"" . $condition_attr[$i] . "\": \"" . $condition_values[$i] . "\"}'";
 
         }
         $query_real = str_replace("%20", " ", $query);
@@ -285,7 +275,7 @@ class DB
     public function delete_where_get($attr, $val, $tablename)
     {
 
-        $condition_value = explode('AND', $val);
+        $condition_values = explode('AND', $val);
         $condition_attr = explode('AND', $attr);
         $query = "DELETE FROM  $tablename";
         for ($i = 0; $i < count($condition_attr); $i++) {
@@ -294,7 +284,7 @@ class DB
             } else {
                 $query .= " AND ";
             }
-            $query .= "value @> '{\"" . $condition_attr[$i] . "\": \"" . $condition_value[$i] . "\"}'";
+            $query .= "values @> '{\"" . $condition_attr[$i] . "\": \"" . $condition_values[$i] . "\"}'";
 
         }
         $query_real = str_replace("%20", " ", $query);
@@ -302,10 +292,10 @@ class DB
         return $this->db->execute($query_real);
     }
 
-    public function delete_value_on_attribute($id, $attr, $tablename)
+    public function delete_values_on_attribute($id, $attr, $tablename)
     {
 
-        $query = "UPDATE $tablename SET value = value || '{";
+        $query = "UPDATE $tablename SET values = values || '{";
         $condition_attr = explode('AND', $attr);
         for ($i = 0; $i < count($condition_attr); $i++) {
 
@@ -326,7 +316,7 @@ class DB
 
     public function delete_attr_by_id($id, $attr, $tablename)
     {
-        $query = "UPDATE $tablename SET value = value - '" . $attr . "' WHERE id = " . $id . " ";
+        $query = "UPDATE $tablename SET values = values - '" . $attr . "' WHERE id = " . $id . " ";
 
         return $this->db->execute($query);
     }
