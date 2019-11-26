@@ -70,9 +70,12 @@ class Objects
         
         $name = $request[0]->name;
         $attribute = json_encode($request[0]->attribute);
+        $tbl_name = $request[0]->name;
+        $tbl_name = strtolower($tbl_name);
+        $tbl_name = str_replace(" ", "_", $tbl_name);
         // implode("," ,$request[0]->attribute);
-        $query = "INSERT INTO $tablename (name, attribute)";
-        $query .= "VALUES ('$name', '$attribute')";
+        $query = "INSERT INTO $tablename (name, attribute, tbl_name)";
+        $query .= "VALUES ('$name', '$attribute', '$tbl_name')";
         // die($query);
         return $this->db->execute($query);
 

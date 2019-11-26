@@ -33,7 +33,9 @@ class ConfigForm
                     'id' => $id,
                     'form_name' => $form_name,
                     'form_type_submit' => $form_type_submit,
-                    'object' => $object,
+                    'object_id' => $object_id,
+                    'object_name' => $object_name,
+                    'object_table' => $object_table,
 
                 );
 
@@ -60,7 +62,9 @@ class ConfigForm
             'form_type_submit' => $form_type_submit,
             'form_name' => $form_name,
             'data_cfg' => json_decode($form_config),
-            'object' => $object,
+            'object_id' => $object_id,
+            'object_name' => $object_name,
+            'object_table' => $object_table,
 
         );
 
@@ -96,9 +100,11 @@ class ConfigForm
 
         $form_type_submit = $request[0]->type;
         $form_name = $request[0]->name;
-        $object = $request[0]->object;
-        $query = "INSERT INTO $tablename (form_type_submit, form_name, object)";
-        $query .= " VALUES ('$form_type_submit' , '$form_name', $object)";
+        $object_id = $request[0]->object_id;
+        $object_name = $request[0]->object_name;
+        $object_table = $request[0]->object_table;
+        $query = "INSERT INTO $tablename (form_type_submit, form_name, object_id, object_name, object_table)";
+        $query .= " VALUES ('$form_type_submit' , '$form_name', $object_id, $object_name, $object_table)";
         // die($query);
         return $this->db->execute($query);
 
