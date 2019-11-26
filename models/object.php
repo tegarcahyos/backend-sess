@@ -128,10 +128,11 @@ class Objects
         $result = $this->db->execute($query1);
         $row = $result->fetchRow();
         extract($row);
-        $result = $row["tbl_name"] ?? null;
-        die($result);
-        $tbl_name = $data->tbl_name;
-        $query = "ALTER TABLE  RENAME TO deleted_$name";
+        $tbl_name = $row["tbl_name"] ?? null;
+        $name = $row["name"] ?? null;
+        $name = strtolower($name);
+        $name = str_replace(" ", "_", $name);
+        $query = "ALTER TABLE $tbl_name RENAME TO deleted_$name";
         return $this->db->execute($query);
     }
 }
