@@ -106,10 +106,25 @@ class Objects
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request[0]->name;
-        $attribute = $request[0]->attribute;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "' WHERE id = " . $id;
+        $query1 = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $result = $this->db->execute($query1);
+        $row = $result->fetchRow();
+        extract($row);
+        $tbl_name = $row["tbl_name"] ?? null;
+        $name = $row["name"] ?? null;
+        $name = strtolower($name);
+        $name = str_replace(" ", "_", $name);
+        $query = "ALTER TABLE $tbl_name RENAME TO data_$name";
+        $this->db->execute($query);
+
+        $name = $request[0]->name;
+        $attribute = json_encode($request[0]->attribute);
+        $tbl_name = $request[0]->name;
+        $tbl_name = strtolower($tbl_name);
+        $tbl_name = str_replace(" ", "_", $tbl_name);
+
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name . "' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
