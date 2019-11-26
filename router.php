@@ -166,6 +166,10 @@ class Router
                     $db = new Objects($this->core_connect());
                     $result = $db->insert($explodeUrl[0]);
                     $result = $db->create_table();
+                } else if ($explodeUrl[1] == "update_object") {
+                    $tablename = $explodeUrl[0];
+                    $id = $explodeUrl[2];
+                    $result = $db->updateObject($id, $tablename);
                 }
             } else if ($explodeUrl[0] == 'users') {
                 $db = new User($this->core_connect());

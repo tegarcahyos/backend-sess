@@ -100,7 +100,7 @@ class Objects
         return $this->db->execute($query);
     }
 
-    public function update($id, $tablename)
+    public function updateObject($id, $tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
