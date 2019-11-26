@@ -121,7 +121,6 @@ class Objects
         return $this->db->execute($query);
     }
 
-    private $data = [];
     public function delete_table($id, $tablename)
     {
         $query1 = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
@@ -132,7 +131,7 @@ class Objects
         $name = $row["name"] ?? null;
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
-        $query = "ALTER TABLE $tbl_name RENAME TO deleted_$name";
+        $query = "ALTER TABLE $tbl_name RENAME TO bug_$name";
         return $this->db->execute($query);
     }
 }
