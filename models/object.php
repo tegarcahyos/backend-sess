@@ -69,7 +69,7 @@ class Objects
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        
+
         $name = $request[0]->name;
         $attribute = json_encode($request[0]->attribute);
         $tbl_name = $request[0]->name;
@@ -109,7 +109,7 @@ class Objects
         $name = $request[0]->name;
         $attribute = $request[0]->attribute;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '". $attribute . "' WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
@@ -118,6 +118,21 @@ class Objects
     {
         $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
         // die($query);
+        return $this->db->execute($query);
+    }
+
+    public function delete_table($tablename, $id)
+    {
+        $query1 = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $result = $this->db->execute($query1);
+        $row = $result->fetchRow();
+        extract($row);
+        $data = json_encode($row);
+        $name = $data->name;
+        $name = strtolower($name);
+        $name = str_replace(" ", "_", $name);
+        $query = "ALTER TABLE data_$name RENAME TO deleted_$name";
+        die($query);
         return $this->db->execute($query);
     }
 }
