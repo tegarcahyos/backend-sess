@@ -203,8 +203,8 @@ class DB
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUE ('$values')";
         // die($query);
-        $exec = $this->db->execute($query);
-        die($exec->insert_Id());
+        $this->db->execute($query);
+        die($this->db->insert_Id());
 
     }
 
