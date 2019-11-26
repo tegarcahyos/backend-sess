@@ -106,7 +106,7 @@ class Objects
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die($request->name);
+
         $name = $request->name;
         $attribute = json_encode($request->attribute);
         $tbl_name_baru = $request->name;
@@ -121,7 +121,7 @@ class Objects
         $query_alter = "ALTER TABLE $tbl_name RENAME TO data_$tbl_name_baru";
         // die($query_alter);
         // $this->db->execute($query_alter);
-
+        die($name);
         $query_update = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name_baru . "' WHERE id = " . $id;
         die($query_update);
         return $this->db->execute($query_update);
