@@ -125,7 +125,6 @@ class Objects
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
         $query = "ALTER TABLE $tbl_name RENAME TO bug_$name";
-        die($query);
         $this->db->execute($query);
 
         $query2 = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
