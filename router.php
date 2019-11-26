@@ -259,8 +259,8 @@ class Router
                 }
             } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
                 $db = new DB($this->core_connect());
-                if ($explodeUrl[2] == "select_all_get") {
-                    $tablename = $explodeUrl[1];
+                if ($explodeUrl[1] == "select_all_get") {
+                    $tablename = $explodeUrl[0];
                     $result = $db->select_all_get($tablename);
                 } else if ($explodeUrl[2] == "select_id_get") {
                     $tablename = $explodeUrl[1];
