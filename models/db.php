@@ -201,9 +201,9 @@ class DB
         //
         $request = json_decode($data);
         $values = $request[0]->values;
+        die($values);
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$values')";
-        // die($query);
         $this->db->execute($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
         $select = "SELECT * FROM $tablename WHERE id = $lastId";
