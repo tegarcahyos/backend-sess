@@ -300,15 +300,15 @@ class Router
                     $id = $explodeUrl[3];
                     $attr = $explodeUrl[4];
                     $result = $db->delete_attr_by_id($id, $attr, $tablename);
-                } else if ($explodeUrl[1] == "get") {
-                    $result = $db->get($explodeUrl[0]);
-                } else if ($explodeUrl[1] == "find_id") {
-                    $id = $explodeUrl[2];
-                    $result = $db->findById($id, $explodeUrl[0]);
-                } else if ($explodeUrl[1] == "delete") {
-                    $id = $explodeUrl[2];
-                    $result = $db->delete($id, $explodeUrl[0]);
                 }
+            } else if ($explodeUrl[1] == "get") {
+                $result = $db->get($explodeUrl[0]);
+            } else if ($explodeUrl[1] == "find_id") {
+                $id = $explodeUrl[2];
+                $result = $db->findById($id, $explodeUrl[0]);
+            } else if ($explodeUrl[1] == "delete") {
+                $id = $explodeUrl[2];
+                $result = $db->delete($id, $explodeUrl[0]);
             }
         } else {
             echo json_encode("Cant Connect");
