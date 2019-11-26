@@ -7,6 +7,7 @@ include "models/app.php";
 include "models/page.php";
 include "models/config_page.php";
 include "models/config_table.php";
+include "models/config_gann.php";
 include "models/metric.php";
 include "models/object.php";
 include "models/db.php";
@@ -147,6 +148,11 @@ class Router
                 } else if ($explodeUrl[1] == "insert_form_layout") {
                     $id_form = $explodeUrl[2];
                     $result = $db->insertLayout($explodeUrl[0], $id_form);
+                }
+            } else if ($explodeUrl[0] == 'config_gann') {
+                $db = new ConfigGann($this->core_connect());
+                if ($explodeUrl[1] == "insert_gann_data") {
+                    $result = $db->insertGannData($explodeUrl[0]);
                 }
             } else if ($explodeUrl[0] == 'form_page') {
                 $db = new FormPage($this->core_connect());
