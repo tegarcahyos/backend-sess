@@ -128,10 +128,10 @@ class Objects
         $row = $result->fetchRow();
         extract($row);
         $data = json_encode($row);
-        die($data);
         $name = $data->name;
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
+        die($name);
         $query = "ALTER TABLE data_$name RENAME TO deleted_$name";
         return $this->db->execute($query);
     }
