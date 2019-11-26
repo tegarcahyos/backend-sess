@@ -121,11 +121,11 @@ class Objects
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
         $query_alter = "ALTER TABLE $tbl_name RENAME TO data_$tbl_name_baru";
-        die($query_alter);
+        // die($query_alter);
         $this->db->execute($query_alter);
 
         $query_update = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name . "' WHERE id = " . $id;
-        die($query_update);
+        // die($query_update);
         return $this->db->execute($query_update);
     }
 
