@@ -113,18 +113,21 @@ class Objects
         $tbl_name_baru = strtolower($tbl_name_baru);
         $tbl_name_baru = str_replace(" ", "_", $tbl_name_baru);
 
+        // die($query_alter);
+        // $this->db->execute($query_alter);
+
+        $query_update = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name_baru . "' WHERE id = " . $id;
+        die($query_update);
+        $this->db->execute($query_update);
+
         $query_select = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
         $result = $this->db->execute($query_select);
         $row = $result->fetchRow();
         extract($row);
         $tbl_name = $row["tbl_name"] ?? null;
         $query_alter = "ALTER TABLE $tbl_name RENAME TO data_$tbl_name_baru";
-        // die($query_alter);
-        // $this->db->execute($query_alter);
-        die($name);
-        $query_update = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name_baru . "' WHERE id = " . $id;
-        die($query_update);
-        return $this->db->execute($query_update);
+        // return $this->db->execute($query_alter);
+
     }
 
     public function delete($id, $tablename)
