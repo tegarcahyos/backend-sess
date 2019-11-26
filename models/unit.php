@@ -64,7 +64,7 @@ class Unit
             $result = $this->db->execute($query);
             $row = $result->fetchRow();
             extract($row);
-            // die($parent_id);
+
             $nameTemp = $name;
             // SUNTIK nama array
             array_push($this->parentArray, $nameTemp);
