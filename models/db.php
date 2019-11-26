@@ -197,9 +197,10 @@ class DB
 
     public function insert($tablename)
     {
-        // $data = file_get_contents("php://input");
-
-        $values = $_POST['values'];
+        $data = file_get_contents("php://input");
+        //
+        $request = json_decode($data);
+        $values = $request[0]->values;
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$values')";
         // die($query);
