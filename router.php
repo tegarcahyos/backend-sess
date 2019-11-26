@@ -246,6 +246,9 @@ class Router
                 if ($explodeUrl[1] == "get_by_user") {
                     $user_id = $explodeUrl[2];
                     $result = $db->getByUserId($explodeUrl[0], $user_id);
+                } else if ($explodeUrl[1] == "get_by_parent_unit_id") {
+                    $parent_id = $explodeUrl[2];
+                    $result = $db->getByParentUnitId($explodeUrl[0], $parent_id);
                 }
             } else if ($explodeUrl[0] == 'role') {
                 $db = new Role($this->core_connect());
