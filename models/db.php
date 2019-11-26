@@ -203,6 +203,7 @@ class DB
         $ayam = $data[0]->dataSended;
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$ayam')";
+        die($query);
         $this->db->execute($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
         $select = "SELECT * FROM $tablename WHERE id = $lastId";
