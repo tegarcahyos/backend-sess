@@ -202,9 +202,10 @@ class UserUnit
         $unit_code = $request[0]->unit_code;
         $user_id = $request[0]->user_id;
         $user_name = $request[0]->user_name;
+        $parent_id = $request[0]->parent_id;
 
-        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, unit_id, unit_name, unit_code, user_id, user_name)";
-        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $unit_id , '$unit_name', '$unit_code', $user_id , '$user_name')";
+        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, unit_id, unit_name, unit_code, user_id, user_name, parent_id)";
+        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $unit_id , '$unit_name', '$unit_code', $user_id , '$user_name', $parent_id)";
         // die($query);
         return $this->db->execute($query);
 
@@ -222,8 +223,9 @@ class UserUnit
         $unit_code = $request[0]->unit_code;
         $user_id = $request[0]->user_id;
         $user_name = $request[0]->user_name;
+        $parent_id = $request[0]->parent_id;
 
-        $query = "UPDATE " . $tablename . " SET organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "', unit_id = '" . $unit_id . "', unit_code = '" . $unit_code . "', unit_name = '" . $unit_name . "', user_id = '" . $user_id . "', user_name = '" . $user_name . "'" . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "', unit_id = '" . $unit_id . "', unit_code = '" . $unit_code . "', unit_name = '" . $unit_name . "', user_id = '" . $user_id . "', user_name = '" . $user_name . "' , parent_id = '" . $parent_id . "' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
