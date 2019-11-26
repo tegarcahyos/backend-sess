@@ -117,9 +117,6 @@ class Objects
         $row = $result->fetchRow();
         extract($row);
         $tbl_name = $row["tbl_name"] ?? null;
-        $name = $row["name"] ?? null;
-        $name = strtolower($name);
-        $name = str_replace(" ", "_", $name);
         $query_alter = "ALTER TABLE $tbl_name RENAME TO data_$tbl_name_baru";
         // die($query_alter);
         // $this->db->execute($query_alter);
