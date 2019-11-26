@@ -106,6 +106,7 @@ class Objects
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
+        die($request->name);
         $name = $request->name;
         $attribute = json_encode($request->attribute);
         $tbl_name_baru = $request->name;
