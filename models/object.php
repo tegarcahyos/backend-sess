@@ -130,7 +130,7 @@ class Objects
         extract($row);
         // $json = json_encode($row);
         array_push($this->data, $row);
-        die(json_encode($this->data));
+        die(json_encode($this->data->tbl_name));
         $tbl_name = $data->tbl_name;
         $query = "ALTER TABLE  RENAME TO deleted_$name";
         return $this->db->execute($query);
