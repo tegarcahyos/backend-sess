@@ -63,7 +63,7 @@ class Unit
             //
             $nameTemp = name;
             // SUNTIK nama array
-            array_push($parentArray, $nameTemp);
+            array_push($this->parentArray, $nameTemp);
             // Ambil parent id, buat dicari lagi atasnya
             $idParentTemp = parentId;
             // Cari atasnya
@@ -100,7 +100,7 @@ class Unit
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
-                    'parent_list' => $parentArray,
+                    'parent_list' => $this->parentArray,
                 );
 
                 array_push($data_arr, $data_item);
