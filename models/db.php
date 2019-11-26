@@ -199,7 +199,7 @@ class DB
     {
         $data = file_get_contents("php://input");
         //
-        $ayam = $data[0]->values;
+        $ayam = $data[0]->dataSended;
         die($ayam);
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$ayam')";
