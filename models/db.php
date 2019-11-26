@@ -212,7 +212,7 @@ class DB
         // $data = file_get_contents("php://input");
 
         $data = $_POST['data'];
-        $query = 'INSERT INTO ' . $tablename . ' (value) ';
+        $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$data')";
         die($query);
         return $this->db->execute($query);
