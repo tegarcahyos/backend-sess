@@ -33,6 +33,7 @@ class ConfigForm
                     'id' => $id,
                     'form_name' => $form_name,
                     'form_type_submit' => $form_type_submit,
+                    'object' => $object,
 
                 );
 
@@ -59,6 +60,7 @@ class ConfigForm
             'form_type_submit' => $form_type_submit,
             'form_name' => $form_name,
             'data_cfg' => json_decode($form_config),
+            'object' => $object,
 
         );
 
