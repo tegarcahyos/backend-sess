@@ -116,9 +116,21 @@ class Objects
 
     public function delete($id, $tablename)
     {
-        $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        $query1 = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $result = $this->db->execute($query1);
+        $row = $result->fetchRow();
+        extract($row);
+        $tbl_name = $row["tbl_name"] ?? null;
+        $name = $row["name"] ?? null;
+        $name = strtolower($name);
+        $name = str_replace(" ", "_", $name);
+        $query = "ALTER TABLE $tbl_name RENAME TO bug_$name";
+        die($query);
+        $this->db->execute($query);
+
+        $query2 = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
         // die($query);
-        return $this->db->execute($query);
+        return $this->db->execute($query2);
     }
 
     public function delete_table($id, $tablename)
