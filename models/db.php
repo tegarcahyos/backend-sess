@@ -75,7 +75,7 @@ class DB
     public function select_where_get($attr, $val, $tablename)
     {
 
-        $query = "SELECT values FROM $tablename";
+        $query = "SELECT values FROM $tablename ";
         $values = explode('AND', $val);
         $attr = explode('AND', $attr);
         for ($i = 0; $i < count($attr); $i++) {
@@ -89,7 +89,7 @@ class DB
         }
 
         $query_real = str_replace("%20", " ", $query);
-        die($query_real);
+        // die($query_real);
         $result = $this->db->execute($query_real);
 
         $num = $result->rowCount();
