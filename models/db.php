@@ -199,9 +199,9 @@ class DB
     {
         // $data = file_get_contents("php://input");
 
-        $data = $_POST['data'];
+        $values = $_POST['values'];
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
-        $query .= "VALUE ('$data')";
+        $query .= "VALUE ('$values')";
         // die($query);
         return $this->db->execute($query);
     }
