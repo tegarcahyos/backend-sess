@@ -89,7 +89,7 @@ class DB
         }
 
         $query_real = str_replace("%20", " ", $query);
-        // die($query_real);
+        die($query_real);
         $result = $this->db->execute($query_real);
 
         $num = $result->rowCount();
