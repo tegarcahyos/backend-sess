@@ -64,12 +64,12 @@ class Unit
             $result = $this->db->execute($query);
             $row = $result->fetchRow();
             extract($row);
-            die($parent_id);
+            // die($parent_id);
             $nameTemp = $name;
             // SUNTIK nama array
             array_push($this->parentArray, $nameTemp);
             // Ambil parent id, buat dicari lagi atasnya
-            $idParentTemp = parentId;
+            $idParentTemp = $parent_id;
             // Cari atasnya
             $this->getParentUnitBy($idParentTemp);
         }
