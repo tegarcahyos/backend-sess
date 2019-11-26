@@ -1,6 +1,6 @@
 <?php
 
-class Table
+class ConfigTable
 {
     public $db;
 
@@ -35,6 +35,7 @@ class Table
                     'type_table' => $type_table,
                     'object_id' => $object_id,
                     'object_name' => $object_name,
+                    'object_table' => $object_table,
                     'selected_data' => $selected_data,
 
                 );
@@ -63,29 +64,13 @@ class Table
             'type_table' => $type_table,
             'object_id' => $object_id,
             'object_name' => $object_name,
+            'object_table' => $object_table,
             'selected_data' => $selected_data,
 
         );
         return $data_item;
     }
 
-    // public function findByAppId($object_name, $tablename)
-    // {
-    //     $query = 'SELECT * FROM ' . $tablename . ' WHERE object_name = ' . $object_name . "";
-    //     $result = $this->db->execute($query);
-    //     $row = $result->fetchRow();
-    //     extract($row);
-
-    //     $data_item = array(
-    //         'id' => $id,
-    //         'name' => $name,
-    //         'type_table' => $type_table,
-    //         'object_id' => $object_id,
-    //         'object_name' => $object_name,
-    //         'selected_data' => $selected_data,
-    //     );
-    //     return $data_item;
-    // }
 
     public function insert($tablename)
     {
@@ -98,10 +83,11 @@ class Table
         $type_table = $request[0]->type_table;
         $object_id = $request[0]->object_id;
         $object_name = $request[0]->object_name;
-        $selected_data = $request[0]->selected_data;
+        $object_table = $request[0]->object_table;
+        $selected_data = json_encode($request[0]->selected_data);
 
-        $query = "INSERT INTO $tablename (name, type_table, object_id, object_name, selected_data)";
-        $query .= "VALUES ($name , $type_table, '$object_id', $object_name , '$selected_data')";
+        $query = "INSERT INTO $tablename (name, type_table, object_id, object_name, object_table, selected_data)";
+        $query .= "VALUES ('$name' , $type_table, $object_id, '$object_name' , '$object_table', '$selected_data')";
         // die($query);
         return $this->db->execute($query);
 
@@ -115,9 +101,10 @@ class Table
         $type_table = $request[0]->type_table;
         $object_id = $request[0]->object_id;
         $object_name = $request[0]->object_name;
-        $selected_data = $request[0]->selected_data;
+        $object_table = $request[0]->object_table;
+        $selected_data = json_encode($request[0]->selected_data);
 
-        $query = "UPDATE " . $tablename . " SET type_table = '" . $type_table . "', object_name = '" . $object_name . "', name = '" . $name . "', object_id = '" . $object_id . "', selected_data = '" . $selected_data . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET type_table = '" . $type_table . "', object_name = '" . $object_name . "', name = '" . $name . "', object_id = '" . $object_id . "', object_table = '". $object_table ."' selected_data = '" . $selected_data . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }

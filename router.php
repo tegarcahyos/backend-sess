@@ -6,6 +6,7 @@ include "models/unit.php";
 include "models/app.php";
 include "models/page.php";
 include "models/config_page.php";
+include "models/config_table.php";
 include "models/metric.php";
 include "models/object.php";
 include "models/db.php";
@@ -149,6 +150,8 @@ class Router
                 }
             } else if ($explodeUrl[0] == 'form_page') {
                 $db = new FormPage($this->core_connect());
+            } else if ($explodeUrl[0] == 'config_table') {
+                $db = new ConfigTable($this->core_connect());
             } else if ($explodeUrl[0] == 'metric') {
                 $db = new Metric($this->core_connect());
 
