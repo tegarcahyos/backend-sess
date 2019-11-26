@@ -75,7 +75,7 @@ class DB
     public function select_where_get($attr, $val, $tablename)
     {
 
-        $query = "SELECT values FROM $tablename ";
+        $query = "SELECT values FROM $tablename WHERE";
         $values = explode('AND', $val);
         $attr = explode('AND', $attr);
         for ($i = 0; $i < count($attr); $i++) {
@@ -119,7 +119,7 @@ class DB
     public function select_or_where_get($attr, $val, $tablename)
     {
         // find query
-        $query = "SELECT values FROM $tablename ";
+        $query = "SELECT values FROM $tablename WHERE";
         $values = explode('OR', $val);
         $attr = explode('OR', $attr);
         for ($i = 0; $i < count($attr); $i++) {
@@ -163,7 +163,7 @@ class DB
     public function select_where_like_get($attr, $val, $tablename)
     {
 
-        $query = "SELECT values FROM $tablename ";
+        $query = "SELECT values FROM $tablename WHERE";
 
         $query .= "values @> '{\"" . $attr . "\": \"" . $val . "\"}'";
 
