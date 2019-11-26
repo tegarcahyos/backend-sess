@@ -204,7 +204,7 @@ class DB
         $query .= "VALUE ('$values')";
         // die($query);
         $this->db->execute($query);
-        die("id: "+$this->db->insert_Id());
+        die("id: " . $this->db->insert_Id());
 
     }
 
