@@ -62,7 +62,8 @@ class Unit
             $query = "SELECT * FROM unit WHERE id = $id";
             //
             $result = $this->db->execute($query);
-            die(json_encode($result));
+            $row = $result->fetchRow();
+            die($row);
             $nameTemp = name;
             // SUNTIK nama array
             array_push($this->parentArray, $nameTemp);
