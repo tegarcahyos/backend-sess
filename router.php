@@ -51,14 +51,6 @@ class Router
         return $this->db;
     }
 
-    public function object_connect()
-    {
-        $this->db = newADOConnection('pgsql');
-        $this->db->connect(db_host, db_username, db_password, db_name2);
-        // die($this->db);
-        return $this->db;
-    }
-
     public function get_table_db()
     {
         $tempDb = $this->core_connect();

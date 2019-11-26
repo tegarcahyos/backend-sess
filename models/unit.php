@@ -91,7 +91,7 @@ class Unit
             while ($row = $result->fetchRow()) {
                 extract($row);
                 // ambil parent parentnya pake $parent_id
-                getParentUnitBy($parent_id);
+                $this->getParentUnitBy($parent_id);
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
