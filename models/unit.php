@@ -59,8 +59,10 @@ class Unit
         } else {
             // bukan root
             // select name, parentId by $id,
-            $query = "";
+            $query = "SELECT * FROM unit WHERE id = $id";
             //
+            $result = $this->db->execute($query);
+            die($result);
             $nameTemp = name;
             // SUNTIK nama array
             array_push($this->parentArray, $nameTemp);
