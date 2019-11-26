@@ -203,7 +203,9 @@ class DB
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUE ('$values')";
         // die($query);
-        return $this->db->execute($query);
+        $exec = $this->db->execute($query);
+        die($exec->lastInsertedId());
+
     }
 
     public function update_all($attr, $val, $tablename)
