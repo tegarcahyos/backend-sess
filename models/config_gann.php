@@ -68,7 +68,7 @@ class ConfigGann
         $data = file_get_contents("php://input");
         //
         // die(print_r($data));
-        die($data[0]);
+        die($data[0]->task);
         $task = $data[0]->task;
         $query = "INSERT INTO $tablename (task)";
         $query .= " VALUES ('$task')";
