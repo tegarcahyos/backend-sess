@@ -104,7 +104,7 @@ class ConfigTable
         $selected_data = json_encode($request[0]->selected_data);
 
         $query = "UPDATE $tablename SET type_table = $type_table, object_name = '$object_name', name = '$name', object_id = $object_id, object_table = '$object_table' selected_data = '$selected_data' WHERE id =  '$id'";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
     }
 
