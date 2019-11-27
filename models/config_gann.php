@@ -68,7 +68,7 @@ class ConfigGann
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-
+        die($request);
         $task = $request[0]->task;
         $query = "INSERT INTO $tablename (task)";
         $query .= " VALUES ('$task')";
@@ -85,11 +85,6 @@ class ConfigGann
         $request = json_decode($data);
         // // die(json_encode($request));
         $task = $request[0]->task;
-        // $form_name = $request->form_name;
-        // $form_config = $request->form_config;
-
-        $data_form = $data;
-        // $query = "UPDATE " . $tablename . " SET form_config = '" . $form_config . "', form_id = '" . $form_id . "', form_name = '" . $form_name . "'" . " WHERE id = " . $id;
         $query = "UPDATE  $tablename SET task = '$task' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
