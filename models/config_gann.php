@@ -67,6 +67,7 @@ class ConfigGann
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
+        die(print_r($data));
         $request = json_decode($data);
         die($request[0]->task);
         $task = $request[0]->task;
