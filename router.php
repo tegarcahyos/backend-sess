@@ -243,6 +243,8 @@ class Router
                 $db = new ConfigList($this->core_connect());
             } else if ($explodeUrl[0] == 'config_form_layout') {
                 $db = new ConfigForm($this->core_connect());
+            } else if ($explodeUrl[0] == 'config_gann') {
+                $db = new ConfigGann($this->core_connect());
             } else if ($explodeUrl[0] == 'metric') {
                 $db = new Metric($this->core_connect());
             } else if ($explodeUrl[0] == 'object') {
