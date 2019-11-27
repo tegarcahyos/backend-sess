@@ -31,7 +31,7 @@ class ConfigForm
 
                 $data_item = array(
                     'id' => $id,
-                    'form_name' => $form_name,
+                    'name' => $name,
                     'form_type_submit' => $form_type_submit,
                     'data_cfg' => json_decode($form_config),
                     'object_id' => $object_id,
@@ -61,7 +61,7 @@ class ConfigForm
         $data_item = array(
             'id' => $id,
             'form_type_submit' => $form_type_submit,
-            'form_name' => $form_name,
+            'name' => $name,
             'data_cfg' => json_decode($form_config),
             'object_id' => $object_id,
             'object_name' => $object_name,
@@ -81,9 +81,9 @@ class ConfigForm
         $data_form = $data;
 
         // $form_id = $request[0]->form_id;
-        // $form_name = $request[0]->form_name;
-        // $query = "INSERT INTO $tablename (form_id, form_name, form_config)";
-        // $query .= " VALUES ($form_id , '$form_name', '$form_config')";
+        // $name = $request[0]->name;
+        // $query = "INSERT INTO $tablename (form_id, name, form_config)";
+        // $query .= " VALUES ($form_id , '$name', '$form_config')";
         // $implode = implode(" ", $data);
 
         $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = '$id'";
@@ -100,12 +100,12 @@ class ConfigForm
         $request = json_decode($data);
 
         $form_type_submit = $request[0]->type;
-        $form_name = $request[0]->name;
+        $name = $request[0]->name;
         $object_id = $request[0]->object_id;
         $object_name = $request[0]->object_name;
         $object_table = $request[0]->object_table;
-        $query = "INSERT INTO $tablename (form_type_submit, form_name, object_id, object_name, object_table)";
-        $query .= " VALUES ('$form_type_submit' , '$form_name', $object_id, '$object_name', '$object_table')";
+        $query = "INSERT INTO $tablename (form_type_submit, name, object_id, object_name, object_table)";
+        $query .= " VALUES ('$form_type_submit' , '$name', $object_id, '$object_name', '$object_table')";
         // die($query);
         return $this->db->execute($query);
 
@@ -116,15 +116,15 @@ class ConfigForm
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        // $request = json_decode($data);
-        // // die(json_encode($request));
-        // $form_id = $request->form_id;
-        // $form_name = $request->form_name;
-        // $form_config = $request->form_config;
+        $request = json_decode($data);
 
-        $data_form = $data;
-        // $query = "UPDATE " . $tablename . " SET form_config = '" . $form_config . "', form_id = '" . $form_id . "', form_name = '" . $form_name . "'" . " WHERE id = " . $id;
-        $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = $id";
+        $name = $request[0]->name;
+        $form_type_submit = $request[0]->type;
+        $object_id = $request[0]->object_id;
+        $object_name = $request[0]->object_name;
+        $object_table = $request[0]->object_table;
+        $query = "UPDATE $tablename SET form_type_submit = '$form_type_submit', object_id = '$object_id', name = '$name', object_name = '$object_name', object_table = '$object_table' WHERE id = '$id'";
+        // $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
     }
