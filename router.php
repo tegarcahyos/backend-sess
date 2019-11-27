@@ -234,10 +234,8 @@ class Router
                 $db = new Page($this->core_connect());
             } else if ($explodeUrl[0] == 'page_layout') {
                 $db = new PageLayout($this->core_connect());
-            } else if ($explodeUrl[0] == 'form') {
-                $db = new Form($this->core_connect());
-            } else if ($explodeUrl[0] == 'config_form') {
-                $db = new ConfigForm($this->core_connect());
+            } else if ($explodeUrl[0] == 'config_table') {
+                $db = new ConfigTable($this->core_connect());
             } else if ($explodeUrl[0] == 'config_form_layout') {
                 $db = new ConfigForm($this->core_connect());
             } else if ($explodeUrl[0] == 'metric') {
@@ -277,18 +275,7 @@ class Router
                     $user_id = $explodeUrl[2];
                     $result = $db->findByUserId($user_id, $explodeUrl[0]);
                 }
-            } 
-            
-            if ($explodeUrl[1] == "get") {
-                $result = $db->get($explodeUrl[0]);
-            } else if ($explodeUrl[1] == "find_id") {
-                $id = $explodeUrl[2];
-                $result = $db->findById($id, $explodeUrl[0]);
-            } else if ($explodeUrl[1] == "delete") {
-                $id = $explodeUrl[2];
-                $result = $db->delete($id, $explodeUrl[0]);
-            }
-            else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
+            } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
                 $db = new ObjectData($this->core_connect());
                 if ($explodeUrl[1] == "select_all_get") {
                     $tablename = $explodeUrl[0];
@@ -333,6 +320,15 @@ class Router
                     $result = $db->delete_attr_by_id($id, $attr, $tablename);
                 }
 
+            }
+            if ($explodeUrl[1] == "get") {
+                $result = $db->get($explodeUrl[0]);
+            } else if ($explodeUrl[1] == "find_id") {
+                $id = $explodeUrl[2];
+                $result = $db->findById($id, $explodeUrl[0]);
+            } else if ($explodeUrl[1] == "delete") {
+                $id = $explodeUrl[2];
+                $result = $db->delete($id, $explodeUrl[0]);
             }
 
         }
