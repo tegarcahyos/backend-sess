@@ -7,6 +7,7 @@ include "models/app.php";
 include "models/page_data.php";
 include "models/config_page.php";
 include "models/config_table.php";
+include "models/config_list.php";
 include "models/config_gann.php";
 include "models/metric.php";
 include "models/object.php";
@@ -158,6 +159,8 @@ class Router
                 $db = new FormPage($this->core_connect());
             } else if ($explodeUrl[0] == 'config_table') {
                 $db = new ConfigTable($this->core_connect());
+            } else if ($explodeUrl[0] == 'config_list') {
+                $db = new ConfigList($this->core_connect());
             } else if ($explodeUrl[0] == 'metric') {
                 $db = new Metric($this->core_connect());
             } else if ($explodeUrl[0] == 'object') {
@@ -236,6 +239,8 @@ class Router
                 $db = new PageLayout($this->core_connect());
             } else if ($explodeUrl[0] == 'config_table') {
                 $db = new ConfigTable($this->core_connect());
+            } else if ($explodeUrl[0] == 'config_list') {
+                $db = new ConfigList($this->core_connect());
             } else if ($explodeUrl[0] == 'config_form_layout') {
                 $db = new ConfigForm($this->core_connect());
             } else if ($explodeUrl[0] == 'metric') {

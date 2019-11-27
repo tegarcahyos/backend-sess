@@ -1,6 +1,6 @@
 <?php
 
-class Lists
+class ConfigList
 {
     public $db;
 
@@ -32,9 +32,10 @@ class Lists
                 $data_item = array(
                     'id' => $id,
                     'name' => $name,
-                    'type_list' => $type_list,
+                    'type_table' => $type_table,
                     'object_id' => $object_id,
                     'object_name' => $object_name,
+                    'object_table' => $object_table,
                     'selected_data' => $selected_data,
 
                 );
@@ -52,7 +53,7 @@ class Lists
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
@@ -60,32 +61,15 @@ class Lists
         $data_item = array(
             'id' => $id,
             'name' => $name,
-            'type_list' => $type_list,
+            'type_table' => $type_table,
             'object_id' => $object_id,
             'object_name' => $object_name,
+            'object_table' => $object_table,
             'selected_data' => $selected_data,
 
         );
         return $data_item;
     }
-
-    // public function findByAppId($object_name, $tablename)
-    // {
-    //     $query = 'SELECT * FROM ' . $tablename . ' WHERE object_name = ' . $object_name . "";
-    //     $result = $this->db->execute($query);
-    //     $row = $result->fetchRow();
-    //     extract($row);
-
-    //     $data_item = array(
-    //         'id' => $id,
-    //         'name' => $name,
-    //         'type_table' => $type_table,
-    //         'object_id' => $object_id,
-    //         'object_name' => $object_name,
-    //         'selected_data' => $selected_data,
-    //     );
-    //     return $data_item;
-    // }
 
     public function insert($tablename)
     {
@@ -95,13 +79,14 @@ class Lists
         $request = json_decode($data);
         // die(json_encode($request));
         $name = $request[0]->name;
-        $type_list = $request[0]->type_list;
+        $type_table = $request[0]->type_table;
         $object_id = $request[0]->object_id;
         $object_name = $request[0]->object_name;
-        $selected_data = $request[0]->selected_data;
+        $object_table = $request[0]->object_table;
+        $selected_data = json_encode($request[0]->selected_data);
 
-        $query = "INSERT INTO $tablename (name, type_list, object_id, object_name, selected_data)";
-        $query .= "VALUES ($name , $type_list, '$object_id', $object_name , '$selected_data')";
+        $query = "INSERT INTO $tablename (name, type_table, object_id, object_name, object_table, selected_data)";
+        $query .= "VALUES ('$name' , $type_table, $object_id, '$object_name' , '$object_table', '$selected_data')";
         // die($query);
         return $this->db->execute($query);
 
@@ -112,19 +97,20 @@ class Lists
         $data = file_get_contents("php://input");
         $request = json_decode($data);
         $name = $request[0]->name;
-        $type_list = $request[0]->type_list;
+        $type_table = $request[0]->type_table;
         $object_id = $request[0]->object_id;
         $object_name = $request[0]->object_name;
-        $selected_data = $request[0]->selected_data;
+        $object_table = $request[0]->object_table;
+        $selected_data = json_encode($request[0]->selected_data);
 
-        $query = "UPDATE " . $tablename . " SET type_list = '" . $type_list . "', object_name = '" . $object_name . "', name = '" . $name . "', object_id = '" . $object_id . "', selected_data = '" . $selected_data . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET type_table = '" . $type_table . "', object_name = '" . $object_name . "', name = '" . $name . "', object_id = '" . $object_id . "', object_table = '" . $object_table . "' selected_data = '" . $selected_data . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
 
     public function delete($id, $tablename)
     {
-        $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
