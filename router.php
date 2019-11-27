@@ -277,7 +277,18 @@ class Router
                     $user_id = $explodeUrl[2];
                     $result = $db->findByUserId($user_id, $explodeUrl[0]);
                 }
-            } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
+            } 
+            
+            if ($explodeUrl[1] == "get") {
+                $result = $db->get($explodeUrl[0]);
+            } else if ($explodeUrl[1] == "find_id") {
+                $id = $explodeUrl[2];
+                $result = $db->findById($id, $explodeUrl[0]);
+            } else if ($explodeUrl[1] == "delete") {
+                $id = $explodeUrl[2];
+                $result = $db->delete($id, $explodeUrl[0]);
+            }
+            else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
                 $db = new ObjectData($this->core_connect());
                 if ($explodeUrl[1] == "select_all_get") {
                     $tablename = $explodeUrl[0];
@@ -322,15 +333,6 @@ class Router
                     $result = $db->delete_attr_by_id($id, $attr, $tablename);
                 }
 
-            }
-            if ($explodeUrl[1] == "get") {
-                $result = $db->get($explodeUrl[0]);
-            } else if ($explodeUrl[1] == "find_id") {
-                $id = $explodeUrl[2];
-                $result = $db->findById($id, $explodeUrl[0]);
-            } else if ($explodeUrl[1] == "delete") {
-                $id = $explodeUrl[2];
-                $result = $db->delete($id, $explodeUrl[0]);
             }
 
         }
