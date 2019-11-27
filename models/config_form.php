@@ -33,6 +33,7 @@ class ConfigForm
                     'id' => $id,
                     'form_name' => $form_name,
                     'form_type_submit' => $form_type_submit,
+                    'data_cfg' => json_decode($form_config),
                     'object_id' => $object_id,
                     'object_name' => $object_name,
                     'object_table' => $object_table,
