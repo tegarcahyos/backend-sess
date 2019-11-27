@@ -32,7 +32,6 @@ class ConfigGann
                 $data_item = array(
                     'id' => $id,
                     'task' => json_decode($task),
-                    'links' => json_decode($links),
 
                 );
 
@@ -57,31 +56,10 @@ class ConfigGann
         $data_item = array(
             'id' => $id,
             'task' => json_decode($task),
-            'links' => json_decode($links),
 
         );
 
         return $data_item;
-    }
-
-    public function insertLayout($tablename, $id)
-    {
-        // get data input from frontend
-        $data = file_get_contents("php://input");
-        //
-
-        $data_form = $data;
-
-        // $form_id = $request[0]->form_id;
-        // $form_name = $request[0]->form_name;
-        // $query = "INSERT INTO $tablename (form_id, form_name, form_config)";
-        // $query .= " VALUES ($form_id , '$form_name', '$form_config')";
-        // $implode = implode(" ", $data);
-
-        $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = '$id'";
-        // die($query);
-        return $this->db->execute($query);
-
     }
 
     public function insertGannData($tablename)
@@ -92,9 +70,8 @@ class ConfigGann
         $request = json_decode($data);
 
         $task = $request[0]->task;
-        $links = $request[0]->links;
-        $query = "INSERT INTO $tablename (task, links)";
-        $query .= " VALUES ('$task' , '$links')";
+        $query = "INSERT INTO $tablename (task)";
+        $query .= " VALUES ('$task')";
         // die($query);
         return $this->db->execute($query);
 
@@ -105,15 +82,15 @@ class ConfigGann
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        // $request = json_decode($data);
+        $request = json_decode($data);
         // // die(json_encode($request));
-        // $form_id = $request->form_id;
+        $task = $request[0]->task;
         // $form_name = $request->form_name;
         // $form_config = $request->form_config;
 
         $data_form = $data;
         // $query = "UPDATE " . $tablename . " SET form_config = '" . $form_config . "', form_id = '" . $form_id . "', form_name = '" . $form_name . "'" . " WHERE id = " . $id;
-        $query = "UPDATE  $tablename SET form_config = '$data_form' WHERE id = $id";
+        $query = "UPDATE  $tablename SET task = '$task' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
     }
