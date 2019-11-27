@@ -10,7 +10,7 @@ include "models/config_table.php";
 include "models/config_gann.php";
 include "models/metric.php";
 include "models/object.php";
-include "models/db.php";
+include "models/object_data.php";
 include "models/user.php";
 include "models/form.php";
 include "models/config_form.php";
@@ -179,7 +179,7 @@ class Router
             } else if ($explodeUrl[0] == 'user_role') {
                 $db = new UserRole($this->core_connect());
             } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
-                $db = new DB($this->core_connect());
+                $db = new ObjectData($this->core_connect());
                 if ($explodeUrl[1] == "insert_object") {
                     $result = $db->insert($explodeUrl[0]);
                 } else if ($explodeUrl[1] == "update_all") {
@@ -278,7 +278,7 @@ class Router
                     $result = $db->findByUserId($user_id, $explodeUrl[0]);
                 }
             } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
-                $db = new DB($this->core_connect());
+                $db = new ObjectData($this->core_connect());
                 if ($explodeUrl[1] == "select_all_get") {
                     $tablename = $explodeUrl[0];
                     $result = $db->select_all_get($tablename);

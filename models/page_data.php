@@ -1,6 +1,6 @@
 <?php
 
-class Page
+class PageData
 {
     public $db;
 
@@ -31,9 +31,9 @@ class Page
 
                 $data_item = array(
                     'id' => $id,
-                    'name' => $name,
-                    'app_id' => $app_id,
-                    'app_name' => $app_name,
+                    'page_id' => $page_id,
+                    'page_name' => $page_name,
+                    'data' => json_decode($data),
 
                 );
 
@@ -57,10 +57,9 @@ class Page
 
         $data_item = array(
             'id' => $id,
-            'name' => $name,
-            'app_id' => $app_id,
-            'app_name' => $app_name,
-
+            'page_id' => $page_id,
+            'page_name' => $page_name,
+            'data' => json_decode($data),
         );
         return $data_item;
     }
@@ -72,12 +71,12 @@ class Page
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $name = $request[0]->name;
-        $app_id = $request[0]->app_id;
-        $app_name = $request[0]->app_name;
+        $page_id = $request[0]->page_id;
+        $page_name = $request[0]->page_name;
+        $data = $request[0]->data;
 
-        $query = "INSERT INTO $tablename (app_id, app_name, name)";
-        $query .= " VALUES ($app_id , '$app_name', '$name')";
+        $query = "INSERT INTO $tablename (page_id, page_name, data)";
+        $query .= " VALUES ($page_id , '$page_name', '$data')";
         // die($query);
         return $this->db->execute($query);
 
@@ -90,11 +89,11 @@ class Page
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $app_id = $request->app_id;
-        $app_name = $request->app_name;
-        $name = $request->name;
+        $page_id = $request[0]->page_id;
+        $page_name = $request[0]->page_name;
+        $data = $request[0]->data;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', app_id = '" . $app_id . "', app_name = '" . $app_name . "'" . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET data = '" . $data . "', page_id = '" . $page_id . "', page_name = '" . $page_name . "'" . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
