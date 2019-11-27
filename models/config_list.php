@@ -104,8 +104,8 @@ class ConfigList
         $selected_data = json_encode($request[0]->selected_data);
 
         $query = "UPDATE $tablename SET type_list = '$type_list', object_name = '$object_name', name = '$name', object_id = '$object_id', object_table = '$object_table', selected_data = '$selected_data' WHERE id = '$id'";
-        // die($query);
-        return $this->db->execute($query);
+        die($query);
+        // return $this->db->execute($query);
     }
 
     public function delete($id, $tablename)
