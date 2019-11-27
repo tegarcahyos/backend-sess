@@ -87,7 +87,7 @@ class ConfigList
 
         $query = "INSERT INTO $tablename (name, type_list, object_id, object_name, object_table, selected_data)";
         $query .= "VALUES ('$name' , $type_list, $object_id, '$object_name' , '$object_table', '$selected_data')";
-        die($query);
+        // die($query);
         return $this->db->execute($query);
 
     }
