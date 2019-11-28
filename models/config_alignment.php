@@ -81,7 +81,19 @@ class ConfigAlignment
 
     }
 
-    public function update($id, $tablename)
+    public function insertData($tablename, $id)
+    {
+        // get data input from frontend
+        $data = file_get_contents("php://input");
+        //
+        $alignment = $data;
+        $query = "UPDATE  $tablename SET alignment = '$alignment' WHERE id = '$id'";
+        // die($query);
+        return $this->db->execute($query);
+
+    }
+
+    public function updateData($id, $tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
@@ -91,8 +103,8 @@ class ConfigAlignment
         // die(print_r($data));
         // die(json_decode($data));
         $name = $request[0]->name;
-        $alignment = json_encode($request[0]->data);
-        $query = "UPDATE  $tablename SET name = '$name', alignment = '$alignment' WHERE id = '$id'";
+        // $alignment = json_encode($request[0]->data);
+        $query = "UPDATE  $tablename SET name = '$name' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }

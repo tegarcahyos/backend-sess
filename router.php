@@ -162,6 +162,9 @@ class Router
                 $db = new ConfigAlignment($this->core_connect());
                 if ($explodeUrl[1] == "insert_alignment") {
                     $result = $db->insertAlignData($explodeUrl[0]);
+                } else if ($explodeUrl[1] == "insert_data_alignment") {
+                    $id = $explodeUrl[2];
+                    $result = $db->insertData($explodeUrl[0], $id);
                 }
             } else if ($explodeUrl[0] == 'config_table') {
                 $db = new ConfigTable($this->core_connect());
