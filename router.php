@@ -160,7 +160,7 @@ class Router
                 $db = new FormPage($this->core_connect());
             } else if ($explodeUrl[0] == 'config_alignment') {
                 $db = new ConfigAlignment($this->core_connect());
-                if ($explodeUrl[1] == "insert_align_data") {
+                if ($explodeUrl[1] == "insert_alignment") {
                     $result = $db->insertAlignData($explodeUrl[0]);
                 }
             } else if ($explodeUrl[0] == 'config_table') {
