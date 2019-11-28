@@ -31,6 +31,7 @@ class ConfigAlignment
 
                 $data_item = array(
                     'id' => $id,
+                    'name' => $name,
                     'alignment' => json_decode($alignment),
 
                 );
@@ -55,6 +56,7 @@ class ConfigAlignment
 
         $data_item = array(
             'id' => $id,
+            'name' => $name,
             'alignment' => json_decode($alignment),
 
         );
@@ -67,11 +69,13 @@ class ConfigAlignment
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
+        $request = json_decode($data);
         // die(print_r($data));
         // die(json_decode($data));
-        $alignment = $data;
-        $query = "INSERT INTO $tablename (alignment)";
-        $query .= " VALUES ('$alignment')";
+        $name = $request[0]->name;
+        $alignment = $request[0]->data;
+        $query = "INSERT INTO $tablename (name, alignment)";
+        $query .= " VALUES ('$name', '$alignment')";
         // die($query);
         return $this->db->execute($query);
 
@@ -83,8 +87,12 @@ class ConfigAlignment
         $data = file_get_contents("php://input");
         //
         // // die(json_encode($request));
-        $alignment = $data;
-        $query = "UPDATE  $tablename SET alignment = '$alignment' WHERE id = $id";
+        $request = json_decode($data);
+        // die(print_r($data));
+        // die(json_decode($data));
+        $name = $request[0]->name;
+        $alignment = $request[0]->data;
+        $query = "UPDATE  $tablename SET name = '$name', alignment = '$alignment' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
     }
