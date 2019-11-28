@@ -1,6 +1,6 @@
 <?php
 
-class ConfigGann
+class ConfigAlignment
 {
     public $db;
 
@@ -31,7 +31,7 @@ class ConfigGann
 
                 $data_item = array(
                     'id' => $id,
-                    'task' => json_decode($task),
+                    'alignment' => json_decode($alignment),
 
                 );
 
@@ -55,7 +55,7 @@ class ConfigGann
 
         $data_item = array(
             'id' => $id,
-            'task' => json_decode($task),
+            'alignment' => json_decode($alignment),
 
         );
 
@@ -69,9 +69,9 @@ class ConfigGann
         //
         // die(print_r($data));
         // die(json_decode($data));
-        $task = $data;
-        $query = "INSERT INTO $tablename (task)";
-        $query .= " VALUES ('$task')";
+        $alignment = $data;
+        $query = "INSERT INTO $tablename (alignment)";
+        $query .= " VALUES ('$alignment')";
         // die($query);
         return $this->db->execute($query);
 
@@ -82,8 +82,9 @@ class ConfigGann
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        $task = $data;
-        $query = "UPDATE  $tablename SET task = '$task' WHERE id = $id";
+        // // die(json_encode($request));
+        $alignment = $data;
+        $query = "UPDATE  $tablename SET alignment = '$alignment' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
     }
