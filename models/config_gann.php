@@ -92,7 +92,7 @@ class ConfigGann
         // die(json_decode($data));
         $task = $data;
         $query = "UPDATE  $tablename SET task = '$task' WHERE id = '$id'";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
