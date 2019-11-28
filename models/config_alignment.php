@@ -73,9 +73,9 @@ class ConfigAlignment
         // die(print_r($data));
         // die(json_decode($data));
         $name = $request[0]->name;
-        $alignment = json_encode($request[0]->data);
-        $query = "INSERT INTO $tablename (name, alignment)";
-        $query .= " VALUES ('$name', '$alignment')";
+        // $alignment = json_encode($request[0]->data);
+        $query = "INSERT INTO $tablename (name)";
+        $query .= " VALUES ('$name')";
         // die($query);
         return $this->db->execute($query);
 

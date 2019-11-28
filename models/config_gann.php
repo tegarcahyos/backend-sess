@@ -62,6 +62,25 @@ class ConfigGann
         return $data_item;
     }
 
+    public function insertGann($tablename)
+    {
+        $data = file_get_contents("php://input");
+        //
+        $request = json_decode($data);
+        // die(print_r($data));
+        // die(json_decode($data));
+        $name = $request[0]->name;
+        // $alignment = json_encode($request[0]->data);
+        $query = "INSERT INTO $tablename (name)";
+        $query .= " VALUES ('$name')";
+        // die($query);
+        return $this->db->execute($query);
+
+        // die($query);
+        return $this->db->execute($query);
+
+    }
+
     public function insertGannData($tablename)
     {
         // get data input from frontend
@@ -72,18 +91,24 @@ class ConfigGann
         $task = $data;
         $query = "INSERT INTO $tablename (task)";
         $query .= " VALUES ('$task')";
+        $query = "UPDATE  $tablename SET task = '$task' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
 
     }
 
-    public function update($id, $tablename)
+    public function updateData($id, $tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        $task = $data;
-        $query = "UPDATE  $tablename SET task = '$task' WHERE id = $id";
+        // // die(json_encode($request));
+        $request = json_decode($data);
+        // die(print_r($data));
+        // die(json_decode($data));
+        $name = $request[0]->name;
+        // $alignment = json_encode($request[0]->data);
+        $query = "UPDATE  $tablename SET name = '$name' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
