@@ -153,8 +153,11 @@ class Router
                 }
             } else if ($explodeUrl[0] == 'config_gann') {
                 $db = new ConfigGann($this->core_connect());
-                if ($explodeUrl[1] == "insert_gann_data") {
-                    $result = $db->insertGannData($explodeUrl[0]);
+                if ($explodeUrl[1] == "insert_gann") {
+                    $result = $db->insertGann($explodeUrl[0]);
+                } else if ($explodeUrl[1] == "insert_gann_data") {
+                    $id = $explodeUrl[2];
+                    $result = $db->insertGannData($explodeUrl[0], $id);
                 }
             } else if ($explodeUrl[0] == 'form_page') {
                 $db = new FormPage($this->core_connect());

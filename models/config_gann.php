@@ -81,7 +81,7 @@ class ConfigGann
 
     }
 
-    public function insertGannData($tablename)
+    public function insertGannData($tablename, $id)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
@@ -89,8 +89,6 @@ class ConfigGann
         // die(print_r($data));
         // die(json_decode($data));
         $task = $data;
-        $query = "INSERT INTO $tablename (task)";
-        $query .= " VALUES ('$task')";
         $query = "UPDATE  $tablename SET task = '$task' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
