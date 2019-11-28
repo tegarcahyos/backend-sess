@@ -69,14 +69,14 @@ class ConfigAlignment
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        // die($query);
         $request = json_decode($data);
         // die(print_r($data));
         // die(json_decode($data));
         $name = $request[0]->name;
-        $alignment = $request[0]->data;
+        $alignment = json_encode($request[0]->data);
         $query = "INSERT INTO $tablename (name, alignment)";
         $query .= " VALUES ('$name', '$alignment')";
+        die($query);
         return $this->db->execute($query);
 
     }
