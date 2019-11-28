@@ -129,6 +129,9 @@ class Objects
 
     public function delete($id, $tablename)
     {
+
+        $query2 = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        // die($query);
         $query1 = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
         $result = $this->db->execute($query1);
         $row = $result->fetchRow();
@@ -140,8 +143,6 @@ class Objects
         $query = "ALTER TABLE $tbl_name RENAME TO bug_$name";
         $this->db->execute($query);
 
-        $query2 = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
-        // die($query);
         return $this->db->execute($query2);
     }
 
