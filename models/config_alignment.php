@@ -62,7 +62,7 @@ class ConfigAlignment
         return $data_item;
     }
 
-    public function insertGannData($tablename)
+    public function insertAlignData($tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");

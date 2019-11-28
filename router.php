@@ -9,6 +9,7 @@ include "models/config_page.php";
 include "models/config_table.php";
 include "models/config_list.php";
 include "models/config_gann.php";
+include "models/config_alignment.php";
 include "models/metric.php";
 include "models/object.php";
 include "models/object_data.php";
@@ -157,6 +158,11 @@ class Router
                 }
             } else if ($explodeUrl[0] == 'form_page') {
                 $db = new FormPage($this->core_connect());
+            } else if ($explodeUrl[0] == 'config_alignment') {
+                $db = new ConfigAlignment($this->core_connect());
+                if ($explodeUrl[1] == "insert_align_data") {
+                    $result = $db->insertAlignData($explodeUrl[0]);
+                }
             } else if ($explodeUrl[0] == 'config_table') {
                 $db = new ConfigTable($this->core_connect());
             } else if ($explodeUrl[0] == 'config_list') {
@@ -245,6 +251,8 @@ class Router
                 $db = new ConfigForm($this->core_connect());
             } else if ($explodeUrl[0] == 'config_gann') {
                 $db = new ConfigGann($this->core_connect());
+            } else if ($explodeUrl[0] == 'config_alignment') {
+                $db = new ConfigAlignment($this->core_connect());
             } else if ($explodeUrl[0] == 'metric') {
                 $db = new Metric($this->core_connect());
             } else if ($explodeUrl[0] == 'object') {
