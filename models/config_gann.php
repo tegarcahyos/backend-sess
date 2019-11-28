@@ -31,6 +31,7 @@ class ConfigGann
 
                 $data_item = array(
                     'id' => $id,
+                    'name' => $name,
                     'task' => json_decode($task),
 
                 );
@@ -55,6 +56,7 @@ class ConfigGann
 
         $data_item = array(
             'id' => $id,
+            'name' => $name,
             'task' => json_decode($task),
 
         );
