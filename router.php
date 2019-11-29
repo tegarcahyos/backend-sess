@@ -5,6 +5,7 @@ include "models/organization_role.php";
 include "models/unit.php";
 include "models/app.php";
 include "models/page_data.php";
+include "models/button_action.php";
 include "models/config_page.php";
 include "models/config_table.php";
 include "models/config_list.php";
@@ -26,12 +27,10 @@ if (file_exists('settings.php')) {
     define('db_username', 'pmo');
     define('db_password', 'pass4pmo');
     define('db_name1', "core");
-    define('db_name2', "dbobject");
     define("db_host", "localhost");
     define("db_port", "5432");
 }
 
-// require __DIR__ . '/vendor/autoload.php';
 
 class Router
 {
@@ -47,7 +46,7 @@ class Router
         $link .= $_SERVER['REQUEST_URI'];
         $this->url = $link;
     }
-
+    // CONNECT TO DB
     public function core_connect()
     {
         $this->db = newADOConnection('pgsql');
@@ -55,7 +54,7 @@ class Router
         // die($this->db);
         return $this->db;
     }
-
+    // CHECK IF TABLENAME EXISTS FOR OBJECT QUERY
     public function get_table_db()
     {
         $tempDb = $this->core_connect();
@@ -85,7 +84,7 @@ class Router
             return $table;
         }
     }
-
+    // MESSAGES 
     public function msg($type = null, $msg, $keterangan, $status)
     {
         if ($type == 200) {
@@ -98,8 +97,8 @@ class Router
             echo json_encode($array);
         } else if ($type == 203) {
             $array = array(
-                // 'type' => $type,
-                // 'keterangan' => $keterangan . '',
+                'type' => $type,
+                'keterangan' => $keterangan . '',
                 'error-msg' => $msg,
                 'status' => $status,
             );
@@ -108,7 +107,7 @@ class Router
             return "kosong";
         }
     }
-
+    // REQUEST
     public function request()
     {
         $explodeUrl = explode('/', $this->url);
@@ -133,6 +132,23 @@ class Router
                 $db = new App($this->core_connect());
             } else if ($explodeUrl[0] == 'page') {
                 $db = new Page($this->core_connect());
+            } else if ($explodeUrl[0] == 'form') {
+                $db = new Form($this->core_connect());
+                } else if ($explodeUrl[0] == 'metric') {
+                $db = new Metric($this->core_connect());
+            
+            } else if ($explodeUrl[0] == 'users') {
+                $db = new User($this->core_connect());
+            } else if ($explodeUrl[0] == 'user_unit') {
+                $db = new UserUnit($this->core_connect());
+            } else if ($explodeUrl[0] == 'role') {
+                $db = new Role($this->core_connect());
+            } else if ($explodeUrl[0] == 'user_role') {
+                $db = new UserRole($this->core_connect());
+            } else if ($explodeUrl[0] == 'config_table') {
+                $db = new ConfigTable($this->core_connect());
+            } else if ($explodeUrl[0] == 'config_list') {
+                $db = new ConfigList($this->core_connect());
             } else if ($explodeUrl[0] == 'config_page_layout') {
                 $db = new ConfigPage($this->core_connect());
                 if ($explodeUrl[1] == "insert_page_data") {
@@ -141,8 +157,6 @@ class Router
                     $id_page = $explodeUrl[2];
                     $result = $db->insertLayout($explodeUrl[0], $id_page);
                 }
-            } else if ($explodeUrl[0] == 'form') {
-                $db = new Form($this->core_connect());
             } else if ($explodeUrl[0] == 'config_form_layout') {
                 $db = new ConfigForm($this->core_connect());
                 if ($explodeUrl[1] == "insert_form_data") {
@@ -169,12 +183,14 @@ class Router
                     $id = $explodeUrl[2];
                     $result = $db->insertData($explodeUrl[0], $id);
                 }
-            } else if ($explodeUrl[0] == 'config_table') {
-                $db = new ConfigTable($this->core_connect());
-            } else if ($explodeUrl[0] == 'config_list') {
-                $db = new ConfigList($this->core_connect());
-            } else if ($explodeUrl[0] == 'metric') {
-                $db = new Metric($this->core_connect());
+            } else if ($explodeUrl[0] == 'button_action') {
+                $db = new ButtonAction($this->core_connect());
+                if ($explodeUrl[1] == "insert_button") {
+                    $result = $db->insertButton($explodeUrl[0]);
+                } else if ($explodeUrl[1] == "insert_button_action") {
+                    $id = $explodeUrl[2];
+                    $result = $db->insertAction($explodeUrl[0], $id);
+                }
             } else if ($explodeUrl[0] == 'object') {
                 $db = new Objects($this->core_connect());
                 if ($explodeUrl[1] == "insert_object") {
@@ -185,14 +201,6 @@ class Router
                     $id = $explodeUrl[2];
                     $result = $db->updateObject($id, $tablename);
                 }
-            } else if ($explodeUrl[0] == 'users') {
-                $db = new User($this->core_connect());
-            } else if ($explodeUrl[0] == 'user_unit') {
-                $db = new UserUnit($this->core_connect());
-            } else if ($explodeUrl[0] == 'role') {
-                $db = new Role($this->core_connect());
-            } else if ($explodeUrl[0] == 'user_role') {
-                $db = new UserRole($this->core_connect());
             } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
                 $db = new ObjectData($this->core_connect());
                 if ($explodeUrl[1] == "insert_object") {
@@ -214,7 +222,7 @@ class Router
                     $result = $db->update_where($attr, $value, $tablename);
                 }
             }
-
+            // Normal POST Action
             if ($explodeUrl[1] == "insert") {
                 $result = $db->insert($explodeUrl[0]);
             } else if ($explodeUrl[1] == "update") {
@@ -266,7 +274,6 @@ class Router
                 if ($explodeUrl[1] == "delete_object") {
                     $id = $explodeUrl[2];
                     $result = $db->delete($id, $explodeUrl[0]);
-                    // $result = $db->delete_table($id, $explodeUrl[0]);
                 }
             } else if ($explodeUrl[0] == 'users') {
                 $db = new User($this->core_connect());
@@ -354,7 +361,6 @@ class Router
 
         }
         try {
-            // echo json_encode($result);
             if ($result == [] || $result == 'Data Kosong') {
                 $this->msg(200, $result, "berhasil", 0);
             } else {
@@ -363,7 +369,6 @@ class Router
 
         } catch (\Throwable $th) {
             $this->msg(203, $th, "Terjadi Kesalahan");
-            // echo json_encode("terjadi kesalahan");
         }
     }
 }
