@@ -33,8 +33,6 @@ class ConfigPage
                     'id' => $id,
                     'page_config' => $page_config,
                     'page_name' => $page_name,
-                    'app_id' => $app_id,
-                    'app_name' => $app_name,
 
                 );
 
@@ -61,8 +59,6 @@ class ConfigPage
             'id' => $id,
             'page_config' => $page_config,
             'page_name' => $page_name,
-            'app_id' => $app_id,
-            'app_name' => $app_name,
 
         );
         return $data_item;
@@ -89,11 +85,9 @@ class ConfigPage
         //
         $request = json_decode($data);
 
-        $app_id = $request[0]->app_id;
-        $app_name = $request[0]->app_name;
         $page_name = $request[0]->name;
-        $query = "INSERT INTO $tablename (app_id, app_name, page_name)";
-        $query .= " VALUES ($app_id , '$app_name', '$page_name')";
+        $query = "INSERT INTO $tablename (page_name)";
+        $query .= " VALUES ('$page_name')";
         // die($query);
         return $this->db->execute($query);
 
@@ -107,9 +101,7 @@ class ConfigPage
         $request = json_decode($data);
         // die(json_encode($request));
         $page_name = $request->name;
-        $app_id = $request->app_id;
-        $app_name = $request->app_name;
-        $query = "UPDATE $tablename SET page_name = '$page_name', app_id = $app_id, app_name = '$app_name' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET page_name = '$page_name' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
