@@ -33,7 +33,7 @@ class App
                     'id' => $id,
                     'name' => $name,
                     'code' => $code,
-                    'page_data' => json_encode($page_data),
+                    'page_data' => $page_data,
                 );
 
                 array_push($data_arr, $data_item);
@@ -58,7 +58,7 @@ class App
             'id' => $id,
             'name' => $name,
             'code' => $code,
-            'page_data' => json_encode($page_data),
+            'page_data' => $page_data,
         );
         return $data_item;
     }
