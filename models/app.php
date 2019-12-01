@@ -84,9 +84,9 @@ class App
     {
         $data = file_get_contents("php://input");
         //
-        $request = json_decode($data);
+        // $request = json_decode($data);
         // die(json_encode($request))
-        $page_data = $request[0]->page_data;
+        $page_data = $data[0]->page_data;
         die($page_data);
         $query = "UPDATE $tablename  SET page_data = $page_data ' WHERE id = $id";
         // die($query);
