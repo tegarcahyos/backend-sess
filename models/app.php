@@ -87,7 +87,6 @@ class App
         // $request = json_decode($data);
         // die(json_encode($request))
         $page_data = $data;
-        die($page_data);
         $query = "UPDATE $tablename  SET page_data = $page_data ' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
