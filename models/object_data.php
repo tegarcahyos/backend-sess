@@ -42,7 +42,7 @@ class ObjectData
 
     public function select_id_get($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . " ";
+        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -201,7 +201,7 @@ class ObjectData
         //
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
         $query .= "VALUES ('$data')";
-        // die($query); 
+        // die($query);
         $this->db->execute($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
         $select = "SELECT * FROM $tablename WHERE id = $lastId";
