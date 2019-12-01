@@ -31,11 +31,10 @@ class App
 
                 $data_item = array(
                     'id' => $id,
-                    'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'name' => $name,
                     'code' => $code,
+                    'page_id' => json_encode($page_id),
+                    'page_name' => json_encode($page_name),
                 );
 
                 array_push($data_arr, $data_item);
@@ -58,11 +57,10 @@ class App
 
         $data_item = array(
             'id' => $id,
-            'organization_id' => $organization_id,
-            'organization_name' => $organization_name,
-            'organization_code' => $organization_code,
             'name' => $name,
             'code' => $code,
+            'page_id' => json_encode($page_id),
+            'page_name' => json_encode($page_name),
         );
         return $data_item;
     }
@@ -74,17 +72,28 @@ class App
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $organization_id = $request[0]->organization_id;
-        $organization_name = $request[0]->organization_name;
-        $organization_code = $request[0]->organization_code;
         $name = $request[0]->name;
         $code = $request[0]->code;
 
-        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, name, code)";
-        $query .= " VALUES ($organization_id , '$organization_name', '$organization_code', '$name', '$code')";
+        $query = "INSERT INTO $tablename (name, code)";
+        $query .= " VALUES ('$name', '$code')";
         // die($query);
         return $this->db->execute($query);
 
+    }
+
+    public function addPage($id, $tablename)
+    {
+        $data = file_get_contents("php://input");
+        //
+        $request = json_decode($data);
+        // die(json_encode($request));
+        $page_id = $request->page_id;
+        $page_name = $request->page_name;
+
+        $query = "UPDATE $tablename  SET page_id = $page_id, page_name = $page_name ' WHERE id = $id";
+        // die($query);
+        return $this->db->execute($query);
     }
 
     public function update($id, $tablename)
@@ -94,13 +103,10 @@ class App
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $organization_id = $request->organization_id;
-        $organization_name = $request->organization_name;
-        $organization_code = $request->organization_code;
         $name = $request->name;
         $code = $request->code;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "', organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "'" . " WHERE id = " . $id;
+        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "'" . " WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }

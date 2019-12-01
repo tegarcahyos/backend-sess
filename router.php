@@ -131,6 +131,10 @@ class Router
                 $db = new Unit($this->core_connect());
             } else if ($explodeUrl[0] == 'app') {
                 $db = new App($this->core_connect());
+                if ($explodeUrl[1] == "add_page") {
+                    $id = $explodeUrl[2];
+                    $result = $db->addPage($id, $explodeUrl[0]);
+                }
             } else if ($explodeUrl[0] == 'page') {
                 $db = new Page($this->core_connect());
             } else if ($explodeUrl[0] == 'config_page_layout') {
