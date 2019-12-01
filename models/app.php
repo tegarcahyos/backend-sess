@@ -91,7 +91,7 @@ class App
         $page_id = $request->page_id;
         $page_data = $request->page_data;
 
-        $query = "UPDATE $tablename  SET page_id = $page_id, page_data = $page_data ' WHERE id = $id";
+        $query = "UPDATE $tablename  SET page_data = $page_data ' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
     }
