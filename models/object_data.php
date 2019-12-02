@@ -239,11 +239,11 @@ class ObjectData
     public function update_all($attr, $val, $tablename)
     {
         // init values baru
-        $this->values = $_POST["values"];
+        $data = file_get_contents("php://input");
 
         $condition_values = explode('AND', $val);
         $condition_attr = explode('AND', $attr);
-        $query = "UPDATE  $tablename  SET values = '$this->values'";
+        $query = "UPDATE  $tablename  SET values = '$data'";
         for ($i = 0; $i < count($condition_attr); $i++) {
             if ($i == 0) {
 
@@ -261,10 +261,11 @@ class ObjectData
     public function update_id($id, $tablename)
     {
         // init attribute dan values
-        $this->attr = $_POST["attr"];
-        $this->values = $_POST["values"];
+        // $this->attr = $_POST["attr"];
+        // $this->values = $_POST["values"];
+        $data = file_get_contents("php://input");
 
-        $query = "UPDATE $tablename SET values = values || '{\"" . $this->attr . "\":\"" . $this->values . "\"}' AND id = $id";
+        $query = "UPDATE $tablename SET values = '$data' WHERE id = $id";
 
         // die($query);
 

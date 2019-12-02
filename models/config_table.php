@@ -54,6 +54,7 @@ class ConfigTable
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
+        die($query);
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
@@ -66,9 +67,32 @@ class ConfigTable
             'object_name' => $object_name,
             'object_table' => $object_table,
             'selected_data' => $selected_data,
-
         );
+
+        die($data_item->object_id);
+        $query = "SELECT * FROM config_form_layout WHERE object_id = $object_id";
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        extract($row);
+
+        $data_layout = array(
+            'id' => $id,
+            'form_type_submit' => $form_type_submit,
+            'name' => $name,
+            'data_cfg' => json_decode($form_config),
+            'object_id' => $object_id,
+            'object_name' => $object_name,
+            'object_table' => $object_table,
+        );
+
         return $data_item;
+    }
+
+    public function get_layout($id_object)
+    {
+        $query = "SELECT * FROM config_form_layout WHERE object_id = $id_object";
+
+        return $this->db->execute($query);
     }
 
     public function insert($tablename)
