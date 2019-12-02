@@ -59,9 +59,9 @@ class Login
                 $role_id = $row['role_id'];
                 $role_name = $row['role_name'];
 
-                $query = "SELECT * FROM user_unit WHERE user_id = $id";
+                $query2 = "SELECT * FROM user_unit WHERE user_id = $id";
 
-                $result = $this->db->execute($query);
+                $result = $this->db->execute($query2);
                 $row = $result->fetchRow();
                 extract($row);
                 $unit_id = $row['unit_id'];
