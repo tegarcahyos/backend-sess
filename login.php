@@ -59,12 +59,25 @@ class Login
                 $role_id = $row['role_id'];
                 $role_name = $row['role_name'];
 
+                $query = "SELECT * FROM user_unit WHERE user_id = $id";
+
+                $result = $this->db->execute($query);
+                $row = $result->fetchRow();
+                extract($row);
+                $unit_id = $row['unit_id'];
+                $unit_code = $row['unit_code'];
+                $unit_name = $row['unit_name'];
+
                 $msg = array(
                     "message" => "Successful login.",
                     // "token" => $jwt,
                     "username" => $username,
                     // "expireAt" => $expire_claim,
-                    "role_name" => $role_name
+                    "role_id" => $role_id,
+                    "role_name" => $role_name,
+                    "unit_id" => $unit_id,
+                    "unit_code" => $unit_code,
+                    "unit_name" => $unit_name
                 );
 
             } else {
