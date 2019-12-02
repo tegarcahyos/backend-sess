@@ -18,7 +18,7 @@ class Login
         $username = $data->username;
         $password = $data->password;
 
-        $query = "SELECT * FROM " . $tablename . " WHERE username = '$username' LIMIT 1 UNION ";
+        $query = "SELECT * FROM " . $tablename . " WHERE username = '$username' LIMIT 1 ";
 
         $result = $this->db->execute($query);
         $num = $result->rowCount();
