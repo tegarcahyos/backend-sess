@@ -84,9 +84,9 @@ class ConfigTable
             'object_table' => $object_table,
         );
 
+        $data = null;
         $data->data_table = $data_item;
         $data->data_layout = $data_layout;
-        die(json_encode($data));
 
         return $data_item;
     }
