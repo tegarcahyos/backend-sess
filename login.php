@@ -28,7 +28,7 @@ class Login
                 $name = $row['name'];
                 $password2 = $row['password'];
             }
-            die($password2);
+            // die($password2);
             if (password_verify($password, $password2)) {
                 $secret_key = "YOUR_SECRET_KEY";
                 $issuer_claim = "THE_ISSUER"; // this can be the servername
@@ -49,11 +49,11 @@ class Login
 
                 http_response_code(200);
 
-                $jwt = JWT::encode($token, $secret_key);
+                // $jwt = JWT::encode($token, $secret_key);
 
                 $msg = array(
                     "message" => "Successful login.",
-                    "token" => $jwt,
+                    // "token" => $jwt,
                     "username" => $username,
                     "expireAt" => $expire_claim,
                 );
