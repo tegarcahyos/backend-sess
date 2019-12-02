@@ -109,9 +109,9 @@ class Router
     // REQUEST
     public function request()
     {
+        header("Access-Control-Allow-Origin: * ");
         $explodeUrl = explode('/', $this->url);
         $explodeUrl = array_slice($explodeUrl, 3);
-
         $result = "";
 
         // Explode Url digunakan untuk melihat controller dan fungsi yang digunakan
@@ -261,6 +261,9 @@ class Router
                 $db = new PageLayout($this->core_connect());
             } else if ($explodeUrl[0] == 'config_table') {
                 $db = new ConfigTable($this->core_connect());
+                if ($explodeUrl[1] == 'get_layout') {
+                    $result = $db->get_layout($explodeUrl[2]);
+                }
             } else if ($explodeUrl[0] == 'config_list') {
                 $db = new ConfigList($this->core_connect());
             } else if ($explodeUrl[0] == 'config_form_layout') {

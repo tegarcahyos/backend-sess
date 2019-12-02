@@ -68,10 +68,14 @@ class ConfigTable
             'object_table' => $object_table,
             'selected_data' => $selected_data,
         );
+        return $data_item;
+    }
 
-        $query2 = "SELECT * FROM config_form_layout WHERE object_id =" . $data_item['object_id'] . "";
-        // die($query2);
-        $result = $this->db->execute($query2);
+    public function get_layout($id_object)
+    {
+        $query = "SELECT * FROM config_form_layout WHERE object_id = $id_object";
+
+        $result = $this->db->execute($query);
 
         $num = $result->rowCount();
 
@@ -94,20 +98,14 @@ class ConfigTable
                 );
 
                 array_push($data_arr, $data_layout);
+                $msg = $data_arr;
             }
+
+        } else {
+            $msg = 'Data Kosong';
         }
-        $data = new stdClass();
-        $data->data_table = $data_item;
-        $data->data_layout = $data_arr;
 
-        return $data;
-    }
-
-    public function get_layout($id_object)
-    {
-        $query = "SELECT * FROM config_form_layout WHERE object_id = $id_object";
-
-        return $this->db->execute($query);
+        return $msg;
     }
 
     public function insert($tablename)
