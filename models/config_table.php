@@ -37,7 +37,8 @@ class ConfigTable
                     'object_name' => $object_name,
                     'object_table' => $object_table,
                     'selected_data' => $selected_data,
-
+                    'form_id' => $form_id,
+                    'selected_button_action' => $selected_button_action,
                 );
 
                 array_push($data_arr, $data_item);
@@ -67,6 +68,8 @@ class ConfigTable
             'object_name' => $object_name,
             'object_table' => $object_table,
             'selected_data' => $selected_data,
+            'form_id' => $form_id,
+            'selected_button_action' => $selected_button_action,
         );
         return $data_item;
     }
