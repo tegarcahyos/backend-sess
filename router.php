@@ -128,7 +128,7 @@ class Router
                 $db = new OrganizationRole($this->core_connect());
             } else if ($explodeUrl[0] == 'login') {
                 $db = new Login($this->core_connect());
-                $result = $db->authenticate("users");
+
             } else if ($explodeUrl[0] == 'unit') {
                 $db = new Unit($this->core_connect());
             } else if ($explodeUrl[0] == 'app') {
@@ -146,6 +146,9 @@ class Router
 
             } else if ($explodeUrl[0] == 'users') {
                 $db = new User($this->core_connect());
+                if ($explodeUrl[1] == "login") {
+                    $result = $db->authenticate($explodeUrl[0]);
+                }
             } else if ($explodeUrl[0] == 'user_unit') {
                 $db = new UserUnit($this->core_connect());
             } else if ($explodeUrl[0] == 'role') {
@@ -228,10 +231,10 @@ class Router
                     $result = $db->update_where($attr, $value, $tablename);
                 }
             }
+
             // Normal POST Action
             if ($explodeUrl[1] == "insert") {
                 $result = $db->insert($explodeUrl[0]);
-
             } else if ($explodeUrl[1] == "update") {
                 $tablename = $explodeUrl[0];
                 $id = $explodeUrl[2];
