@@ -1,6 +1,6 @@
 <?php
-// require "../vendor/autoload.php";
-// use \Firebase\JWT\JWT;
+require "../vendor/autoload.php";
+use \Firebase\JWT\JWT;
 
 class Login
 {
@@ -50,7 +50,7 @@ class Login
 
                 // http_response_code(200);
 
-                // $jwt = JWT::encode($token, $secret_key);
+                $jwt = JWT::encode($token, $secret_key);
                 $query = "SELECT * FROM user_role WHERE user_id = $user_id";
                 $result = $this->db->execute($query);
                 // die($query);
@@ -71,14 +71,15 @@ class Login
 
                 $msg = array(
                     "message" => "Successful login.",
-                    // "token" => $jwt,
+                    "name" => $name,
                     "username" => $username,
                     // "expireAt" => $expire_claim,
                     "role_id" => $role_id,
                     "role_name" => $role_name,
                     "unit_id" => $unit_id,
                     "unit_code" => $unit_code,
-                    "unit_name" => $unit_name
+                    "unit_name" => $unit_name,
+                    "token" => $jwt,
                 );
 
             } else {
