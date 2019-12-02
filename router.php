@@ -126,9 +126,6 @@ class Router
                 $db = new Organization($this->core_connect());
             } else if ($explodeUrl[0] == 'organization_role') {
                 $db = new OrganizationRole($this->core_connect());
-            } else if ($explodeUrl[0] == 'login') {
-                $db = new Login($this->core_connect());
-
             } else if ($explodeUrl[0] == 'unit') {
                 $db = new Unit($this->core_connect());
             } else if ($explodeUrl[0] == 'app') {
@@ -147,6 +144,7 @@ class Router
             } else if ($explodeUrl[0] == 'users') {
                 $db = new User($this->core_connect());
                 if ($explodeUrl[1] == "login") {
+                    $db = new Login($this->core_connect());
                     $result = $db->authenticate($explodeUrl[0]);
                 }
             } else if ($explodeUrl[0] == 'user_unit') {
