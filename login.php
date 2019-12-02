@@ -61,7 +61,7 @@ class Login
 
 
                 $query2 = "SELECT * FROM user_unit WHERE user_id = $user_id";
-                die($query2);
+                // die($query2);
                 $result = $this->db->execute($query2);
                 $row = $result->fetchRow();
                 extract($row);
