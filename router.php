@@ -272,6 +272,9 @@ class Router
                 }
             } else if ($explodeUrl[0] == 'config_list') {
                 $db = new ConfigList($this->core_connect());
+                if ($explodeUrl[1] == 'get_layout') {
+                    $result = $db->get_layout($explodeUrl[2]);
+                }
             } else if ($explodeUrl[0] == 'config_form_layout') {
                 $db = new ConfigForm($this->core_connect());
             } else if ($explodeUrl[0] == 'config_gann') {
