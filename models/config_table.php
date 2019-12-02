@@ -129,7 +129,7 @@ class ConfigTable
 
         $query = "INSERT INTO $tablename (name, type_table, object_id, object_name, object_table, selected_data, form_id, selected_button_action)";
         $query .= "VALUES ('$name' , $type_table, $object_id, '$object_name' , '$object_table', '$selected_data', '$form_id', '$selected_button_action')";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
