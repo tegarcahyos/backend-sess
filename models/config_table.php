@@ -70,7 +70,7 @@ class ConfigTable
         );
 
         $query2 = "SELECT * FROM config_form_layout WHERE object_id =" . $data_item['object_id'] . "";
-        die($query2);
+        // die($query2);
         $result = $this->db->execute($query2);
 
         $num = $result->rowCount();
