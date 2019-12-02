@@ -69,7 +69,7 @@ class ConfigTable
             'selected_data' => $selected_data,
         );
 
-        die($data_item);
+        die(json_encode($data_item));
         $query = "SELECT * FROM config_form_layout WHERE object_id = $object_id";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
