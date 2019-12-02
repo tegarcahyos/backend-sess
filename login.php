@@ -18,8 +18,8 @@ class Login
         $username = $data->username;
         $password = $data->password;
 
-        $query = "SELECT * FROM " . $tablename . " WHERE username = '$username' LIMIT 0,1";
-        die($query);
+        $query = "SELECT * FROM " . $tablename . " WHERE username = '$username' LIMIT 1";
+
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -28,7 +28,7 @@ class Login
                 $name = $row['name'];
                 $password2 = $row['password'];
             }
-
+            die($password2);
             if (password_verify($password, $password2)) {
                 $secret_key = "YOUR_SECRET_KEY";
                 $issuer_claim = "THE_ISSUER"; // this can be the servername
