@@ -53,6 +53,7 @@ class Login
                 // $jwt = JWT::encode($token, $secret_key);
                 $query = "SELECT * FROM user_role WHERE user_id = $id";
                 $result = $this->db->execute($query);
+                die($query);
                 $row = $result->fetchRow();
                 extract($row);
                 $role_id = $row['role_id'];
