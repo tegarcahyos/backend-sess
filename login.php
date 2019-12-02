@@ -14,9 +14,9 @@ class Login
     public function authenticate($tablename)
     {
         $data = json_decode(file_get_contents("php://input"));
-        $request = json_decode($data);
-        $username = $request->username;
-        $password = $request->password;
+
+        $username = $data->username;
+        $password = $data->password;
 
         $query = "SELECT * FROM " . $tablename . " WHERE username = '$username' LIMIT 1";
 
