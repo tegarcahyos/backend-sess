@@ -18,44 +18,53 @@ class Login
         $username = $data->username;
         $password = $data->password;
 
-        $query = "SELECT * FROM " . $tablename . " WHERE username = '$username' LIMIT 1";
+        $query = "SELECT * FROM " . $tablename . " WHERE username = '$username' LIMIT 1 UNION ";
 
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
         if ($num > 0) {
             while ($row = $result->fetchRow()) {
+                $id = $row['id'];
                 $name = $row['name'];
                 $password2 = $row['password'];
             }
             // die($password2);
             if (password_verify($password, $password2)) {
-                $secret_key = "YOUR_SECRET_KEY";
-                $issuer_claim = "THE_ISSUER"; // this can be the servername
-                $audience_claim = "THE_AUDIENCE";
-                $issuedat_claim = time(); // issued at
-                $notbefore_claim = $issuedat_claim + 10; //not before in seconds
-                $expire_claim = $issuedat_claim + 60; // expire time in seconds
-                $token = array(
-                    "iss" => $issuer_claim,
-                    "aud" => $audience_claim,
-                    "iat" => $issuedat_claim,
-                    "nbf" => $notbefore_claim,
-                    "exp" => $expire_claim,
-                    "data" => array(
-                        "name" => $name,
-                        "username" => $username,
-                    ));
+                // $secret_key = "YOUR_SECRET_KEY";
+                // $issuer_claim = "THE_ISSUER"; // this can be the servername
+                // $audience_claim = "THE_AUDIENCE";
+                // $issuedat_claim = time(); // issued at
+                // $notbefore_claim = $issuedat_claim + 10; //not before in seconds
+                // $expire_claim = $issuedat_claim + 60; // expire time in seconds
+                // $token = array(
+                //     "iss" => $issuer_claim,
+                //     "aud" => $audience_claim,
+                //     "iat" => $issuedat_claim,
+                //     "nbf" => $notbefore_claim,
+                //     "exp" => $expire_claim,
+                //     "data" => array(
+                //         "name" => $name,
+                //         "username" => $username,
+                //     ));
 
-                http_response_code(200);
+                // http_response_code(200);
 
                 // $jwt = JWT::encode($token, $secret_key);
+                $query = "SELECT * FROM user_role WHERE user_id = $id";
+
+                $result = $this->db->execute($query);
+                $row = $result->fetchRow();
+                extract($row);
+                $role_id = $row['role_id'];
+                $role_name = $row['role_name'];
 
                 $msg = array(
                     "message" => "Successful login.",
                     // "token" => $jwt,
                     "username" => $username,
-                    "expireAt" => $expire_claim,
+                    // "expireAt" => $expire_claim,
+                    "role_name" => $role_name
                 );
 
             } else {
