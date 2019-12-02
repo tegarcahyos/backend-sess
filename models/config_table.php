@@ -69,20 +69,9 @@ class ConfigTable
             'selected_data' => $selected_data,
         );
 
-        $query = "SELECT * FROM config_form_layout WHERE object_id =" . $data_item['object_id'] . "";
-        $result = $this->db->execute($query);
-        // $row = $result->fetchRow();
-        // extract($row);
-
-        // $data_layout = array(
-        //     'id' => $id,
-        //     'form_type_submit' => $form_type_submit,
-        //     'name' => $name,
-        //     'data_cfg' => json_decode($form_config),
-        //     'object_id' => $object_id,
-        //     'object_name' => $object_name,
-        //     'object_table' => $object_table,
-        // );
+        $query2 = "SELECT * FROM config_form_layout WHERE object_id =" . $data_item['object_id'] . "";
+        die($query2);
+        $result = $this->db->execute($query2);
 
         $num = $result->rowCount();
 
@@ -109,7 +98,7 @@ class ConfigTable
         }
         $data = new stdClass();
         $data->data_table = $data_item;
-        $data->data_layout = $data_layout;
+        $data->data_layout = $data_arr;
 
         return $data;
     }
