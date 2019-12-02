@@ -54,7 +54,7 @@ class ConfigTable
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
