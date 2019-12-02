@@ -128,7 +128,7 @@ class ConfigTable
         $selected_button_action = json_encode($request[0]->selected_button_action);
 
         $query = "INSERT INTO $tablename (name, type_table, object_id, object_name, object_table, selected_data, form_id, selected_button_action)";
-        $query .= "VALUES ('$name' , $type_table, $object_id, '$object_name' , '$object_table', '$selected_data', $form_id, $selected_button_action)";
+        $query .= "VALUES ('$name' , $type_table, $object_id, '$object_name' , '$object_table', '$selected_data', '$form_id', '$selected_button_action')";
         // die($query);
         return $this->db->execute($query);
 
