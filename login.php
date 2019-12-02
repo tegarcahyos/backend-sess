@@ -25,7 +25,7 @@ class Login
 
         if ($num > 0) {
             while ($row = $result->fetchRow()) {
-                $id = $row['id'];
+                $user_id = $row['id'];
                 $name = $row['name'];
                 $password2 = $row['password'];
             }
@@ -51,16 +51,16 @@ class Login
                 // http_response_code(200);
 
                 // $jwt = JWT::encode($token, $secret_key);
-                $query = "SELECT * FROM user_role WHERE user_id = $id";
+                $query = "SELECT * FROM user_role WHERE user_id = $user_id";
                 $result = $this->db->execute($query);
-                die($query);
+                // die($query);
                 $row = $result->fetchRow();
                 extract($row);
                 $role_id = $row['role_id'];
                 $role_name = $row['role_name'];
 
 
-                $query2 = "SELECT * FROM user_unit WHERE user_id = $id";
+                $query2 = "SELECT * FROM user_unit WHERE user_id = $user_id";
                 die($query2);
                 $result = $this->db->execute($query2);
                 $row = $result->fetchRow();
