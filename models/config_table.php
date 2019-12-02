@@ -84,11 +84,11 @@ class ConfigTable
             'object_table' => $object_table,
         );
 
-        $data = null;
+        $data = new stdClass();
         $data->data_table = $data_item;
         $data->data_layout = $data_layout;
 
-        return $data_item;
+        return $data;
     }
 
     public function get_layout($id_object)
