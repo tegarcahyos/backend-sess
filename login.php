@@ -1,7 +1,6 @@
 <?php
-include_once './config/database.php';
-require "../vendor/autoload.php";
-use \Firebase\JWT\JWT;
+// require "../vendor/autoload.php";
+// use \Firebase\JWT\JWT;
 
 class Login
 {
