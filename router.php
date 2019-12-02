@@ -31,7 +31,6 @@ if (file_exists('settings.php')) {
     define("db_port", "5432");
 }
 
-
 class Router
 {
     public $url;
@@ -84,7 +83,7 @@ class Router
             return $table;
         }
     }
-    // MESSAGES 
+    // MESSAGES
     public function msg($type = null, $msg, $keterangan, $status)
     {
         if ($type == 200) {
@@ -138,9 +137,9 @@ class Router
                 $db = new Page($this->core_connect());
             } else if ($explodeUrl[0] == 'form') {
                 $db = new Form($this->core_connect());
-                } else if ($explodeUrl[0] == 'metric') {
+            } else if ($explodeUrl[0] == 'metric') {
                 $db = new Metric($this->core_connect());
-            
+
             } else if ($explodeUrl[0] == 'users') {
                 $db = new User($this->core_connect());
             } else if ($explodeUrl[0] == 'user_unit') {
@@ -209,13 +208,12 @@ class Router
                 $db = new ObjectData($this->core_connect());
                 if ($explodeUrl[1] == "insert_object") {
                     $result = $db->insert($explodeUrl[0]);
-                } else if ($explodeUrl[1] == "update_all") {
-                    // function ini untuk mengupdate satu table data
-                    $tablename = $explodeUrl[1];
-                    $attr = $explodeUrl[3];
-                    $value = $explodeUrl[4];
-                    $result = $db->update_all($attr, $value, $tablename);
-                } else if ($explodeUrl[2] == "update_id") {
+                    // } else if ($explodeUrl[1] == "update_attr_value") {
+                    //     $tablename = $explodeUrl[1];
+                    //     $attr = $explodeUrl[3];
+                    //     $value = $explodeUrl[4];
+                    //     $result = $db->update_all($attr, $value, $tablename);
+                } else if ($explodeUrl[2] == "update_by_id") {
                     $tablename = $explodeUrl[1];
                     $id = $explodeUrl[3];
                     $result = $db->update_id($id, $tablename);
@@ -344,7 +342,7 @@ class Router
                     $tablename = $explodeUrl[0];
                     $id = $explodeUrl[2];
                     $attr = $explodeUrl[3];
-                    $result = $db->delete_value_on_attribute($id, $attr, $tablename);
+                    $result = $db->delete_values_on_attribute($id, $attr, $tablename);
                 } else if ($explodeUrl[1] == 'delete_attr_by_id') {
                     $tablename = $explodeUrl[0];
                     $id = $explodeUrl[2];
