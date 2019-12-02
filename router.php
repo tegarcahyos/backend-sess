@@ -21,6 +21,7 @@ include "models/form_page.php";
 include "models/user_role.php";
 include "models/user_unit.php";
 include "models/role.php";
+include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
 } else {
@@ -125,6 +126,9 @@ class Router
                 $db = new Organization($this->core_connect());
             } else if ($explodeUrl[0] == 'organization_role') {
                 $db = new OrganizationRole($this->core_connect());
+            } else if ($explodeUrl[0] == 'login') {
+                $db = new Login($this->core_connect());
+                $result = $db->authenticate("users");
             } else if ($explodeUrl[0] == 'unit') {
                 $db = new Unit($this->core_connect());
             } else if ($explodeUrl[0] == 'app') {
@@ -227,6 +231,7 @@ class Router
             // Normal POST Action
             if ($explodeUrl[1] == "insert") {
                 $result = $db->insert($explodeUrl[0]);
+
             } else if ($explodeUrl[1] == "update") {
                 $tablename = $explodeUrl[0];
                 $id = $explodeUrl[2];

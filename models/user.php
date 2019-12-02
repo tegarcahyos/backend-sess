@@ -126,12 +126,13 @@ class User
         $phone = $request[0]->phone;
         $username = $request[0]->username;
         $password = $request[0]->password;
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
         $external_id = 1;
         $status_active = 'false';
         $status_delete = 'false';
 
         $query = "INSERT INTO $tablename (name, email, phone, username, password, external_id, status_active, status_delete)";
-        $query .= "VALUES ('$name', '$email', $phone ,'$username', '$password', $external_id, '$status_active', '$status_delete')";
+        $query .= "VALUES ('$name', '$email', $phone ,'$username', '$password_hash', $external_id, '$status_active', '$status_delete')";
         // die($query);
         return $this->db->execute($query);
 
