@@ -70,7 +70,7 @@ class ConfigTable
         );
 
         die($data_item['object_id']);
-        $query = "SELECT * FROM config_form_layout WHERE object_id = $object_id";
+        $query = "SELECT * FROM config_form_layout WHERE object_id =" . $data_item['object_id'] . "";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
@@ -84,6 +84,10 @@ class ConfigTable
             'object_name' => $object_name,
             'object_table' => $object_table,
         );
+
+        $data->data_table = $data_item;
+        $data->data_layout = $data_layout;
+        die(json_encode($data));
 
         return $data_item;
     }
