@@ -264,7 +264,7 @@ class ObjectData
         // $this->attr = $_POST["attr"];
         // $this->values = $_POST["values"];
         $data = file_get_contents("php://input");
-        // die($data);
+        die($data);
 
         $query = "UPDATE $tablename SET values = '$data' WHERE id = $id";
 
