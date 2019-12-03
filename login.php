@@ -1,6 +1,6 @@
 <?php
 // require "vendor/autoload.php";
-include "/vencor/autoload.php";
+include "vendor/autoload.php";
 use \Firebase\JWT\JWT;
 
 class Login
