@@ -1,5 +1,5 @@
 <?php
-require "../vendor/autoload.php";
+require "/vendor/autoload.php";
 use \Firebase\JWT\JWT;
 
 class Login
@@ -28,6 +28,7 @@ class Login
                 $user_id = $row['id'];
                 $name = $row['name'];
                 $password2 = $row['password'];
+                $user_token = $row['token'];
             }
             // die($password2);
             if (password_verify($password, $password2)) {
@@ -51,6 +52,10 @@ class Login
                 // http_response_code(200);
 
                 $jwt = JWT::encode($token, $secret_key);
+                if($user_token == null){
+                    $insert_token = "UPDATE users SET token = $jwt WHERE id = $user_id";
+                    $this->db->execute($insert_token);
+                }
                 $query = "SELECT * FROM user_role WHERE user_id = $user_id";
                 $result = $this->db->execute($query);
                 // die($query);
@@ -68,6 +73,8 @@ class Login
                 $unit_id = $row['unit_id'];
                 $unit_code = $row['unit_code'];
                 $unit_name = $row['unit_name'];
+
+
 
                 $msg = array(
                     "message" => "Successful login.",
