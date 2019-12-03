@@ -50,8 +50,6 @@ class Login
                         "username" => $username,
                     ));
 
-                http_response_code(200);
-
                 $jwt = JWT::encode($token, $secret_key);
                 if($user_token == null){
                     $insert_token = "UPDATE users SET token = '$jwt' WHERE id = $user_id";
@@ -82,6 +80,7 @@ class Login
 
 
                 $msg = array(
+                    "code" => 200,
                     "message" => "Successful login.",
                     "name" => $name,
                     "username" => $username,
