@@ -99,8 +99,8 @@ class App
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $name = $request->name;
-        $code = $request->code;
+        $name = $request[0]->name;
+        $code = $request[0]->code;
 
         $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "'" . " WHERE id = " . $id;
         // die($query);
