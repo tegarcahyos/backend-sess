@@ -263,7 +263,7 @@ class ObjectData
         // init attribute dan values
 
         $data = file_get_contents("php://input");
-        // die($data);
+        die($data);
 
         $query = "UPDATE $tablename SET values = '$data' WHERE id = $id";
 
