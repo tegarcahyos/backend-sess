@@ -211,7 +211,7 @@ class Router
                 }
             } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
                 $db = new ObjectData($this->core_connect());
-                if ($explodeUrl[1] == "insert_object") {
+                if ($explodeUrl[1] == "insert_object_data") {
                     $result = $db->insert($explodeUrl[0]);
                     // } else if ($explodeUrl[1] == "update_attr_value") {
                     //     $tablename = $explodeUrl[1];
