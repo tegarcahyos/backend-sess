@@ -54,7 +54,8 @@ class Login
 
                 $jwt = JWT::encode($token, $secret_key);
                 if($user_token == null){
-                    $insert_token = "UPDATE users SET token = $jwt WHERE id = $user_id";
+                    $insert_token = "UPDATE users SET token = '$jwt' WHERE id = $user_id";
+                    // die($insert_token);
                     $this->db->execute($insert_token);
                 }
                 $query = "SELECT * FROM user_role WHERE user_id = $user_id";
