@@ -100,7 +100,7 @@ class Login
                 $msg = array("message" => "Login failed Wrong Password.");
             }
         } else {
-            $msg = 'Username Tidak Ada';
+            $msg = array("message" => 'User Tidak Ditemukan');
         }
         return $msg;
     }
