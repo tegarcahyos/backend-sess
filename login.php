@@ -96,7 +96,7 @@ class Login
 
             } else {
 
-                http_response_code(401);
+                // http_response_code(401);
                 $msg = array("message" => "Login failed Wrong Password.");
             }
         } else {
