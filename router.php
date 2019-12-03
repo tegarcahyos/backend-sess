@@ -211,21 +211,21 @@ class Router
                 }
             } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
                 $db = new ObjectData($this->core_connect());
-                if ($explodeUrl[1] == "insert_object_data") {
+                if ($explodeUrl[1] == "insert_object") {
                     $result = $db->insert($explodeUrl[0]);
                     // } else if ($explodeUrl[1] == "update_attr_value") {
                     //     $tablename = $explodeUrl[1];
                     //     $attr = $explodeUrl[3];
                     //     $value = $explodeUrl[4];
                     //     $result = $db->update_all($attr, $value, $tablename);
-                } else if ($explodeUrl[2] == "update_by_id") {
-                    $tablename = $explodeUrl[1];
-                    $id = $explodeUrl[3];
+                } else if ($explodeUrl[1] == "update_by_id") {
+                    $tablename = $explodeUrl[0];
+                    $id = $explodeUrl[2];
                     $result = $db->update_id($id, $tablename);
-                } else if ($explodeUrl[2] == "update_where") {
-                    $tablename = $explodeUrl[1];
-                    $attr = $explodeUrl[3];
-                    $value = $explodeUrl[4];
+                } else if ($explodeUrl[1] == "update_where") {
+                    $tablename = $explodeUrl[0];
+                    $attr = $explodeUrl[2];
+                    $value = $explodeUrl[3];
                     $result = $db->update_where($attr, $value, $tablename);
                 }
             }
