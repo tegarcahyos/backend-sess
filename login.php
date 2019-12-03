@@ -58,6 +58,8 @@ class Login
                     // die($insert_token);
                     $this->db->execute($insert_token);
                 }
+
+                // GET USER ROLE
                 $query = "SELECT * FROM user_role WHERE user_id = $user_id";
                 $result = $this->db->execute($query);
                 // die($query);
@@ -67,6 +69,7 @@ class Login
                 $role_name = $row['role_name'];
 
 
+                // GET USER UNIT
                 $query2 = "SELECT * FROM user_unit WHERE user_id = $user_id";
                 // die($query2);
                 $result = $this->db->execute($query2);
@@ -94,9 +97,11 @@ class Login
             } else {
 
                 http_response_code(401);
-                $msg = array("message" => "Login failed.", "wrong password");
+                $msg = array("message" => "Login failed Wrong Password.");
             }
-            return $msg;
+        } else {
+            $msg = 'Username Tidak Ada';
         }
+        return $msg;
     }
 }
