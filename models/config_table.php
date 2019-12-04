@@ -148,8 +148,11 @@ class ConfigTable
         $object_table = $request[0]->object_table;
         $selected_data = json_encode($request[0]->selected_data);
         $detail_page_id = $request[0]->detail_page_id;
+        $form_id = $request[0]->form_id;
+        $selected_button_action = json_encode($request[0]->selected_button_action);
+        $detail_page_id = $request[0]->detail_page_id;
 
-        $query = "UPDATE $tablename SET type_table = $type_table, object_name = '$object_name', name = '$name', object_id = $object_id, object_table = '$object_table', selected_data = '$selected_data', detail_page_id ='$detail_page_id' WHERE id =  '$id'";
+        $query = "UPDATE $tablename SET type_table = $type_table, object_name = '$object_name', name = '$name', object_id = $object_id, object_table = '$object_table', selected_data = '$selected_data', form_id = '$form_id', selected_button_action = '$selected_button_action', detail_page_id ='$detail_page_id' WHERE id =  '$id'";
         // die($query);
         return $this->db->execute($query);
     }
