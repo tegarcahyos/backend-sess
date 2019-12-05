@@ -107,6 +107,21 @@ class Router
             return "kosong";
         }
     }
+
+    public function check_token($id){
+        $tempDb = $this->core_connect();
+        $query = "SELECT * FROM users WHERE id = $id";
+        $tempDb->execute($query);
+        $row = $result->fetchRow();
+                if (is_bool($row)) {
+                    
+                } else {
+                    extract($row);
+                    $expireAt = $row['expireAt'];
+                }
+        // if($expireAt )
+    }
+
     // REQUEST
     public function request()
     {
