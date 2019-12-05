@@ -39,7 +39,7 @@ class Login
                 $issuedat_claim = time(); // issued at
                 $notbefore_claim = $issuedat_claim + 10; //not before in seconds
                 $expire_claim = $issuedat_claim + 600000; // expire time in seconds
-                $expireAt = date('h:i', $expire_claim);
+                $expireAt = date('Y:m:d h:i:sa', $expire_claim);
                 $token = array(
                     "iss" => $issuer_claim,
                     "aud" => $audience_claim,
