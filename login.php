@@ -56,7 +56,7 @@ class Login
                     // die($insert_token);
                     $this->db->execute($insert_token);
                 } else {
-                    $update_expireAt = "UPDATE users SET expire_at = '$expireAt' WHERE id = $user_id";
+                    $update_expireAt = "UPDATE users SET expire_at = '$expire_claim' WHERE id = $user_id";
                     $this->db->execute($update_expireAt);
                 }
 
@@ -95,7 +95,7 @@ class Login
                     "message" => "Successful login.",
                     "name" => $name,
                     "username" => $username,
-                    "expireAt" => $expireAt,
+                    "expireAt" => $expire_claim,
                     "role_id" => $role_id,
                     "role_name" => $role_name,
                     "unit_id" => $unit_id,
