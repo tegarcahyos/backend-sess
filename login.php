@@ -39,7 +39,7 @@ class Login
                 $issuedat_claim = time(); // issued at
                 $notbefore_claim = $issuedat_claim + 10; //not before in seconds
                 $expire_claim = $issuedat_claim + 600000; // expire time in seconds
-                date('h:i', $expire_claim);
+                $expireAt = date('h:i', $expire_claim);
                 $token = array(
                     "iss" => $issuer_claim,
                     "aud" => $audience_claim,
@@ -53,7 +53,7 @@ class Login
 
                 $jwt = JWT::encode($token, $secret_key);
                 if ($user_token == null) {
-                    $insert_token = "UPDATE users SET token = '$jwt', expireAt = '$expire_claim' WHERE id = $user_id";
+                    $insert_token = "UPDATE users SET token = '$jwt', expireAt = '$expireAt' WHERE id = $user_id";
                     // die($insert_token);
                     $this->db->execute($insert_token);
                 }
@@ -93,7 +93,7 @@ class Login
                     "message" => "Successful login.",
                     "name" => $name,
                     "username" => $username,
-                    "expireAt" => $expire_claim,
+                    "expireAt" => $expireAt,
                     "role_id" => $role_id,
                     "role_name" => $role_name,
                     "unit_id" => $unit_id,
