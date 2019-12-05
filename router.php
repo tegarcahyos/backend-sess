@@ -131,8 +131,8 @@ class Router
     // REQUEST
     public function request()
     {
-        $passed = $this->check_token('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNTc1NDQzMDkzLCJuYmYiOjE1NzU0NDMxMDMsImV4cCI6MTU3NTQ0MzE1MywiZGF0YSI6eyJuYW1lIjoiQXNkYXIiLCJ1c2VybmFtZSI6ImFzZGFyMTIzIn19.GFgkoZu-7X0fYiZePTzsYUoQQXF--xd28AuzltE_KpI');
-        if($passed == true){
+        // $passed = $this->check_token('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNTc1NDQzMDkzLCJuYmYiOjE1NzU0NDMxMDMsImV4cCI6MTU3NTQ0MzE1MywiZGF0YSI6eyJuYW1lIjoiQXNkYXIiLCJ1c2VybmFtZSI6ImFzZGFyMTIzIn19.GFgkoZu-7X0fYiZePTzsYUoQQXF--xd28AuzltE_KpI');
+        // if($passed == true){
         header("Access-Control-Allow-Origin: * ");
         $explodeUrl = explode('/', $this->url);
         $explodeUrl = array_slice($explodeUrl, 3);
@@ -261,7 +261,7 @@ class Router
                 $id = $explodeUrl[2];
                 $result = $db->update($id, $tablename);
             }
-        }
+        // }
         } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             if ($explodeUrl[0] == 'organization') {
