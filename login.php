@@ -76,10 +76,16 @@ class Login
                 // die($query2);
                 $result = $this->db->execute($query2);
                 $row = $result->fetchRow();
-                extract($row);
-                $unit_id = $row['unit_id'];
-                $unit_code = $row['unit_code'];
-                $unit_name = $row['unit_name'];
+                if (is_bool($row)) {
+                    $unit_id = null;
+                    $unit_code = null;
+                    $unit_name = null;
+                } else {
+                    extract($row);
+                    $unit_id = $row['unit_id'];
+                    $unit_code = $row['unit_code'];
+                    $unit_name = $row['unit_name'];
+                }
 
                 $msg = array(
                     "code" => 200,
