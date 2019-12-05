@@ -51,7 +51,7 @@ class Login
                     ));
 
                 $jwt = JWT::encode($token, $secret_key);
-                if($user_token == null){
+                if ($user_token == null) {
                     $insert_token = "UPDATE users SET token = '$jwt' WHERE id = $user_id";
                     // die($insert_token);
                     $this->db->execute($insert_token);
@@ -61,11 +61,11 @@ class Login
                 $query = "SELECT * FROM user_role WHERE user_id = $user_id";
                 $result = $this->db->execute($query);
                 // die($query);
+                die($result);
                 $row = $result->fetchRow();
                 extract($row);
                 $role_id = $row['role_id'];
                 $role_name = $row['role_name'];
-
 
                 // GET USER UNIT
                 $query2 = "SELECT * FROM user_unit WHERE user_id = $user_id";
@@ -76,8 +76,6 @@ class Login
                 $unit_id = $row['unit_id'];
                 $unit_code = $row['unit_code'];
                 $unit_name = $row['unit_name'];
-
-
 
                 $msg = array(
                     "code" => 200,
@@ -90,7 +88,7 @@ class Login
                     "unit_id" => $unit_id,
                     "unit_code" => $unit_code,
                     "unit_name" => $unit_name,
-                    "token" => $jwt,
+                    "token" => $user_token,
                 );
 
             } else {
