@@ -58,12 +58,12 @@ class Login
                 }
 
                 // GET USER ROLE
-                $query = "SELECT * FROM user_role WHERE user_id = $user_id";
+                $query = "SELECT * FROM user_role WHERE user_id = $user_id LIMIT 1";
                 $result = $this->db->execute($query);
                 $num = $result->rowCount();
-                die($num == 0 ? true : false);
                 if ($num > 0) {
                     while ($row = $result->fetchRow()) {
+                        die(json_encode($row));
                         $role_id = $row['role_id'];
                         $role_name = $row['role_name'];
                     }
