@@ -92,7 +92,7 @@ class Login
                     "message" => "Successful login.",
                     "name" => $name,
                     "username" => $username,
-                    "expireAt" => date('Y-m-d', $expire_claim),
+                    "expireAt" => date('Y-m-d h:i:sa', $expire_claim),
                     "role_id" => $role_id,
                     "role_name" => $role_name,
                     "unit_id" => $unit_id,
