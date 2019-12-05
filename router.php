@@ -112,8 +112,8 @@ class Router
     public function check_token($token){
         $tempDb = $this->core_connect();
         $query = "SELECT * FROM users WHERE token = '$token'";
-        die($query);
-        $tempDb->execute($query);
+        // die($query);
+        $result = $tempDb->execute($query);
         $row = $result->fetchRow();
                 if (is_bool($row)) {
                     
