@@ -61,7 +61,7 @@ class Login
                 $query = "SELECT * FROM user_role WHERE user_id = $user_id";
                 $result = $this->db->execute($query);
                 $num = $result->rowCount();
-                die($num);
+                die($num == 0 ? true : false);
                 if ($num > 0) {
                     while ($row = $result->fetchRow()) {
                         $role_id = $row['role_id'];
