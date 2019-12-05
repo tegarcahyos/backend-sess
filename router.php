@@ -261,6 +261,7 @@ class Router
                 $id = $explodeUrl[2];
                 $result = $db->update($id, $tablename);
             }
+        }
         } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             if ($explodeUrl[0] == 'organization') {
@@ -407,7 +408,7 @@ class Router
         } catch (\Throwable $th) {
             $this->msg(203, $th, "Terjadi Kesalahan");
         }
-    }
+    
     }
     
 }
