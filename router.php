@@ -122,7 +122,8 @@ class Router
                     $expireAt = $row['expire_at'];
                 }
                 $now = time();
-                die($expireAt < date('h:i:sa', $now));
+                // die(strtotime($expireAt) < date('h:i:sa', $now));
+                die(strtotime($expireAt) < strtotime('now'));
         if($expireAt < date('h:i:sa', $now)){
             return true;
         }else {
