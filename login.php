@@ -61,7 +61,12 @@ class Login
                 $query = "SELECT * FROM user_role WHERE user_id = $user_id";
                 $result = $this->db->execute($query);
                 // extract($row);
-                if (extract($row) != 1) {
+                $row = $result->fetchRow();
+                if (is_bool($row)) {
+                    $role_id = null;
+                    $role_name = null;
+                } else {
+                    extract($row);
                     $role_id = $row['role_id'];
                     $role_name = $row['role_name'];
                 }
