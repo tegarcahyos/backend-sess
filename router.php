@@ -132,8 +132,8 @@ class Router
     // REQUEST
     public function request()
     {
-        $passed = $this->check_token();
-        if($passed == true){
+        // $passed = $this->check_token();
+        // if($passed == true){
         header("Access-Control-Allow-Origin: * ");
         $explodeUrl = explode('/', $this->url);
         $explodeUrl = array_slice($explodeUrl, 3);
@@ -409,6 +409,6 @@ class Router
             $this->msg(203, $th, "Terjadi Kesalahan");
         }
     }
-    }
+    // }
     
 }
