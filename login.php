@@ -60,10 +60,14 @@ class Login
                 // GET USER ROLE
                 $query = "SELECT * FROM user_role WHERE user_id = $user_id";
                 $result = $this->db->execute($query);
-                die($result);
-                extract($row);
-                $role_id = $row['role_id'];
-                $role_name = $row['role_name'];
+                $num = $result->rowCount();
+                if ($num > 0) {
+                    while ($row = $result->fetchRow()) {
+                        $role_id = $row['role_id'];
+                        $role_name = $row['role_name'];
+                    }
+                }
+                // extract($row);
 
                 // GET USER UNIT
                 $query2 = "SELECT * FROM user_unit WHERE user_id = $user_id";
