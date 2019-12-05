@@ -121,8 +121,8 @@ class Router
                     extract($row);
                     $expireAt = $row['expire_at'];
                 }
-                die($expireAt);
-        $now = time();
+                $now = time();
+                die($expireAt < date('h:i:sa', $now));
         if($expireAt < date('h:i:sa', $now)){
             return true;
         }else {
