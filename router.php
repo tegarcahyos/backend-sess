@@ -111,8 +111,8 @@ class Router
     
     public function check_token($token){
         $tempDb = $this->core_connect();
-        $query = "SELECT * FROM users WHERE token = $token";
-        die($query);
+        $query = "SELECT * FROM users WHERE token = '$token'";
+        // die($query);
         $tempDb->execute($query);
         $row = $result->fetchRow();
                 if (is_bool($row)) {
@@ -121,6 +121,7 @@ class Router
                     extract($row);
                     $expireAt = $row['expire_at'];
                 }
+                die($expireAt);
         $now = time();
         if($expireAt < date('h:i:sa', $now)){
             return true;
