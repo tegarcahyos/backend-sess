@@ -56,6 +56,9 @@ class Login
                     $insert_token = "UPDATE users SET token = '$jwt', expireAt = '$expireAt' WHERE id = $user_id";
                     // die($insert_token);
                     $this->db->execute($insert_token);
+                } else {
+                    $update_expireAt = "UPDATE users SET expireAt = '$expireAt' WHERE id = $user_id";
+                    $this->db->execute($update_expireAt);
                 }
 
                 // GET USER ROLE
