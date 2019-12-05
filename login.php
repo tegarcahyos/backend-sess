@@ -39,7 +39,7 @@ class Login
                 $issuedat_claim = time(); // issued at
                 $notbefore_claim = $issuedat_claim + 10; //not before in seconds
                 $expire_claim = $issuedat_claim + 600; // expire time in seconds
-                $expireAt = date('Y:m:d h:i:sa', $expire_claim);
+                $expireAt = date('h:i:sa', $expire_claim);
                 $token = array(
                     "iss" => $issuer_claim,
                     "aud" => $audience_claim,
@@ -57,8 +57,7 @@ class Login
                     // die($insert_token);
                     $this->db->execute($insert_token);
                 } else {
-                    $update_expireAt = "UPDATE users SET expireAt = '$expireAt' WHERE id = $user_id";
-                    die($update_expireAt);
+                    $update_expireAt = "UPDATE users SET expire_at = '$expireAt' WHERE id = $user_id";
                     $this->db->execute($update_expireAt);
                 }
 

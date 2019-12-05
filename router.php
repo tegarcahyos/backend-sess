@@ -108,23 +108,32 @@ class Router
         }
     }
 
-    public function check_token($id){
+    
+    public function check_token($token){
         $tempDb = $this->core_connect();
-        $query = "SELECT * FROM users WHERE id = $id";
+        $query = "SELECT * FROM users WHERE token = $token";
+        die($query);
         $tempDb->execute($query);
         $row = $result->fetchRow();
                 if (is_bool($row)) {
                     
                 } else {
                     extract($row);
-                    $expireAt = $row['expireAt'];
+                    $expireAt = $row['expire_at'];
                 }
-        // if($expireAt )
+        $now = time();
+        if($expireAt < date('h:i:sa', $now)){
+            return true;
+        }else {
+            return http_response_code(101);
+        }
     }
 
     // REQUEST
     public function request()
     {
+        $passed = $this->check_token();
+        if($passed == true){
         header("Access-Control-Allow-Origin: * ");
         $explodeUrl = explode('/', $this->url);
         $explodeUrl = array_slice($explodeUrl, 3);
@@ -400,4 +409,6 @@ class Router
             $this->msg(203, $th, "Terjadi Kesalahan");
         }
     }
+    }
+    
 }
