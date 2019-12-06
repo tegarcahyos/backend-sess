@@ -97,7 +97,7 @@ class ConfigGann
 
     }
 
-    public function updateData($id, $tablename)
+    public function update($id, $tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
