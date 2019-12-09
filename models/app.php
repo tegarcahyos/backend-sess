@@ -106,7 +106,7 @@ class App
         $code = $request[0]->code;
         $properties = $request[0]->properties;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', properties = '$properties' WHERE id =  $id";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', properties = $properties WHERE id =  $id";
         // die($query);
         return $this->db->execute($query);
     }
