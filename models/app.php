@@ -101,6 +101,7 @@ class App
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
+        die($request);
         // die(json_encode($request));
         $name = $request[0]->name;
         $code = $request[0]->code;
