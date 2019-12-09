@@ -108,31 +108,30 @@ class Router
         }
     }
 
-    
-    public function check_token($token){
+    public function check_token($token)
+    {
         $tempDb = $this->core_connect();
         $query = "SELECT * FROM users WHERE token = '$token'";
         // die($query);
         $result = $tempDb->execute($query);
         $row = $result->fetchRow();
-                if (is_bool($row)) {
-                    
-                } else {
-                    extract($row);
-                    $expireAt = $row['expire_at'];
-                }
-        if(strtotime('now') < strtotime($expireAt) ){
-            return true;
-        }else {
-            return http_response_code(101);
+        if (is_bool($row)) {
+
+        } else {
+            extract($row);
+            $expireAt = $row['expire_at'];
+        }
+        if (strtotime('now') < $expireAt) {
+            return 'true';
+        } else {
+            return 'false';
+            // return http_response_code(101);
         }
     }
 
     // REQUEST
     public function request()
     {
-        // $passed = $this->check_token('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUSEVfSVNTVUVSIiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNTc1NDQzMDkzLCJuYmYiOjE1NzU0NDMxMDMsImV4cCI6MTU3NTQ0MzE1MywiZGF0YSI6eyJuYW1lIjoiQXNkYXIiLCJ1c2VybmFtZSI6ImFzZGFyMTIzIn19.GFgkoZu-7X0fYiZePTzsYUoQQXF--xd28AuzltE_KpI');
-        // if($passed == true){
         header("Access-Control-Allow-Origin: * ");
         $explodeUrl = explode('/', $this->url);
         $explodeUrl = array_slice($explodeUrl, 3);
@@ -144,124 +143,158 @@ class Router
         //explode[2] : Fungsi
         // POST - UPDATE / INSERT
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            if ($explodeUrl[0] == 'organization') {
-                $db = new Organization($this->core_connect());
-            } else if ($explodeUrl[0] == 'organization_role') {
-                $db = new OrganizationRole($this->core_connect());
-            } else if ($explodeUrl[0] == 'unit') {
-                $db = new Unit($this->core_connect());
-            } else if ($explodeUrl[0] == 'app') {
-                $db = new App($this->core_connect());
-                if ($explodeUrl[1] == "add_page") {
-                    $id = $explodeUrl[2];
-                    $result = $db->addPage($id, $explodeUrl[0]);
-                }
-            } else if ($explodeUrl[0] == 'page') {
-                $db = new Page($this->core_connect());
-            } else if ($explodeUrl[0] == 'form') {
-                $db = new Form($this->core_connect());
-            } else if ($explodeUrl[0] == 'metric') {
-                $db = new Metric($this->core_connect());
-
-            } else if ($explodeUrl[0] == 'users') {
-                $db = new User($this->core_connect());
-                if ($explodeUrl[1] == "login") {
-                    $db = new Login($this->core_connect());
-                    $result = $db->authenticate($explodeUrl[0]);
-                }
-            } else if ($explodeUrl[0] == 'user_unit') {
-                $db = new UserUnit($this->core_connect());
-            } else if ($explodeUrl[0] == 'role') {
-                $db = new Role($this->core_connect());
-            } else if ($explodeUrl[0] == 'user_role') {
-                $db = new UserRole($this->core_connect());
-            } else if ($explodeUrl[0] == 'config_table') {
-                $db = new ConfigTable($this->core_connect());
-            } else if ($explodeUrl[0] == 'config_list') {
-                $db = new ConfigList($this->core_connect());
-            } else if ($explodeUrl[0] == 'config_page_layout') {
-                $db = new ConfigPage($this->core_connect());
-                if ($explodeUrl[1] == "insert_page_data") {
-                    $result = $db->insertPageData($explodeUrl[0]);
-                } else if ($explodeUrl[1] == "insert_page_layout") {
-                    $id_page = $explodeUrl[2];
-                    $result = $db->insertLayout($explodeUrl[0], $id_page);
-                }
-            } else if ($explodeUrl[0] == 'config_form_layout') {
-                $db = new ConfigForm($this->core_connect());
-                if ($explodeUrl[1] == "insert_form_data") {
-                    $result = $db->insertFormData($explodeUrl[0]);
-                } else if ($explodeUrl[1] == "insert_form_layout") {
-                    $id_form = $explodeUrl[2];
-                    $result = $db->insertLayout($explodeUrl[0], $id_form);
-                }
-            } else if ($explodeUrl[0] == 'config_gann') {
-                $db = new ConfigGann($this->core_connect());
-                if ($explodeUrl[1] == "insert_gann") {
-                    $result = $db->insertGann($explodeUrl[0]);
-                } else if ($explodeUrl[1] == "insert_gann_data") {
-                    $id = $explodeUrl[2];
-                    $result = $db->insertGannData($explodeUrl[0], $id);
-                }
-            } else if ($explodeUrl[0] == 'form_page') {
-                $db = new FormPage($this->core_connect());
-            } else if ($explodeUrl[0] == 'config_alignment') {
-                $db = new ConfigAlignment($this->core_connect());
-                if ($explodeUrl[1] == "insert_alignment") {
-                    $result = $db->insertAlignData($explodeUrl[0]);
-                } else if ($explodeUrl[1] == "insert_data_alignment") {
-                    $id = $explodeUrl[2];
-                    $result = $db->insertData($explodeUrl[0], $id);
-                }
-            } else if ($explodeUrl[0] == 'button_action') {
-                $db = new ButtonAction($this->core_connect());
-                if ($explodeUrl[1] == "insert_button") {
-                    $result = $db->insertButton($explodeUrl[0]);
-                } else if ($explodeUrl[1] == "insert_button_action") {
-                    $id = $explodeUrl[2];
-                    $result = $db->insertAction($explodeUrl[0], $id);
-                }
-            } else if ($explodeUrl[0] == 'object') {
-                $db = new Objects($this->core_connect());
-                if ($explodeUrl[1] == "insert_object") {
-                    $result = $db->insert($explodeUrl[0]);
-                    $result = $db->create_table();
-                } else if ($explodeUrl[1] == "update_object") {
-                    $tablename = $explodeUrl[0];
-                    $id = $explodeUrl[2];
-                    $result = $db->updateObject($id, $tablename);
-                }
-            } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
-                $db = new ObjectData($this->core_connect());
-                if ($explodeUrl[1] == "insert_object") {
-                    $result = $db->insert($explodeUrl[0]);
-                    // } else if ($explodeUrl[1] == "update_attr_value") {
-                    //     $tablename = $explodeUrl[1];
-                    //     $attr = $explodeUrl[3];
-                    //     $value = $explodeUrl[4];
-                    //     $result = $db->update_all($attr, $value, $tablename);
-                } else if ($explodeUrl[1] == "update_by_id") {
-                    $tablename = $explodeUrl[0];
-                    $id = $explodeUrl[2];
-                    $result = $db->update_id($id, $tablename);
-                } else if ($explodeUrl[1] == "update_where") {
-                    $tablename = $explodeUrl[0];
-                    $attr = $explodeUrl[2];
-                    $value = $explodeUrl[3];
-                    $result = $db->update_where($attr, $value, $tablename);
-                }
+            if ($explodeUrl[0] == 'login') {
+                $db = new Login($this->db_connect());
+                $result = $db->authenticate("users");
             }
+            // CORE DATA
+            if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
+                // $data = json_decode(file_get_contents("php://input"));
 
-            // Normal POST Action
-            if ($explodeUrl[1] == "insert") {
-                $result = $db->insert($explodeUrl[0]);
-            } else if ($explodeUrl[1] == "update") {
-                $tablename = $explodeUrl[0];
-                $id = $explodeUrl[2];
-                $result = $db->update($id, $tablename);
+                // $passed = $this->check_token($data->token);
+                // if ($passed == 'true') {
+                    if ($explodeUrl[0] == 'organization') {
+                        $db = new Organization($this->core_connect());
+                    } else if ($explodeUrl[0] == 'organization_role') {
+                        $db = new OrganizationRole($this->core_connect());
+                    } else if ($explodeUrl[0] == 'unit') {
+                        $db = new Unit($this->core_connect());
+                    } else if ($explodeUrl[0] == 'app') {
+                        $db = new App($this->core_connect());
+                        if ($explodeUrl[1] == "add_page") {
+                            $id = $explodeUrl[2];
+                            $result = $db->addPage($id, $explodeUrl[0]);
+                        }
+                    } else if ($explodeUrl[0] == 'page') {
+                        $db = new Page($this->core_connect());
+                    } else if ($explodeUrl[0] == 'form') {
+                        $db = new Form($this->core_connect());
+                    } else if ($explodeUrl[0] == 'metric') {
+                        $db = new Metric($this->core_connect());
+
+                    } else if ($explodeUrl[0] == 'users') {
+                        $db = new User($this->core_connect());
+                    } else if ($explodeUrl[0] == 'user_unit') {
+                        $db = new UserUnit($this->core_connect());
+                    } else if ($explodeUrl[0] == 'role') {
+                        $db = new Role($this->core_connect());
+                    } else if ($explodeUrl[0] == 'user_role') {
+                        $db = new UserRole($this->core_connect());
+                    } else if ($explodeUrl[0] == 'config_table') {
+                        $db = new ConfigTable($this->core_connect());
+                    } else if ($explodeUrl[0] == 'config_list') {
+                        $db = new ConfigList($this->core_connect());
+                    } else if ($explodeUrl[0] == 'config_page_layout') {
+                        $db = new ConfigPage($this->core_connect());
+                        if ($explodeUrl[1] == "insert_page_data") {
+                            $result = $db->insertPageData($explodeUrl[0]);
+                        } else if ($explodeUrl[1] == "insert_page_layout") {
+                            $id_page = $explodeUrl[2];
+                            $result = $db->insertLayout($explodeUrl[0], $id_page);
+                        }
+                    } else if ($explodeUrl[0] == 'config_form_layout') {
+                        $db = new ConfigForm($this->core_connect());
+                        if ($explodeUrl[1] == "insert_form_data") {
+                            $result = $db->insertFormData($explodeUrl[0]);
+                        } else if ($explodeUrl[1] == "insert_form_layout") {
+                            $id_form = $explodeUrl[2];
+                            $result = $db->insertLayout($explodeUrl[0], $id_form);
+                        }
+                    } else if ($explodeUrl[0] == 'config_gann') {
+                        $db = new ConfigGann($this->core_connect());
+                        if ($explodeUrl[1] == "insert_gann") {
+                            $result = $db->insertGann($explodeUrl[0]);
+                        } else if ($explodeUrl[1] == "insert_gann_data") {
+                            $id = $explodeUrl[2];
+                            $result = $db->insertGannData($explodeUrl[0], $id);
+                        }
+                    } else if ($explodeUrl[0] == 'form_page') {
+                        $db = new FormPage($this->core_connect());
+                    } else if ($explodeUrl[0] == 'config_alignment') {
+                        $db = new ConfigAlignment($this->core_connect());
+                        if ($explodeUrl[1] == "insert_alignment") {
+                            $result = $db->insertAlignData($explodeUrl[0]);
+                        } else if ($explodeUrl[1] == "insert_data_alignment") {
+                            $id = $explodeUrl[2];
+                            $result = $db->insertData($explodeUrl[0], $id);
+                        }
+                    } else if ($explodeUrl[0] == 'button_action') {
+                        $db = new ButtonAction($this->core_connect());
+                        if ($explodeUrl[1] == "insert_button") {
+                            $result = $db->insertButton($explodeUrl[0]);
+                        } else if ($explodeUrl[1] == "insert_button_action") {
+                            $id = $explodeUrl[2];
+                            $result = $db->insertAction($explodeUrl[0], $id);
+                        }
+                    } else if ($explodeUrl[0] == 'object') {
+                        $db = new Objects($this->core_connect());
+                        if ($explodeUrl[1] == "insert_object") {
+                            $result = $db->insert($explodeUrl[0]);
+                            $result = $db->create_table();
+                        } else if ($explodeUrl[1] == "update_object") {
+                            $tablename = $explodeUrl[0];
+                            $id = $explodeUrl[2];
+                            $result = $db->updateObject($id, $tablename);
+                        }
+                    }
+                    // Normal POST Action
+                    if ($explodeUrl[1] == "insert") {
+                        $result = $db->insert($explodeUrl[0]);
+                    } else if ($explodeUrl[1] == "update") {
+                        $tablename = $explodeUrl[0];
+                        $id = $explodeUrl[2];
+                        $result = $db->update($id, $tablename);
+                    }
+
+                    //
+                    $db_object = new ObjectData($this->core_connect());
+                    if ($explodeUrl[1] == "insert_object") {
+                        $result = $db_object->insert($explodeUrl[0]);
+                        // } else if ($explodeUrl[1] == "update_attr_value") {
+                        //     $tablename = $explodeUrl[1];
+                        //     $attr = $explodeUrl[3];
+                        //     $value = $explodeUrl[4];
+                        //     $result = $db_object->update_all($attr, $value, $tablename);
+                    } else if ($explodeUrl[1] == "update_by_id") {
+                        $tablename = $explodeUrl[0];
+                        $id = $explodeUrl[2];
+                        $result = $db_object->update_id($id, $tablename);
+                    } else if ($explodeUrl[1] == "update_where") {
+                        $tablename = $explodeUrl[0];
+                        $attr = $explodeUrl[2];
+                        $value = $explodeUrl[3];
+                        $result = $db_object->update_where($attr, $value, $tablename);
+                    }
+                // }
             }
-        // }
+            // OBJECT DATA
+            // if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
+            //     $data = json_decode(file_get_contents("php://input"));
+
+            //     $passed = $this->check_token($data->token);
+            //     if ($passed == 'true') {
+            //         $db = new ObjectData($this->core_connect());
+            //         if ($explodeUrl[1] == "insert_object") {
+            //             $result = $db->insert($explodeUrl[0]);
+            //             // } else if ($explodeUrl[1] == "update_attr_value") {
+            //             //     $tablename = $explodeUrl[1];
+            //             //     $attr = $explodeUrl[3];
+            //             //     $value = $explodeUrl[4];
+            //             //     $result = $db->update_all($attr, $value, $tablename);
+            //         } else if ($explodeUrl[1] == "update_by_id") {
+            //             $tablename = $explodeUrl[0];
+            //             $id = $explodeUrl[2];
+            //             $result = $db->update_id($id, $tablename);
+            //         } else if ($explodeUrl[1] == "update_where") {
+            //             $tablename = $explodeUrl[0];
+            //             $attr = $explodeUrl[2];
+            //             $value = $explodeUrl[3];
+            //             $result = $db->update_where($attr, $value, $tablename);
+            //         }
+            //     }
+            // }
+
+            // }
         } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             if ($explodeUrl[0] == 'organization') {
@@ -408,7 +441,7 @@ class Router
         } catch (\Throwable $th) {
             $this->msg(203, $th, "Terjadi Kesalahan");
         }
-    
+
     }
-    
+
 }

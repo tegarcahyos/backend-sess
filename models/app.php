@@ -34,6 +34,7 @@ class App
                     'name' => $name,
                     'code' => $code,
                     'page_data' => $page_data,
+                    'properties' => $properties,
                 );
 
                 array_push($data_arr, $data_item);
@@ -59,6 +60,7 @@ class App
             'name' => $name,
             'code' => $code,
             'page_data' => $page_data,
+            'properties' => $properties,
         );
         return $data_item;
     }
@@ -72,9 +74,10 @@ class App
         // die(json_encode($request));
         $name = $request[0]->name;
         $code = $request[0]->code;
+        $properties = $request[0]->properties;
 
-        $query = "INSERT INTO $tablename (name, code)";
-        $query .= " VALUES ('$name', '$code')";
+        $query = "INSERT INTO $tablename (name, code, properties)";
+        $query .= " VALUES ('$name', '$code', '$properties')";
         // die($query);
         return $this->db->execute($query);
 
@@ -101,8 +104,9 @@ class App
         // die(json_encode($request));
         $name = $request[0]->name;
         $code = $request[0]->code;
+        $properties = $request[0]->properties;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "'" . " WHERE id = " . $id;
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', properties = '$properties' WHERE id =  $id";
         // die($query);
         return $this->db->execute($query);
     }
