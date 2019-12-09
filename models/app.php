@@ -77,7 +77,7 @@ class App
         $properties = $request[0]->properties;
 
         $query = "INSERT INTO $tablename (name, code, properties)";
-        $query .= " VALUES ('$name', '$code', '$properties')";
+        $query .= " VALUES ('$name', '$code', $properties)";
         // die($query);
         return $this->db->execute($query);
 
@@ -101,7 +101,7 @@ class App
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die($request);
+        die($request[0]);
         // die(json_encode($request));
         $name = $request[0]->name;
         $code = $request[0]->code;
