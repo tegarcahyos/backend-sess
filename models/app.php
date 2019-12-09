@@ -77,7 +77,7 @@ class App
         $properties = $request[0]->properties;
 
         $query = "INSERT INTO $tablename (name, code, properties)";
-        $query .= " VALUES ('$name', '$code', $properties)";
+        $query .= " VALUES ('$name', '$code', '$properties')";
         // die($query);
         return $this->db->execute($query);
 
