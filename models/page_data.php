@@ -31,8 +31,6 @@ class PageData
 
                 $data_item = array(
                     'id' => $id,
-                    'page_id' => $page_id,
-                    'page_name' => $page_name,
                     'data' => json_decode($data),
 
                 );
@@ -57,8 +55,6 @@ class PageData
 
         $data_item = array(
             'id' => $id,
-            'page_id' => $page_id,
-            'page_name' => $page_name,
             'data' => json_decode($data),
         );
         return $data_item;
@@ -71,12 +67,10 @@ class PageData
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $page_id = $request[0]->page_id;
-        $page_name = $request[0]->page_name;
         $data = $request[0]->data;
 
-        $query = "INSERT INTO $tablename (page_id, page_name, data)";
-        $query .= " VALUES ($page_id , '$page_name', '$data')";
+        $query = "INSERT INTO $tablename (data)";
+        $query .= " VALUES ('$data')";
         // die($query);
         return $this->db->execute($query);
 
@@ -89,11 +83,9 @@ class PageData
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $page_id = $request[0]->page_id;
-        $page_name = $request[0]->page_name;
         $data = $request[0]->data;
 
-        $query = "UPDATE " . $tablename . " SET data = '" . $data . "', page_id = '" . $page_id . "', page_name = '" . $page_name . "'" . " WHERE id = " . $id;
+        $query = "UPDATE $tablename SET data = '$data' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
