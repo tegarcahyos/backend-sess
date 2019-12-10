@@ -173,12 +173,6 @@ class Router
                     $db = new Metric($this->core_connect());
                 } else if ($explodeUrl[0] == 'page_data') {
                     $db = new PageData($this->core_connect());
-                    if ($explodeUrl[1] == "update_by_page_id") {
-                        $tablename = $explodeUrl[0];
-                        $attr = $explodeUrl[2];
-                        $value = $explodeUrl[3];
-                        $result = $db->update_where($attr, $value, $tablename);
-                    }
                 } else if ($explodeUrl[0] == 'users') {
                     $db = new User($this->core_connect());
                 } else if ($explodeUrl[0] == 'user_unit') {
@@ -329,12 +323,6 @@ class Router
                 $db = new Page($this->core_connect());
             } else if ($explodeUrl[0] == 'page_data') {
                 $db = new PageData($this->core_connect());
-                if ($explodeUrl[1] == "get_by_page_id") {
-                    $tablename = $explodeUrl[0];
-                    $attr = $explodeUrl[2];
-                    $value = $explodeUrl[3];
-                    $result = $db->select_where_get($attr, $value, $tablename);
-                }
             } else if ($explodeUrl[0] == 'page_layout') {
                 $db = new PageLayout($this->core_connect());
             } else if ($explodeUrl[0] == 'config_table') {
