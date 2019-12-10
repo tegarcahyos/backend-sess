@@ -118,14 +118,12 @@ class ConfigList
         $name = $request[0]->name;
         $type_list = $request[0]->type_list;
         $object_id = $request[0]->object_id;
-        $object_name = $request[0]->object_name;
-        $object_table = $request[0]->object_table;
         $page_id = $request[0]->page_id;
         $selected_data = json_encode($request[0]->selected_data);
         $detail_page_id = $request[0]->detail_page_id;
 
         $query = "INSERT INTO $tablename (name, type_list, object_id, object_name, object_table, page_id selected_data, detail_page_id)";
-        $query .= "VALUES ('$name' , $type_list, $object_id, '$page_id', '$object_name' , '$object_table', '$selected_data','$detail_page_id')";
+        $query .= "VALUES ('$name' , $type_list, $object_id, '$page_id', '$selected_data','$detail_page_id')";
         // die($query);
         return $this->db->execute($query);
 
