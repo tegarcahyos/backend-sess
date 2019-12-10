@@ -50,7 +50,7 @@ class PageData
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "'";
+        $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
@@ -59,7 +59,7 @@ class PageData
             'id' => $id,
             'page_id' => $page_id,
             'page_name' => $page_name,
-            'data' => $data,
+            'data' => json_decode($data),
         );
         return $data_item;
     }
