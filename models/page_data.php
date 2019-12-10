@@ -71,8 +71,8 @@ class PageData
         $request = json_decode($data);
         $page_id = $request[0]->page_id;
         $page_name = $request[0]->page_name;
-        $data = $request[0]->data[0]->data;
-        die($data);
+        $data = $request[0]->data[0];
+        die(print_r($data));
         $query = "INSERT INTO $tablename (page_id, page_name, data)";
         $query .= " VALUES ('$page_id','$page_name','$data')";
         // die($query);
