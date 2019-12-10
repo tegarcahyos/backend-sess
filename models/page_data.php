@@ -73,7 +73,7 @@ class PageData
         $page_name = $request[0]->page_name;
         $data = $request[0]->data;
         $query = "INSERT INTO $tablename (page_id, page_name, data)";
-        $query .= " VALUES ($page_id, '$page_name','$data')";
+        $query .= " VALUES ('$page_id', '$page_name','$data')";
         // die($query);
         return $this->db->execute($query);
 
@@ -88,7 +88,7 @@ class PageData
         $page_name = $request[0]->page_name;
         $data = $request[0]->data;
 
-        $query = "UPDATE $tablename SET data = '$data', page_id = $page_id, page_name = '$page_name' WHERE id = " . $id;
+        $query = "UPDATE $tablename SET data = '$data', page_id = '$page_id', page_name = '$page_name' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
