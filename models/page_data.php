@@ -74,7 +74,7 @@ class PageData
         $data = $request[0]->data[0];
         $data = json_encode($data);
         $query = "INSERT INTO $tablename (page_id, page_name, data)";
-        $query .= " VALUES ('$page_id','$page_name',$data)";
+        $query .= " VALUES ('$page_id','$page_name','$data')";
         // die($query);
         return $this->db->execute($query);
 
