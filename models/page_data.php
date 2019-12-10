@@ -72,7 +72,6 @@ class PageData
         $page_id = $request[0]->page_id;
         $page_name = $request[0]->page_name;
         $data = $request[0]->data;
-        die($data[0]);
         $query = "INSERT INTO $tablename (page_id, page_name, data)";
         $query .= " VALUES ('$page_id','$page_name','$data')";
         // die($query);
