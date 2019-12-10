@@ -143,7 +143,6 @@ class ConfigTable
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        die($request[0]->view_thumbnail);
         $name = $request[0]->name;
         $type_table = $request[0]->type_table;
         $object_id = $request[0]->object_id;
@@ -156,7 +155,7 @@ class ConfigTable
         $detail_page_id = $request[0]->detail_page_id;
         $view_thumbnail = $request[0]->view_thumbnail;
 
-        $query = "UPDATE $tablename SET type_table = $type_table, object_name = '$object_name', name = '$name', object_id = $object_id, object_table = '$object_table', selected_data = '$selected_data', form_id = '$form_id', selected_button_action = '$selected_button_action', detail_page_id ='$detail_page_id', view_thumbnail= '$view_thumbnail' WHERE id =  '$id'";
+        $query = "UPDATE $tablename SET type_table = $type_table, object_name = '$object_name', name = '$name', object_id = $object_id, object_table = '$object_table', selected_data = '$selected_data', form_id = '$form_id', selected_button_action = '$selected_button_action', detail_page_id ='$detail_page_id', view_thumbnail = '$view_thumbnail' WHERE id =  '$id'";
         // die($query);
         return $this->db->execute($query);
     }
