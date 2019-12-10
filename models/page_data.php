@@ -60,14 +60,54 @@ class PageData
         return $data_item;
     }
 
+    public function select_where_get($attr, $val, $tablename)
+    {
+
+        $query = "SELECT values FROM $tablename WHERE ";
+        $values = explode('AND', $val);
+        $attr = explode('AND', $attr);
+        for ($i = 0; $i < count($attr); $i++) {
+            if ($i == 0) {
+
+            } else {
+                $query .= " AND ";
+            }
+            $query .= "values @> '{\"" . $attr[$i] . "\": \"" . $values[$i] . "\"}'";
+
+        }
+
+        $query_real = str_replace("%20", " ", $query);
+        // die($query_real);
+        $result = $this->db->execute($query_real);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+            $arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                array_push($arr, json_decode($values));
+            }
+
+            $item = array(
+                'data' => $arr,
+            );
+
+            // echo json_encode($item);
+        } else {
+            echo json_encode(
+                array('message' => 'data tidak ditemukan')
+            );
+        }
+        return $item;
+    }
+
     public function insert($tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
-        //
-        $request = json_decode($data);
-        // die(json_encode($request));
-        $data = $request[0]->data;
 
         $query = "INSERT INTO $tablename (data)";
         $query .= " VALUES ('$data')";
@@ -81,13 +121,35 @@ class PageData
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        $request = json_decode($data);
         // die(json_encode($request));
-        $data = $request[0]->data;
+        $data = $request->data;
 
         $query = "UPDATE $tablename SET data = '$data' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
+    }
+
+    public function update_where($attr, $val, $tablename)
+    {
+        $data = file_get_contents("php://input");
+
+        $condition_values = explode('AND', $val);
+        $condition_attr = explode('AND', $attr);
+
+        $query = "UPDATE $tablename SET values = '$data' ";
+        for ($i = 0; $i < count($condition_attr); $i++) {
+            if ($i == 0) {
+
+            } else {
+                $query .= " AND ";
+            }
+            $query .= "values @> '{\"" . $condition_attr[$i] . "\": \"" . $condition_values[$i] . "\"}'";
+
+        }
+        $query_real = str_replace("%20", " ", $query);
+        // die($query_real);
+
+        return $this->db->execute($query_real);
     }
 
     public function delete($id, $tablename)
