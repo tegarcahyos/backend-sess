@@ -144,7 +144,7 @@ class Router
         // POST - UPDATE / INSERT
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($explodeUrl[0] == 'login') {
-                $db = new Login($this->db_connect());
+                $db = new Login($this->core_connect());
                 $result = $db->authenticate("users");
             }
             // CORE DATA
