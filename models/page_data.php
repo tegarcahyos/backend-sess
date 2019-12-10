@@ -66,7 +66,7 @@ class PageData
 
     public function findByPageId($page_id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE page_id = ' . $page_id . "";
+        $query = "SELECT * FROM  $tablename WHERE page_id = '$page_id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         extract($row);
