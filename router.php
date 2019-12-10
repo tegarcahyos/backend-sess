@@ -172,7 +172,7 @@ class Router
                 } else if ($explodeUrl[0] == 'metric') {
                     $db = new Metric($this->core_connect());
                 } else if ($explodeUrl[0] == 'page_data') {
-                    $db = new PageDatax($this->core_connect());
+                    $db = new PageData($this->core_connect());
                 } else if ($explodeUrl[0] == 'users') {
                     $db = new User($this->core_connect());
                 } else if ($explodeUrl[0] == 'user_unit') {

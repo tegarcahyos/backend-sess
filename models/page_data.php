@@ -1,6 +1,6 @@
 <?php
 
-class PageDatax
+class PageData
 {
     public $db;
 
