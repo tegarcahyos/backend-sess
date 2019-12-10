@@ -68,16 +68,32 @@ class PageData
     {
         $query = "SELECT * FROM  $tablename WHERE page_id = '$page_id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        extract($row);
+        $num = $result->rowCount();
 
-        $data_item = array(
-            'id' => $id,
-            'page_id' => $page_id,
-            'page_name' => $page_name,
-            'data' => json_decode($data),
-        );
-        return $data_item;
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'page_id' => $page_id,
+                    'page_name' => $page_name,
+                    'data' => $data,
+
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
     }
 
     public function insert($tablename)
