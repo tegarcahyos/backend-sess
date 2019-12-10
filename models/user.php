@@ -147,7 +147,7 @@ class User
         $upload_file = $upload_dir . basename($request->photo);
         $name = $request->photo;
 
-        move_uploaded_file($name, $upload_file);
+        move_uploaded_file($upload_file, $upload_dir);
 
         $query = "UPDATE $tablename SET photo_profile = '$name' WHERE id = $id";
         return $this->db->execute($query);
