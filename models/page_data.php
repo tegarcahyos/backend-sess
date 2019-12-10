@@ -71,9 +71,10 @@ class PageData
         $request = json_decode($data);
         $page_id = $request[0]->page_id;
         $page_name = $request[0]->page_name;
-        $data = $request[0]->data;
+        $data = $request[0]->data[0]->data;
+        die($data);
         $query = "INSERT INTO $tablename (page_id, page_name, data)";
-        $query .= " VALUES ('$page_id','$page_name',$data)";
+        $query .= " VALUES ('$page_id','$page_name','$data')";
         // die($query);
         return $this->db->execute($query);
 
@@ -87,7 +88,6 @@ class PageData
         $page_id = $request[0]->page_id;
         $page_name = $request[0]->page_name;
         $data = $request[0]->data[0]->data;
-        die($data);
         $query = "UPDATE $tablename SET data = $data, page_id = '$page_id', page_name = '$page_name' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
