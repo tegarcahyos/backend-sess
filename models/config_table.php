@@ -143,7 +143,7 @@ class ConfigTable
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        die(json_encode($request[0]));
+        die($request[0]->view_thumbnail);
         $name = $request[0]->name;
         $type_table = $request[0]->type_table;
         $object_id = $request[0]->object_id;
