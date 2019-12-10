@@ -75,7 +75,7 @@ class PageData
             'id' => $id,
             'page_id' => $page_id,
             'page_name' => $page_name,
-            'data' => $data,
+            'data' => json_decode($data),
         );
         return $data_item;
     }
