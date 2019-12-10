@@ -64,6 +64,22 @@ class PageData
         return $data_item;
     }
 
+    public function findByPageId($page_id, $tablename)
+    {
+        $query = 'SELECT * FROM ' . $tablename . ' WHERE page_id = ' . $page_id . "";
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        extract($row);
+
+        $data_item = array(
+            'id' => $id,
+            'page_id' => $page_id,
+            'page_name' => $page_name,
+            'data' => $data,
+        );
+        return $data_item;
+    }
+
     public function insert($tablename)
     {
         // get data input from frontend

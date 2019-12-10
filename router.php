@@ -323,6 +323,10 @@ class Router
                 $db = new Page($this->core_connect());
             } else if ($explodeUrl[0] == 'page_data') {
                 $db = new PageData($this->core_connect());
+                if ($explodeUrl[1] == 'find_by_page_id') {
+                    $page_id = $explodeUrl[2];
+                    $result = $db->findByPageId($page_id, $explodeUrl[0]);
+                }
             } else if ($explodeUrl[0] == 'page_layout') {
                 $db = new PageLayout($this->core_connect());
             } else if ($explodeUrl[0] == 'config_table') {
