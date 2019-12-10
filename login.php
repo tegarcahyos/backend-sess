@@ -27,6 +27,8 @@ class Login
             while ($row = $result->fetchRow()) {
                 $user_id = $row['id'];
                 $name = $row['name'];
+                $email = $row['email'];
+                $phone = $row['phone'];
                 $password2 = $row['password'];
                 $user_token = $row['token'];
             }
@@ -37,7 +39,7 @@ class Login
                 $audience_claim = "THE_AUDIENCE";
                 $issuedat_claim = time(); // issued at
                 $notbefore_claim = $issuedat_claim + 10; //not before in seconds
-                $expire_claim = $issuedat_claim + 18000; // expire time in seconds
+                $expire_claim = $issuedat_claim + 36000; // expire time in seconds
                 $token = array(
                     "iss" => $issuer_claim,
                     "aud" => $audience_claim,
@@ -94,6 +96,9 @@ class Login
                     "message" => "Successful login.",
                     "name" => $name,
                     "username" => $username,
+                    "password" => $password,
+                    "email" => $email,
+                    "phone" => $phone,
                     "expireAt" => $expire_claim,
                     "role_id" => $role_id,
                     "role_name" => $role_name,

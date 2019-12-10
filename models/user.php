@@ -138,6 +138,21 @@ class User
 
     }
 
+    public function updatePhotoProfile($id, $tablename)
+    {
+        $data = file_get_contents("php://input");
+
+        $request = json_decode($data);
+        $upload_dir = '../upload/profile/';
+        $upload_file = $upload_dir . basename($request->photo);
+        $name = $request->photo;
+
+        move_uploaded_file($request->temp_name, $upload_file);
+
+        $query = "UPDATE $tablename SET photo_profile = '$name' WHERE id = $id";
+        return $this->db->execute($query);
+    }
+
     public function update($id, $tablename)
     {
         // get data input from frontend
@@ -149,11 +164,12 @@ class User
         $phone = $request[0]->phone;
         $username = $request[0]->username;
         $password = $request[0]->password;
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
         $external_id = 1;
         $status_active = 'false';
         $status_delete = 'false';
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', email = '" . $email . "', phone = '" . $phone . "', username = '" . $username . "', password = '" . $password . "', external_id = '" . $external_id . "', status_active = '" . $status_active . "', status_delete = '" . $status_delete . "'" . " WHERE id = " . $id;
+        $query = "UPDATE $tablename SET name = '$name', email = '$email', phone = '$phone', username = ' $username', password = '$password_hash', external_id = '$external_id', status_active = '$status_active', status_delete = '$status_delete' WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
     }

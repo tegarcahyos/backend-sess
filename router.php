@@ -175,6 +175,10 @@ class Router
                     $db = new PageData($this->core_connect());
                 } else if ($explodeUrl[0] == 'users') {
                     $db = new User($this->core_connect());
+                    if ($explodeUrl[1] == 'upload_photo') {
+                        $id = $explodeUrl[2];
+                        $result = $db->updatePhotoProfile($id, $explodeUrl[0]);
+                    }
                 } else if ($explodeUrl[0] == 'user_unit') {
                     $db = new UserUnit($this->core_connect());
                 } else if ($explodeUrl[0] == 'role') {
@@ -251,11 +255,6 @@ class Router
                 $db_object = new ObjectData($this->core_connect());
                 if ($explodeUrl[1] == "insert_object") {
                     $result = $db_object->insert($explodeUrl[0]);
-                    // } else if ($explodeUrl[1] == "update_attr_value") {
-                    //     $tablename = $explodeUrl[1];
-                    //     $attr = $explodeUrl[3];
-                    //     $value = $explodeUrl[4];
-                    //     $result = $db_object->update_all($attr, $value, $tablename);
                 } else if ($explodeUrl[1] == "update_by_id") {
                     $tablename = $explodeUrl[0];
                     $id = $explodeUrl[2];
