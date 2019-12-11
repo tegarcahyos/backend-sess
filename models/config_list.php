@@ -133,7 +133,7 @@ class ConfigList
         $detail_page_id = $request[0]->detail_page_id;
 
         $query = "INSERT INTO $tablename (name, type_list, object_id, object_name, object_table, page_id, selected_data, detail_page_id)";
-        $query .= "VALUES ('$name' , $type_list, NULLIF($object_id,NULL), NULLIF($object_name,NULL), NULLIF($object_table,NULL), NULLIF('$page_id',NULL), '$selected_data','$detail_page_id')";
+        $query .= "VALUES ('$name' , $type_list, NULLIF('$object_id','NULL'), NULLIF('$object_name','NULL'), NULLIF('$object_table','NULL'), NULLIF('$page_id','NULL'), '$selected_data','$detail_page_id')";
         // die($query);
         return $this->db->execute($query);
 
