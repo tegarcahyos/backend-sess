@@ -118,11 +118,11 @@ class ConfigList
         $name = $request[0]->name;
         $type_list = $request[0]->type_list;
         $object_id = $request[0]->object_id;
-        if($object_id == ""){
+        if (empty($object_id)) {
             $object_id == null;
         }
         $page_id = $request[0]->page_id;
-        if($page_id == ""){
+        if (empty($page_id)) {
             $page_id == null;
         }
         $selected_data = json_encode($request[0]->selected_data);
