@@ -133,7 +133,7 @@ class ConfigList
         $detail_page_id = $request[0]->detail_page_id;
 
         $query = "INSERT INTO $tablename (name, type_list, object_id, object_name, object_table, page_id, selected_data, detail_page_id)";
-        $query .= "VALUES ('$name' , $type_list, NULLIF($object_id,NULL), NULLIF($object_id,NULL), NULLIF($object_id,NULL), NULLIF('$page_id',NULL), '$selected_data','$detail_page_id')";
+        $query .= "VALUES ('$name' , $type_list, NULLIF($object_id,NULL), NULLIF($object_name,NULL), NULLIF($object_table,NULL), NULLIF('$page_id',NULL), '$selected_data','$detail_page_id')";
         // die($query);
         return $this->db->execute($query);
 
@@ -148,11 +148,19 @@ class ConfigList
         $object_id = $request[0]->object_id;
         $object_name = $request[0]->object_name;
         $object_table = $request[0]->object_table;
+        if (empty($object_id)) {
+            $object_id = 'NULL';
+            $object_name = 'NULL';
+            $object_table = 'NULL';
+        }
         $page_id = $request[0]->page_id;
+        if (empty($page_id)) {
+            $page_id = 'NULL';
+        }
         $selected_data = json_encode($request[0]->selected_data);
         $detail_page_id = $request[0]->detail_page_id;
 
-        $query = "UPDATE $tablename SET type_list = '$type_list', object_name = '$object_name', name = '$name', object_id = $object_id, page_id = $page_id, object_table = '$object_table', selected_data = '$selected_data', detail_page_id ='$detail_page_id' WHERE id =  '$id'";
+        $query = "UPDATE $tablename SET type_list = '$type_list', object_name = '$object_name', name = '$name', object_id = NULLIF($object_id,NULL), page_id = $page_id, object_table = NULLIF($object_id,NULL), selected_data = '$selected_data', detail_page_id ='$detail_page_id' WHERE id =  '$id'";
         // die($query);
         return $this->db->execute($query);
     }
