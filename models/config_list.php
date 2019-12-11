@@ -125,6 +125,7 @@ class ConfigList
             $object_name = '';
             $object_table = '';
         }
+        die($object_id);
         //     $object_name = $request[0]->object_name;
         //     $object_table = $request[0]->object_table;
         // }
