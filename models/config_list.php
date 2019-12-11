@@ -38,6 +38,7 @@ class ConfigList
                     'object_table' => $object_table,
                     'selected_data' => $selected_data,
                     'detail_page_id' => $detail_page_id,
+                    'page_id' => $page_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -67,6 +68,7 @@ class ConfigList
             'object_table' => $object_table,
             'selected_data' => $selected_data,
             'detail_page_id' => $detail_page_id,
+            'page_id' => $page_id,
         );
         return $data_item;
     }

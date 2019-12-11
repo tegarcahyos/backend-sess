@@ -175,7 +175,7 @@ class Router
                     $db = new PageData($this->core_connect());
                 } else if ($explodeUrl[0] == 'users') {
                     $db = new User($this->core_connect());
-                    if ($explodeUrl[1] == 'upload_photo') {
+                    if($explodeUrl[1] == 'upload_photo'){
                         $id = $explodeUrl[2];
                         $result = $db->updatePhotoProfile($id, $explodeUrl[0]);
                     }
