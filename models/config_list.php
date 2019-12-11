@@ -120,10 +120,11 @@ class ConfigList
         $object_id = $request[0]->object_id;
         $object_name = $request[0]->object_name;
         $object_table = $request[0]->object_table;
-        // if (empty($object_id)) {
-        //     $object_name = 'NULL';
-        //     $object_table = 'NULL';
-        // } else {
+        if (empty($object_id)) {
+            $object_id = '';
+            $object_name = '';
+            $object_table = '';
+        }
         //     $object_name = $request[0]->object_name;
         //     $object_table = $request[0]->object_table;
         // }
