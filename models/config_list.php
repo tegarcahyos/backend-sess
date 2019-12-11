@@ -119,7 +119,7 @@ class ConfigList
         $type_list = $request[0]->type_list;
         $object_id = $request[0]->object_id;
         if (empty($object_id)) {
-            $object_id = null;
+            unset($object_id);
         }
         $page_id = $request[0]->page_id;
         if (empty($page_id)) {
