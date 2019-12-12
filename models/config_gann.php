@@ -32,6 +32,7 @@ class ConfigGann
                 $data_item = array(
                     'id' => $id,
                     'name' => $name,
+                    'properties' => $properties,
                     'task' => json_decode($task),
 
                 );
@@ -57,6 +58,7 @@ class ConfigGann
         $data_item = array(
             'id' => $id,
             'name' => $name,
+            'properties' => $properties,
             'task' => json_decode($task),
 
         );
@@ -72,9 +74,10 @@ class ConfigGann
         // die(print_r($data));
         // die(json_decode($data));
         $name = $request[0]->name;
+        $properties = $request[0]->properties;
         // $alignment = json_encode($request[0]->data);
-        $query = "INSERT INTO $tablename (name)";
-        $query .= " VALUES ('$name')";
+        $query = "INSERT INTO $tablename (name, properties)";
+        $query .= " VALUES ('$name', '$properties')";
         // die($query);
         return $this->db->execute($query);
 
@@ -107,8 +110,9 @@ class ConfigGann
         // die(print_r($data));
         // die(json_decode($data));
         $name = $request[0]->name;
+        $properties = $request[0]->properties;
         // $alignment = json_encode($request[0]->data);
-        $query = "UPDATE  $tablename SET name = '$name' WHERE id = '$id'";
+        $query = "UPDATE  $tablename SET name = '$name', properties = '$properties' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
