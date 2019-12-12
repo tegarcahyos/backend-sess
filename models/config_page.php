@@ -33,6 +33,7 @@ class ConfigPage
                     'id' => $id,
                     'page_config' => $page_config,
                     'page_name' => $page_name,
+                    'page_type' => $page_type,
 
                 );
 
@@ -59,6 +60,7 @@ class ConfigPage
             'id' => $id,
             'page_config' => $page_config,
             'page_name' => $page_name,
+            'page_type' => $page_type,
 
         );
         return $data_item;
@@ -86,8 +88,9 @@ class ConfigPage
         $request = json_decode($data);
 
         $page_name = $request[0]->name;
-        $query = "INSERT INTO $tablename (page_name)";
-        $query .= " VALUES ('$page_name')";
+        $page_type = $request[0]->type;
+        $query = "INSERT INTO $tablename (page_name, page_type)";
+        $query .= " VALUES ('$page_name', '$page_type')";
         // die($query);
         return $this->db->execute($query);
 
@@ -101,7 +104,8 @@ class ConfigPage
         $request = json_decode($data);
         // die(json_encode($request));
         $page_name = $request->name;
-        $query = "UPDATE $tablename SET page_name = '$page_name' WHERE id = '$id'";
+        $page_type = $request->type;
+        $query = "UPDATE $tablename SET page_name = '$page_name', page_type = '$page_type' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
