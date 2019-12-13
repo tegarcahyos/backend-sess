@@ -134,13 +134,17 @@ class ConfigTable
         $selected_button_action = json_encode($request[0]->selected_button_action);
         $detail_page_id = $request[0]->detail_page_id;
         $page_id = $request[0]->page_id;
-        if(empty($page_id)){
+        if (empty($object_id)) {
+            $object_id = 'NULL';
+            $object_name = 'NULL';
+            $object_table = 'NULL';
+        }
+        if (empty($page_id)) {
             $page_id = 'NULL';
         }
-
         $query = "INSERT INTO $tablename (name, type_table, object_id, object_name, object_table, selected_data, form_id, selected_button_action, detail_page_id, page_id)";
-        $query .= "VALUES ('$name' , $type_table, $object_id, '$object_name' , '$object_table', '$selected_data', '$form_id', '$selected_button_action', '$detail_page_id', NULLIF('$page_id', 'NULL'))";
-        die($query);
+        $query .= "VALUES ('$name' , $type_table, NULLIF('$object_id','NULL'), NULLIF('$object_name','NULL'), NULLIF('$object_table','NULL'), '$selected_data', '$form_id', '$selected_button_action', '$detail_page_id', NULLIF('$page_id', 'NULL'))";
+        // die($query);
         return $this->db->execute($query);
 
     }
