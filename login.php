@@ -30,7 +30,6 @@ class Login
                 $email = $row['email'];
                 $phone = $row['phone'];
                 $password2 = $row['password'];
-                $user_token = $row['token'];
             }
             // die($password2);
             if (password_verify($password, $password2)) {
@@ -52,14 +51,11 @@ class Login
                     ));
 
                 $jwt = JWT::encode($token, $secret_key);
-                if ($user_token == null) {
-                    $insert_token = "UPDATE users SET token = '$jwt', expireAt = '$expireAt' WHERE id = $user_id";
-                    // die($insert_token);
-                    $this->db->execute($insert_token);
-                } else {
-                    $update_expireAt = "UPDATE users SET expire_at = '$expire_claim' WHERE id = $user_id";
-                    $this->db->execute($update_expireAt);
-                }
+                $insert_token = "UPDATE users SET token = '$jwt', expireAt = '$expireAt' WHERE id = $user_id";
+                // die($insert_token);
+                $this->db->execute($insert_token);
+                $update_expireAt = "UPDATE users SET expire_at = '$expire_claim' WHERE id = $user_id";
+                $this->db->execute($update_expireAt);
 
                 // GET USER ROLE
                 $query = "SELECT * FROM user_role WHERE user_id = $user_id";
@@ -105,7 +101,7 @@ class Login
                     "unit_id" => $unit_id,
                     "unit_code" => $unit_code,
                     "unit_name" => $unit_name,
-                    "token" => $user_token,
+                    "token" => $jwt,
                 );
 
             } else {
