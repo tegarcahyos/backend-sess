@@ -144,7 +144,7 @@ class ConfigTable
         }
         $query = "INSERT INTO $tablename (name, type_table, object_id, object_name, object_table, selected_data, form_id, selected_button_action, detail_page_id, page_id)";
         $query .= "VALUES ('$name' , $type_table, NULLIF('$object_id','NULL'), NULLIF('$object_name','NULL'), NULLIF('$object_table','NULL'), '$selected_data', '$form_id', '$selected_button_action', '$detail_page_id', NULLIF('$page_id', 'NULL'))";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
