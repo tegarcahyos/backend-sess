@@ -79,6 +79,7 @@ class Objects
         $query = "INSERT INTO $tablename (name, attribute, tbl_name)";
         $query .= "VALUES ('$name', '$attribute', 'data_$tbl_name')";
         // die($query);
+        $this->create_table();
         return $this->db->execute($query);
 
     }
