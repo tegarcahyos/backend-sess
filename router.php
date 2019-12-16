@@ -323,7 +323,7 @@ class Router
             if ($explodeUrl[0] == 'login') {
                 $db = new Login($this->core_connect());
                 $result = $db->authenticate("users");
-            }
+            } else
             // CORE DATA
             if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
 
