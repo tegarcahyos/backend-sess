@@ -323,9 +323,8 @@ class Router
             if ($explodeUrl[0] == 'login') {
                 $db = new Login($this->core_connect());
                 $result = $db->authenticate("users");
-            } else
-            // CORE DATA
-            if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
+                // CORE DATA
+            } else if (in_array($explodeUrl[0], array_column($this->get_table_db(), 'tablename'))) {
 
                 // $passed = $this->check_token($data->token);
                 // if ($passed == 'true') {
@@ -473,7 +472,7 @@ class Router
             // }
         } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-            if (!empty($token)) {
+            // if (!empty($token)) {
                 if ($explodeUrl[0] == 'organization') {
                     $db = new Organization($this->core_connect());
                 } else if ($explodeUrl[0] == 'organization_role') {
@@ -613,7 +612,7 @@ class Router
                     $result = $db->delete($id, $explodeUrl[0]);
                 }
 
-            }
+            // }
 
         }
         try {
