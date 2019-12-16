@@ -329,7 +329,6 @@ class Router
 
                 // $passed = $this->check_token($data->token);
                 // if ($passed == 'true') {
-                if (!empty($token)) {
                     if ($explodeUrl[0] == 'organization') {
                         $db = new Organization($this->core_connect());
                     } else if ($explodeUrl[0] == 'organization_role') {
@@ -442,7 +441,6 @@ class Router
                         $value = $explodeUrl[3];
                         $result = $db_object->update_where($attr, $value, $tablename);
                     }
-                }
                 // }
             }
             // OBJECT DATA
