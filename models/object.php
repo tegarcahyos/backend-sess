@@ -115,7 +115,7 @@ class Objects
         $tbl_name_baru = strtolower($tbl_name_baru);
         $tbl_name_baru = str_replace(" ", "_", $tbl_name_baru);
 
-        $query_update = "UPDATE " . $tablename . " SET name = '" . $name . "', attribute = '" . $attribute . "', tbl_name = '" . $tbl_name_baru . "' WHERE id = " . $id;
+        $query_update = "UPDATE $tablename SET name = '$name', attribute = '$attribute', tbl_name = 'data_$tbl_name_baru' WHERE id = $id";
 
         $query_select = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
         $result = $this->db->execute($query_select);
