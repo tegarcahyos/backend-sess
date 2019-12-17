@@ -127,7 +127,7 @@ class PageData
 
     public function delete($id, $tablename)
     {
-        $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
