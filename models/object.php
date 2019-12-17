@@ -124,6 +124,7 @@ class Objects
         $tbl_name = $row["tbl_name"] ?? null;
         $query_alter = "ALTER TABLE tbl_name RENAME TO data_$tbl_name_baru";
         $this->db->execute($query_alter);
+        die($query_alter);
         return $this->db->execute($query_update);
 
     }
