@@ -123,6 +123,7 @@ class Objects
         extract($row);
         $tbl_name = $row["tbl_name"] ?? null;
         $query_alter = "ALTER TABLE data_$tbl_name RENAME TO data_$tbl_name_baru";
+        die($query_alter);
         $this->db->execute($query_alter);
         return $this->db->execute($query_update);
 
