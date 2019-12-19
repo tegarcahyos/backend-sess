@@ -249,7 +249,7 @@ class Unit
         $name = $request->name;
         $code = $request->code;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "', organization_id = '" . $organization_id . "', organization_code = '" . $organization_code . "', organization_name = '" . $organization_name . "', parent_id = '" . $parent_id . " WHERE id = " . $id;
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name', parent_id = $parent_id WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
     }
