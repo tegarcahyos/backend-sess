@@ -103,6 +103,13 @@ class PageData
         $request = json_decode($data);
         $page_id = $request[0]->page_id;
         $page_name = $request[0]->page_name;
+        // Input Code 
+        $unit_code;
+        $unit_name;
+        $unit_id;
+        $role_id;
+        $role_name;
+        // Input Code
         $data = $request[0]->data;
         $data = json_encode($data);
         $query = "INSERT INTO $tablename (page_id, page_name, data)";
