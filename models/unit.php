@@ -242,7 +242,6 @@ class Unit
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        die(print_r($request));
         $organization_id = $request->organization_id;
         $organization_name = $request->organization_name;
         $organization_code = $request->organization_code;
