@@ -78,7 +78,7 @@ class ConfigAlignment
         $query .= " VALUES ('$name')";
         // die($query);
         $this->db->execute($query);
-        $lastId = $this->db->insert_Id($tablename, 'id');
+        $lastId = $this->db->insert_Id();
         $select = "SELECT * FROM $tablename WHERE id = '$lastId'";
         die($select);
         $result = $this->db->execute($select);
