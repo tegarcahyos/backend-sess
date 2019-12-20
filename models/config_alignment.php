@@ -79,7 +79,7 @@ class ConfigAlignment
         // die($query);
         $this->db->execute($query);
         $lastId = $this->db->insert_Id($tablename, 'id');
-        $select = "SELECT * FROM $tablename WHERE id = $lastId";
+        $select = "SELECT * FROM $tablename WHERE id = '$lastId'";
 
         $result = $this->db->execute($select);
         $num = $result->rowCount();
