@@ -73,41 +73,12 @@ class ConfigAlignment
         // die(print_r($data));
         // die(json_decode($data));
         $name = $request[0]->name;
+        $alignment = $request[0]->alignment;
         // $alignment = json_encode($request[0]->data);
-        $query = "INSERT INTO $tablename (name)";
-        $query .= " VALUES ('$name')";
+        $query = "INSERT INTO $tablename (name, alignment)";
+        $query .= " VALUES ('$name', '$alignment')";
         // die($query);
-        $this->db->execute($query);
-        $lastId = $this->db->insert_Id();
-        $select = "SELECT * FROM $tablename WHERE id = '$lastId'";
-        die($select);
-        $result = $this->db->execute($select);
-        $num = $result->rowCount();
-
-        // jika ada hasil
-        if ($num > 0) {
-
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-
-                // Push to data_arr
-
-                $data_item = array(
-                    'id' => $id,
-                    'name' => $name,
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
-        } else {
-            $msg = 'Data Kosong';
-        }
-
-        return $msg;
+        return $this->db->execute($query);
 
     }
 
