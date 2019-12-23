@@ -105,8 +105,10 @@ class ConfigAlignment
         // die(print_r($data));
         // die(json_decode($data));
         $name = $request[0]->name;
+        $alignment = $request[0]->alignment;
+        $properties = $request[0]->properties;
         // $alignment = json_encode($request[0]->data);
-        $query = "UPDATE  $tablename SET name = '$name' WHERE id = '$id'";
+        $query = "UPDATE  $tablename SET name = '$name', alignment = '$alignment', properties = '$properties' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
