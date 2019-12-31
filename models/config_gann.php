@@ -75,9 +75,10 @@ class ConfigGann
         // die(json_decode($data));
         $name = $request[0]->name;
         $properties = $request[0]->properties;
+        $task = $request[0]->task;
         // $alignment = json_encode($request[0]->data);
-        $query = "INSERT INTO $tablename (name, properties)";
-        $query .= " VALUES ('$name', '$properties')";
+        $query = "INSERT INTO $tablename (name, properties, task)";
+        $query .= " VALUES ('$name', '$properties', '$task')";
         // die($query);
         return $this->db->execute($query);
 

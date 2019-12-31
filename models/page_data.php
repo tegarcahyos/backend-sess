@@ -34,6 +34,8 @@ class PageData
                     'page_id' => $page_id,
                     'page_name' => $page_name,
                     'data' => json_decode($data),
+                    'role_user' => $role_user,
+                    'unit_user' => $unit_user,
 
                 );
 
@@ -60,6 +62,8 @@ class PageData
             'page_id' => $page_id,
             'page_name' => $page_name,
             'data' => json_decode($data),
+            'role_user' => $role_user,
+            'unit_user' => $unit_user,
         );
         return $data_item;
     }
@@ -82,6 +86,8 @@ class PageData
                     'page_id' => $page_id,
                     'page_name' => $page_name,
                     'data' => json_decode($data),
+                    'role_user' => $role_user,
+                    'unit_user' => $unit_user,
 
                 );
 
@@ -103,7 +109,9 @@ class PageData
         $request = json_decode($data);
         $page_id = $request[0]->page_id;
         $page_name = $request[0]->page_name;
-        // Input Code 
+        $unit_user = $request[0]->unit_user;
+        $role_user = $request[0]->role_user;
+        // Input Code
         $unit_code;
         $unit_name;
         $unit_id;
@@ -112,8 +120,8 @@ class PageData
         // Input Code
         $data = $request[0]->data;
         $data = json_encode($data);
-        $query = "INSERT INTO $tablename (page_id, page_name, data)";
-        $query .= " VALUES ('$page_id','$page_name','$data')";
+        $query = "INSERT INTO $tablename (page_id, page_name, data, unit_user, role_user)";
+        $query .= " VALUES ('$page_id','$page_name','$data', '$unit_user', '$role_user')";
         // die($query);
         return $this->db->execute($query);
 
@@ -127,7 +135,9 @@ class PageData
         $page_id = $request[0]->page_id;
         $page_name = $request[0]->page_name;
         $data = $request[0]->data[0]->data;
-        $query = "UPDATE $tablename SET data = $data, page_id = '$page_id', page_name = '$page_name' WHERE id = " . $id;
+        $unit_user = $request[0]->unit_user;
+        $role_user = $request[0]->role_user;
+        $query = "UPDATE $tablename SET data = $data, page_id = '$page_id', page_name = '$page_name', unit_user = '$unit_user', role_user = '$role_user' WHERE id = " . $id;
         // die($query);
         return $this->db->execute($query);
     }
