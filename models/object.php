@@ -141,7 +141,8 @@ class Objects
         $name = $row["name"] ?? null;
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
-        $query = "ALTER TABLE $tbl_name RENAME TO bug_$name";
+        // $query = "ALTER TABLE $tbl_name RENAME TO bug_$name";
+        $query = "DROP TABLE IF EXISTS $tbl_name";
         $this->db->execute($query);
 
         return $this->db->execute($query2);
@@ -157,7 +158,8 @@ class Objects
         $name = $row["name"] ?? null;
         $name = strtolower($name);
         $name = str_replace(" ", "_", $name);
-        $query = "ALTER TABLE $tbl_name RENAME TO bug_$name";
+        // $query = "ALTER TABLE $tbl_name RENAME TO bug_$name";
+        $query = "DROP TABLE IF EXISTS $tbl_name";
         return $this->db->execute($query);
     }
 }
