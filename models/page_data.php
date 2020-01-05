@@ -122,7 +122,7 @@ class PageData
         $data = json_encode($data);
         $query = "INSERT INTO $tablename (page_id, page_name, data, unit_user, role_user) RETURNING id";
         $query .= " VALUES ('$page_id','$page_name','$data', '$unit_user', '$role_user')";
-        die($query);
+        // die($query);
         return $this->db->execute($query);
 
     }
