@@ -15,12 +15,14 @@ include "models/metric.php";
 include "models/object.php";
 include "models/object_data.php";
 include "models/user.php";
+include "modules/user_login.php";
 include "models/form.php";
 include "models/config_form.php";
 include "models/form_page.php";
 include "models/user_role.php";
 include "models/user_unit.php";
 include "models/role.php";
+include "models/group_chat.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
