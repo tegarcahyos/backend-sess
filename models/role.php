@@ -74,7 +74,7 @@ class Role
         //     }
         // }
         // die($status);
-        die(print_r($request->name));
+        die(print_r($request));
         $name = $request->name;
 
         $query = "INSERT INTO $tablename (name)";
