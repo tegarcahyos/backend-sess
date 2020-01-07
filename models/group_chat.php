@@ -84,16 +84,16 @@ class GroupChat
         //
         $request = json_decode($data);
         
-            $title= $request[0]->title,
-            $message_last= $request[0]->message_last,
-            $message_last_date= $request[0]->message_last_date,
-            $message_last_time= $request[0]->message_last_time,
-            $message_sender_id= $request[0]->message_sender_id,
-            $message_sender_name= $request[0]->message_sender_name,
-            $last_seen_date= $request[0]->last_seen_date,
-            $last_seen_time= $request[0]->last_seen_time,
-            $last_seen_user_id= $request[0]->last_seen_user_id,
-            $last_seen_user_name= $request[0]->last_seen_name,
+            $title= $request[0]->title;
+            $message_last= $request[0]->message_last;
+            $message_last_date= $request[0]->message_last_date;
+            $message_last_time= $request[0]->message_last_time;
+            $message_sender_id= $request[0]->message_sender_id;
+            $message_sender_name= $request[0]->message_sender_name;
+            $last_seen_date= $request[0]->last_seen_date;
+            $last_seen_time= $request[0]->last_seen_time;
+            $last_seen_user_id= $request[0]->last_seen_user_id;
+            $last_seen_user_name= $request[0]->last_seen_name;
 
         $query = "INSERT INTO $tablename (title,message_last,message_last,message_last_date,message_last_time,
                                             message_sender_id,message_sender_name,last_seen_date,last_seen_time,last_seen_user_id,last_seen_name)";
