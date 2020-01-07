@@ -65,6 +65,7 @@ class Role
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
+        die(print_r($request));
         $array = json_decode(json_encode($request), true);
         die(print_r(array_filter($array)));
         $status = "";
