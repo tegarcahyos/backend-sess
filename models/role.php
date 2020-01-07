@@ -66,10 +66,10 @@ class Role
         //
         $request = json_decode($data);
         $name = $request[0]->name;
-
+        die($name);
         $query = "INSERT INTO $tablename (name)";
         $query .= "VALUES ('$name')";
-        die($query);
+        // die($query);
         return $this->db->execute($query);
 
     }
