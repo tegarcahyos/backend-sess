@@ -66,13 +66,14 @@ class Role
         //
         $request = json_decode($data);
         $array = json_decode(json_encode($request), true);
+        $status = "";
         foreach ($array as $key => $value) {
             // die($array);
             if (array_key_exists($key, $array) && is_null($array[$key])) {
                 $status = "$key exists with a value of NULL";
             }
-            die($status);
         }
+        die($status);
         $name = $request->name;
 
         $query = "INSERT INTO $tablename (name)";
