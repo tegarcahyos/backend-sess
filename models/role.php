@@ -66,13 +66,13 @@ class Role
         //
         $request = json_decode($data);
         // die(print_r($request));
-        foreach ($request as $key => $value) {
-            die($value);
-        }
-        if (!array_filter($array)) {
-            $status = "key exists with a value of NULL";
-        } else {
-            $status = "LOL";
+        foreach ($request as $key) {
+            die($key);
+            if (!array_filter($array)) {
+                $status = "key exists with a value of NULL";
+            } else {
+                $status = "LOL";
+            }
         }
         die($status);
         $name = $request->name;
