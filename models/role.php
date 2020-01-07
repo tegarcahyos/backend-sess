@@ -65,16 +65,15 @@ class Role
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        // $keys = json_decode(json_encode($request[0]), true);
-        // foreach ($keys as $key => $value) {
-        //     if (array_key_exists($key, $keys) && is_null($keys[$key])) {
-        //         $status = "$key exists with a value of NULL";
-        //     } else {
-        //         $status = "Ada";
-        //     }
-        // }
-        // die($status);
-        die(print_r($request));
+        $keys = json_decode(json_encode($request[0]), true);
+        foreach ($keys as $key => $value) {
+            if (array_key_exists($key, $keys) && is_null($keys[$key])) {
+                $status = "$key exists with a value of NULL";
+            } else {
+                $status = "Ada";
+            }
+        }
+        die($status);
         $name = $request->name;
 
         $query = "INSERT INTO $tablename (name)";
