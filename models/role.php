@@ -68,7 +68,7 @@ class Role
         $array = json_decode(json_encode($request), true);
         $status = "";
         if (!array_filter($array)) {
-            $status = "$key exists with a value of NULL";
+            $status = "key exists with a value of NULL";
         } else {
             $status = "LOL";
         }
