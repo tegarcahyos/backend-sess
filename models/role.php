@@ -66,12 +66,13 @@ class Role
         //
         $request = json_decode($data);
         $name = $request[0]->name;
-        die($name);
+        // die($name);
         $query = "INSERT INTO $tablename (name)";
         $query .= "VALUES ('$name')";
         // die($query);
-        return $this->db->execute($query);
-
+        $result = $this->db->execute($query);
+        die($result);
+        return $result;
     }
 
     public function update($id, $tablename)
