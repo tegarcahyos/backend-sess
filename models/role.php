@@ -65,10 +65,10 @@ class Role
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die(print_r($request));
-        $array = json_decode(json_encode($request), true);
-        die(print_r(array_filter($array)));
-        $status = "";
+        // die(print_r($request));
+        foreach ($request as $key => $value) {
+            die($key);
+        }
         if (!array_filter($array)) {
             $status = "key exists with a value of NULL";
         } else {
