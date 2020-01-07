@@ -65,8 +65,7 @@ class Role
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $keys = $request[0];
-        die($keys);
+        $keys = json_decode(json_encode($request[0]), true);
         foreach ($keys as $key => $value) {
             die($keys);
             // if (array_key_exists($key, $keys) && is_null($keys[$key])) {
