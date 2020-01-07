@@ -72,7 +72,7 @@ class Role
                 $status = "$key exists with a value of NULL";
             }
         }
-        // die($status);
+        die($status);
         $name = $request->name;
 
         $query = "INSERT INTO $tablename (name)";
