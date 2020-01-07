@@ -69,7 +69,7 @@ class Role
         $status = "";
         foreach ($array as $key => $value) {
             // die($array);
-            if (empty($array[$key])) {
+            if (isset($array[$key])) {
                 $status = "$key exists with a value of NULL";
             } else {
                 $status = "LOL";
