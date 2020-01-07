@@ -71,7 +71,7 @@ class Role
         $query .= "VALUES ('$name')";
         // die($query);
         $result = $this->db->execute($query);
-        die(print_r($result));
+        die(var_dump($result));
         return $result;
     }
 
