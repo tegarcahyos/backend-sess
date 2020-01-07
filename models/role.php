@@ -67,12 +67,12 @@ class Role
         $request = json_decode($data);
         $keys = json_decode(json_encode($request[0]), true);
         foreach ($keys as $key => $value) {
-            die(empty($keys[$key]));
-            // if (isset($keys[$key])) {
-            //     die("Ada");
-            // } else {
-            //     die('Kosong');
-            // }
+
+            if (empty($keys[$key])) {
+                die('Kosong');
+            } else {
+                die("Ada");
+            }
         }
         $name = $request[0]->name;
 
