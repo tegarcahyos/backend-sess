@@ -65,7 +65,7 @@ class Role
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die(is_null($request[0]->name));
+        die(empty($request[0]->name));
         $name = $request[0]->name;
 
         $query = "INSERT INTO $tablename (name)";
