@@ -70,7 +70,7 @@ class Role
 
         $query = "INSERT INTO $tablename (name)";
         $query .= "VALUES ('$name')";
-        die($query);
+
         $result = $this->db->execute($query);
         return $result;
     }

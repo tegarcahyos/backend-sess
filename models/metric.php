@@ -73,7 +73,7 @@ class Metric
 
         $query = "INSERT INTO $tablename (name, code)";
         $query .= "VALUES ('$name', '$code')";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
