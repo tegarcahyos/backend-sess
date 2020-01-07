@@ -66,7 +66,7 @@ class Role
         //
         $request = json_decode($data);
         $key = $request[0];
-        die(count(array($key)));
+        die(print_r(array($key)));
         $name = $request[0]->name;
 
         $query = "INSERT INTO $tablename (name)";
