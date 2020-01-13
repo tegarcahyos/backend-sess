@@ -35,7 +35,6 @@ class User
                     'email' => $email,
                     'phone' => $phone,
                     'username' => $username,
-                    'password' => $password,
                 );
 
                 array_push($data_arr, $data_item);
@@ -66,7 +65,6 @@ class User
                 'email' => $email,
                 'phone' => $phone,
                 'username' => $username,
-                'password' => $password,
             );
             return $data_item;
         }
@@ -89,7 +87,6 @@ class User
                 'email' => $email,
                 'phone' => $phone,
                 'username' => $username,
-                'password' => $password,
             );
             return $data_item;
         }
@@ -112,7 +109,6 @@ class User
                 'email' => $email,
                 'phone' => $phone,
                 'username' => $username,
-                'password' => $password,
             );
             return $data_item;
         }
