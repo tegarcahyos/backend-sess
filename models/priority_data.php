@@ -30,7 +30,6 @@ class Priority
 
                 $data_item = array(
                     'id' => $id,
-                    'criteria' => json_decode($criteria),
                     'data' => json_decode($data),
                 );
 
@@ -58,7 +57,6 @@ class Priority
 
             $data_item = array(
                 'id' => $id,
-                'criteria' => json_decode($criteria),
                 'data' => json_decode($data),
             );
             return $data_item;
@@ -71,10 +69,9 @@ class Priority
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $criteria = $request[0]->criteria;
-        $criteria = $request[0]->criteria;
-        $query = "INSERT INTO $tablename (criteria, criteria)";
-        $query .= "VALUES ('$criteria', '$criteria')";
+        $data = $request[0]->data;
+        $query = "INSERT INTO $tablename (data)";
+        $query .= "VALUES ('$data')";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -95,9 +92,8 @@ class Priority
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $criteria = $request[0]->criteria;
         $data = $request[0]->data;
-        $query = "UPDATE $tablename SET criteria = '$criteria', data = '$data' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET data = '$data' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
