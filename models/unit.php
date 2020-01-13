@@ -32,8 +32,6 @@ class Unit
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -59,7 +57,7 @@ class Unit
         } else {
             // bukan root
             // select name, parentId by $id,
-            $query = "SELECT * FROM unit WHERE id = $id";
+            $query = "SELECT * FROM unit WHERE id = '$id'";
             //
             $result = $this->db->execute($query);
             $row = $result->fetchRow();
@@ -80,7 +78,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename WHERE parent_id = $parent_id
+             $tablename WHERE parent_id = '$parent_id'
           ORDER BY
             id ASC";
 
@@ -99,8 +97,6 @@ class Unit
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -138,8 +134,6 @@ class Unit
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -162,7 +156,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename WHERE organization_id = $org_id
+             $tablename WHERE organization_id = '$org_id'
           ORDER BY
             id ASC";
 
@@ -180,8 +174,6 @@ class Unit
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -200,7 +192,7 @@ class Unit
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
@@ -212,8 +204,6 @@ class Unit
             $data_item = array(
                 'id' => $id,
                 'organization_id' => $organization_id,
-                'organization_name' => $organization_name,
-                'organization_code' => $organization_code,
                 'parent_id' => $parent_id,
                 'name' => $name,
                 'code' => $code,
@@ -230,14 +220,12 @@ class Unit
         $request = json_decode($data);
         // die(json_encode($request));
         $organization_id = $request[0]->organization_id;
-        $organization_name = $request[0]->organization_name;
-        $organization_code = $request[0]->organization_code;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
 
-        $query = "INSERT INTO $tablename (organization_id, organization_name, organization_code, parent_id, name, code)";
-        $query .= "VALUES ($organization_id , '$organization_name', '$organization_code', $parent_id , '$name', '$code')";
+        $query = "INSERT INTO $tablename (organization_id, parent_id, name, code)";
+        $query .= "VALUES ('$organization_id', '$parent_id' , '$name', '$code')";
         // die($query);
         return $this->db->execute($query);
 
@@ -248,20 +236,18 @@ class Unit
         $data = file_get_contents("php://input");
         $request = json_decode($data);
         $organization_id = $request->organization_id;
-        $organization_name = $request->organization_name;
-        $organization_code = $request->organization_code;
         $parent_id = $request->parent_id;
         $name = $request->name;
         $code = $request->code;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name', parent_id = $parent_id WHERE id = $id";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id', parent_id = $parent_id WHERE id = $id";
         // die($query);
         return $this->db->execute($query);
     }
 
     public function delete($id, $tablename)
     {
-        $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
         // return $result;
