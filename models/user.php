@@ -51,6 +51,7 @@ class User
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
+        die($query);
         $handle = $this->db->prepare($query);
         $result = $this->db->execute($handle);
         $row = $result->fetchRow();

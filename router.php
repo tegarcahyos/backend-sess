@@ -345,11 +345,13 @@ class Router
             case FastRoute\Dispatcher::FOUND:
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];
+                $param = array_values($vars);
+                die($param);
 
                 list($class, $method) = explode("/", $handler, 2);
 
                 if ($httpMethod === 'GET') {
-                    $result = call_user_func_array(array(new $class($connection), $method), array(array_values($vars), ($explodeUri[3])));
+                    $result = call_user_func(array(new $class($connection), $method), array(($explodeUri[3])));
                 } else if ($httpMethod === 'POST') {
 
                 }
