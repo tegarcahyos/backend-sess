@@ -340,98 +340,98 @@ class Router
 
                 list($class, $method) = explode("/", $handler, 2);
 
-                if ($explodeUri[4] == 'login') {
+                if ($explodeUri[3] == 'login') {
                     $result = call_user_func_array(array(new $class($connection), $method), array('users'));
 
-                } else if ($explodeUri[5] == "select_group_message_id") {
+                } else if ($explodeUri[4] == "select_group_message_id") {
 
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[3]));
 
-                } else if ($explodeUri[5] == "select_group_id") {
+                } else if ($explodeUri[4] == "select_group_id") {
 
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['group_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['group_id'], $explodeUri[3]));
 
-                } else if ($explodeUri[5] == "select_user_id") {
+                } else if ($explodeUri[4] == "select_user_id") {
 
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[3]));
 
-                } else if ($explodeUri[5] == "select_unit_id") {
+                } else if ($explodeUri[4] == "select_unit_id") {
 
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['unit_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['unit_id'], $explodeUri[3]));
 
-                } else if ($explodeUri[5] == "select_push_id") {
+                } else if ($explodeUri[4] == "select_push_id") {
 
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['push_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['push_id'], $explodeUri[3]));
 
                 } else if (
-                    $explodeUri[5] == "select_device" ||
-                    $explodeUri[5] == "delete_device") {
+                    $explodeUri[4] == "select_device" ||
+                    $explodeUri[4] == "delete_device") {
 
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['device_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['device_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[5] == "select_message" ||
-                    $explodeUri[5] == "select_group_member" ||
-                    $explodeUri[5] == "find_id" ||
-                    $explodeUri[5] == "select_group_chat" ||
-                    $explodeUri[5] == "get_layout" ||
-                    $explodeUri[5] == "update" ||
-                    $explodeUri[5] == "insert_data_alignment" ||
-                    $explodeUri[5] == "add_page" ||
-                    $explodeUri[5] == "insert_form_layout" ||
-                    $explodeUri[5] == "insert_gann_data" ||
-                    $explodeUri[5] == "insert_page_layout" ||
-                    $explodeUri[5] == "update_object" ||
-                    $explodeUri[5] == "delete_all_get" ||
-                    $explodeUri[5] == "delete" ||
-                    $explodeUri[5] == "update_id" ||
-                    $explodeUri[5] == "select_id_get"
+                    $explodeUri[4] == "select_message" ||
+                    $explodeUri[4] == "select_group_member" ||
+                    $explodeUri[4] == "find_id" ||
+                    $explodeUri[4] == "select_group_chat" ||
+                    $explodeUri[4] == "get_layout" ||
+                    $explodeUri[4] == "update" ||
+                    $explodeUri[4] == "insert_data_alignment" ||
+                    $explodeUri[4] == "add_page" ||
+                    $explodeUri[4] == "insert_form_layout" ||
+                    $explodeUri[4] == "insert_gann_data" ||
+                    $explodeUri[4] == "insert_page_layout" ||
+                    $explodeUri[4] == "update_object" ||
+                    $explodeUri[4] == "delete_all_get" ||
+                    $explodeUri[4] == "delete" ||
+                    $explodeUri[4] == "update_id" ||
+                    $explodeUri[4] == "select_id_get"
                 ) {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[5] == "get_by_organization"
+                    $explodeUri[4] == "get_by_organization"
                 ) {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['org_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['org_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[5] == "get_by_user"
+                    $explodeUri[4] == "get_by_user"
                 ) {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[5] == "find_by_page_id"
+                    $explodeUri[4] == "find_by_page_id"
                 ) {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['page_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['page_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[5] == "get_by_parent_unit_id" ||
-                    $explodeUri[5] == "get_by_parent"
+                    $explodeUri[4] == "get_by_parent_unit_id" ||
+                    $explodeUri[4] == "get_by_parent"
                 ) {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['parent_id'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['parent_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[5] == "insert_message" ||
-                    $explodeUri[5] == "select_all_message" ||
-                    $explodeUri[5] == "insert_group_member" ||
-                    $explodeUri[5] == "select_all_member" ||
-                    $explodeUri[5] == "insert_attachment" ||
-                    $explodeUri[5] == "select_all_attachment" ||
-                    $explodeUri[5] == "select_all_device" ||
-                    $explodeUri[5] == "insert_user_device" ||
-                    $explodeUri[5] == "select_all_group_chat" ||
-                    $explodeUri[5] == "insert_group_chat" ||
-                    $explodeUri[5] == "get" ||
-                    $explodeUri[5] == "insert" ||
-                    $explodeUri[5] == "insert_alignment" ||
-                    $explodeUri[5] == "insert_form_data" ||
-                    $explodeUri[5] == "insert_gann" ||
-                    $explodeUri[5] == "insert_page_data" ||
-                    $explodeUri[5] == "get_leaf_unit" ||
-                    $explodeUri[5] == "insert_object" ||
-                    $explodeUri[5] == "select_all_get"
+                    $explodeUri[4] == "insert_message" ||
+                    $explodeUri[4] == "select_all_message" ||
+                    $explodeUri[4] == "insert_group_member" ||
+                    $explodeUri[4] == "select_all_member" ||
+                    $explodeUri[4] == "insert_attachment" ||
+                    $explodeUri[4] == "select_all_attachment" ||
+                    $explodeUri[4] == "select_all_device" ||
+                    $explodeUri[4] == "insert_user_device" ||
+                    $explodeUri[4] == "select_all_group_chat" ||
+                    $explodeUri[4] == "insert_group_chat" ||
+                    $explodeUri[4] == "get" ||
+                    $explodeUri[4] == "insert" ||
+                    $explodeUri[4] == "insert_alignment" ||
+                    $explodeUri[4] == "insert_form_data" ||
+                    $explodeUri[4] == "insert_gann" ||
+                    $explodeUri[4] == "insert_page_data" ||
+                    $explodeUri[4] == "get_leaf_unit" ||
+                    $explodeUri[4] == "insert_object" ||
+                    $explodeUri[4] == "select_all_get"
                 ) {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[4]));
-                } else if ($explodeUri[5] == "select_where_get") {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['attr'], $vars['val'], $explodeUri[4]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
+                } else if ($explodeUri[4] == "select_where_get") {
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['attr'], $vars['val'], $explodeUri[3]));
                 } else if ($explodeUri[6] == "join_chat" ||
                     $explodeUri[6] == "join_group_chat") {
 
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $vars['group_id'], $explodeUri[4], $explodeUri[5]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $vars['group_id'], $explodeUri[3], $explodeUri[4]));
 
                 }
                 break;
