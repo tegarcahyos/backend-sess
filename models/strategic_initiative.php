@@ -14,9 +14,7 @@ class StraIn
         $query = "SELECT
            *
           FROM
-             $tablename
-          ORDER BY
-            id ASC";
+             $tablename";
 
         // die($query);
         $result = $this->db->execute($query);
@@ -49,7 +47,7 @@ class StraIn
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {

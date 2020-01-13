@@ -14,8 +14,10 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename a LEFT JOIN organization b ON a.organization_id = b.id ";
-        // die($query);
+             $tablename
+          ORDER BY
+            id ASC";
+
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
@@ -26,7 +28,6 @@ class Unit
 
             while ($row = $result->fetchRow()) {
                 extract($row);
-                die(print_r($row));
 
                 $data_item = array(
                     'id' => $id,
