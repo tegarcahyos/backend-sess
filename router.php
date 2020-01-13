@@ -128,11 +128,11 @@ class Router
             // if ($passed == 'true') {
 
             // --- USER ---
-            $r->get('/api/index.php/users/get', 'User/get');
+            $r->get('/api/index.php/users', 'User/get');
             $r->get('/api/index.php/users/find_id/{id}', 'User/findById');
-            $r->get('/api/index.php/users/delete/{id}', 'User/delete');
-            $r->post('/api/index.php/users/insert', 'User/insert');
-            $r->post('/api/index.php/users/update/{id}', 'User/update');
+            $r->post('/api/index.php/users', 'User/insert');
+            $r->put('/api/index.php/users/{id}', 'User/update');
+            $r->delete('/api/index.php/users/{id}', 'User/delete');
 
             // --- APP ---
             $r->get('/api/index.php/app/get', 'App/get');
