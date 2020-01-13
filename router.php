@@ -2,25 +2,11 @@
 include "adodb/adodb.inc.php";
 include "vendor/autoload.php";
 include "models/organization.php";
-include "models/organization_role.php";
 include "models/unit.php";
-include "models/app.php";
-include "models/page_data.php";
-include "models/button_action.php";
-include "models/config_page.php";
-include "models/config_table.php";
-include "models/config_list.php";
 include "models/config_gann.php";
 include "models/config_alignment.php";
 include "models/metric.php";
-include "models/object.php";
-include "models/object_data.php";
 include "models/user.php";
-include "models/form.php";
-include "models/config_form.php";
-include "models/form_page.php";
-include "models/user_role.php";
-include "models/user_unit.php";
 include "models/role.php";
 include "models/attachment.php";
 include "models/group_chat.php";
@@ -128,21 +114,19 @@ class Router
             // if ($passed == 'true') {
 
             // --- USER ---
-            $r->get('/api/index.php/users', 'User/get');
+            $r->get('/api/index.php/users/get', 'User/get');
             $r->get('/api/index.php/users/find_id/{id}', 'User/findById');
-            $r->post('/api/index.php/users', 'User/insert');
-            $r->put('/api/index.php/users/{id}', 'User/update');
-            $r->delete('/api/index.php/users/{id}', 'User/delete');
+            $r->get('/api/index.php/users/delete/{id}', 'User/delete');
+            $r->post('/api/index.php/users/insert', 'User/insert');
+            $r->post('/api/index.php/users/update/{id}', 'User/update');
 
-            // --- APP ---
-            $r->get('/api/index.php/app/get', 'App/get');
-            $r->get('/api/index.php/app/find_id/{id}', 'App/findById');
-            $r->get('/api/index.php/app/delete/{id}', 'App/delete');
-            $r->post('/api/index.php/app/insert', 'App/insert');
-            $r->post('/api/index.php/app/add_page/{id}', 'App/addPage');
-            $r->post('/api/index.php/app/update/{id}', 'App/update');
+            // SI
+            $r->get('/api/index.php/strategic_initiative/get', 'StraIn/get');
+            $r->get('/api/index.php/strategic_initiative/find_id/{id}', 'StraIn/findById');
+            $r->get('/api/index.php/strategic_initiative/delete/{id}', 'StraIn/delete');
+            $r->post('/api/index.php/strategic_initiative/insert', 'StraIn/insert');
+            $r->post('/api/index.php/strategic_initiative/update/{id}', 'StraIn/update');
 
-            // --- CONFIG --
             // // --- CONFIG ALIGNMENT ---
             $r->get('/api/index.php/config_alignment/get', 'ConfigAlignment/get');
             $r->get('/api/index.php/config_alignment/find_id/{id}', 'ConfigAlignment/findById');
@@ -150,14 +134,6 @@ class Router
             $r->post('/api/index.php/config_alignment/insert_alignment', 'ConfigAlignment/insertAlignData');
             $r->post('/api/index.php/config_alignment/insert_data_alignment/{id}', 'ConfigAlignment/insertData');
             $r->post('/api/index.php/config_alignment/update/{id}', 'ConfigAlignment/update');
-
-            // // --- CONFIG FORM ---
-            $r->get('/api/index.php/config_form_layout/get', 'ConfigForm/get');
-            $r->get('/api/index.php/config_form_layout/find_id/{id}', 'ConfigForm/findById');
-            $r->get('/api/index.php/config_form_layout/delete/{id}', 'ConfigForm/delete');
-            $r->post('/api/index.php/config_form_layout/insert_form_data', 'ConfigForm/insertFormData');
-            $r->post('/api/index.php/config_form_layout/insert_form_layout/{id}', 'ConfigForm/insertLayout');
-            $r->post('/api/index.php/config_form_layout/update/{id}', 'ConfigForm/update');
 
             // // --- CONFIG GANN ---
             $r->get('/api/index.php/config_gann/get', 'ConfigGann/get');
@@ -167,50 +143,12 @@ class Router
             $r->post('/api/index.php/config_gann/insert_gann_data/{id}', 'ConfigGann/insertGannData');
             $r->post('/api/index.php/config_gann/update/{id}', 'ConfigGann/update');
 
-            // // --- CONFIG LIST ---
-            $r->get('/api/index.php/config_list/get', 'ConfigList/get');
-            $r->get('/api/index.php/config_list/find_id/{id}', 'ConfigList/findById');
-            $r->get('/api/index.php/config_list/delete/{id}', 'ConfigList/delete');
-            $r->post('/api/index.php/config_list/insert', 'ConfigList/insert');
-            $r->post('/api/index.php/config_list/update/{id}', 'ConfigList/update');
-
-            // // --- CONFIG PAGE ---
-            $r->get('/api/index.php/config_page_layout/get', 'ConfigPage/get');
-            $r->get('/api/index.php/config_page_layout/find_id/{id}', 'ConfigPage/findById');
-            $r->get('/api/index.php/config_page_layout/delete/{id}', 'ConfigPage/delete');
-            $r->post('/api/index.php/config_page_layout/insert_page_data', 'ConfigPage/insertPageData');
-            $r->post('/api/index.php/config_page_layout/insert_page_layout/{id}', 'ConfigPage/insertLayout');
-            $r->post('/api/index.php/config_page_layout/update/{id}', 'ConfigPage/update');
-
-            // // // --- PAGE DATA ---
-            $r->get('/api/index.php/page_data/get', 'PageData/get');
-            $r->get('/api/index.php/page_data/find_id/{id}', 'PageData/findById');
-            $r->get('/api/index.php/page_data/find_by_page_id/{page_id}', 'PageData/findByPageId');
-            $r->get('/api/index.php/page_data/delete/{id}', 'PageData/delete');
-            $r->post('/api/index.php/page_data/insert', 'PageData/insert');
-            $r->post('/api/index.php/page_data/update/{id}', 'PageData/update');
-
-            // // --- CONFIG TABLE ---
-            $r->get('/api/index.php/config_table/get', 'ConfigTable/get');
-            $r->get('/api/index.php/config_table/find_id/{id}', 'ConfigTable/findById');
-            $r->get('/api/index.php/config_table/get_layout/{id}', 'ConfigTable/getLayout');
-            $r->get('/api/index.php/config_table/delete/{id}', 'ConfigTable/delete');
-            $r->post('/api/index.php/config_table/insert', 'ConfigTable/insert');
-            $r->post('/api/index.php/config_table/update/{id}', 'ConfigTable/update');
-
             // METRIC
             $r->get('/api/index.php/metric/get', 'Metric/get');
             $r->get('/api/index.php/metric/find_id/{id}', 'Metric/findById');
             $r->get('/api/index.php/metric/delete/{id}', 'Metric/delete');
             $r->post('/api/index.php/metric/insert', 'Metric/insert');
             $r->post('/api/index.php/metric/update/{id}', 'Metric/update');
-
-            // OBJECT
-            $r->get('/api/index.php/object/get', 'Objects/get');
-            $r->get('/api/index.php/object/find_id/{id}', 'Objects/findById');
-            $r->get('/api/index.php/object/delete/{id}', 'Objects/delete');
-            $r->post('/api/index.php/object/insert_object', 'Objects/insert');
-            $r->post('/api/index.php/object/update_object/{id}', 'Objects/updateObject');
 
             // ROLE
             $r->get('/api/index.php/role/get', 'Role/get');
@@ -225,23 +163,6 @@ class Router
             $r->get('/api/index.php/organization/delete/{id}', 'Organization/delete');
             $r->post('/api/index.php/organization/insert', 'Organization/insert');
             $r->post('/api/index.php/organization/update/{id}', 'Organization/update');
-
-            // USER ROLE
-            $r->get('/api/index.php/user_role/get', 'UserRole/get');
-            $r->get('/api/index.php/user_role/find_id/{id}', 'UserRole/findById');
-            $r->get('/api/index.php/user_role/get_by_user/{user_id}', 'UserRole/findByUserId');
-            $r->get('/api/index.php/user_role/delete/{id}', 'UserRole/delete');
-            $r->post('/api/index.php/user_role/insert', 'UserRole/insert');
-            $r->post('/api/index.php/user_role/update/{id}', 'UserRole/update');
-
-            // USER UNIT
-            $r->get('/api/index.php/user_unit/get', 'UserUnit/get');
-            $r->get('/api/index.php/user_unit/find_id/{id}', 'UserUnit/find');
-            $r->get('/api/index.php/user_unit/get_by_user/{user_id}', 'UserUnit/getByUserId');
-            $r->get('/api/index.php/user_unit/get_by_parent_unit_id/{parent_id}', 'UserUnit/getByParentUnitId');
-            $r->get('/api/index.php/user_unit/delete/{id}', 'UserUnit/delete');
-            $r->post('/api/index.php/user_unit/insert', 'UserUnit/insert');
-            $r->post('/api/index.php/user_unit/update/{id}', 'UserUnit/update');
 
             // UNIT
             $r->get('/api/index.php/unit/get', 'Unit/get');
