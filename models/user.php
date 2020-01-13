@@ -36,9 +36,6 @@ class User
                     'phone' => $phone,
                     'username' => $username,
                     'password' => $password,
-                    'external_id' => $external_id,
-                    'status_active' => $status_active,
-                    'status_delete' => $status_delete,
                 );
 
                 array_push($data_arr, $data_item);
@@ -54,7 +51,7 @@ class User
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $handle = $this->db->prepare($query);
         $result = $this->db->execute($handle);
         $row = $result->fetchRow();
@@ -70,9 +67,6 @@ class User
                 'phone' => $phone,
                 'username' => $username,
                 'password' => $password,
-                'external_id' => $external_id,
-                'status_active' => $status_active,
-                'status_delete' => $status_delete,
             );
             return $data_item;
         }
@@ -80,7 +74,7 @@ class User
 
     public function findByEmail($email, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE email = $email";
+        $query = "SELECT * FROM $tablename WHERE email = '$email'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
@@ -96,9 +90,6 @@ class User
                 'phone' => $phone,
                 'username' => $username,
                 'password' => $password,
-                'external_id' => $external_id,
-                'status_active' => $status_active,
-                'status_delete' => $status_delete,
             );
             return $data_item;
         }
@@ -106,7 +97,7 @@ class User
 
     public function findByUsername($username, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE username = $username";
+        $query = "SELECT * FROM $tablename WHERE username = '$username'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
@@ -122,9 +113,6 @@ class User
                 'phone' => $phone,
                 'username' => $username,
                 'password' => $password,
-                'external_id' => $external_id,
-                'status_active' => $status_active,
-                'status_delete' => $status_delete,
             );
             return $data_item;
         }
@@ -142,12 +130,9 @@ class User
         $username = $request[0]->username;
         $password = $request[0]->password;
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        $external_id = 1;
-        $status_active = 'false';
-        $status_delete = 'false';
 
-        $query = "INSERT INTO $tablename (name, email, phone, username, password, external_id, status_active, status_delete)";
-        $query .= "VALUES ('$name', '$email', $phone ,'$username', '$password_hash', $external_id, '$status_active', '$status_delete')";
+        $query = "INSERT INTO $tablename (name, email, phone, username, password)";
+        $query .= "VALUES ('$name', '$email', $phone ,'$username', '$password_hash')";
         // die($query);
         return $this->db->execute($query);
 
@@ -180,31 +165,18 @@ class User
         $username = $request[0]->username;
         $password = $request[0]->password;
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        $external_id = 1;
-        $status_active = 'false';
-        $status_delete = 'false';
 
-        $query = "UPDATE $tablename SET name = '$name', email = '$email', phone = '$phone', username = ' $username', password = '$password_hash', external_id = '$external_id', status_active = '$status_active', status_delete = '$status_delete' WHERE id = $id";
+        $query = "UPDATE $tablename SET name = '$name', email = '$email', phone = '$phone', username = ' $username', password = '$password_hash' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
 
     public function delete($id, $tablename)
     {
-        $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
-        $query_unit = "DELETE FROM user_unit WHERE user_id = $id";
-        $query_role = "DELETE FROM user_role WHERE user_id = $id";
         $result = $this->db->execute($query);
         // return $result;
-        $res = $this->db->affected_rows();
 
-        if ($res == true) {
-            $this->db->execute($query_unit);
-            $this->db->execute($query_role);
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
-        } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-        }
     }
 }
