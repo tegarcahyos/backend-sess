@@ -15,7 +15,7 @@ class Unit
            *
           FROM
              $tablename a JOIN organization b ON a.organization_id = b.id ";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
@@ -26,6 +26,7 @@ class Unit
 
             while ($row = $result->fetchRow()) {
                 extract($row);
+                die($row);
 
                 $data_item = array(
                     'id' => $id,
