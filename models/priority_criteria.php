@@ -14,7 +14,7 @@ class PriorityCriteria
         $query = "SELECT
            *
           FROM
-             $tablename ORDER BY updated_at desc limit 1";
+             $tablename ORDER BY updated_at asc limit 1";
 
         // die($query);
         $result = $this->db->execute($query);
