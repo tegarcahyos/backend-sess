@@ -14,7 +14,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename a JOIN organization b ON a.organization_id = b.id ";
+             $tablename a LEFT JOIN organization b ON a.organization_id = b.id ";
         // die($query);
         $result = $this->db->execute($query);
 
