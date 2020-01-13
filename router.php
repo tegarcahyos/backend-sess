@@ -65,7 +65,6 @@ class Router
         } else if ($type == 203) {
             $array = array(
                 'type' => $type,
-                'keterangan' => $keterangan . '',
                 'error-msg' => $msg,
                 'status' => $status,
             );
@@ -73,7 +72,6 @@ class Router
         } else if ($type == 204) {
             $array = array(
                 'type' => $type,
-                'keterangan' => $keterangan . '',
                 'error-msg' => $msg,
                 'status' => $status,
             );
@@ -449,7 +447,7 @@ class Router
 
         try {
             if ($result == [] || $result == 'Data Kosong') {
-                $this->msg(204, $result, "empty data or invalid data inserted", 0);
+                $this->msg(204, $result 0);
             } else {
                 $this->msg(200, $result, "berhasil", 1);
             }
