@@ -32,6 +32,7 @@ class StraIn
                 $data_item = array(
                     'id' => $id,
                     'name' => $name,
+                    'parent_id' => $parent_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -59,6 +60,7 @@ class StraIn
             $data_item = array(
                 'id' => $id,
                 'name' => $name,
+                'parent_id' => $parent_id,
             );
             return $data_item;
         }
@@ -71,9 +73,9 @@ class StraIn
         //
         $request = json_decode($data);
         $name = $request[0]->name;
-
-        $query = "INSERT INTO $tablename (name)";
-        $query .= "VALUES ('$name')";
+        $parent_id = $request[0]->parent_id;
+        $query = "INSERT INTO $tablename (name, parent_id)";
+        $query .= "VALUES ('$name', '$parent_id')";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -96,7 +98,7 @@ class StraIn
         $request = json_decode($data);
         $name = $request->name;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "' WHERE id = " . $id;
+        $query = "UPDATE $tablename SET name = '$name', parent_id = '$parent_id' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
@@ -111,7 +113,7 @@ class StraIn
 
     public function delete($id, $tablename)
     {
-        $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
         // return $result;
