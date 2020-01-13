@@ -443,8 +443,8 @@ class Router
 
                 // }
 
-                if($httpMethod === 'GET'){
-                    $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]))
+                if ($httpMethod === 'GET') {
+                    $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
                 }
                 break;
         }
