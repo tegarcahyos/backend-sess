@@ -1,6 +1,6 @@
 <?php
 
-class MainProgram
+class Priority
 {
     public $db;
 
@@ -30,9 +30,8 @@ class MainProgram
 
                 $data_item = array(
                     'id' => $id,
-                    'title' => $title,
-                    'code' => $code,
-                    'unit_id' => $unit_id,
+                    'criteria' => json_decode($criteria),
+                    'data' => json_decode($data),
                 );
 
                 array_push($data_arr, $data_item);
@@ -59,9 +58,8 @@ class MainProgram
 
             $data_item = array(
                 'id' => $id,
-                'title' => $title,
-                'code' => $code,
-                'unit_id' => $unit_id,
+                'criteria' => json_decode($criteria),
+                'data' => json_decode($data),
             );
             return $data_item;
         }
@@ -73,11 +71,10 @@ class MainProgram
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $title = $request[0]->title;
-        $code = $request[0]->code;
-        $unit_id = $request[0]->unit_id;
-        $query = "INSERT INTO $tablename (title, code, unit_id)";
-        $query .= "VALUES ('$title', '$code','$unit_id')";
+        $criteria = $request[0]->criteria;
+        $criteria = $request[0]->criteria;
+        $query = "INSERT INTO $tablename (criteria, criteria)";
+        $query .= "VALUES ('$criteria', '$criteria')";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -98,10 +95,9 @@ class MainProgram
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $title = $request[0]->title;
-        $code = $request[0]->code;
-        $unit_id = $request[0]->unit_id;
-        $query = "UPDATE $tablename SET title = '$title', unit_id = '$unit_id', code = '$code' WHERE id = '$id'";
+        $criteria = $request[0]->criteria;
+        $data = $request[0]->data;
+        $query = "UPDATE $tablename SET criteria = '$criteria', data = '$data' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
