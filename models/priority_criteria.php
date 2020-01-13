@@ -69,7 +69,7 @@ class PriorityCriteria
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $criteria = $request[0]->criteria;
+        $criteria = json_encode($request[0]->criteria);
         $query = "INSERT INTO $tablename (criteria)";
         $query .= "VALUES ('$criteria')";
         // die($query);
