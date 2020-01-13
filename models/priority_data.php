@@ -1,6 +1,6 @@
 <?php
 
-class Priority
+class PriorityData
 {
     public $db;
 

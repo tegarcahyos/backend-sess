@@ -16,6 +16,8 @@ include "models/user_login.php";
 include "models/matrix.php";
 include "models/strategic_initiative.php";
 include "models/main_program.php";
+include "models/priority_data.php";
+include "models/priority_criteria.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -135,6 +137,20 @@ class Router
             $r->get('/api/index.php/main_program/delete/{id}', 'MainProgram/delete');
             $r->post('/api/index.php/main_program/insert', 'MainProgram/insert');
             $r->post('/api/index.php/main_program/update/{id}', 'MainProgram/update');
+
+            // Criteria Priority
+            $r->get('/api/index.php/criteria_priority/get', 'PriorityCriteria/get');
+            $r->get('/api/index.php/criteria_priority/find_id/{id}', 'PriorityCriteria/findById');
+            $r->get('/api/index.php/criteria_priority/delete/{id}', 'PriorityCriteria/delete');
+            $r->post('/api/index.php/criteria_priority/insert', 'PriorityCriteria/insert');
+            $r->post('/api/index.php/criteria_priority/update/{id}', 'PriorityCriteria/update');
+
+            // Data Priority
+            $r->get('/api/index.php/data_priority/get', 'PriorityData/get');
+            $r->get('/api/index.php/data_priority/find_id/{id}', 'PriorityData/findById');
+            $r->get('/api/index.php/data_priority/delete/{id}', 'PriorityData/delete');
+            $r->post('/api/index.php/data_priority/insert', 'PriorityData/insert');
+            $r->post('/api/index.php/data_priority/update/{id}', 'PriorityData/update');
 
             // // --- CONFIG ALIGNMENT ---
             $r->get('/api/index.php/config_alignment/get', 'ConfigAlignment/get');
