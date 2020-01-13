@@ -9,12 +9,12 @@ class User
         $this->db = $db;
     }
 
-    public function get($tablename)
+    public function get()
     {
         $query = "SELECT
            *
           FROM
-             $tablename
+             users
           ORDER BY
             id ASC";
 
