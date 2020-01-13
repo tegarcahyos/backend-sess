@@ -346,6 +346,7 @@ class Router
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];
                 $param = array_values($vars);
+                die($param);
 
                 list($class, $method) = explode("/", $handler, 2);
 
