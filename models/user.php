@@ -132,9 +132,19 @@ class User
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
         $query = "INSERT INTO $tablename (name, email, phone, username, password)";
-        $query .= "VALUES ('$name', '$email', $phone ,'$username', '$password_hash')";
+        $query .= "VALUES ('$name', '$email', $phone ,'$username', '$password_hash') RETURNING *";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        extract($row);
+        $data_item = array(
+            'id' => $id,
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'username' => $username,
+        );
+        return $data_item;
 
     }
 
