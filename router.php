@@ -343,10 +343,16 @@ class Router
                 // ... 405 Method Not Allowed
                 break;
             case FastRoute\Dispatcher::FOUND:
-                $handler = $routeInfo[1];
-                $vars = $routeInfo[2];
-
                 list($class, $method) = explode("/", $handler, 2);
+                return $routeInfo[1](call_user_func_array(array(new $class($connection), $method), ...array_values($routeInfo[2])));
+                // $handler = $routeInfo[1];
+                // $vars = $routeInfo[2];
+
+                // if ($httpMethod === 'GET') {
+                //     $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
+                // } else if ($httpMethod === 'POST') {
+
+                // }
 
                 // if ($explodeUri[3] == 'login') {
                 //     $result = call_user_func_array(array(new $class($connection), $method), array('users'));
@@ -443,24 +449,21 @@ class Router
 
                 // }
 
-                if ($httpMethod === 'GET') {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
-                }
                 break;
         }
 
         // die($result);
 
-        try {
-            if ($result == [] || $result == 'Data Kosong') {
-                $this->msg(204, $result, "gagal", 0);
-            } else {
-                $this->msg(200, $result, "berhasil", 1);
-            }
+        // try {
+        //     if ($result == [] || $result == 'Data Kosong') {
+        //         $this->msg(204, $result, "gagal", 0);
+        //     } else {
+        //         $this->msg(200, $result, "berhasil", 1);
+        //     }
 
-        } catch (\Throwable $th) {
-            $this->msg(203, $th, "Terjadi Kesalahan");
-        }
+        // } catch (\Throwable $th) {
+        //     $this->msg(203, $th, "Terjadi Kesalahan");
+        // }
 
     }
 
