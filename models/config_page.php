@@ -53,20 +53,25 @@ class ConfigPage
         $query = "SELECT * FROM  $tablename  WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        extract($row);
+        if (empty($result)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            $row = $result->fetchRow();
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'page_config' => $page_config,
-            'page_name' => $page_name,
-            'page_type' => $page_type,
+            $data_item = array(
+                'id' => $id,
+                'page_config' => $page_config,
+                'page_name' => $page_name,
+                'page_type' => $page_type,
 
-        );
-        return $data_item;
+            );
+            return $data_item;
+        }
     }
 
-    public function insertLayout($tablename, $id)
+    public function insertLayout($id, $tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
@@ -114,6 +119,14 @@ class ConfigPage
     {
         $query = "DELETE FROM $tablename WHERE id =  '$id'";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 }

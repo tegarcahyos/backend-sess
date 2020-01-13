@@ -53,16 +53,21 @@ class App
         $query = "SELECT * FROM  $tablename  WHERE id =  $id ";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
-        extract($row);
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
-            'code' => $code,
-            'page_data' => $page_data,
-            'properties' => $properties,
-        );
-        return $data_item;
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'code' => $code,
+                'page_data' => $page_data,
+                'properties' => $properties,
+            );
+            return $data_item;
+        }
     }
 
     public function insert($tablename)
@@ -116,6 +121,14 @@ class App
     {
         $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 }

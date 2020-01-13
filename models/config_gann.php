@@ -52,18 +52,23 @@ class ConfigGann
     {
         $query = "SELECT * FROM $tablename  WHERE id = '$id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        extract($row);
+        if (empty($result)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            $row = $result->fetchRow();
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
-            'properties' => $properties,
-            'task' => json_decode($task),
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'properties' => $properties,
+                'task' => json_decode($task),
 
-        );
+            );
 
-        return $data_item;
+            return $data_item;
+        }
     }
 
     public function insertGann($tablename)
@@ -75,19 +80,40 @@ class ConfigGann
         // die(json_decode($data));
         $name = $request[0]->name;
         $properties = $request[0]->properties;
-        $task = $request[0]->task;
-        // $alignment = json_encode($request[0]->data);
+        $task = json_encode($request[0]->task);
         $query = "INSERT INTO $tablename (name, properties, task)";
-        $query .= " VALUES ('$name', '$properties', '$task')";
+        $query .= " VALUES ('$name', '$properties', '$task') RETURNING id";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
 
-        // die($query);
-        return $this->db->execute($query);
+        // jika ada hasil
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
 
     }
 
-    public function insertGannData($tablename, $id)
+    public function insertGannData($id, $tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
@@ -112,8 +138,9 @@ class ConfigGann
         // die(json_decode($data));
         $name = $request[0]->name;
         $properties = $request[0]->properties;
-        // $alignment = json_encode($request[0]->data);
-        $query = "UPDATE  $tablename SET name = '$name', properties = '$properties' WHERE id = '$id'";
+        $task = $request[0]->task;
+        // $alignment = json_encode($request[0]->task);
+        $query = "UPDATE  $tablename SET name = '$name', properties = '$properties', task = '$task' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
@@ -122,6 +149,14 @@ class ConfigGann
     {
         $query = "DELETE FROM $tablename  WHERE id = '$id'";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 }

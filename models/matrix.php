@@ -1,6 +1,6 @@
 <?php
 
-class PageData
+class Matrix
 {
     public $db;
 
@@ -11,15 +11,10 @@ class PageData
 
     public function get($tablename)
     {
-        $query = "SELECT
-           *
-          FROM
-             $tablename
-          ORDER BY
-            id ASC";
-
+        $query = "SELECT * FROM  $tablename ";
+        // die($query);
         $result = $this->db->execute($query);
-
+        // hitung result
         $num = $result->rowCount();
 
         if ($num > 0) {
@@ -31,13 +26,8 @@ class PageData
 
                 $data_item = array(
                     'id' => $id,
-                    'page_id' => $page_id,
-                    'page_name' => $page_name,
-                    'data' => json_decode($data),
-                    'role_user' => $role_user,
-                    'unit_user' => $unit_user,
-                    'user_id' => $user_id,
-
+                    'name' => $name,
+                    'values' => json_decode($values),
                 );
 
                 array_push($data_arr, $data_item);
@@ -55,47 +45,58 @@ class PageData
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
+        if (empty($result)) {
             $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
             return $msg;
         } else {
+            $row = $result->fetchRow();
             extract($row);
+
+            // Push to data_arr
 
             $data_item = array(
                 'id' => $id,
-                'page_id' => $page_id,
-                'page_name' => $page_name,
-                'data' => json_decode($data),
-                'role_user' => $role_user,
-                'unit_user' => $unit_user,
-                'user_id' => $user_id,
+                'name' => $name,
+                'values' => json_decode($values),
             );
-            return $data_item;
+
+            $msg = $data_item;
+            return $msg;
         }
     }
 
-    public function findByPageId($page_id, $tablename)
+    public function getByValues($attr, $val, $tablename)
     {
-        $query = "SELECT * FROM  $tablename WHERE page_id = '$page_id'";
-        $result = $this->db->execute($query);
+
+        $query = "SELECT * FROM $tablename WHERE ";
+        $values = explode('AND', $val);
+        $attr = explode('AND', $attr);
+        for ($i = 0; $i < count($attr); $i++) {
+            if ($i == 0) {
+
+            } else {
+                $query .= " AND ";
+            }
+            // $query .= "values @> '{\"" . $attr[$i] . "\": \"" . $values[$i] . "\"}'";
+            $query .= "values ->> '" . $attr[$i] . "' = '" . $values[$i] . "'";
+
+        }
+
+        $query_real = str_replace("%20", " ", $query);
+        die($query_real);
+        $result = $this->db->execute($query_real);
+
         $num = $result->rowCount();
 
         if ($num > 0) {
-
             $data_arr = array();
 
             while ($row = $result->fetchRow()) {
                 extract($row);
-
                 $data_item = array(
                     'id' => $id,
-                    'page_id' => $page_id,
-                    'page_name' => $page_name,
-                    'data' => json_decode($data),
-                    'role_user' => $role_user,
-                    'unit_user' => $unit_user,
-                    'user_id' => $user_id,
+                    'name' => $name,
+                    'values' => json_decode($values),
                 );
 
                 array_push($data_arr, $data_item);
@@ -111,17 +112,15 @@ class PageData
 
     public function insert($tablename)
     {
-        // get data input from frontend
         $data = file_get_contents("php://input");
+        //
         $request = json_decode($data);
-        $page_id = $request[0]->page_id;
-        $page_name = $request[0]->page_name;
-        $data = json_encode($request[0]->data);
-        $role_user = $request[0]->role_user;
-        $unit_user = $request[0]->unit_user;
-        $user_id = $request[0]->user_id;
-        $query = "INSERT INTO $tablename (page_id, page_name, data, role_user, unit_user, user_id)";
-        $query .= " VALUES ('$page_id','$page_name','$data', '$role_user', '$unit_user', '$user_id') RETURNING id";
+
+        $name = $request[0]->name;
+        $data = $request[0]->data;
+
+        $query = 'INSERT INTO ' . $tablename . ' (name, values) ';
+        $query .= "VALUES ('$name','$data') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -138,6 +137,8 @@ class PageData
 
                 $data_item = array(
                     'id' => $id,
+                    'name' => $name,
+                    'values' => json_decode($values),
                 );
 
                 array_push($data_arr, $data_item);
@@ -154,17 +155,18 @@ class PageData
 
     public function update($id, $tablename)
     {
-        // get data input from frontend
+        // init attribute dan values
+
         $data = file_get_contents("php://input");
+
         $request = json_decode($data);
-        $page_id = $request[0]->page_id;
-        $page_name = $request[0]->page_name;
-        $data = json_encode($request[0]->data);
-        $role_user = $request[0]->role_user;
-        $unit_user = $request[0]->unit_user;
-        $user_id = $request[0]->user_id;
-        $query = "UPDATE $tablename SET data = '$data', page_id = '$page_id', page_name = '$page_name', role_user = '$role_user', unit_user = '$unit_user', user_id = '$user_id' WHERE id = '$id' RETURNING *";
+        $name = $request[0]->name;
+        $data = $request[0]->data;
+
+        $query = "UPDATE $tablename SET name = '$name', values = '$data' WHERE id = '$id' RETURNING *";
+
         // die($query);
+
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -180,6 +182,8 @@ class PageData
 
                 $data_item = array(
                     'id' => $id,
+                    'name' => $name,
+                    'values' => json_decode($values),
                 );
 
                 array_push($data_arr, $data_item);
@@ -196,7 +200,7 @@ class PageData
     public function delete($id, $tablename)
     {
         $query = "DELETE FROM $tablename WHERE id = '$id'";
-        // die($query);
+
         $result = $this->db->execute($query);
         // return $result;
         $res = $this->db->affected_rows();
@@ -207,4 +211,25 @@ class PageData
             return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
         }
     }
+
+    public function deleteByValues($attr, $val, $tablename)
+    {
+
+        $condition_values = explode('AND', $val);
+        $condition_attr = explode('AND', $attr);
+        $query = "DELETE FROM  $tablename";
+        for ($i = 0; $i < count($condition_attr); $i++) {
+            if ($i == 0) {
+
+            } else {
+                $query .= " AND ";
+            }
+            $query .= "values @> '{\"" . $condition_attr[$i] . "\": \"" . $condition_values[$i] . "\"}'";
+
+        }
+        $query_real = str_replace("%20", " ", $query);
+        // die($query_real);
+        return $this->db->execute($query_real);
+    }
+
 }

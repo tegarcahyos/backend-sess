@@ -55,22 +55,27 @@ class User
     public function findById($id, $tablename)
     {
         $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
-        $result = $this->db->execute($query);
+        $handle = $this->db->prepare($query);
+        $result = $this->db->execute($handle);
         $row = $result->fetchRow();
-        extract($row);
-
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'username' => $username,
-            'password' => $password,
-            'external_id' => $external_id,
-            'status_active' => $status_active,
-            'status_delete' => $status_delete,
-        );
-        return $data_item;
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'email' => $email,
+                'phone' => $phone,
+                'username' => $username,
+                'password' => $password,
+                'external_id' => $external_id,
+                'status_active' => $status_active,
+                'status_delete' => $status_delete,
+            );
+            return $data_item;
+        }
     }
 
     public function findByEmail($email, $tablename)
@@ -78,20 +83,25 @@ class User
         $query = "SELECT * FROM $tablename WHERE email = $email";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
-        extract($row);
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'username' => $username,
-            'password' => $password,
-            'external_id' => $external_id,
-            'status_active' => $status_active,
-            'status_delete' => $status_delete,
-        );
-        return $data_item;
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'email' => $email,
+                'phone' => $phone,
+                'username' => $username,
+                'password' => $password,
+                'external_id' => $external_id,
+                'status_active' => $status_active,
+                'status_delete' => $status_delete,
+            );
+            return $data_item;
+        }
     }
 
     public function findByUsername($username, $tablename)
@@ -99,20 +109,25 @@ class User
         $query = "SELECT * FROM $tablename WHERE username = $username";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
-        extract($row);
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'username' => $username,
-            'password' => $password,
-            'external_id' => $external_id,
-            'status_active' => $status_active,
-            'status_delete' => $status_delete,
-        );
-        return $data_item;
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'email' => $email,
+                'phone' => $phone,
+                'username' => $username,
+                'password' => $password,
+                'external_id' => $external_id,
+                'status_active' => $status_active,
+                'status_delete' => $status_delete,
+            );
+            return $data_item;
+        }
     }
 
     public function insert($tablename)
@@ -178,6 +193,18 @@ class User
     {
         $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
         // die($query);
-        return $this->db->execute($query);
+        $query_unit = "DELETE FROM user_unit WHERE user_id = $id";
+        $query_role = "DELETE FROM user_role WHERE user_id = $id";
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            $this->db->execute($query_unit);
+            $this->db->execute($query_role);
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 }

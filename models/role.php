@@ -50,13 +50,18 @@ class Role
         $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
-        extract($row);
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
-        );
-        return $data_item;
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+            );
+            return $data_item;
+        }
     }
 
     public function insert($tablename)
@@ -65,14 +70,22 @@ class Role
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        // die(print_r($request));
-        $name = $request->name;
+        $name = $request[0]->name;
 
         $query = "INSERT INTO $tablename (name)";
         $query .= "VALUES ('$name')";
-
+        // die($query);
         $result = $this->db->execute($query);
-        return $result;
+        $num = $result->rowCount();
+
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
+
     }
 
     public function update($id, $tablename)
@@ -85,13 +98,29 @@ class Role
 
         $query = "UPDATE " . $tablename . " SET name = '" . $name . "' WHERE id = " . $id;
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 
     public function delete($id, $tablename)
     {
         $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 }

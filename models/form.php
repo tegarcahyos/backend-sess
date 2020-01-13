@@ -51,14 +51,19 @@ class Form
         $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
-        extract($row);
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
 
-        );
-        return $data_item;
+            );
+            return $data_item;
+        }
     }
 
     public function insert($tablename)

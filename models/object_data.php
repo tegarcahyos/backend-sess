@@ -75,7 +75,7 @@ class ObjectData
     public function select_where_get($attr, $val, $tablename)
     {
 
-        $query = "SELECT values FROM $tablename WHERE ";
+        $query = "SELECT * FROM $tablename WHERE ";
         $values = explode('AND', $val);
         $attr = explode('AND', $attr);
         for ($i = 0; $i < count($attr); $i++) {
@@ -84,7 +84,8 @@ class ObjectData
             } else {
                 $query .= " AND ";
             }
-            $query .= "values @> '{\"" . $attr[$i] . "\": \"" . $values[$i] . "\"}'";
+            // $query .= "values @> '{\"" . $attr[$i] . "\": \"" . $values[$i] . "\"}'";
+            $query .= "values ->> '" . $attr[$i] . "' = '" . $values[$i] . "'";
 
         }
 
@@ -95,25 +96,24 @@ class ObjectData
         $num = $result->rowCount();
 
         if ($num > 0) {
-            $arr = array();
+            $data_arr = array();
 
             while ($row = $result->fetchRow()) {
                 extract($row);
+                $data_item = array(
+                    'id' => $id,
+                    'values' => json_decode($values),
+                );
 
-                array_push($arr, json_decode($values));
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
             }
 
-            $item = array(
-                'values' => $arr,
-            );
-
-            // echo json_encode($item);
         } else {
-            echo json_encode(
-                array('message' => 'data tidak ditemukan')
-            );
+            $msg = 'Data Kosong';
         }
-        return $item;
+
+        return $msg;
     }
 
     public function select_or_where_get($attr, $val, $tablename)
@@ -200,13 +200,14 @@ class ObjectData
         $data = file_get_contents("php://input");
         //
         $query = 'INSERT INTO ' . $tablename . ' (values) ';
-        $query .= "VALUES ('$data')";
+        $query .= "VALUES ('$data') RETURNING id";
         // die($query);
-        $this->db->execute($query);
-        $lastId = $this->db->insert_Id($tablename, 'id');
-        $select = "SELECT * FROM $tablename WHERE id = $lastId";
+        // $this->db->execute($query);
+        // $lastId = $this->db->insert_Id($tablename, 'id');
+        // $select = "SELECT * FROM $tablename WHERE id = $lastId";
 
-        $result = $this->db->execute($select);
+        // $result = $this->db->execute($select);
+        $result = $this->db->execute($query);
         $num = $result->rowCount();
 
         // jika ada hasil
@@ -221,7 +222,6 @@ class ObjectData
 
                 $data_item = array(
                     'id' => $id,
-                    'values' => json_decode($values),
                 );
 
                 array_push($data_arr, $data_item);
@@ -264,11 +264,36 @@ class ObjectData
 
         $data = file_get_contents("php://input");
 
-        $query = "UPDATE $tablename SET values = '$data' WHERE id = $id";
+        $query = "UPDATE $tablename SET values = '$data' WHERE id = $id RETURNING id";
 
         // die($query);
 
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
+
+        // jika ada hasil
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
     }
 
     public function update_where($attr, $val, $tablename)
@@ -299,7 +324,15 @@ class ObjectData
     {
         $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id . " ";
 
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 
     public function delete_where_get($attr, $val, $tablename)

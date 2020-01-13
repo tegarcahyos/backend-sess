@@ -55,24 +55,29 @@ class ConfigForm
     {
         $query = "SELECT * FROM $tablename  WHERE id = '$id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        extract($row);
+        if (empty($result)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            $row = $result->fetchRow();
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'form_type_submit' => $form_type_submit,
-            'name' => $name,
-            'data_cfg' => json_decode($form_config),
-            'object_id' => $object_id,
-            'object_name' => $object_name,
-            'object_table' => $object_table,
+            $data_item = array(
+                'id' => $id,
+                'form_type_submit' => $form_type_submit,
+                'name' => $name,
+                'data_cfg' => json_decode($form_config),
+                'object_id' => $object_id,
+                'object_name' => $object_name,
+                'object_table' => $object_table,
 
-        );
+            );
 
-        return $data_item;
+            return $data_item;
+        }
     }
 
-    public function insertLayout($tablename, $id)
+    public function insertLayout($id, $tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
@@ -133,6 +138,14 @@ class ConfigForm
     {
         $query = "DELETE FROM $tablename  WHERE id = '$id'";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 }

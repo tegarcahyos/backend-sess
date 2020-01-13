@@ -52,15 +52,20 @@ class Objects
         // die($query);
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
-        extract($row);
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
-            'attribute' => $attribute,
-            'tbl_name' => $tbl_name,
-        );
-        return $data_item;
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'attribute' => $attribute,
+                'tbl_name' => $tbl_name,
+            );
+            return $data_item;
+        }
     }
 
     public function insert($tablename)
@@ -80,7 +85,8 @@ class Objects
         $query .= "VALUES ('$name', '$attribute', 'data_$tbl_name')";
         // die($query);
         $this->create_table();
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        return $result;
 
     }
 
@@ -145,7 +151,15 @@ class Objects
         $query = "DROP TABLE IF EXISTS $tbl_name";
         $this->db->execute($query);
 
-        return $this->db->execute($query2);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 
     public function delete_table($id, $tablename)

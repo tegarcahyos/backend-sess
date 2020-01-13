@@ -50,18 +50,24 @@ class ConfigAlignment
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename  WHERE id = '$id'";
-        $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        extract($row);
+        $handle = $this->db->prepare($query);
+        $result = $this->db->execute($handle);
+        if (empty($result)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            $row = $result->fetchRow();
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'name' => $name,
-            'alignment' => json_decode($alignment),
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'alignment' => json_decode($alignment),
 
-        );
+            );
 
-        return $data_item;
+            return $data_item;
+        }
     }
 
     public function insertAlignData($tablename)
@@ -74,16 +80,40 @@ class ConfigAlignment
         // die(json_decode($data));
         $name = $request[0]->name;
         $alignment = $request[0]->alignment;
-        $properties = $request[0]->properties;
         // $alignment = json_encode($request[0]->data);
-        $query = "INSERT INTO $tablename (name, alignment, properties)";
-        $query .= " VALUES ('$name', '$alignment', '$properties')";
+        $query = "INSERT INTO $tablename (name, alignment)";
+        $query .= " VALUES ('$name', '$alignment') RETURNING id";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
+
+        // jika ada hasil
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
 
     }
 
-    public function insertData($tablename, $id)
+    public function insertData($id, $tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
@@ -106,9 +136,8 @@ class ConfigAlignment
         // die(json_decode($data));
         $name = $request[0]->name;
         $alignment = $request[0]->alignment;
-        $properties = $request[0]->properties;
         // $alignment = json_encode($request[0]->data);
-        $query = "UPDATE  $tablename SET name = '$name', alignment = '$alignment', properties = '$properties' WHERE id = '$id'";
+        $query = "UPDATE  $tablename SET name = '$name', alignment = '$alignment' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
@@ -117,6 +146,14 @@ class ConfigAlignment
     {
         $query = "DELETE FROM $tablename  WHERE id = '$id'";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 }

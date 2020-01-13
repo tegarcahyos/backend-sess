@@ -90,7 +90,7 @@ class Login
                 $msg = array(
                     "code" => 200,
                     "message" => "Successful login.",
-                    "user_id" => $user_id,
+                    "id" => $user_id,
                     "name" => $name,
                     "username" => $username,
                     "password" => $password,

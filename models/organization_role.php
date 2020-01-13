@@ -55,21 +55,26 @@ class OrganizationRole
         $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
-        extract($row);
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'organization_id' => $organization_id,
-            'organization_name' => $organization_name,
-            'organization_code' => $organization_code,
-            'role_id' => $role_id,
-            'role_name' => $role_name,
+            $data_item = array(
+                'id' => $id,
+                'organization_id' => $organization_id,
+                'organization_name' => $organization_name,
+                'organization_code' => $organization_code,
+                'role_id' => $role_id,
+                'role_name' => $role_name,
 
-        );
-        return $data_item;
+            );
+            return $data_item;
+        }
     }
 
-    public function findByOrgId($tablename, $organization_id)
+    public function findByOrgId($organization_id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE organization_id = $organization_id";
         // die($query);
@@ -142,6 +147,14 @@ class OrganizationRole
     {
         $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 }

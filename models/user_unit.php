@@ -78,15 +78,13 @@ class UserUnit
         }
     }
 
-    public function getByParentUnitId($tablename, $parent_id)
+    public function getByParentUnitId($parent_id, $tablename)
     {
         $query = "SELECT
            *
           FROM
              $tablename
               WHERE parent_id =  $parent_id ";
-
-        // die($query);
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
@@ -126,26 +124,33 @@ class UserUnit
     public function find($id, $tablename)
     {
         $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
-        $result = $this->db->execute($query);
+        $handle = $this->db->prepare($query);
+        $result = $this->db->execute($handle);
         $row = $result->fetchRow();
-        extract($row);
 
-        $data_item = array(
-            'id' => $id,
-            'organization_id' => $organization_id,
-            'organization_name' => $organization_name,
-            'organization_code' => $organization_code,
-            'unit_id' => $unit_id,
-            'unit_name' => $unit_name,
-            'unit_code' => $unit_code,
-            'user_id' => $user_id,
-            'user_name' => $user_name,
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
 
-        );
-        return $data_item;
+            $data_item = array(
+                'id' => $id,
+                'organization_id' => $organization_id,
+                'organization_name' => $organization_name,
+                'organization_code' => $organization_code,
+                'unit_id' => $unit_id,
+                'unit_name' => $unit_name,
+                'unit_code' => $unit_code,
+                'user_id' => $user_id,
+                'user_name' => $user_name,
+
+            );
+            return $data_item;
+        }
     }
 
-    public function getByUserId($tablename, $user_id)
+    public function getByUserId($user_id, $tablename)
     {
         $query = "SELECT
            *
@@ -154,38 +159,29 @@ class UserUnit
               WHERE user_id =  $user_id ";
 
         $result = $this->db->execute($query);
-
-        $num = $result->rowCount();
-
-        if ($num > 0) {
-
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-
-                $data_item = array(
-                    'id' => $id,
-                    'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
-                    'unit_id' => $unit_id,
-                    'unit_name' => $unit_name,
-                    'unit_code' => $unit_code,
-                    'user_id' => $user_id,
-                    'user_name' => $user_name,
-
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
         } else {
-            $msg = 'Data Kosong';
-        }
+            extract($row);
 
-        return $msg;
+            $data_item = array(
+                'id' => $id,
+                'organization_id' => $organization_id,
+                'organization_name' => $organization_name,
+                'organization_code' => $organization_code,
+                'unit_id' => $unit_id,
+                'unit_name' => $unit_name,
+                'unit_code' => $unit_code,
+                'user_id' => $user_id,
+                'user_name' => $user_name,
+
+            );
+
+            $msg = $data_item;
+            return $msg;
+        }
     }
 
     public function insert($tablename)
@@ -232,8 +228,19 @@ class UserUnit
 
     public function delete($id, $tablename)
     {
-        $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        $query = "DELETE FROM $tablename WHERE id = $id";
         // die($query);
-        return $this->db->execute($query);
+
+        $result = $this->db->execute($query);
+        // return $result;
+
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
     }
 }
