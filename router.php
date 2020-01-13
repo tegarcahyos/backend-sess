@@ -70,6 +70,14 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
+        } else if ($type == 204) {
+            $array = array(
+                'type' => $type,
+                'keterangan' => $keterangan . '',
+                'error-msg' => $msg,
+                'status' => $status,
+            );
+            echo json_encode($array);
         } else {
             return "kosong";
         }
