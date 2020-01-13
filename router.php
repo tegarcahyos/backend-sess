@@ -329,7 +329,7 @@ class Router
         $uri = rawurldecode($uri);
         $explodeUri = explode("/", $uri);
         $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
-        die($routeInfo);
+        die(print_r($routeInfo));
         $connection = $this->core_connect();
 
         switch ($routeInfo[0]) {
