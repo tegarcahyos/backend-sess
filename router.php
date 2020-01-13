@@ -346,7 +346,7 @@ class Router
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];
                 list($class, $method) = explode("/", $handler, 2);
-                return $routeInfo[1](call_user_func_array(array(new $class($connection), $method), ...array_values($routeInfo[2])));
+                return $routeInfo[1](call_user_func_array(array(new $class($connection), $method), ...array_values($vars)));
 
                 // if ($httpMethod === 'GET') {
                 //     $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
