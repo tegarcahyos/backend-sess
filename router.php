@@ -14,6 +14,7 @@ include "models/group_member.php";
 include "models/group_message.php";
 include "models/user_login.php";
 include "models/matrix.php";
+include "models/strategic_initiative.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
