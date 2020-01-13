@@ -328,8 +328,8 @@ class Router
         // die($uri);
         $uri = rawurldecode($uri);
         $explodeUri = explode("/", $uri);
+        die($httpMethod);
         $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
-        die(print_r($routeInfo));
         $connection = $this->core_connect();
 
         switch ($routeInfo[0]) {
