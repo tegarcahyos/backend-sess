@@ -441,7 +441,7 @@ class Router
 
         try {
             if ($result == [] || $result == 'Data Kosong') {
-                $this->msg(200, $result, "empty data or invalid data inserted", 0);
+                $this->msg(204, $result, "empty data or invalid data inserted", 0);
             } else {
                 $this->msg(200, $result, "berhasil", 1);
             }
