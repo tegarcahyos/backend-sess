@@ -454,18 +454,18 @@ class Router
                 break;
         }
 
-        die($result);
+        // die($result);
 
-        try {
-            if ($result == [] || $result == 'Data Kosong') {
-                $this->msg(204, $result, "gagal", 0);
-            } else {
-                $this->msg(200, $result, "berhasil", 1);
-            }
+        // try {
+        //     if ($result == [] || $result == 'Data Kosong') {
+        //         $this->msg(204, $result, "gagal", 0);
+        //     } else {
+        //         $this->msg(200, $result, "berhasil", 1);
+        //     }
 
-        } catch (\Throwable $th) {
-            $this->msg(203, $th, "Terjadi Kesalahan");
-        }
+        // } catch (\Throwable $th) {
+        //     $this->msg(203, $th, "Terjadi Kesalahan");
+        // }
 
     }
 
