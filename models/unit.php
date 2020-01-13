@@ -14,10 +14,8 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename
-          ORDER BY
-            id ASC";
-
+             $tablename a JOIN organization b ON a.organization_id = b.id ";
+        die($query);
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
