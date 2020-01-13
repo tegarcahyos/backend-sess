@@ -54,7 +54,6 @@ class Router
     // MESSAGES
     public function msg($type = null, $msg, $keterangan, $status)
     {
-        die($type);
         if ($type == 200) {
             $array = array(
                 'status' => $status,
@@ -67,6 +66,7 @@ class Router
             $array = array(
                 'type' => $type,
                 'error-msg' => $msg,
+                'keterangan' => $keterangan . '',
                 'status' => $status,
             );
             echo json_encode($array);
@@ -74,6 +74,7 @@ class Router
             $array = array(
                 'type' => $type,
                 'error-msg' => $msg,
+                'keterangan' => $keterangan . '',
                 'status' => $status,
             );
             echo json_encode($array);
@@ -448,7 +449,7 @@ class Router
 
         try {
             if ($result == [] || $result == 'Data Kosong') {
-                $this->msg(204, $result, 0);
+                $this->msg(204, $result, "", 0);
             } else {
                 $this->msg(200, $result, "berhasil", 1);
             }
