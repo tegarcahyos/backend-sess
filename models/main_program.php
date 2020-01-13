@@ -73,10 +73,10 @@ class MainProgram
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request[0]->name;
+        $title = $request[0]->title;
         $unit_id = $request[0]->unit_id;
-        $query = "INSERT INTO $tablename (name, unit_id)";
-        $query .= "VALUES ('$name', '$unit_id')";
+        $query = "INSERT INTO $tablename (title, unit_id)";
+        $query .= "VALUES ('$title', '$unit_id')";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -97,9 +97,9 @@ class MainProgram
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request->name;
-
-        $query = "UPDATE $tablename SET name = '$name', unit_id = '$unit_id' WHERE id = '$id'";
+        $title = $request[0]->title;
+        $unit_id = $request[0]->unit_id;
+        $query = "UPDATE $tablename SET title = '$title', unit_id = '$unit_id' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
