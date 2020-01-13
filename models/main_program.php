@@ -33,6 +33,7 @@ class MainProgram
                 $data_item = array(
                     'id' => $id,
                     'title' => $title,
+                    'code' => $code,
                     'unit_id' => $unit_id,
                 );
 
@@ -61,6 +62,7 @@ class MainProgram
             $data_item = array(
                 'id' => $id,
                 'title' => $title,
+                'code' => $code,
                 'unit_id' => $unit_id,
             );
             return $data_item;
@@ -74,9 +76,10 @@ class MainProgram
         //
         $request = json_decode($data);
         $title = $request[0]->title;
+        $code = $request[0]->code;
         $unit_id = $request[0]->unit_id;
-        $query = "INSERT INTO $tablename (title, unit_id)";
-        $query .= "VALUES ('$title', '$unit_id')";
+        $query = "INSERT INTO $tablename (title, code, unit_id)";
+        $query .= "VALUES ('$title', '$code','$unit_id')";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -98,8 +101,9 @@ class MainProgram
         //
         $request = json_decode($data);
         $title = $request[0]->title;
+        $code = $request[0]->code;
         $unit_id = $request[0]->unit_id;
-        $query = "UPDATE $tablename SET title = '$title', unit_id = '$unit_id' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET title = '$title', unit_id = '$unit_id', code = '$code' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
