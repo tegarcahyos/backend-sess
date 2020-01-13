@@ -14,9 +14,7 @@ class User
         $query = "SELECT
            *
           FROM
-             $tablename
-          ORDER BY
-            id ASC";
+             $tablename";
 
         $result = $this->db->execute($query);
 
