@@ -328,7 +328,6 @@ class Router
         // die($uri);
         $uri = rawurldecode($uri);
         $explodeUri = explode("/", $uri);
-        die($httpMethod);
         $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
         $connection = $this->core_connect();
 
@@ -443,6 +442,10 @@ class Router
                 //     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $vars['group_id'], $explodeUri[3], $explodeUri[4]));
 
                 // }
+
+                if($httpMethod === 'GET'){
+                    $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]))
+                }
                 break;
         }
 
