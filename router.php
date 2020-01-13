@@ -15,6 +15,7 @@ include "models/group_message.php";
 include "models/user_login.php";
 include "models/matrix.php";
 include "models/strategic_initiative.php";
+include "models/main_program.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -127,6 +128,13 @@ class Router
             $r->get('/api/index.php/strategic_initiative/delete/{id}', 'StraIn/delete');
             $r->post('/api/index.php/strategic_initiative/insert', 'StraIn/insert');
             $r->post('/api/index.php/strategic_initiative/update/{id}', 'StraIn/update');
+
+            // Main Program
+            $r->get('/api/index.php/main_program/get', 'MainProgram/get');
+            $r->get('/api/index.php/main_program/find_id/{id}', 'MainProgram/findById');
+            $r->get('/api/index.php/main_program/delete/{id}', 'MainProgram/delete');
+            $r->post('/api/index.php/main_program/insert', 'MainProgram/insert');
+            $r->post('/api/index.php/main_program/update/{id}', 'MainProgram/update');
 
             // // --- CONFIG ALIGNMENT ---
             $r->get('/api/index.php/config_alignment/get', 'ConfigAlignment/get');
