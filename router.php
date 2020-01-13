@@ -346,7 +346,6 @@ class Router
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];
                 $param = array_values($vars);
-                die($param);
 
                 list($class, $method) = explode("/", $handler, 2);
 
@@ -456,16 +455,16 @@ class Router
 
         // die($result);
 
-        // try {
-        //     if ($result == [] || $result == 'Data Kosong') {
-        //         $this->msg(204, $result, "gagal", 0);
-        //     } else {
-        //         $this->msg(200, $result, "berhasil", 1);
-        //     }
+        try {
+            if ($result == [] || $result == 'Data Kosong') {
+                $this->msg(204, $result, "gagal", 0);
+            } else {
+                $this->msg(200, $result, "berhasil", 1);
+            }
 
-        // } catch (\Throwable $th) {
-        //     $this->msg(203, $th, "Terjadi Kesalahan");
-        // }
+        } catch (\Throwable $th) {
+            $this->msg(203, $th, "Terjadi Kesalahan");
+        }
 
     }
 
