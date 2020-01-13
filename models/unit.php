@@ -26,7 +26,7 @@ class Unit
 
             while ($row = $result->fetchRow()) {
                 extract($row);
-                die($row);
+                die(print_r($row));
 
                 $data_item = array(
                     'id' => $id,
