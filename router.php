@@ -349,7 +349,7 @@ class Router
                 list($class, $method) = explode("/", $handler, 2);
 
                 if ($httpMethod === 'GET') {
-                    $result = call_user_func_array(array(new $class($connection), $method), ...array_values($vars));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]), ...array_values($vars));
                 } else if ($httpMethod === 'POST') {
 
                 }
