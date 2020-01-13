@@ -18,6 +18,7 @@ class StraIn
           ORDER BY
             id ASC";
 
+        die($query);
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
