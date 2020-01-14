@@ -26,8 +26,7 @@ class CeoNotes
 
                 $data_item = array(
                     'id' => $id,
-                    'name' => $name,
-                    'values' => json_decode($values),
+                    'data' => json_decode($data),
                 );
 
                 array_push($data_arr, $data_item);
@@ -56,8 +55,7 @@ class CeoNotes
 
             $data_item = array(
                 'id' => $id,
-                'name' => $name,
-                'values' => json_decode($values),
+                'data' => json_decode($data),
             );
 
             $msg = $data_item;
