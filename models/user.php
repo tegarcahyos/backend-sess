@@ -180,11 +180,12 @@ class User
     {
         $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
+        $query_detail = "DELETE FROM user_detail WHERE user_id = $id";
         $result = $this->db->execute($query);
-        // return $result;
         $res = $this->db->affected_rows();
 
         if ($res == true) {
+            $this->db->execute($query_detail);
             return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
         } else {
             return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
