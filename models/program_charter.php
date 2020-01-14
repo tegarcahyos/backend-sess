@@ -1,6 +1,6 @@
 <?php
 
-class PriorityData
+class ProgramCharter
 {
     public $db;
 
@@ -30,9 +30,19 @@ class PriorityData
 
                 $data_item = array(
                     'id' => $id,
-                    'id_program' => $id_program,
-                    'program_name' => $program_name,
-                    'data' => json_decode($data),
+                    'title' => $title,
+                    'code' => $code,
+                    'weight' => $weight,
+                    'matrix' => $matrix,
+                    'description' => $description,
+                    'refer_to' => $refer_to,
+                    'stakeholders' => $stakeholders,
+                    'kpi' => $kpi,
+                    'budget' => $budget,
+                    'main_activities' => $main_activities,
+                    'key_asks' => $key_asks,
+                    'risks' => $risks,
+                    'approval' => $approval,
                 );
 
                 array_push($data_arr, $data_item);
@@ -59,9 +69,19 @@ class PriorityData
 
             $data_item = array(
                 'id' => $id,
-                'id_program' => $id_program,
-                'program_name' => $program_name,
-                'data' => json_decode($data),
+                'title' => $title,
+                'code' => $code,
+                'weight' => $weight,
+                'matrix' => $matrix,
+                'description' => $description,
+                'refer_to' => $refer_to,
+                'stakeholders' => $stakeholders,
+                'kpi' => $kpi,
+                'budget' => $budget,
+                'main_activities' => $main_activities,
+                'key_asks' => $key_asks,
+                'risks' => $risks,
+                'approval' => $approval,
             );
             return $data_item;
         }
