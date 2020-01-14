@@ -181,6 +181,13 @@ class User
         // die($query);
         $result = $this->db->execute($query);
         // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
 
     }
 }
