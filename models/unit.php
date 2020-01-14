@@ -238,7 +238,7 @@ class Unit
             parent_id, name, code)";
         $query .= "VALUES (
             '$parent_id' , '$name', '$code')";
-        // die($query);
+        die($query);
         return $this->db->execute($query);
 
     }
