@@ -121,6 +121,7 @@ class Unit
        FROM
           $tablename t1
            WHERE NOT EXISTS (SELECT * FROM $tablename t2 WHERE t1.id=t2.parent_id)";
+        die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
