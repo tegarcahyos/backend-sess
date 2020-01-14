@@ -63,6 +63,7 @@ class User
                 'email' => $email,
                 'phone' => $phone,
                 'username' => $username,
+                'password' => $password,
             );
             return $data_item;
         }
