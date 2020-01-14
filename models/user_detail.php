@@ -103,7 +103,7 @@ class UserDetail
         '$unit_name',
         '$role_id',
         '$role_name') RETURNING *";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
