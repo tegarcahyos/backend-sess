@@ -31,6 +31,7 @@ class StraIn
                 $data_item = array(
                     'id' => $id,
                     'name' => $name,
+                    'code' => $code,
                     'parent_id' => $parent_id,
                 );
 
@@ -59,6 +60,7 @@ class StraIn
             $data_item = array(
                 'id' => $id,
                 'name' => $name,
+                'code' => $code,
                 'parent_id' => $parent_id,
             );
             return $data_item;
@@ -72,9 +74,10 @@ class StraIn
         //
         $request = json_decode($data);
         $name = $request[0]->name;
+        $code = $request[0]->code;
         $parent_id = $request[0]->parent_id;
-        $query = "INSERT INTO $tablename (name, parent_id)";
-        $query .= "VALUES ('$name', '$parent_id')";
+        $query = "INSERT INTO $tablename (name, code, parent_id)";
+        $query .= "VALUES ('$name', '$code', '$parent_id')";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -96,8 +99,10 @@ class StraIn
         //
         $request = json_decode($data);
         $name = $request->name;
+        $code = $request[0]->code;
+        $parent_id = $request[0]->parent_id;
 
-        $query = "UPDATE $tablename SET name = '$name', parent_id = '$parent_id' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', parent_id = '$parent_id' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
