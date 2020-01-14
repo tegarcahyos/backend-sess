@@ -29,8 +29,8 @@ class UserDetail
                     'user_id' => $user_id,
                     'user_name' => $user_name,
                     'unit_id' => $unit_id,
-                    'user_code' => $user_code,
-                    'user_name' => $user_name,
+                    'unit_code' => $unit_code,
+                    'unit_name' => $unit_name,
                     'role_id' => $role_id,
                     'role_name' => $role_name,
                 );
@@ -64,8 +64,8 @@ class UserDetail
                 'user_id' => $user_id,
                 'user_name' => $user_name,
                 'unit_id' => $unit_id,
-                'user_code' => $user_code,
-                'user_name' => $user_name,
+                'unit_code' => $unit_code,
+                'unit_name' => $unit_name,
                 'role_id' => $role_id,
                 'role_name' => $role_name,
             );
@@ -122,8 +122,8 @@ class UserDetail
                     'user_id' => $user_id,
                     'user_name' => $user_name,
                     'unit_id' => $unit_id,
-                    'user_code' => $user_code,
-                    'user_name' => $user_name,
+                    'unit_code' => $unit_code,
+                    'unit_name' => $unit_name,
                     'role_id' => $role_id,
                     'role_name' => $role_name,
                 );
@@ -177,8 +177,8 @@ class UserDetail
                     'user_id' => $user_id,
                     'user_name' => $user_name,
                     'unit_id' => $unit_id,
-                    'user_code' => $user_code,
-                    'user_name' => $user_name,
+                    'unit_code' => $unit_code,
+                    'unit_name' => $unit_name,
                     'role_id' => $role_id,
                     'role_name' => $role_name,
                 );
