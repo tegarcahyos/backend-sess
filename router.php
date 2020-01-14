@@ -146,6 +146,13 @@ class Router
             $r->post('/api/index.php/ceo_notes/insert', 'CeoNotes/insert');
             $r->post('/api/index.php/ceo_notes/update/{id}', 'CeoNotes/update');
 
+            // User Detail
+            $r->get('/api/index.php/user_detail/get', 'UserDetail/get');
+            $r->get('/api/index.php/user_detail/find_id/{id}', 'UserDetail/findById');
+            $r->get('/api/index.php/user_detail/delete/{id}', 'UserDetail/delete');
+            $r->post('/api/index.php/user_detail/insert', 'UserDetail/insert');
+            $r->post('/api/index.php/user_detail/update/{id}', 'UserDetail/update');
+
             // Criteria Priority
             $r->get('/api/index.php/criteria_priority/get', 'PriorityCriteria/get');
             $r->get('/api/index.php/criteria_priority/find_id/{id}', 'PriorityCriteria/findById');
