@@ -26,8 +26,9 @@ class Matrix
 
                 $data_item = array(
                     'id' => $id,
-                    'name' => $name,
-                    'values' => json_decode($values),
+                    'si_id' => $si_id,
+                    'unit_id' => $unit_id,
+                    'matrix' => $matrix,
                 );
 
                 array_push($data_arr, $data_item);
@@ -56,8 +57,9 @@ class Matrix
 
             $data_item = array(
                 'id' => $id,
-                'name' => $name,
-                'values' => json_decode($values),
+                'si_id' => $si_id,
+                'unit_id' => $unit_id,
+                'matrix' => $matrix,
             );
 
             $msg = $data_item;
@@ -95,8 +97,9 @@ class Matrix
                 extract($row);
                 $data_item = array(
                     'id' => $id,
-                    'name' => $name,
-                    'values' => json_decode($values),
+                    'si_id' => $si_id,
+                    'unit_id' => $unit_id,
+                    'matrix' => $matrix,
                 );
 
                 array_push($data_arr, $data_item);
@@ -116,11 +119,12 @@ class Matrix
         //
         $request = json_decode($data);
 
-        $name = $request[0]->name;
-        $data = $request[0]->data;
+        $si_id = $request[0]->si_id;
+        $unit_id = $request[0]->unit_id;
+        $matrix = $request[0]->matrix;
 
-        $query = 'INSERT INTO ' . $tablename . ' (name, values) ';
-        $query .= "VALUES ('$name','$data') RETURNING *";
+        $query = 'INSERT INTO ' . $tablename . ' (si_id, unit_id, matrix) ';
+        $query .= "VALUES ('$si_id','$unit_id', '$matrix') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -137,8 +141,9 @@ class Matrix
 
                 $data_item = array(
                     'id' => $id,
-                    'name' => $name,
-                    'values' => json_decode($values),
+                    'si_id' => $si_id,
+                    'unit_id' => $unit_id,
+                    'matrix' => $matrix,
                 );
 
                 array_push($data_arr, $data_item);
@@ -160,10 +165,11 @@ class Matrix
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $name = $request[0]->name;
-        $data = $request[0]->data;
+        $si_id = $request[0]->si_id;
+        $unit_id = $request[0]->unit_id;
+        $matrix = $request[0]->matrix;
 
-        $query = "UPDATE $tablename SET name = '$name', values = '$data' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET si_id = '$si_id', unit_id = '$unit_id',matrix = '$matrix' WHERE id = '$id' RETURNING *";
 
         // die($query);
 
@@ -182,8 +188,9 @@ class Matrix
 
                 $data_item = array(
                     'id' => $id,
-                    'name' => $name,
-                    'values' => json_decode($values),
+                    'si_id' => $si_id,
+                    'unit_id' => $unit_id,
+                    'matrix' => $matrix,
                 );
 
                 array_push($data_arr, $data_item);
