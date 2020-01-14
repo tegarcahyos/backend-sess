@@ -98,7 +98,7 @@ class StraIn
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request->name;
+        $name = $request[0]->name;
         $code = $request[0]->code;
         $parent_id = $request[0]->parent_id;
 
