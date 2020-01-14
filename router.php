@@ -20,6 +20,7 @@ include "models/priority_data.php";
 include "models/priority_criteria.php";
 include "models/ceo_notes.php";
 include "models/user_detail.php";
+include "models/kpi.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -197,6 +198,13 @@ class Router
             $r->get('/api/index.php/role/delete/{id}', 'Role/delete');
             $r->post('/api/index.php/role/insert', 'Role/insert');
             $r->post('/api/index.php/role/update/{id}', 'Role/update');
+
+            // KPI
+            $r->get('/api/index.php/kpi/get', 'Kpi/get');
+            $r->get('/api/index.php/kpi/find_id/{id}', 'Kpi/findById');
+            $r->get('/api/index.php/kpi/delete/{id}', 'Kpi/delete');
+            $r->post('/api/index.php/kpi/insert', 'Kpi/insert');
+            $r->post('/api/index.php/kpi/update/{id}', 'Kpi/update');
 
             // ORGANIZATION
             $r->get('/api/index.php/organization/get', 'Organization/get');
