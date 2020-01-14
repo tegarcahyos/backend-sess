@@ -14,9 +14,7 @@ class Role
         $query = "SELECT
            *
           FROM
-             $tablename
-          ORDER BY
-            id ASC";
+             $tablename";
 
         $result = $this->db->execute($query);
 
@@ -47,7 +45,7 @@ class Role
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
