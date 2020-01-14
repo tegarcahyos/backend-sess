@@ -92,9 +92,9 @@ class Role
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request->name;
+        $name = $request[0]->name;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "' WHERE id = " . $id;
+        $query = "UPDATE $tablename  SET name = '$name ' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
