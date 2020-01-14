@@ -287,8 +287,8 @@ class Router
             $uri = substr($uri, 0, $pos);
         }
 
-        // die($uri);
         $uri = rawurldecode($uri);
+        die($uri);
         $explodeUri = explode("/", $uri);
         $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
         $connection = $this->core_connect();
