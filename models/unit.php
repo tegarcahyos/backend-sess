@@ -250,9 +250,9 @@ class Unit
         // $organization_id = $request->organization_id;
         // $organization_name = $request->organization_name;
         // $organization_code = $request->organization_code;
-        $parent_id = $request->parent_id;
-        $name = $request->name;
-        $code = $request->code;
+        $parent_id = $request[0]->parent_id;
+        $name = $request[0]->name;
+        $code = $request[0]->code;
 
         $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id' WHERE id = '$id'";
         // die($query);
