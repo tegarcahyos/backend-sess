@@ -98,7 +98,7 @@ class PriorityData
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $data = $request[0]->data;
+        $data = json_encode($request[0]->data);
         $id_program = $request[0]->id_program;
         $program_name = $request[0]->program_name;
         $query = "UPDATE $tablename SET id_program = '$id_program', program_name = '$program_name', data = '$data' WHERE id = '$id'";
