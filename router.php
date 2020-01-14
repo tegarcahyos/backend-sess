@@ -19,7 +19,8 @@ include "models/main_program.php";
 include "models/priority_data.php";
 include "models/priority_criteria.php";
 include "models/ceo_notes.php";
-include "login.php"; 
+include "models/user_detail.php";
+include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
 } else {
