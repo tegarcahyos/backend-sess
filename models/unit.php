@@ -235,9 +235,6 @@ class Unit
         $code = $request[0]->code;
 
         $query = "INSERT INTO $tablename (
-            -- organization_id,
-            -- organization_name,
-            -- organization_code,
             parent_id, name, code)";
         $query .= "VALUES (
             '$parent_id' , '$name', '$code')";
@@ -257,7 +254,7 @@ class Unit
         $name = $request->name;
         $code = $request->code;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = $parent_id WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
