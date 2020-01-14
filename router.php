@@ -16,6 +16,7 @@ include "models/user_login.php";
 include "models/matrix.php";
 include "models/strategic_initiative.php";
 include "models/main_program.php";
+include "models/program_charter.php";
 include "models/priority_data.php";
 include "models/priority_criteria.php";
 include "models/ceo_notes.php";
@@ -168,6 +169,13 @@ class Router
             $r->get('/api/index.php/data_priority/delete/{id}', 'PriorityData/delete');
             $r->post('/api/index.php/data_priority/insert', 'PriorityData/insert');
             $r->post('/api/index.php/data_priority/update/{id}', 'PriorityData/update');
+
+            // Program Charter
+            $r->get('/api/index.php/program_charter/get', 'ProgramCharter/get');
+            $r->get('/api/index.php/program_charter/find_id/{id}', 'ProgramCharter/findById');
+            $r->get('/api/index.php/program_charter/delete/{id}', 'ProgramCharter/delete');
+            $r->post('/api/index.php/program_charter/insert', 'ProgramCharter/insert');
+            $r->post('/api/index.php/program_charter/update/{id}', 'ProgramCharter/update');
 
             // // --- CONFIG ALIGNMENT ---
             $r->get('/api/index.php/config_alignment/get', 'ConfigAlignment/get');
