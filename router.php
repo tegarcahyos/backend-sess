@@ -138,6 +138,13 @@ class Router
             $r->post('/api/index.php/main_program/insert', 'MainProgram/insert');
             $r->post('/api/index.php/main_program/update/{id}', 'MainProgram/update');
 
+            // CEO Notes
+            $r->get('/api/index.php/ceo_notes/get', 'CeoNotes/get');
+            $r->get('/api/index.php/ceo_notes/find_id/{id}', 'CeoNotes/findById');
+            $r->get('/api/index.php/ceo_notes/delete/{id}', 'CeoNotes/delete');
+            $r->post('/api/index.php/ceo_notes/insert', 'CeoNotes/insert');
+            $r->post('/api/index.php/ceo_notes/update/{id}', 'CeoNotes/update');
+
             // Criteria Priority
             $r->get('/api/index.php/criteria_priority/get', 'PriorityCriteria/get');
             $r->get('/api/index.php/criteria_priority/find_id/{id}', 'PriorityCriteria/findById');

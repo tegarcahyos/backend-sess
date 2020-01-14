@@ -78,9 +78,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename WHERE parent_id = '$parent_id'
-          ORDER BY
-            id ASC";
+             $tablename WHERE parent_id = '$parent_id'";
 
         $result = $this->db->execute($query);
 
