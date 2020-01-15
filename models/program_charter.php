@@ -158,7 +158,6 @@ class ProgramCharter
             )";
         // die($query);
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
 
         $res = $this->db->affected_rows();
 
