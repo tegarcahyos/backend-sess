@@ -11,8 +11,7 @@ class Upload
 
     public function upload_file()
     {
-        die(print_r($_FILES));
-        if (isset($_FILES['files'])) {
+        if (isset($_FILES['file'])) {
             $errors = [];
             $path = '/app/pmo-backend/uploads/';
 
