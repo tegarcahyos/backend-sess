@@ -224,7 +224,7 @@ class StraIn
     {
         echo $id;
         $query = "DELETE FROM $tablename WHERE id = '$id'";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         // return $result;
         $res = $this->db->affected_rows();
