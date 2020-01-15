@@ -13,7 +13,7 @@ class Upload
     {
         if (isset($_FILES['files'])) {
             $errors = [];
-            $path = 'uploads/';
+            $path = '/uploads/';
 
             // $all_files = count($_FILES['files']['tmp_name']);
             // for ($i = 0; $i < $all_files; $i++) {
@@ -24,11 +24,11 @@ class Upload
             $tmp = explode('.', $_FILES['files']['name']);
             $file_ext = strtolower(end($tmp));
             $file = $path . $file_name;
-            $file = '/' . $file;
             if ($file_size > 2097152) {
                 $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
             }
             if (empty($errors)) {
+                die($file);
                 if(move_uploaded_file($file_tmp, $file)) {
                     die("berhasil");
                 } else {
