@@ -233,7 +233,7 @@ class ProgramCharter
             main_activities = '$main_activities',
             key_asks = '$key_asks' ,
             risks = NULLIF('$risks', 'NULL'),
-            approval = NULLIF('$approval', 'NULL'),
+            approval = NULLIF('$approval', 'NULL')
         WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
