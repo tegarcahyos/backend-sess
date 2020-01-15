@@ -57,24 +57,11 @@ class Login
                 $update_expireAt = "UPDATE users SET expireAt = '$expire_claim' WHERE id = $user_id";
                 $this->db->execute($update_expireAt);
 
-                // GET USER ROLE
-                $query = "SELECT * FROM user_role WHERE user_id = $user_id";
-                $result = $this->db->execute($query);
-                // extract($row);
-                $row = $result->fetchRow();
-                if (is_bool($row)) {
-                    $role_id = null;
-                    $role_name = null;
-                } else {
-                    extract($row);
-                    $role_id = $row['role_id'];
-                    $role_name = $row['role_name'];
-                }
-
                 // GET USER UNIT
-                $query2 = "SELECT * FROM user_unit WHERE user_id = $user_id";
+                $query2 = "SELECT * FROM user_detail WHERE user_id = $user_id";
                 // die($query2);
                 $result = $this->db->execute($query2);
+                die(print_r($result));
                 $row = $result->fetchRow();
                 if (is_bool($row)) {
                     $unit_id = null;
