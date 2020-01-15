@@ -223,11 +223,11 @@ class StraIn
     public function delete($id, $tablename)
     {
         $query = "DELETE FROM $tablename WHERE id = '$id'";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
         // return $result;
         $res = $this->db->affected_rows();
-
+ 
         if ($res == true) {
             return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
         } else {

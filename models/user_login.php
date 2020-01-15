@@ -149,8 +149,8 @@ class UserLogin
         $create_date = $request->create_date;
         $create_time = $request->create_time;
 
-        $query = "INSERT INTO $tablename (user_id,user_name,device_id, create_date,create_time)";
-        $query .= "VALUES ($user_id,'$user_name','$device_id', '$create_date','$create_time') RETURNING *";
+        $query = "INSERT INTO $tablename (user_id,user_name,device_id, create_date,create_time)"; 
+        $query .= "VALUES ('$user_id','$user_name','$device_id', '$create_date','$create_time') RETURNING *";
         // die($query);
         $retunring_value = $this->db->execute($query);
         $num = $retunring_value->rowCount();
