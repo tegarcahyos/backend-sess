@@ -17,11 +17,11 @@ class Upload
 
             // $all_files = count($_FILES['files']['tmp_name']);
             // for ($i = 0; $i < $all_files; $i++) {
-            $file_name = $_FILES['files']['name'];
-            $file_tmp = $_FILES['files']['tmp_name'];
-            $file_type = $_FILES['files']['type'];
-            $file_size = $_FILES['files']['size'];
-            $tmp = explode('.', $_FILES['files']['name']);
+            $file_name = $_FILES['file']['name'];
+            $file_tmp = $_FILES['file']['tmp_name'];
+            $file_type = $_FILES['file']['type'];
+            $file_size = $_FILES['file']['size'];
+            $tmp = explode('.', $_FILES['file']['name']);
             $file_ext = strtolower(end($tmp));
             $file = $path . $file_name;
             if ($file_size > 2097152) {
