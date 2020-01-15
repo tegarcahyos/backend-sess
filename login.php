@@ -19,8 +19,9 @@ class Login
         $password = $data->password;
 
         $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
+        die(print_r($result));
         $num = $result->rowCount();
 
         if ($num > 0) {
