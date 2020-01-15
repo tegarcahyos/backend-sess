@@ -13,7 +13,7 @@ class Upload
     {
         if (isset($_FILES['files'])) {
             $errors = [];
-            $path = '../uploads/';
+            $path = 'uploads/';
 
             // $all_files = count($_FILES['files']['tmp_name']);
             // for ($i = 0; $i < $all_files; $i++) {
@@ -28,8 +28,17 @@ class Upload
                 $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
             }
             if (empty($errors)) {
+                die($file);
                 move_uploaded_file($file_tmp, $file);
                 $query = "INSERT INTO attachment (file_name) VALUES ('$file_name')";
+                $result = $this->db->execute($query);
+                $res = $this->db->affected_rows();
+
+                if ($res == true) {
+                    return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+                } else {
+                    return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+                }
             }
             // }
             if ($errors) {
