@@ -194,17 +194,17 @@ class ProgramCharter
         $request = json_decode($data);
         $title = $request[0]->title;
         $code = $request[0]->code;
+        $strategic_initiative = json_encode($request[0]->strategic_initiative);
         $cfu_fu = $request[0]->cfu_fu;
-        $strategic_initiative = $request[0]->strategic_initiative;
         $weight = $request[0]->weight;
         $matrix = $request[0]->matrix;
         $description = $request[0]->description;
-        $refer_to = $request[0]->refer_to;
-        $stakeholders = $request[0]->stakeholders;
-        $kpi = $request[0]->kpi;
-        $budget = $request[0]->budget;
-        $main_activities = $request[0]->main_activities;
-        $key_asks = $request[0]->key_asks;
+        $refer_to = json_encode($request[0]->refer_to);
+        $stakeholders = json_encode($request[0]->stakeholders);
+        $kpi = json_encode($request[0]->kpi);
+        $budget = json_encode($request[0]->budget);
+        $main_activities = json_encode($request[0]->main_activities);
+        $key_asks = json_encode($request[0]->key_asks);
         $risks = $request[0]->risks;
         $approval = $request[0]->approval;
 
