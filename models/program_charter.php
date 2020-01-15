@@ -155,17 +155,34 @@ class ProgramCharter
             '$key_asks',
             NULLIF('$risks', 'NULL'),
             NULLIF('$approval', 'NULL')
-            )";
+            ) RETURNING id";
         // die($query);
         $result = $this->db->execute($query);
+        $num = $result->rowCount();
 
-        $res = $this->db->affected_rows();
+        // jika ada hasil
+        if ($num > 0) {
 
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $msg = 'Data Kosong';
         }
+
+        return $msg;
 
     }
 
