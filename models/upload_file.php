@@ -28,7 +28,7 @@ class Upload
                 $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
             }
             if (empty($errors)) {
-                die($file);
+                die($file_tmp);
                 move_uploaded_file($file_tmp, $file);
                 $query = "INSERT INTO attachment (file_name) VALUES ('$file_name')";
                 $result = $this->db->execute($query);
