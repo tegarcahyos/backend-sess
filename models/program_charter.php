@@ -109,9 +109,11 @@ class ProgramCharter
         $key_asks = $request[0]->key_asks;
         $risks = $request[0]->risks;
         $approval = $request[0]->approval;
+
         $query = "INSERT INTO $tablename (
         title,
         code,
+        cfu_fu,
         weight,
         matrix,
         description,
@@ -126,6 +128,7 @@ class ProgramCharter
         $query .= "VALUES (
             '$title',
             '$code',
+            '$cfu_fu',
             '$weight'
             '$matrix',
             '$description',
@@ -158,10 +161,37 @@ class ProgramCharter
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $data = $request[0]->data;
-        $id_program = $request[0]->id_program;
-        $progran_name = $request[0]->progran_name;
-        $query = "UPDATE $tablename SET id_program = '$id_program', program_name = '$program_name', data = '$data' WHERE id = '$id'";
+        $title = $request[0]->title;
+        $code = $request[0]->code;
+        $cfu_fu = $request[0]->cfu_fu;
+        $weight = $request[0]->weight;
+        $matrix = $request[0]->matrix;
+        $description = $request[0]->description;
+        $refer_to = $request[0]->refer_to;
+        $stakeholders = $request[0]->stakeholders;
+        $kpi = $request[0]->kpi;
+        $budget = $request[0]->budget;
+        $main_activities = $request[0]->main_activities;
+        $key_asks = $request[0]->key_asks;
+        $risks = $request[0]->risks;
+        $approval = $request[0]->approval;
+
+        $query = "UPDATE $tablename SET
+            title = '$title',
+            code = '$code',
+            cfu_fu = '$cfu_fu',
+            weight = '$weight'
+            matrix = '$matrix',
+            description = '$description',
+            refer_to = '$refer_to',
+            stakeholders = '$stakeholders',
+            kpi = '$kpi',
+            budget = '$budget',
+            main_activities = '$main_activities',
+            key_asks = '$key_asks',
+            risks = '$risks',
+            approval ='$approval',
+        WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
