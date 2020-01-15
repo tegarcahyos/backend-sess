@@ -155,7 +155,7 @@ class ProgramCharter
             '$key_asks',
             NULLIF('$risks', 'NULL'),
             NULLIF('$approval', 'NULL')
-            ) RETURNING id";
+            ) RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
