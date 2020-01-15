@@ -29,8 +29,7 @@ class Upload
             }
             if (empty($errors)) {
                 move_uploaded_file($file_tmp, $file);
-                die(print_r($file));
-                $query = "INSERT INTO attachment (file_name) VALUES ('$file')";
+                $query = "INSERT INTO attachment (file_name) VALUES ('$file_name')";
             }
             // }
             if ($errors) {
