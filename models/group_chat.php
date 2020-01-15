@@ -92,74 +92,74 @@ class GroupChat
         return $msg;
     }
     public function join_chat($user_id, $group_id, $group_chat, $group_member)
-
     {
         $query_count = "SELECT group_id, count(user_id)  from group_member where group_id in $group_id group by group_id HAVING count(user_id) = 2";
 
         $result_count = $this->db->execute($query_count);
-    
+
         $num = $result_count->rowCount();
-        
-        $data_arr="";
+
+        $data_arr = "";
         if ($num > 0) {
-            
+
             $data_arr .= "(";
-            $i=0;
-        while ($rows = $result_count->fetchRow()){
+            $i = 0;
+            while ($rows = $result_count->fetchRow()) {
                 extract($rows);
-                
+
                 $data_arr .= $group_id;
-                if ($i< $num-1){
-                    $data_arr.=",";
+                if ($i < $num - 1) {
+                    $data_arr .= ",";
                 };
                 $i++;
 
-        }
-        $data_arr .= ")";
+            }
+            $data_arr .= ")";
 
-        
-        }
-        // echo $data_arr;
+            // echo $data_arr;
 
-        $query = "SELECT *  FROM $group_chat INNER JOIN $group_member " .
-            "ON  $group_chat.id = $group_member.group_id " .
-            "where  $group_member.user_id != $user_id and $group_chat.id in $data_arr";
-        // die($query);
+            $query = "SELECT *  FROM $group_chat INNER JOIN $group_member " .
+                "ON  $group_chat.id = $group_member.group_id " .
+                "where  $group_member.user_id != $user_id and $group_chat.id in $data_arr";
+            // die($query);
 
-        $result = $this->db->execute($query);
+            $result = $this->db->execute($query);
 
-        $num = $result->rowCount();
+            $num = $result->rowCount();
 
-        if ($num > 0) {
+            if ($num > 0) {
 
-            $data_arr = array();
+                $data_arr = array();
 
-            while ($row = $result->fetchRow()) {
-                extract($row);
+                while ($row = $result->fetchRow()) {
+                    extract($row);
 
-                $data_item = array(
-                    'id' => $id,
-                    'user_id' => $user_id,
-                    'group_id' => $group_id,
-                    'user_name' => $user_name,
-                    'message_last' => $message_last,
-                    'message_last_time' => $message_last_time,
-                    'user_avatar' => $user_avatar,
-                );
+                    $data_item = array(
+                        'id' => $id,
+                        'user_id' => $user_id,
+                        'group_id' => $group_id,
+                        'user_name' => $user_name,
+                        'message_last' => $message_last,
+                        'message_last_time' => $message_last_time,
+                        'user_avatar' => $user_avatar,
+                    );
 
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            } else {
+                $msg = '0';
             }
 
         } else {
-            $msg = 'Data Kosong';
+            $msg = '0';
         }
 
         return $msg;
     }
 
     public function join_group_chat($user_id, $group_id, $group_chat, $group_member)
-
     {
         $query_count = "SELECT group_id, count(user_id)  from group_member where group_id in $group_id group by group_id HAVING count(user_id) > 2";
 
@@ -167,29 +167,28 @@ class GroupChat
         // echo $result_count;
         $num = $result_count->rowCount();
         // echo $num;
-        $data_arr="";
+        $data_arr = "";
         if ($num > 0) {
             // echo "assup";
             $data_arr .= "(";
-            $i=0;
-            while ($rows = $result_count->fetchRow()){
+            $i = 0;
+            while ($rows = $result_count->fetchRow()) {
                 extract($rows);
                 // echo $group_id;
                 $data_arr .= $group_id;
-                if ($i< $num-1){
-                    $data_arr.=",";
+                if ($i < $num - 1) {
+                    $data_arr .= ",";
                 };
                 $i++;
 
             }
             $data_arr .= ")";
 
-            if($data_arr != ""){
+            if ($data_arr != "") {
 
-        
                 $query = "SELECT *  FROM $group_chat where $group_chat.id in $data_arr";
                 // die($query);
-            
+
                 $result = $this->db->execute($query);
                 $num = $result->rowCount();
 
@@ -222,13 +221,20 @@ class GroupChat
                     $msg = '0';
                 }
 
-            }else{
+            } else {
                 $msg = '0';
             }
 
             // echo $data_arr;
-            return $msg;
+            // return $msg;
+
+        } else {
+
+            $msg = '0';
         }
+
+        return $msg;
+
     }
 
     public function insert($tablename)

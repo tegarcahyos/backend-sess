@@ -92,7 +92,44 @@ class GroupMessage
 
     public function select_group_id($group_id, $tablename)
     {
-        $query = "SELECT * FROM  $tablename WHERE group_id = $group_id";
+        $query = "SELECT * FROM  $tablename WHERE group_id = $group_id ORDER BY id ASC";
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+                $data_item = array(
+                    'id' => $id,
+                    'group_id' => $group_id,
+                    'user_id' => $user_id,
+                    'user_name' => $user_name,
+                    'message' => $message,
+                    'create_date' => $create_date,
+                    'create_time' => $create_time,
+                    'status_origin' => $status_origin,
+                    'status_read' => $status_read,
+                    'status_removed' => $status_removed,
+
+                );
+                array_push($data_arr, $data_item);
+
+                $msg = $data_arr;
+            }
+        } else {
+            $msg = '0';
+        }
+
+        return $msg;
+    }
+
+    public function status_read($group_id, $tablename)
+    {
+        $query = "SELECT * FROM  $tablename WHERE group_id = $group_id AND status_read = false ORDER BY id ASC";
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
@@ -129,7 +166,7 @@ class GroupMessage
 
     public function select_user_id($user_id, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE user_id = $user_id";
+        $query = "SELECT * FROM $tablename WHERE user_id = $user_id ORDER BY id";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 

@@ -86,7 +86,7 @@ class Attachment
 
     public function select_group_id($group_id, $tablename)
     {
-        $query = "SELECT * FROM  $tablename WHERE group_id = $group_id";
+        $query = "SELECT * FROM  $tablename WHERE group_id = $group_id ORDER BY id ASC";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -120,7 +120,7 @@ class Attachment
 
     public function select_group_message_id($message_id, $tablename)
     {
-        $query = "SELECT * FROM  $tablename WHERE group_message_id = $message_id";
+        $query = "SELECT * FROM  $tablename WHERE group_message_id = $message_id ORDER BY id ASC";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -214,10 +214,10 @@ class Attachment
                                             message_sender_id = $message_sender_id ,message_sender_name = '$message_sender_name',last_seen_date = '$last_seen_date',last_seen_time = '$last_seen_time',last_seen_user_id = $last_seen_user_id,last_seen_user_name = '$last_seen_user_name'  WHERE id =  $id";
         $this->db->execute($query);
         $select_query = $this->select_id($id, $tablename);
-        $data_arr=array();
+        $data_arr = array();
         array_push($data_arr, $select_query);
-        
-        $msg=$data_arr;
+
+        $msg = $data_arr;
         // die($query);
         return $msg;
     }

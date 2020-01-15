@@ -92,7 +92,7 @@ class GroupMember
 
     public function select_group_id($group_id, $tablename)
     {
-        $query = "SELECT * FROM  $tablename WHERE group_id = $group_id";
+        $query = "SELECT * FROM  $tablename WHERE group_id = $group_id ORDER BY id ASC";
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
@@ -128,7 +128,7 @@ class GroupMember
 
     public function select_unit_id($unit_id, $tablename)
     {
-        $query = "SELECT * FROM  $tablename WHERE unit_id = $unit_id";
+        $query = "SELECT * FROM  $tablename WHERE unit_id = $unit_id ORDER BY id ASC";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -295,8 +295,6 @@ class GroupMember
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-
-       
 
         $query = "UPDATE  $tablename SET title = '$title', message_last = '$message_last' ,message_last_date = '$message_last_date',
                                          message_last_time = '$message_last_time',message_sender_id = $message_sender_id ,

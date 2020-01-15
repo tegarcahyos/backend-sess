@@ -258,8 +258,7 @@ class Router
             $r->get('/api/index.php/group_chat/delete/{id}', 'GroupChat/delete');
             $r->post('/api/index.php/group_chat/insert_group_chat', 'GroupChat/insert');
             $r->post('/api/index.php/group_chat/update/{id}', 'GroupChat/update');
-            $r->get('/api/index.php/group_chat/group_member/join_chat/{user_id}/{group_id}', 'GroupChat/join_chat');
-            $r->get('/api/index.php/group_chat/group_member/join_group_chat/{user_id}/{group_id}', 'GroupChat/join_group_chat');
+            $r->get('/api/index.php/group_chat/group_member/join/{user_id}/{group_id}', 'GroupChat/join');
 
             //USER LOGIN
             $r->post('/api/index.php/user_login/insert_user_device', 'UserLogin/insert');
@@ -290,6 +289,7 @@ class Router
             $r->get('/api/index.php/group_message/select_group_id/{group_id}', 'GroupMessage/select_group_id');
             $r->get('/api/index.php/group_message/select_user_id/{user_id}', 'GroupMessage/select_user_id');
             $r->post('/api/index.php/group_message/update/{id}', 'GroupMessage/update');
+            $r->get('/api/index.php/group_message/status_read/{group_id}', 'GroupMessage/status_read');
 
             // } else {
             //     die('token expired');
