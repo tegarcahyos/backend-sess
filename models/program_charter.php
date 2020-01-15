@@ -142,7 +142,7 @@ class ProgramCharter
         $query .= "VALUES (
             '$title',
             '$code',
-            '$strategic_initiative'
+            '$strategic_initiative',
             '$cfu_fu',
             '$weight'
             '$matrix',
