@@ -222,6 +222,7 @@ class StraIn
 
     public function delete($id, $tablename)
     {
+        echo $id;
         $query = "DELETE FROM $tablename WHERE id = '$id'";
         die($query);
         $result = $this->db->execute($query);
