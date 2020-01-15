@@ -132,6 +132,7 @@ class Router
             $r->get('/api/index.php/strategic_initiative/get', 'StraIn/get');
             $r->get('/api/index.php/strategic_initiative/find_id/{id}', 'StraIn/findById');
             $r->get('/api/index.php/strategic_initiative/get_leaf', 'StraIn/getLeaf');
+            $r->get('/api/index.php/strategic_initiative/get_by_parent/{parent_id}', 'StraIn/getByParent');
             $r->get('/api/index.php/strategic_initiative/delete/{id}', 'StraIn/delete');
             $r->post('/api/index.php/strategic_initiative/insert', 'StraIn/insert');
             $r->post('/api/index.php/strategic_initiative/update/{id}', 'StraIn/update');
