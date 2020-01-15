@@ -154,7 +154,7 @@ class ProgramCharter
             '$main_activities',
             '$key_asks',
             NULLIF('$risks', 'NULL'),
-            NULLIF('$approval', 'NULL'),
+            NULLIF('$approval', 'NULL')
             )";
         // die($query);
         $result = $this->db->execute($query);
