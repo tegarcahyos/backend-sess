@@ -126,7 +126,7 @@ class ProgramCharter
         $query = "INSERT INTO $tablename (
         title,
         code,
-        strategic_initiative
+        strategic_initiative,
         cfu_fu,
         weight,
         matrix,
