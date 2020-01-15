@@ -223,7 +223,7 @@ class ProgramCharter
             code = '$code',
             strategic_initiative = '$strategic_initiative',
             cfu_fu = '$cfu_fu',
-            weight = '$weight'
+            weight = '$weight',
             matrix = '$matrix',
             description = NULLIF('$description'),
             refer_to = '$refer_to',
