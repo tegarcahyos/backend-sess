@@ -11,6 +11,7 @@ class Upload
 
     public function upload_file()
     {
+        die(print_r($_FILES));
         if (isset($_FILES['files'])) {
             $errors = [];
             $path = '/uploads/';
@@ -28,7 +29,7 @@ class Upload
                 $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
             }
             if (empty($errors)) {
-                if(move_uploaded_file($file_tmp, $file)) {
+                if (move_uploaded_file($file_tmp, $file)) {
                     die("berhasil");
                 } else {
                     die("gagal");
