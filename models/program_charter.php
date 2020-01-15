@@ -225,7 +225,7 @@ class ProgramCharter
             cfu_fu = '$cfu_fu',
             weight = '$weight',
             matrix = '$matrix',
-            description = NULLIF('$description'),
+            description = NULLIF('$description', 'NULL'),
             refer_to = '$refer_to',
             stakeholders = '$stakeholders',
             kpi = '$kpi',
