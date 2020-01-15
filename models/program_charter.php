@@ -210,9 +210,7 @@ class ProgramCharter
         WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
-
         $res = $this->db->affected_rows();
-
         if ($res == true) {
             return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
         } else {
