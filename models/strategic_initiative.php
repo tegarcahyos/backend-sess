@@ -46,6 +46,72 @@ class StraIn
         return $msg;
     }
 
+    private $parentArray = [""];
+    public function getParentSIBy($id)
+    {
+        // Jika parent
+        if ($id == 0) {
+            // is root
+        } else {
+            // bukan root
+            // select name, parentId by $id,
+            $query = "SELECT * FROM strategic_initiative WHERE id = '$id'";
+            //
+            $result = $this->db->execute($query);
+            $row = $result->fetchRow();
+            extract($row);
+
+            $nameTemp = $name;
+            // SUNTIK nama array
+            array_push($this->parentArray, $nameTemp);
+            // Ambil parent id, buat dicari lagi atasnya
+            $idParentTemp = $parent_id;
+            // Cari atasnya
+            $this->getParentSIBy($idParentTemp);
+        }
+    }
+
+    public function getByParent($parent_id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE parent_id = '$parent_id'";
+
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+                // ambil parent parentnya pake $parent_id
+                $this->getParentSIBy($parent_id);
+                $data_item = array(
+                    'id' => $id,
+                    // 'organization_id' => $organization_id,
+                    // 'organization_name' => $organization_name,
+                    // 'organization_code' => $organization_code,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                    'parent_list' => $this->parentArray,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+    }
+
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
