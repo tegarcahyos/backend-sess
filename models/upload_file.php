@@ -24,6 +24,7 @@ class Upload
             $tmp = explode('.', $_FILES['files']['name']);
             $file_ext = strtolower(end($tmp));
             $file = $path . $file_name;
+            die($file);
             if ($file_size > 2097152) {
                 $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
             }
