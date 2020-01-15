@@ -29,16 +29,20 @@ class Upload
                 $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
             }
             if (empty($errors)) {
-                move_uploaded_file($file_tmp, $file);
-                $query = "INSERT INTO attachment (file_name) VALUES ('$file_name')";
-                $result = $this->db->execute($query);
-                $res = $this->db->affected_rows();
-
-                if ($res == true) {
-                    return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+                if(move_uploaded_file($file_tmp, $file)) {
+                    die("berhasil");
                 } else {
-                    return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+                    die("gagal");
                 }
+                // $query = "INSERT INTO attachment (file_name) VALUES ('$file_name')";
+                // $result = $this->db->execute($query);
+                // $res = $this->db->affected_rows();
+
+                // if ($res == true) {
+                //     return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+                // } else {
+                //     return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+                // }
             }
             // }
             if ($errors) {
