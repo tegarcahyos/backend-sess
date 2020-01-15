@@ -13,7 +13,7 @@ class Upload
     {
         if (isset($_FILES['files'])) {
             $errors = [];
-            $path = '../uploads/';
+            $path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
 
             // $all_files = count($_FILES['files']['tmp_name']);
             // for ($i = 0; $i < $all_files; $i++) {
