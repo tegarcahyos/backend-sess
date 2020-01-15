@@ -178,17 +178,21 @@ class User
 
     public function delete($id, $tablename)
     {
-        $query = "DELETE FROM $tablename WHERE id = '$id'";
-        // die($query);
-        $query_detail = "DELETE FROM user_detail WHERE user_id = $id";
-        $result = $this->db->execute($query);
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            $this->db->execute($query_detail);
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        if ($id == '22fd32c8-10e5-468b-8abd-56c04a50847f') {
+            return $msg = array("message" => 'Data Tidak Dapat Dihapus', "code" => 200);
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $query = "DELETE FROM $tablename WHERE id = '$id'";
+            // die($query);
+            $query_detail = "DELETE FROM user_detail WHERE user_id = $id";
+            $result = $this->db->execute($query);
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                $this->db->execute($query_detail);
+                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+            } else {
+                return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
         }
 
     }
