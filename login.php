@@ -52,7 +52,7 @@ class Login
 
                 $jwt = JWT::encode($token, $secret_key);
                 $insert_token = "UPDATE users SET token = '$jwt', expire_at = '$expire_claim' WHERE id = '$user_id'";
-                // die($insert_token);
+                die($insert_token);
                 $this->db->execute($insert_token);
                 $update_expireAt = "UPDATE users SET expire_at = '$expire_claim' WHERE id = '$user_id'";
                 $this->db->execute($update_expireAt);
