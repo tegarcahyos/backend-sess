@@ -408,6 +408,7 @@ class Router
                     $explodeUri[4] == "insert_gann" ||
                     $explodeUri[4] == "insert_page_data" ||
                     $explodeUri[4] == "get_leaf_unit" ||
+                    $explodeUri[4] == "get_leaf" ||
                     $explodeUri[4] == "insert_object" ||
                     $explodeUri[4] == "select_all_get"
                 ) {
