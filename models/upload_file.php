@@ -9,6 +9,11 @@ class Upload
         $this->db = $db;
     }
 
+    public function download_file($filename)
+    {
+
+    }
+
     public function upload_file()
     {
         if (isset($_FILES['file'])) {
@@ -29,7 +34,7 @@ class Upload
             }
             if (empty($errors)) {
                 move_uploaded_file($file_tmp, $file);
-                $query = "INSERT INTO attachment (file_name) VALUES ('$file_name') RETURNING *";
+                $query = "INSERT INTO upload_file (file_name) VALUES ('$file_name') RETURNING *";
                 $result = $this->db->execute($query);
                 $num = $result->rowCount();
 
