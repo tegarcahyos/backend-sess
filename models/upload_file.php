@@ -34,7 +34,7 @@ class Upload
                 $res = $this->db->affected_rows();
 
                 if ($res == true) {
-                    return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+                    return $msg = array("message" => 'Data berhasil diupload', "code" => 200);
                 } else {
                     return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
                 }
