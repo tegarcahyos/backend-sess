@@ -120,7 +120,7 @@ class GroupChat
 
             $query = "SELECT *  FROM $group_chat INNER JOIN $group_member " .
                 "ON  $group_chat.id = $group_member.group_id " .
-                "where  $group_member.user_id != $user_id and $group_chat.id in $data_arr";
+                "where  $group_member.user_id != '$user_id' and $group_chat.id in $data_arr";
             // die($query);
 
             $result = $this->db->execute($query);
@@ -249,19 +249,19 @@ class GroupChat
         $message_last = $request->message_last;
         $message_last_date = $request->message_last_date;
         $message_last_time = $request->message_last_time;
-        $message_sender_id = (int) $request->message_sender_id;
+        $message_sender_id = $request->message_sender_id;
         $message_sender_name = $request->message_sender_name;
         $last_seen_date = $request->last_seen_date;
         $last_seen_time = $request->last_seen_time;
-        $last_seen_user_id = (int) $request->last_seen_user_id;
+        $last_seen_user_id = $request->last_seen_user_id;
         $last_seen_user_name = $request->last_seen_user_name;
 
         $query = "INSERT INTO $tablename (title,message_last,message_last_date,message_last_time,
                                           message_sender_id,message_sender_name,last_seen_date,last_seen_time,
                                           last_seen_user_id,last_seen_user_name)";
         $query .= "VALUES ('$title','$message_last','$message_last_date','$message_last_time',
-                            $message_sender_id,'$message_sender_name','$last_seen_date','$last_seen_time',
-                            $last_seen_user_id,'$last_seen_user_name') RETURNING *";
+                            '$message_sender_id','$message_sender_name','$last_seen_date','$last_seen_time',
+                            '$last_seen_user_id','$last_seen_user_name') RETURNING *";
         // die($query);
 
         $retunring_value = $this->db->execute($query);
@@ -312,17 +312,17 @@ class GroupChat
         $message_last = $request->message_last;
         $message_last_date = $request->message_last_date;
         $message_last_time = $request->message_last_time;
-        $message_sender_id = (int) $request->message_sender_id;
+        $message_sender_id = $request->message_sender_id;
         $message_sender_name = $request->message_sender_name;
         $last_seen_date = $request->last_seen_date;
         $last_seen_time = $request->last_seen_time;
-        $last_seen_user_id = (int) $request->last_seen_user_id;
+        $last_seen_user_id = $request->last_seen_user_id;
         $last_seen_user_name = $request->last_seen_user_name;
 
         $query = "UPDATE  $tablename SET title = '$title', message_last = '$message_last' ,message_last_date = '$message_last_date',
-                                         message_last_time = '$message_last_time', message_sender_id = $message_sender_id ,
+                                         message_last_time = '$message_last_time', message_sender_id = '$message_sender_id' ,
                                          message_sender_name = '$message_sender_name',last_seen_date = '$last_seen_date',
-                                         last_seen_time = '$last_seen_time',last_seen_user_id = $last_seen_user_id,
+                                         last_seen_time = '$last_seen_time',last_seen_user_id = '$last_seen_user_id',
                                          last_seen_user_name = '$last_seen_user_name'  WHERE id =  $id";
         $this->db->execute($query);
         $select_query = $this->findById($id, $tablename);

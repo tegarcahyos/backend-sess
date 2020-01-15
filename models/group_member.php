@@ -128,7 +128,7 @@ class GroupMember
 
     public function select_unit_id($unit_id, $tablename)
     {
-        $query = "SELECT * FROM  $tablename WHERE unit_id = $unit_id ORDER BY id ASC";
+        $query = "SELECT * FROM  $tablename WHERE unit_id = '$unit_id' ORDER BY id ASC";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -163,7 +163,7 @@ class GroupMember
 
     public function select_user_id($user_id, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE user_id = $user_id";
+        $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
