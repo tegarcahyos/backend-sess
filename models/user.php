@@ -179,7 +179,7 @@ class User
     public function delete($id, $tablename)
     {
         if ($id == '22fd32c8-10e5-468b-8abd-56c04a50847f') {
-            return $msg = array("message" => 'Data Tidak Dapat Dihapus', "code" => 200);
+            return $msg = array("message" => 'Data Tidak Dapat Dihapus', "code" => 403);
         } else {
             $query = "DELETE FROM $tablename WHERE id = '$id'";
             // die($query);
