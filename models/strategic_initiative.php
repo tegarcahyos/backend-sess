@@ -16,7 +16,7 @@ class StraIn
           FROM
              $tablename";
 
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
