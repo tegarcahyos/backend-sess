@@ -32,6 +32,7 @@ class ProgramCharter
                     'id' => $id,
                     'title' => $title,
                     'code' => $code,
+                    'cfu_fu' => $cfu_fu,
                     'weight' => $weight,
                     'matrix' => $matrix,
                     'description' => $description,
@@ -71,6 +72,7 @@ class ProgramCharter
                 'id' => $id,
                 'title' => $title,
                 'code' => $code,
+                'cfu_fu' => $cfu_fu,
                 'weight' => $weight,
                 'matrix' => $matrix,
                 'description' => $description,
@@ -93,11 +95,49 @@ class ProgramCharter
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $data = json_encode($request[0]->data);
-        $id_program = $request[0]->id_program;
-        $progran_name = $request[0]->progran_name;
-        $query = "INSERT INTO $tablename (id_program, program_name, data)";
-        $query .= "VALUES ('$id_program', '$program_name', '$data')";
+        $title = $request[0]->title;
+        $code = $request[0]->code;
+        $cfu_fu = $request[0]->cfu_fu;
+        $weight = $request[0]->weight;
+        $matrix = $request[0]->matrix;
+        $description = $request[0]->description;
+        $refer_to = $request[0]->refer_to;
+        $stakeholders = $request[0]->stakeholders;
+        $kpi = $request[0]->kpi;
+        $budget = $request[0]->budget;
+        $main_activities = $request[0]->main_activities;
+        $key_asks = $request[0]->key_asks;
+        $risks = $request[0]->risks;
+        $approval = $request[0]->approval;
+        $query = "INSERT INTO $tablename (
+        title,
+        code,
+        weight,
+        matrix,
+        description,
+        refer_to,
+        stakeholders,
+        kpi,
+        budget,
+        main_activities,
+        key_asks,
+        risks,
+        approval)";
+        $query .= "VALUES (
+            '$title',
+            '$code',
+            '$weight'
+            '$matrix',
+            '$description',
+            '$refer_to',
+            '$stakeholders',
+            '$kpi',
+            '$budget',
+            '$main_activities',
+            '$key_asks',
+            '$risks',
+            '$approval',
+            )";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
