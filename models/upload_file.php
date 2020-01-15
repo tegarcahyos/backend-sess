@@ -28,7 +28,6 @@ class Upload
                 $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
             }
             if (empty($errors)) {
-                die($file);
                 if(move_uploaded_file($file_tmp, $file)) {
                     die("berhasil");
                 } else {
