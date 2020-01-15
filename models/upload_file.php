@@ -29,15 +29,33 @@ class Upload
             }
             if (empty($errors)) {
                 move_uploaded_file($file_tmp, $file);
-                $query = "INSERT INTO attachment (file_name) VALUES ('$file_name')";
+                $query = "INSERT INTO attachment (file_name) VALUES ('$file_name') RETURNING *";
                 $result = $this->db->execute($query);
-                $res = $this->db->affected_rows();
+                $num = $result->rowCount();
 
-                if ($res == true) {
-                    return $msg = array("message" => 'Data berhasil diupload', "code" => 200);
+                // jika ada hasil
+                if ($num > 0) {
+
+                    $data_arr = array();
+
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
+
+                        // Push to data_arr
+
+                        $data_item = array(
+                            'file_name' => $file_name,
+                        );
+
+                        array_push($data_arr, $data_item);
+                        $msg = $data_arr;
+                    }
+
                 } else {
-                    return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+                    $msg = 'Data Kosong';
                 }
+
+                return $msg;
             }
             // }
             if ($errors) {
