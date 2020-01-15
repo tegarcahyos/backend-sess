@@ -2,7 +2,7 @@
 
 class Upload
 {
-    public function upload($file)
+    public function upload_file()
     {
         if (isset($_FILES['files'])) {
             $errors = [];

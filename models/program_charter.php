@@ -113,6 +113,16 @@ class ProgramCharter
         $risks = $request[0]->risks;
         $approval = $request[0]->approval;
 
+        if (empty($description)) {
+            $description = 'NULL';
+        }
+        if (empty($risks)) {
+            $risks = 'NULL';
+        }
+        if (empty($approval)) {
+            $approval = 'NULL';
+        }
+
         $query = "INSERT INTO $tablename (
         title,
         code,
@@ -136,15 +146,15 @@ class ProgramCharter
             '$cfu_fu',
             '$weight'
             '$matrix',
-            '$description',
+            NULLIF('$description', 'NULL'),
             '$refer_to',
             '$stakeholders',
             '$kpi',
             '$budget',
             '$main_activities',
             '$key_asks',
-            '$risks',
-            '$approval',
+            NULLIF('$risks', 'NULL'),
+            NULLIF('$approval', 'NULL'),
             )";
         // die($query);
         $result = $this->db->execute($query);
@@ -168,8 +178,8 @@ class ProgramCharter
         $request = json_decode($data);
         $title = $request[0]->title;
         $code = $request[0]->code;
-        $strategic_initiative = $request[0]->strategic_initiative;
         $cfu_fu = $request[0]->cfu_fu;
+        $strategic_initiative = $request[0]->strategic_initiative;
         $weight = $request[0]->weight;
         $matrix = $request[0]->matrix;
         $description = $request[0]->description;
