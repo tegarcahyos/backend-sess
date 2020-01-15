@@ -22,6 +22,7 @@ include "models/priority_criteria.php";
 include "models/ceo_notes.php";
 include "models/user_detail.php";
 include "models/kpi.php";
+include "models/upload_file.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -120,6 +121,8 @@ class Router
             // if (!empty($token)) {
             // $passed = $this->check_token($token);
             // if ($passed == 'true') {
+
+            $r->post('/api/index.php/file/upload', 'Upload/upload');
 
             // --- USER ---
             $r->get('/api/index.php/users/get', 'User/get');
@@ -404,6 +407,7 @@ class Router
                     $explodeUri[4] == "insert_group_chat" ||
                     $explodeUri[4] == "get" ||
                     $explodeUri[4] == "insert" ||
+                    $explodeUri[4] == "upload" ||
                     $explodeUri[4] == "insert_alignment" ||
                     $explodeUri[4] == "insert_form_data" ||
                     $explodeUri[4] == "insert_gann" ||
