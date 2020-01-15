@@ -32,6 +32,7 @@ class ProgramCharter
                     'id' => $id,
                     'title' => $title,
                     'code' => $code,
+                    'strategic_initiative' => $strategic_initiative,
                     'cfu_fu' => $cfu_fu,
                     'weight' => $weight,
                     'matrix' => $matrix,
@@ -72,6 +73,7 @@ class ProgramCharter
                 'id' => $id,
                 'title' => $title,
                 'code' => $code,
+                'strategic_initiative' => $strategic_initiative,
                 'cfu_fu' => $cfu_fu,
                 'weight' => $weight,
                 'matrix' => $matrix,
@@ -97,6 +99,7 @@ class ProgramCharter
         $request = json_decode($data);
         $title = $request[0]->title;
         $code = $request[0]->code;
+        $strategic_initiative = $request[0]->strategic_initiative;
         $cfu_fu = $request[0]->cfu_fu;
         $weight = $request[0]->weight;
         $matrix = $request[0]->matrix;
@@ -113,6 +116,7 @@ class ProgramCharter
         $query = "INSERT INTO $tablename (
         title,
         code,
+        strategic_initiative
         cfu_fu,
         weight,
         matrix,
@@ -128,6 +132,7 @@ class ProgramCharter
         $query .= "VALUES (
             '$title',
             '$code',
+            '$strategic_initiative'
             '$cfu_fu',
             '$weight'
             '$matrix',
@@ -163,6 +168,7 @@ class ProgramCharter
         $request = json_decode($data);
         $title = $request[0]->title;
         $code = $request[0]->code;
+        $strategic_initiative = $request[0]->strategic_initiative;
         $cfu_fu = $request[0]->cfu_fu;
         $weight = $request[0]->weight;
         $matrix = $request[0]->matrix;
@@ -179,6 +185,7 @@ class ProgramCharter
         $query = "UPDATE $tablename SET
             title = '$title',
             code = '$code',
+            strategic_initiative = '$strategic_initiative',
             cfu_fu = '$cfu_fu',
             weight = '$weight'
             matrix = '$matrix',
