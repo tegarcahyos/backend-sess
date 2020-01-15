@@ -2,6 +2,13 @@
 
 class Upload
 {
+    public $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
     public function upload_file()
     {
         if (isset($_FILES['files'])) {
@@ -22,6 +29,8 @@ class Upload
             }
             if (empty($errors)) {
                 move_uploaded_file($file_tmp, $file);
+                die(print_r($file));
+                $query = "INSERT INTO attachment (file_name) VALUES ('$file')";
             }
             // }
             if ($errors) {
