@@ -11,6 +11,7 @@ class Upload
 
     public function upload_file()
     {
+        die(print_r($_FILES['files']));
         if (isset($_FILES['files'])) {
             $errors = [];
             $path = '/uploads/';
