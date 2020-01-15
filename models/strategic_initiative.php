@@ -16,9 +16,9 @@ class StraIn
           FROM
              $tablename";
 
-        die($query);
+        
         $result = $this->db->execute($query);
-
+        die(print_r($result));
         $num = $result->rowCount();
 
         if ($num > 0) {
