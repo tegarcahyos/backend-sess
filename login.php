@@ -51,14 +51,14 @@ class Login
                     ));
 
                 $jwt = JWT::encode($token, $secret_key);
-                $insert_token = "UPDATE users SET token = '$jwt', expireAt = '$expire_claim' WHERE id = $user_id";
+                $insert_token = "UPDATE users SET token = '$jwt', expireAt = '$expire_claim' WHERE id = '$user_id'";
                 // die($insert_token);
                 $this->db->execute($insert_token);
-                $update_expireAt = "UPDATE users SET expireAt = '$expire_claim' WHERE id = $user_id";
+                $update_expireAt = "UPDATE users SET expireAt = '$expire_claim' WHERE id = '$user_id'";
                 $this->db->execute($update_expireAt);
 
                 // GET USER UNIT
-                $query2 = "SELECT * FROM user_detail WHERE user_id = $user_id";
+                $query2 = "SELECT * FROM user_detail WHERE user_id = '$user_id'";
                 // die($query2);
                 $result = $this->db->execute($query2);
                 $row = $result->fetchRow();
