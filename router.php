@@ -122,7 +122,7 @@ class Router
             // $passed = $this->check_token($token);
             // if ($passed == 'true') {
 
-            $r->post('/api/index.php/file/upload', 'Upload/upload');
+            $r->post('/api/index.php/file/upload', 'Upload/upload_file');
 
             // --- USER ---
             $r->get('/api/index.php/users/get', 'User/get');
