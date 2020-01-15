@@ -156,7 +156,7 @@ class ProgramCharter
             NULLIF('$risks', 'NULL'),
             NULLIF('$approval', 'NULL')
             )";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
 
         $res = $this->db->affected_rows();
