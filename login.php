@@ -61,28 +61,20 @@ class Login
                 $query2 = "SELECT * FROM user_detail WHERE user_id = $user_id";
                 // die($query2);
                 $result = $this->db->execute($query2);
-                if (empty($result)) {
+                $row = $result->fetchRow();
+                if (is_bool($row)) {
                     $unit_id = null;
                     $unit_code = null;
                     $unit_name = null;
                     $role_id = null;
                     $role_name = null;
                 } else {
-                    $row = $result->fetchRow();
-                    if (is_bool($row)) {
-                        $unit_id = null;
-                        $unit_code = null;
-                        $unit_name = null;
-                        $role_id = null;
-                        $role_name = null;
-                    } else {
-                        extract($row);
-                        $unit_id = $row['unit_id'];
-                        $unit_code = $row['unit_code'];
-                        $unit_name = $row['unit_name'];
-                        $role_id = $row['role_id'];
-                        $role_name = $row['role_name'];
-                    }
+                    extract($row);
+                    $unit_id = $row['unit_id'];
+                    $unit_code = $row['unit_code'];
+                    $unit_name = $row['unit_name'];
+                    $role_id = $row['role_id'];
+                    $role_name = $row['role_name'];
                 }
 
                 $msg = array(
