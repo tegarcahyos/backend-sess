@@ -71,11 +71,13 @@ class Upload
 
     }
 
-    public function downloadFile($file)
+    public function downloadFile($id_file)
     {
+
+        $query = "SELECT * FROM upload_file where id = $id_file";
+        die($query);
         $file = basename($_GET['file']);
         $file = '/app/pmo-backend/uploads/' . $file;
-
         if (!file_exists($file)) { // file does not exist
             die('file not found');
         } else {
