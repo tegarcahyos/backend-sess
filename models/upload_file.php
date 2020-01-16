@@ -85,14 +85,14 @@ class Upload
             return $msg;
         } else {
             extract($row);
-            $file = basename($row['file_name']);
-            $file = '/app/pmo-backend/uploads/' . $file;
+            $filename = basename($row['file_name']);
+            $file = '/app/pmo-backend/uploads/' . $filename;
             if (!file_exists($file)) { // file does not exist
                 die('file not found');
             } else {
                 header("Cache-Control: public");
                 header("Content-Description: File Transfer");
-                header("Content-Disposition: attachment; filename=$file");
+                header("Content-Disposition: attachment; filename=$filename");
                 header("Content-Type: application/zip");
                 header("Content-Transfer-Encoding: binary");
 
