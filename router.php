@@ -339,7 +339,8 @@ class Router
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[3]));
 
-                } else if ($explodeUri[4] == "select_group_id") {
+                } else if ($explodeUri[4] == "select_group_id" ||
+                           $explodeUri[4] == "status_read" ){
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['group_id'], $explodeUri[3]));
 
