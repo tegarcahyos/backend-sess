@@ -251,9 +251,10 @@ class GroupMember
 
         $query = "INSERT INTO $tablename (group_id, group_name, unit_id, unit_name, user_id, user_name, user_avatar, type, push_id)";
         $query .= "VALUES ($group_id, '$group_name', '$unit_id', '$unit_name', '$user_id','$user_name', '$user_avatar', '$type', '$push_id') RETURNING * ";
-        die($query);
+        // die($query);
 
         $returning_value = $this->db->execute($query);
+        print_r( $returning_value);
         $num = $returning_value->rowCount();
         // echo ($num);
 
