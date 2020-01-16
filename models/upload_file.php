@@ -85,7 +85,7 @@ class Upload
             return $msg;
         } else {
             extract($row);
-            die(print_r($row['file_name']));
+            die(basename($row['file_name']));
             $file = basename($_GET['file']);
             $file = '/app/pmo-backend/uploads/' . $file;
             if (!file_exists($file)) { // file does not exist
