@@ -122,8 +122,12 @@ class Router
             //     $passed = $this->check_token($token);
             //     if ($passed == 'true') {
 
+
+            //FILES
             $r->post('/api/index.php/file/upload', 'Upload/upload_file');
             $r->get('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
+            $r->get('/api/index.php/upload_file/get', 'Upload/get');
+
 
             // --- USER ---
             $r->get('/api/index.php/users/get', 'User/get');
@@ -295,6 +299,8 @@ class Router
             $r->get('/api/index.php/group_message/select_user_id/{user_id}', 'GroupMessage/select_user_id');
             $r->post('/api/index.php/group_message/update/{id}', 'GroupMessage/update');
             $r->get('/api/index.php/group_message/status_read/{group_id}', 'GroupMessage/status_read');
+
+            //
 
             //     } else {
             //         return $this->msg(405, 'Token Expired', "gagal", 0);
