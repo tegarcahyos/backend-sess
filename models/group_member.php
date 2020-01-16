@@ -254,7 +254,8 @@ class GroupMember
         // die($query);
 
         $returning_value = $this->db->execute($query);
-        print_r( $returning_value);
+        // print_r($returning_value);
+
         $num = $returning_value->rowCount();
         // echo ($num);
 
