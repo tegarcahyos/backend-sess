@@ -123,7 +123,7 @@ class Router
             //     if ($passed == 'true') {
 
             $r->post('/api/index.php/file/upload', 'Upload/upload_file');
-            $r->post('/api/index.php/file/download/{file}', 'Upload/downloadFile');
+            $r->post('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
 
             // --- USER ---
             $r->get('/api/index.php/users/get', 'User/get');
@@ -397,7 +397,7 @@ class Router
                     $explodeUri[4] == "download"
                 ) {
                     die('true' . $explodeUri[4]);
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['file']));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['file'], $explodeUri[3]));
                 } else if (
                     $explodeUri[4] == "get_by_parent_unit_id" ||
                     $explodeUri[4] == "get_by_parent"

@@ -71,10 +71,10 @@ class Upload
 
     }
 
-    public function downloadFile($id_file)
+    public function downloadFile($id_file, $tablename)
     {
 
-        $query = "SELECT * FROM upload_file where id = $id_file";
+        $query = "SELECT * FROM $tablename where id = $id_file";
         die($query);
         $file = basename($_GET['file']);
         $file = '/app/pmo-backend/uploads/' . $file;
