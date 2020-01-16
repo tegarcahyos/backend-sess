@@ -14,7 +14,7 @@ class StraIn
         $query = "SELECT
            *
           FROM
-             $tablename";
+             $tablename order by created_at asc NULL LAST";
 
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -222,7 +222,7 @@ class StraIn
     public function delete($id, $tablename)
     {
         $query = "DELETE FROM $tablename WHERE id = '$id'";
-        // die($query); 
+        // die($query);
         $result = $this->db->execute($query);
         // return $result;
         $res = $this->db->affected_rows();
