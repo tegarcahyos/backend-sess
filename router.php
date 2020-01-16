@@ -397,7 +397,7 @@ class Router
                     $explodeUri[4] == "download"
                 ) {
                     die('true' . $explodeUri[4]);
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['file'], $explodeUri[3]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['file']));
                 } else if (
                     $explodeUri[4] == "get_by_parent_unit_id" ||
                     $explodeUri[4] == "get_by_parent"
