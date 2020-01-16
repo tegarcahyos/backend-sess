@@ -50,7 +50,7 @@ class Upload
             $file_size = $_FILES['file']['size'];
             $tmp = explode('.', $_FILES['file']['name']);
             $file_ext = strtolower(end($tmp));
-            $file_name_upload = date('d_m_Y_h_i_s').'.'.$file_ext;
+            $file_name_upload = $uuid.'.'.$file_ext;
             $file = $path.$file_name_upload;
         
            
@@ -61,7 +61,7 @@ class Upload
                 move_uploaded_file($file_tmp, $file);
                 //  print_r($file_tmp);
                 $query = "INSERT INTO upload_file (file_name) VALUES ('$file_name_upload') RETURNING *";
-                die($query);
+                // die($query);
                 $result = $this->db->execute($query);
                 $num = $result->rowCount();
 
