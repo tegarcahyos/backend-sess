@@ -45,6 +45,7 @@ class ProgramCharter
                     'key_asks' => $key_asks,
                     'risks' => $risks,
                     'approval' => $approval,
+                    'status' => $status,
                 );
 
                 array_push($data_arr, $data_item);
@@ -86,6 +87,7 @@ class ProgramCharter
                 'key_asks' => $key_asks,
                 'risks' => $risks,
                 'approval' => $approval,
+                'status' => $status,
             );
             return $data_item;
         }
@@ -99,7 +101,7 @@ class ProgramCharter
         $request = json_decode($data);
         $title = $request[0]->title;
         $code = $request[0]->code;
-        $strategic_initiative = json_encode($request[0]->strategic_initiative);
+        $strategic_initiative = $request[0]->strategic_initiative;
         $cfu_fu = $request[0]->cfu_fu;
         $weight = $request[0]->weight;
         $matrix = $request[0]->matrix;
@@ -112,6 +114,7 @@ class ProgramCharter
         $key_asks = json_encode($request[0]->key_asks);
         $risks = $request[0]->risks;
         $approval = $request[0]->approval;
+        $status = $request[0]->status;
 
         if (empty($description)) {
             $description = 'NULL';
@@ -138,7 +141,8 @@ class ProgramCharter
         main_activities,
         key_asks,
         risks,
-        approval)";
+        approval,
+        status)";
         $query .= "VALUES (
             '$title',
             '$code',
@@ -154,7 +158,8 @@ class ProgramCharter
             '$main_activities',
             '$key_asks',
             NULLIF('$risks', 'NULL'),
-            NULLIF('$approval', 'NULL')
+            NULLIF('$approval', 'NULL'),
+            '$status'
             ) RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
@@ -207,6 +212,7 @@ class ProgramCharter
         $key_asks = json_encode($request[0]->key_asks);
         $risks = $request[0]->risks;
         $approval = $request[0]->approval;
+        $status = $request[0]->status;
 
         if (empty($description)) {
             $description = 'NULL';
@@ -233,12 +239,13 @@ class ProgramCharter
             main_activities = '$main_activities',
             key_asks = '$key_asks' ,
             risks = NULLIF('$risks', 'NULL'),
-            approval = NULLIF('$approval', 'NULL')
+            approval = NULLIF('$approval', 'NULL'),
+            status = '$status'
         WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
         $res = $this->db->affected_rows();
- 
+
         if ($res == true) {
             return $msg = array("message" => 'Data Berhasil Diubah', "code" => 200);
         } else {

@@ -116,11 +116,11 @@ class Router
             // --- LOGIN ---
             $r->post('/api/index.php/login', 'Login/authenticate');
             $r->post('/api/index.php/login_chat', 'LoginChat/authenticate');
+
             // --- CHECK TOKEN ---
-            // die($token);
             // if (!empty($token)) {
-            // $passed = $this->check_token($token);
-            // if ($passed == 'true') {
+            //     $passed = $this->check_token($token);
+            //     if ($passed == 'true') {
 
             $r->post('/api/index.php/file/upload', 'Upload/upload_file');
 
@@ -157,6 +157,7 @@ class Router
             // User Detail
             $r->get('/api/index.php/user_detail/get', 'UserDetail/get');
             $r->get('/api/index.php/user_detail/find_id/{id}', 'UserDetail/findById');
+            $r->get('/api/index.php/user_detail/get_by_user/{user_id}', 'UserDetail/getByUser');
             $r->get('/api/index.php/user_detail/delete/{id}', 'UserDetail/delete');
             $r->post('/api/index.php/user_detail/insert', 'UserDetail/insert');
             $r->post('/api/index.php/user_detail/update/{id}', 'UserDetail/update');
@@ -291,11 +292,11 @@ class Router
             $r->post('/api/index.php/group_message/update/{id}', 'GroupMessage/update');
             $r->get('/api/index.php/group_message/status_read/{group_id}', 'GroupMessage/status_read');
 
+            //     } else {
+            //         return $this->msg(405, 'Token Expired', "gagal", 0);
+            //     }
             // } else {
-            //     die('token expired');
-            // }
-            // } else {
-            //     die('token kosong');
+            //     return $this->msg(407, 'Token Not Found', "gagal", 0);
             // }
 
         });

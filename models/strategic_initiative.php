@@ -14,9 +14,8 @@ class StraIn
         $query = "SELECT
            *
           FROM
-             $tablename";
+             $tablename order by created_at asc";
 
-        
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -222,13 +221,12 @@ class StraIn
 
     public function delete($id, $tablename)
     {
-        echo $id;
         $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
         // return $result;
         $res = $this->db->affected_rows();
- 
+
         if ($res == true) {
             return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
         } else {
