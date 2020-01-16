@@ -169,7 +169,7 @@ class Attachment
 
         $query = "INSERT INTO $tablename (group_id, group_message_id,file, upload_date, upload_time, removed_status)";
         $query .= "VALUES ($group_id, $group_message_id,'$file', '$upload_date', '$upload_time', '$removed_status') RETURNING *";
-        // die($query);
+        die($query);
         // return $this->db->execute($query);
 
         $returning_value = $this->db->execute($query);
