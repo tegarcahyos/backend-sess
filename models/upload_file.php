@@ -78,20 +78,29 @@ class Upload
     {
 
         $query = "SELECT * FROM $tablename where id = $id_file";
-        die($query);
-        $file = basename($_GET['file']);
-        $file = '/app/pmo-backend/uploads/' . $file;
-        if (!file_exists($file)) { // file does not exist
-            die('file not found');
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
         } else {
-            header("Cache-Control: public");
-            header("Content-Description: File Transfer");
-            header("Content-Disposition: attachment; filename=$file");
-            header("Content-Type: application/zip");
-            header("Content-Transfer-Encoding: binary");
+            extract($row);
+            die(print_r($row['file_name']));
+            $file = basename($_GET['file']);
+            $file = '/app/pmo-backend/uploads/' . $file;
+            if (!file_exists($file)) { // file does not exist
+                die('file not found');
+            } else {
+                header("Cache-Control: public");
+                header("Content-Description: File Transfer");
+                header("Content-Disposition: attachment; filename=$file");
+                header("Content-Type: application/zip");
+                header("Content-Transfer-Encoding: binary");
 
-            // read the file from disk
-            readfile($file);
+                // read the file from disk
+                readfile($file);
+            }
         }
+
     }
 }
