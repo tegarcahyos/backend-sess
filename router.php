@@ -123,6 +123,7 @@ class Router
             //     if ($passed == 'true') {
 
             $r->post('/api/index.php/file/upload', 'Upload/upload_file');
+            $r->post('/api/index.php/file/download/{file}', 'Upload/downloadFile');
 
             // --- USER ---
             $r->get('/api/index.php/users/get', 'User/get');
@@ -340,7 +341,7 @@ class Router
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[3]));
 
                 } else if ($explodeUri[4] == "select_group_id" ||
-                           $explodeUri[4] == "status_read" ){
+                    $explodeUri[4] == "status_read") {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['group_id'], $explodeUri[3]));
 
@@ -392,6 +393,11 @@ class Router
                     $explodeUri[4] == "find_by_page_id"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['page_id'], $explodeUri[3]));
+                } else if (
+                    $explodeUri[4] == "download"
+                ) {
+                    die('true' . $explodeUri[4]);
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['file']));
                 } else if (
                     $explodeUri[4] == "get_by_parent_unit_id" ||
                     $explodeUri[4] == "get_by_parent"
