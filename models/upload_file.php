@@ -39,7 +39,7 @@ class Upload
                 move_uploaded_file($file_tmp, $file);
                 //  print_r($file_tmp);
                 $query = "INSERT INTO upload_file (file_name) VALUES ('$file') RETURNING *";
-                die($query);
+                // die($query);
                 $result = $this->db->execute($query);
                 $num = $result->rowCount();
 
