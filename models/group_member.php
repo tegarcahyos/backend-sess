@@ -250,7 +250,7 @@ class GroupMember
         $push_id = $request->push_id;
 
         $query = "INSERT INTO $tablename (group_id, group_name, unit_id, unit_name, user_id, user_name, user_avatar, type, push_id)";
-        $query .= "VALUES ($group_id, '$group_name', $unit_id, '$unit_name', $user_id,'$user_name', '$user_avatar', '$type', $push_id) RETURNING * ";
+        $query .= "VALUES ($group_id, '$group_name', '$unit_id', '$unit_name', '$user_id','$user_name', '$user_avatar', '$type', '$push_id') RETURNING * ";
         // die($query);
 
         $returning_value = $this->db->execute($query);
