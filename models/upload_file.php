@@ -36,7 +36,7 @@ class Upload
                 // 48 bits for "node"
                 mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
             );
-            echo $uuid;
+            // echo $uuid;
         
         if (isset($_FILES['file'])) {
             $errors = [];
