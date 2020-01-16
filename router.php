@@ -259,7 +259,8 @@ class Router
             $r->get('/api/index.php/group_chat/delete/{id}', 'GroupChat/delete');
             $r->post('/api/index.php/group_chat/insert_group_chat', 'GroupChat/insert');
             $r->post('/api/index.php/group_chat/update/{id}', 'GroupChat/update');
-            $r->get('/api/index.php/group_chat/group_member/join/{user_id}/{group_id}', 'GroupChat/join');
+            $r->get('/api/index.php/group_chat/group_member/join_chat/{user_id}/{group_id}', 'GroupChat/join_chat');
+            $r->get('/api/index.php/group_chat/group_member/join_group_chat/{user_id}/{group_id}', 'GroupChat/join_group_chat');
 
             //USER LOGIN
             $r->post('/api/index.php/user_login/insert_user_device', 'UserLogin/insert');
@@ -421,8 +422,8 @@ class Router
                     $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
                 } else if ($explodeUri[4] == "select_where_get") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['attr'], $vars['val'], $explodeUri[3]));
-                } else if ($explodeUri[6] == "join_chat" ||
-                    $explodeUri[6] == "join_group_chat") {
+                } else if ($explodeUri[5] == "join_chat" ||
+                    $explodeUri[5] == "join_group_chat") {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $vars['group_id'], $explodeUri[3], $explodeUri[4]));
 
