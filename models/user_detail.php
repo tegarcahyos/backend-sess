@@ -75,6 +75,35 @@ class UserDetail
         }
     }
 
+    public function getByUser($id_user, $tablename)
+    {
+        $query = "SELECT * FROM $tablename WHERE id_user = '$id_user'";
+        $result = $this->db->execute($query);
+        if (empty($result)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            $row = $result->fetchRow();
+            extract($row);
+
+            // Push to data_arr
+
+            $data_item = array(
+                'id' => $id,
+                'user_id' => $user_id,
+                'user_name' => $user_name,
+                'unit_id' => $unit_id,
+                'unit_code' => $unit_code,
+                'unit_name' => $unit_name,
+                'role_id' => $role_id,
+                'role_name' => $role_name,
+            );
+
+            $msg = $data_item;
+            return $msg;
+        }
+    }
+
     public function insert($tablename)
     {
         $data = file_get_contents("php://input");

@@ -157,6 +157,7 @@ class Router
             // User Detail
             $r->get('/api/index.php/user_detail/get', 'UserDetail/get');
             $r->get('/api/index.php/user_detail/find_id/{id}', 'UserDetail/findById');
+            $r->get('/api/index.php/user_detail/get_by_user/{user_id}', 'UserDetail/getByUser');
             $r->get('/api/index.php/user_detail/delete/{id}', 'UserDetail/delete');
             $r->post('/api/index.php/user_detail/insert', 'UserDetail/insert');
             $r->post('/api/index.php/user_detail/update/{id}', 'UserDetail/update');
