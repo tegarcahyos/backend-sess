@@ -210,10 +210,20 @@ class Attachment
         //
         $request = json_decode($data);
 
-        $query = "UPDATE  $tablename SET title = '$title', message_last = '$message_last' ,message_last_date = '$message_last_date',message_last_time = '$message_last_time',
-                                            message_sender_id = $message_sender_id ,message_sender_name = '$message_sender_name',last_seen_date = '$last_seen_date',last_seen_time = '$last_seen_time',last_seen_user_id = $last_seen_user_id,last_seen_user_name = '$last_seen_user_name'  WHERE id =  $id";
+        $group_id = $request->group_id;
+        $group_message_id = $request->group_message_id;
+        $file = $request->file;
+        $upload_date = $request->upload_date;
+        $upload_time = $request->upload_time;
+        $removed_status = $request->removed_status;
+
+        $query = "UPDATE  $tablename SET group_id = $group_id,group_message_id = $group_message_id,file = '$file',
+                                         upload_date = '$upload_date',upload_time = '$upload_time',
+                                         removed_status = '$removed_status' WHERE id= $id ";
+
         $this->db->execute($query);
         $select_query = $this->select_id($id, $tablename);
+
         $data_arr = array();
         array_push($data_arr, $select_query);
 
