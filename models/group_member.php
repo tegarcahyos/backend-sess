@@ -198,7 +198,7 @@ class GroupMember
 
     public function select_push_id($push_id, $tablename)
     {
-        $query = "SELECT * FROM $tablename  WHERE push_id = $push_id";
+        $query = "SELECT * FROM $tablename  WHERE push_id = '$push_id'";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -251,7 +251,7 @@ class GroupMember
 
         $query = "INSERT INTO $tablename (group_id, group_name, unit_id, unit_name, user_id, user_name, user_avatar, type, push_id)";
         $query .= "VALUES ($group_id, '$group_name', '$unit_id', '$unit_name', '$user_id','$user_name', '$user_avatar', '$type', '$push_id') RETURNING * ";
-        // die($query);
+        die($query);
 
         $returning_value = $this->db->execute($query);
         $num = $returning_value->rowCount();
