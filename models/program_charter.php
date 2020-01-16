@@ -104,7 +104,7 @@ class ProgramCharter
         $strategic_initiative = $request[0]->strategic_initiative;
         $cfu_fu = $request[0]->cfu_fu;
         $weight = $request[0]->weight;
-        $matrix = $request[0]->matrix;
+        $matrix = json_encode($request[0]->matrix);
         $description = $request[0]->description;
         $refer_to = json_encode($request[0]->refer_to);
         $stakeholders = json_encode($request[0]->stakeholders);
@@ -202,7 +202,7 @@ class ProgramCharter
         $strategic_initiative = $request[0]->strategic_initiative;
         $cfu_fu = $request[0]->cfu_fu;
         $weight = $request[0]->weight;
-        $matrix = $request[0]->matrix;
+        $matrix = json_encode($request[0]->matrix);
         $description = $request[0]->description;
         $refer_to = json_encode($request[0]->refer_to);
         $stakeholders = json_encode($request[0]->stakeholders);
