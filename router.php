@@ -123,7 +123,7 @@ class Router
             //     if ($passed == 'true') {
 
             $r->post('/api/index.php/file/upload', 'Upload/upload_file');
-            $r->post('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
+            $r->get('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
 
             // --- USER ---
             $r->get('/api/index.php/users/get', 'User/get');
