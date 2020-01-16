@@ -76,7 +76,6 @@ class Upload
 
     public function downloadFile($id_file, $tablename)
     {
-
         $query = "SELECT * FROM $tablename where id = $id_file";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
