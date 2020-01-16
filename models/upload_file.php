@@ -29,7 +29,7 @@ class Upload
             $tmp = explode('.', $_FILES['file']['name']);
             // echo $tmp;
             $file_ext = strtolower(end($tmp));
-            $file = $path . date('d-m-Y h:i:s').$file_ext;
+            $file = date('d-m-Y h:i:s').'.'.$file_ext;
             // $file_date = date('d-m-Y h:i:s');
             // $fileConcat = $file_name.$file_date;
             if ($file_size > 2097152) {
