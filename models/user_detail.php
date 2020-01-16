@@ -75,9 +75,9 @@ class UserDetail
         }
     }
 
-    public function getByUser($id_user, $tablename)
+    public function getByUser($user_id, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE id_user = '$id_user'";
+        $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
         $result = $this->db->execute($query);
         if (empty($result)) {
             $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
