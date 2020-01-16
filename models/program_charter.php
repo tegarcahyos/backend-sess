@@ -101,7 +101,7 @@ class ProgramCharter
         $request = json_decode($data);
         $title = $request[0]->title;
         $code = $request[0]->code;
-        $strategic_initiative = json_encode($request[0]->strategic_initiative);
+        $strategic_initiative = $request[0]->strategic_initiative;
         $cfu_fu = $request[0]->cfu_fu;
         $weight = $request[0]->weight;
         $matrix = $request[0]->matrix;
