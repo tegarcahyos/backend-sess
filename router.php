@@ -438,7 +438,7 @@ class Router
                 break;
         }
 
-        // die($result);
+        die($result);
 
         try {
             if ($result == [] || $result == 'Data Kosong') {
