@@ -28,7 +28,7 @@ class Upload
             $file_size = $_FILES['file']['size'];
             $tmp = explode('.', $_FILES['file']['name']);
             $file_ext = strtolower(end($tmp));
-            $file_name_upload = date('d-m-Y h:i:s').'.'.$file_ext;
+            $file_name_upload = date('d_m_Y_h_i_s').'.'.$file_ext;
             $file = $path.$file_name_upload;
         
            
