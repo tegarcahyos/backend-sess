@@ -127,6 +127,7 @@ class Router
             $r->post('/api/index.php/file/upload', 'Upload/upload_file');
             $r->get('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
             $r->get('/api/index.php/upload_file/get', 'Upload/get');
+            $r->get('/api/index.php/upload_file/select_file/{id}', 'Upload/select_id');
 
 
             // --- USER ---
@@ -372,6 +373,7 @@ class Router
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['device_id'], $explodeUri[3]));
                 } else if (
                     $explodeUri[4] == "select_message" ||
+                    $explodeUri[4] == "select_file" ||
                     $explodeUri[4] == "select_group_member" ||
                     $explodeUri[4] == "find_id" ||
                     $explodeUri[4] == "select_group_chat" ||

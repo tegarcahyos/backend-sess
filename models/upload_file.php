@@ -157,4 +157,34 @@ class Upload
 
 
     }
+
+    public function select_id($id, $tablename)
+    {
+        $query = "SELECT * FROM $tablename WHERE id = $id";
+
+        $result = $this->db->execute($query);
+        
+        $num = $result->rowCount();
+
+        if($num>0){
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id'=>$id,
+                    'file_name'=>$file_name
+                );
+                array_push($data_arr,$data_item);
+                }
+                $msg=$data_arr;
+        }else{
+            $msg='0';
+        }
+        return $msg;
+        
+
+
+    }
 }
