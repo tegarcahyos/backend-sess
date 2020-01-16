@@ -166,7 +166,7 @@ class GroupMessage
 
     public function select_user_id($user_id, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE user_id = $user_id ORDER BY id";
+        $query = "SELECT * FROM $tablename WHERE user_id = '$user_id' ORDER BY id";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -218,7 +218,7 @@ class GroupMessage
         $status_removed = $request->status_removed;
 
         $query = "INSERT INTO $tablename (group_id,user_id,user_name,message,create_date,create_time,status_origin,status_read,status_removed)";
-        $query .= "VALUES ($group_id,$user_id,'$user_name','$message','$create_date','$create_time','$status_origin','$status_read','$status_removed') RETURNING * ";
+        $query .= "VALUES ($group_id,'$user_id','$user_name','$message','$create_date','$create_time','$status_origin','$status_read','$status_removed') RETURNING * ";
         // die($query);
 
         $returning_value = $this->db->execute($query);
@@ -274,7 +274,7 @@ class GroupMessage
         $status_read = $request->status_read;
         $status_removed = $request->status_removed;
 
-        $query = "UPDATE  $tablename SET group_id = $group_id, user_id = $user_id, user_name = '$user_name', message = '$message',
+        $query = "UPDATE  $tablename SET group_id = $group_id, user_id = '$user_id', user_name = '$user_name', message = '$message',
                                          create_date = '$create_date',create_time = '$create_time',
                                          status_origin = '$status_origin', status_read = '$status_read', status_removed = '$status_removed'  WHERE id =  $id";
         $this->db->execute($query);
