@@ -111,7 +111,7 @@ class ProgramCharter
         $kpi = json_encode($request[0]->kpi);
         $budget = json_encode($request[0]->budget);
         $main_activities = json_encode($request[0]->main_activities);
-        $key_asks = json_encode($request[0]->key_asks);
+        $key_asks = $request[0]->key_asks;
         $risks = $request[0]->risks;
         $approval = $request[0]->approval;
         $status = $request[0]->status;
