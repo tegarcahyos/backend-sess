@@ -73,6 +73,7 @@ class Upload
 
     public function downloadFile($file)
     {
+        die("sampe");
         $file = basename($_GET['file']);
         $file = '/app/pmo-backend/uploads/' . $file;
 
