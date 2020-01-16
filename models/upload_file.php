@@ -27,18 +27,18 @@ class Upload
             $file_type = $_FILES['file']['type'];
             $file_size = $_FILES['file']['size'];
             $tmp = explode('.', $_FILES['file']['name']);
-            // echo $tmp;
             $file_ext = strtolower(end($tmp));
-            $file = date('d-m-Y h:i:s').'.'.$file_ext;
-            // $file_date = date('d-m-Y h:i:s');
-            // $fileConcat = $file_name.$file_date;
+            $file_name_upload = date('d-m-Y h:i:s').'.'.$file_ext;
+            $file = $path.$file_name_upload;
+        
+           
             if ($file_size > 2097152) {
                 $errors[] = 'File size exceeds limit: ' . $file_name . ' ' . $file_type;
             }
             if (empty($errors)) {
                 move_uploaded_file($file_tmp, $file);
                 //  print_r($file_tmp);
-                $query = "INSERT INTO upload_file (file_name) VALUES ('$file') RETURNING *";
+                $query = "INSERT INTO upload_file (file_name) VALUES ('$file_name_uplaod') RETURNING *";
                 // die($query);
                 $result = $this->db->execute($query);
                 $num = $result->rowCount();
@@ -54,7 +54,9 @@ class Upload
                         // Push to data_arr
 
                         $data_item = array(
+                            'id' => $id,
                             'file_name' => $file_name,
+                            
                         );
 
                         array_push($data_arr, $data_item);
