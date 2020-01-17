@@ -63,7 +63,7 @@ class Upload
             if (empty($errors)) {
                 move_uploaded_file($file_tmp, $file);
                 //  print_r($file_tmp);
-                $query = "INSERT INTO upload_file (file_name) VALUES ('$file_name_upload') RETURNING *";
+                $query = "INSERT INTO upload_file (file_name, type) VALUES ('$file_name_upload','$file_type') RETURNING *";
                 // die($query);
                 $result = $this->db->execute($query);
                 $num = $result->rowCount();
@@ -81,6 +81,7 @@ class Upload
                         $data_item = array(
                             'id' => $id,
                             'file_name' => $file_name,
+                            'type' => $type,
                             
                         );
 
