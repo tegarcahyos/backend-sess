@@ -285,7 +285,7 @@ class Router
             $r->post('/api/index.php/attachment/insert_attachment', 'Attachment/insert');
             $r->get('/api/index.php/attachment/select_all_attachment', 'Attachment/get');
             $r->get('/api/index.php/attachment/select_attachment', 'Attachment/select_id');
-            $r->get('/api/index.php/attachment/select_group_id/{group_id}', 'Attachment/group_id');
+            $r->get('/api/index.php/attachment/select_group_id/{group_id}', 'Attachment/select_group_id');
             $r->get('/api/index.php/attachment/select_group_message_id/{message_id}', 'Attachment/select_group_message_id');
             $r->get('/api/index.php/attachment/update/{id}', 'Attachment/update');
 
