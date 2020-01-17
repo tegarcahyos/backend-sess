@@ -48,6 +48,63 @@ class Unit
         return $msg;
     }
 
+    public function getRootParent($id)
+    {
+        $query = "WITH RECURSIVE parents AS
+        (
+          SELECT
+            id              AS id,
+            0               AS number_of_ancestors,
+            NULL :: TEXT AS parent_id,
+            id              AS root_id
+          FROM unit
+          WHERE
+            parent_id::text IS NOT NULL
+          UNION
+          SELECT
+            child.id                                    AS id,
+            p.number_of_ancestors + 1                   AS ancestry_size,
+            child.parent_id::text                              AS parent_id,
+            coalesce(p.root_id::uuid, child.parent_id::uuid) AS root_id
+          FROM unit child
+            INNER JOIN parents p ON p.id::text = child.parent_id::text
+        )
+        SELECT
+          id,
+          number_of_ancestors,
+          parent_id,
+          root_id
+        FROM parents  where id = '$id' AND number_of_ancestors = (select max(parents.number_of_ancestors) from parents)";
+
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+                $data_item = array(
+                    'id' => $id,
+                    'number_of_ancestors' => $number_of_ancestors,
+                    'parent_id' => $parent_id,
+                    'root_id' => $root_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+
+    }
+
     private $parentArray = [""];
     public function getParentUnitBy($id)
     {
