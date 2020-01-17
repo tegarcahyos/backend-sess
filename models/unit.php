@@ -63,7 +63,7 @@ class Unit
             $row = $result->fetchRow();
             extract($row);
 
-            $nameTemp = $id;
+            $nameTemp = $name;
             // SUNTIK nama array
             array_push($this->parentArray, $nameTemp);
             // Ambil parent id, buat dicari lagi atasnya
