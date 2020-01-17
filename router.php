@@ -22,6 +22,8 @@ include "models/priority_criteria.php";
 include "models/ceo_notes.php";
 include "models/user_detail.php";
 include "models/kpi.php";
+include "models/master_data.php";
+include "models/data_from_master.php";
 include "models/si_target.php";
 include "models/upload_file.php";
 include "login.php";
@@ -135,6 +137,20 @@ class Router
             $r->get('/api/index.php/users/delete/{id}', 'User/delete');
             $r->post('/api/index.php/users/insert', 'User/insert');
             $r->post('/api/index.php/users/update/{id}', 'User/update');
+
+            // --- MASTER DATA ---
+            $r->get('/api/index.php/master_data/get', 'MasterData/get');
+            $r->get('/api/index.php/master_data/find_id/{id}', 'MasterData/findById');
+            $r->get('/api/index.php/master_data/delete/{id}', 'MasterData/delete');
+            $r->post('/api/index.php/master_data/insert', 'MasterData/insert');
+            $r->post('/api/index.php/master_data/update/{id}', 'MasterData/update');
+
+            // --- DATA FROM MASTER ---
+            $r->get('/api/index.php/data_from_master/get', 'DataMaster/get');
+            $r->get('/api/index.php/data_from_master/find_id/{id}', 'DataMaster/findById');
+            $r->get('/api/index.php/data_from_master/delete/{id}', 'DataMaster/delete');
+            $r->post('/api/index.php/data_from_master/insert', 'DataMaster/insert');
+            $r->post('/api/index.php/data_from_master/update/{id}', 'DataMaster/update');
 
             // SI
             $r->get('/api/index.php/strategic_initiative/get', 'StraIn/get');
