@@ -122,13 +122,11 @@ class Router
             //     $passed = $this->check_token($token);
             //     if ($passed == 'true') {
 
-
             //FILES
             $r->post('/api/index.php/file/upload', 'Upload/upload_file');
             $r->get('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
             $r->get('/api/index.php/upload_file/get', 'Upload/get');
             $r->get('/api/index.php/upload_file/select_file/{id}', 'Upload/select_id');
-
 
             // --- USER ---
             $r->get('/api/index.php/users/get', 'User/get');
@@ -237,7 +235,8 @@ class Router
             $r->get('/api/index.php/unit/get', 'Unit/get');
             $r->get('/api/index.php/unit/get_leaf_unit', 'Unit/getLeafUnit');
             $r->get('/api/index.php/unit/find_id/{id}', 'Unit/findById');
-            $r->get('/api/index.php/unit/get_by_parent/{parent_id}', 'Unit/getByParent');
+            $r->get('/api/index.php/unit/get_by_parent_unit_id/{parent_id}', 'Unit/getByParent');
+            $r->get('/api/index.php/unit/get_root_parent/{id}', 'Unit/getRootParent');
             $r->get('/api/index.php/unit/get_by_organization/{org_id}', 'Unit/findByOrgId');
             $r->get('/api/index.php/unit/delete/{id}', 'Unit/delete');
             $r->post('/api/index.php/unit/insert', 'Unit/insert');
@@ -281,7 +280,6 @@ class Router
             $r->get('/api/index.php/attachment/select_group_id/{group_id}', 'Attachment/group_id');
             $r->get('/api/index.php/attachment/select_group_message_id/{message_id}', 'Attachment/select_group_message_id');
             $r->get('/api/index.php/attachment/update/{id}', 'Attachment/update');
-
 
             //GROUP MEMBER
             $r->post('/api/index.php/group_member/insert_group_member', 'GroupMember/insert');
@@ -388,7 +386,8 @@ class Router
                     $explodeUri[4] == "delete_all_get" ||
                     $explodeUri[4] == "delete" ||
                     $explodeUri[4] == "update_id" ||
-                    $explodeUri[4] == "select_id_get"
+                    $explodeUri[4] == "select_id_get" ||
+                    $explodeUri[4] == "get_root_parent"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
                 } else if (
