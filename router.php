@@ -487,7 +487,7 @@ class Router
             if ($result == [] || $result == 'Data Kosong') {
                 $this->msg(http_response_code(204), 204, $result, "gagal", 0);
             } else if ($httpMethod == 'POST') {
-                $this->msg(http_response_code(201), 201, $result, "berhasil", 1);
+                $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             } else if ($httpMethod == 'GET') {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
