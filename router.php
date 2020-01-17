@@ -22,6 +22,7 @@ include "models/priority_criteria.php";
 include "models/ceo_notes.php";
 include "models/user_detail.php";
 include "models/kpi.php";
+include "models/si_target.php";
 include "models/upload_file.php";
 include "login.php";
 if (file_exists('settings.php')) {
@@ -223,6 +224,13 @@ class Router
             $r->get('/api/index.php/kpi/delete/{id}', 'Kpi/delete');
             $r->post('/api/index.php/kpi/insert', 'Kpi/insert');
             $r->post('/api/index.php/kpi/update/{id}', 'Kpi/update');
+
+            // KPI
+            $r->get('/api/index.php/si_target/get', 'SITarget/get');
+            $r->get('/api/index.php/si_target/find_id/{id}', 'SITarget/findById');
+            $r->get('/api/index.php/si_target/delete/{id}', 'SITarget/delete');
+            $r->post('/api/index.php/si_target/insert', 'SITarget/insert');
+            $r->post('/api/index.php/si_target/update/{id}', 'SITarget/update');
 
             // ORGANIZATION
             $r->get('/api/index.php/organization/get', 'Organization/get');
