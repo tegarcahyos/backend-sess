@@ -122,8 +122,13 @@ class Router
             //     $passed = $this->check_token($token);
             //     if ($passed == 'true') {
 
+
+            //FILES
             $r->post('/api/index.php/file/upload', 'Upload/upload_file');
             $r->get('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
+            $r->get('/api/index.php/upload_file/get', 'Upload/get');
+            $r->get('/api/index.php/upload_file/select_file/{id}', 'Upload/select_id');
+
 
             // --- USER ---
             $r->get('/api/index.php/users/get', 'User/get');
@@ -296,6 +301,8 @@ class Router
             $r->post('/api/index.php/group_message/update/{id}', 'GroupMessage/update');
             $r->get('/api/index.php/group_message/status_read/{group_id}', 'GroupMessage/status_read');
 
+            //
+
             //     } else {
             //         return $this->msg(405, 'Token Expired', "gagal", 0);
             //     }
@@ -366,6 +373,7 @@ class Router
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['device_id'], $explodeUri[3]));
                 } else if (
                     $explodeUri[4] == "select_message" ||
+                    $explodeUri[4] == "select_file" ||
                     $explodeUri[4] == "select_group_member" ||
                     $explodeUri[4] == "find_id" ||
                     $explodeUri[4] == "select_group_chat" ||

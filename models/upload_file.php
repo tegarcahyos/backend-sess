@@ -16,6 +16,28 @@ class Upload
 
     public function upload_file()
     {
+        
+            $uuid =sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                // 32 bits for "time_low"
+                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+        
+                // 16 bits for "time_mid"
+                mt_rand( 0, 0xffff ),
+        
+                // // 16 bits for "time_hi_and_version",
+                // // four most significant bits holds version number 4
+                mt_rand( 0, 0x0fff ) | 0x4000,
+        
+                // 16 bits, 8 bits for "clk_seq_hi_res",
+                // 8 bits for "clk_seq_low",
+                // two most significant bits holds zero and one for variant DCE1.1
+                mt_rand( 0, 0x3fff ) | 0x8000,
+        
+                // 48 bits for "node"
+                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+            );
+            // echo $uuid;
+        
         if (isset($_FILES['file'])) {
             $errors = [];
             $path = '/app/pmo-backend/uploads/';
@@ -28,7 +50,7 @@ class Upload
             $file_size = $_FILES['file']['size'];
             $tmp = explode('.', $_FILES['file']['name']);
             $file_ext = strtolower(end($tmp));
-            $file_name_upload = date('d-m-Y h:i:s').'.'.$file_ext;
+            $file_name_upload = $uuid.'.'.$file_ext;
             $file = $path.$file_name_upload;
         
            
@@ -103,6 +125,66 @@ class Upload
                 readfile($file);
             }
         }
+
+    }
+
+    public function get($tablename)
+    {
+        $query = "SELECT * FROM $tablename ORDER BY id ASC";
+
+        $result = $this->db->execute($query);
+        
+        $num = $result->rowCount();
+
+        if($num>0){
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id'=>$id,
+                    'file_name'=>$file_name
+                );
+                array_push($data_arr,$data_item);
+                }
+                $msg=$data_arr;
+        }else{
+            $msg='0';
+        }
+        return $msg;
+        
+
+
+    }
+
+    public function select_id($id, $tablename)
+    {
+        $query = "SELECT * FROM $tablename WHERE id = $id";
+
+        $result = $this->db->execute($query);
+        
+        $num = $result->rowCount();
+
+        if($num>0){
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id'=>$id,
+                    'file_name'=>$file_name
+                );
+                array_push($data_arr,$data_item);
+                }
+                $msg=$data_arr;
+        }else{
+            $msg='0';
+        }
+        return $msg;
+        
+
 
     }
 }

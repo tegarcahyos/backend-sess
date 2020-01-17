@@ -200,7 +200,7 @@ class Attachment
         } else {
             $msg = '0';
         }
-
+        return $msg;
     }
 
     public function update($id, $tablename)
