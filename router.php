@@ -478,6 +478,7 @@ class Router
 
         try {
             if ($result == [] || $result == 'Data Kosong') {
+                header("HTTP/1.0 204 Not Content");
                 $this->msg(204, $result, "gagal", 0);
             } else {
                 $this->msg(200, $result, "berhasil", 1);
