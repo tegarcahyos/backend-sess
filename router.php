@@ -51,7 +51,7 @@ class Router
         return $this->db;
     }
     // MESSAGES
-    public function msg($type = null, $msg, $keterangan, $status)
+    public function msg($header, $type = null, $msg, $keterangan, $status)
     {
         if ($type == 200) {
             $array = array(
@@ -477,11 +477,11 @@ class Router
 
         try {
             if ($result == [] || $result == 'Data Kosong') {
-                $this->msg(http_response_code(204), $result, "gagal", 0);
+                $this->msg(http_response_code(204), 204, $result, "gagal", 0);
             } else if ($httpMethod == 'POST') {
-                $this->msg(http_response_code(201), $result, "berhasil", 1);
+                $this->msg(http_response_code(201), 201, $result, "berhasil", 1);
             } else if ($httpMethod == 'GET') {
-                $this->msg(http_response_code(200), $result, "berhasil", 1);
+                $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
 
         } catch (\Throwable $th) {
