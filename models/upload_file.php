@@ -48,10 +48,13 @@ class Upload
             $file_tmp = $_FILES['file']['tmp_name'];
             $file_type = $_FILES['file']['type'];
             $file_size = $_FILES['file']['size'];
+            // $file_content_type = $_FILES['file']['type'];
             $tmp = explode('.', $_FILES['file']['name']);
             $file_ext = strtolower(end($tmp));
             $file_name_upload = $uuid.'.'.$file_ext;
             $file = $path.$file_name_upload;
+
+            echo $file_type;
         
            
             if ($file_size > 2097152) {
