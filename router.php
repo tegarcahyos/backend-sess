@@ -161,6 +161,13 @@ class Router
             $r->post('/api/index.php/data_from_master/insert', 'DataMaster/insert');
             $r->post('/api/index.php/data_from_master/update/{id}', 'DataMaster/update');
 
+            // --- EXPERT JUDGEMENT ---
+            $r->get('/api/index.php/expert_judgement/get', 'ExpertJudgement/get');
+            $r->get('/api/index.php/expert_judgement/find_id/{id}', 'ExpertJudgement/findById');
+            $r->get('/api/index.php/expert_judgement/delete/{id}', 'ExpertJudgement/delete');
+            $r->post('/api/index.php/expert_judgement/insert', 'ExpertJudgement/insert');
+            $r->post('/api/index.php/expert_judgement/update/{id}', 'ExpertJudgement/update');
+
             // SI
             $r->get('/api/index.php/strategic_initiative/get', 'StraIn/get');
             $r->get('/api/index.php/strategic_initiative/find_id/{id}', 'StraIn/findById');
