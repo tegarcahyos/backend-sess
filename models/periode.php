@@ -1,6 +1,6 @@
 <?php
 
-class StraIn
+class Periode
 {
     public $db;
 
