@@ -250,7 +250,7 @@ class Router
             $r->post('/api/index.php/kpi/insert', 'Kpi/insert');
             $r->post('/api/index.php/kpi/update/{id}', 'Kpi/update');
 
-            // KPI
+            // SI TARGET
             $r->get('/api/index.php/si_target/get', 'SITarget/get');
             $r->get('/api/index.php/si_target/find_id/{id}', 'SITarget/findById');
             $r->get('/api/index.php/si_target/delete/{id}', 'SITarget/delete');

@@ -54,7 +54,7 @@ class Upload
             $file_name_upload = $uuid.'.'.$file_ext;
             $file = $path.$file_name_upload;
 
-            echo $file_type;
+            // echo $file_type;
         
            
             if ($file_size > 2097152) {
