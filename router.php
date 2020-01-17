@@ -24,6 +24,7 @@ include "models/user_detail.php";
 include "models/kpi.php";
 include "models/si_target.php";
 include "models/upload_file.php";
+include "models/periode.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -265,6 +266,9 @@ class Router
             $r->get('/api/index.php/matrix/delete/{id}', 'Matrix/delete');
             $r->post('/api/index.php/matrix/insert', 'Matrix/insert');
             $r->post('/api/index.php/matrix/update/{id}', 'Matrix/update');
+
+            //PERIOD
+            $r->post('/api/index.php/periode/insert', 'Periode/insert');
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
