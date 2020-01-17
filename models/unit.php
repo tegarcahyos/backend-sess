@@ -74,8 +74,8 @@ class Unit
           number_of_ancestors,
           parent_id,
           root_id
-        FROM parents  where id = '$id' AND number_of_ancestors = (select max(parents.number_of_ancestors) from parents)";
-        die($query);
+        FROM parents  where id = '$id' AND number_of_ancestors = (select max(parents.number_of_ancestors) from parents where id = '$id')";
+
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
