@@ -86,10 +86,10 @@ class Attachment
 
     public function select_group_id($group_id, $tablename)
     {
-        $query = "SELECT * FROM  $tablename WHERE group_id = $group_id ORDER BY id ASC";
+        $query = "SELECT * FROM  $tablename WHERE group_id = $group_id ORDER BY id";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
-
+        // die($query);
         if ($num > 0) {
 
             $data_arr = array();

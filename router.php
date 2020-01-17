@@ -26,6 +26,7 @@ include "models/master_data.php";
 include "models/data_from_master.php";
 include "models/si_target.php";
 include "models/upload_file.php";
+include "models/periode.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -282,6 +283,9 @@ class Router
             $r->post('/api/index.php/matrix/insert', 'Matrix/insert');
             $r->post('/api/index.php/matrix/update/{id}', 'Matrix/update');
 
+            //PERIOD
+            $r->post('/api/index.php/periode/insert', 'Periode/insert');
+
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
             $r->get('/api/index.php/group_chat/select_all_group_chat', 'GroupChat/get');
@@ -301,7 +305,7 @@ class Router
             $r->post('/api/index.php/attachment/insert_attachment', 'Attachment/insert');
             $r->get('/api/index.php/attachment/select_all_attachment', 'Attachment/get');
             $r->get('/api/index.php/attachment/select_attachment', 'Attachment/select_id');
-            $r->get('/api/index.php/attachment/select_group_id/{group_id}', 'Attachment/group_id');
+            $r->get('/api/index.php/attachment/select_group_id/{group_id}', 'Attachment/select_group_id');
             $r->get('/api/index.php/attachment/select_group_message_id/{message_id}', 'Attachment/select_group_message_id');
             $r->get('/api/index.php/attachment/update/{id}', 'Attachment/update');
 
