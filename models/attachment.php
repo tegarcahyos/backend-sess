@@ -89,7 +89,7 @@ class Attachment
         $query = "SELECT * FROM  $tablename WHERE group_id = $group_id ORDER BY id";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
-        die($query);
+        // die($query);
         if ($num > 0) {
 
             $data_arr = array();
