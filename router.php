@@ -478,8 +478,7 @@ class Router
 
         try {
             if ($result == [] || $result == 'Data Kosong') {
-                http_response_code(204);
-                $this->msg(204, $result, "gagal", 0);
+                $this->msg(http_response_code(204), $result, "gagal", 0);
             } else {
                 $this->msg(200, $result, "berhasil", 1);
             }
