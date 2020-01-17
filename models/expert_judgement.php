@@ -72,7 +72,7 @@ class ExpertJudgement
         $request = json_decode($data);
 
         $user_id = $request[0]->user_id;
-        $program_charter = $request[0]->program_charter;
+        $program_charter = json_encode($request[0]->program_charter);
 
         $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter) ';
         $query .= "VALUES ('$user_id', '$program_charter') RETURNING *";
@@ -116,7 +116,7 @@ class ExpertJudgement
 
         $request = json_decode($data);
         $user_id = $request[0]->user_id;
-        $program_charter = $request[0]->program_charter;
+        $program_charter = json_encode($request[0]->program_charter);
 
         $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter' WHERE id = '$id' RETURNING *";
 
