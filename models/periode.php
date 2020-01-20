@@ -111,7 +111,7 @@ class Periode
         return $msg;
     }
 
-    public function findById($id, $tablename)
+    public function select_id($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
@@ -126,7 +126,7 @@ class Periode
                 'id' => $id,
                 'name' => $name,
                 'code' => $code,
-                'parent_id' => $parent_id,
+                'status_active' => $status_active,
             );
             return $data_item;
         }
