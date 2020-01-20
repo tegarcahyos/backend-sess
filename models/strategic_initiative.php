@@ -58,17 +58,12 @@ class StraIn
             $result = $this->db->execute($query);
             // die(print_r($result->fetchRow()));
             $row = $result->fetchRow();
-            // die(print_r($row));
             extract($row);
+            die(print_r($row));
 
-            $data_item = array(
-                'id' => $id,
-                'name' => $name,
-                'code' => $code,
-                'parent_id' => $parent_id,
-            );
+            $nameTemp = $name;
             // SUNTIK nama array
-            array_push($this->parentArray, $data_item);
+            array_push($this->parentArray, $nameTemp);
             // Ambil parent id, buat dicari lagi atasnya
             $idParentTemp = $parent_id;
             // Cari atasnya
