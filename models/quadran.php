@@ -76,7 +76,7 @@ class Quadran
 
         $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter) ';
         $query .= "VALUES ('$user_id', '$program_charter') RETURNING *";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
