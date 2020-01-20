@@ -114,7 +114,7 @@ class CeoNotes
         //
         $request = json_decode($data);
         // die(print_r($request));
-        $data = $request[0]->data;
+        $data = json_encode($request[0]->data);
 
         $query = 'INSERT INTO ' . $tablename . ' (data) ';
         $query .= "VALUES ('$data') RETURNING *";
