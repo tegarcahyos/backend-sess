@@ -27,6 +27,7 @@ include "models/data_from_master.php";
 include "models/si_target.php";
 include "models/upload_file.php";
 include "models/expert_judgement.php";
+include "models/quadran.php";
 include "models/periode.php";
 include "login.php";
 if (file_exists('settings.php')) {
@@ -167,6 +168,13 @@ class Router
             $r->get('/api/index.php/expert_judgement/delete/{id}', 'ExpertJudgement/delete');
             $r->post('/api/index.php/expert_judgement/insert', 'ExpertJudgement/insert');
             $r->post('/api/index.php/expert_judgement/update/{id}', 'ExpertJudgement/update');
+
+            // --- QUADRAn ---
+            $r->get('/api/index.php/quadran/get', 'Quadran/get');
+            $r->get('/api/index.php/quadran/find_id/{id}', 'Quadran/findById');
+            $r->get('/api/index.php/quadran/delete/{id}', 'Quadran/delete');
+            $r->post('/api/index.php/quadran/insert', 'Quadran/insert');
+            $r->post('/api/index.php/quadran/update/{id}', 'Quadran/update');
 
             // SI
             $r->get('/api/index.php/strategic_initiative/get', 'StraIn/get');
@@ -354,7 +362,6 @@ class Router
 
         });
 
-
         if (isset($_SERVER['HTTP_ORIGIN'])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
             // you want to allow, and if so:
@@ -367,13 +374,12 @@ class Router
                 // may also be using PUT, PATCH, HEAD etc
                 header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
             }
-        
+
             if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
                 header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
             }
             exit(0);
         }
-
 
         // Fetch method and URI from somewhere
         $httpMethod = $_SERVER['REQUEST_METHOD'];
