@@ -118,7 +118,7 @@ class CeoNotes
 
         $query = 'INSERT INTO ' . $tablename . ' (data) ';
         $query .= "VALUES ('$data') RETURNING *";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
