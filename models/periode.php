@@ -18,7 +18,7 @@ class Periode
         // die($query);
         $result = $this->db->execute($query);
         echo $result;
-        die($query);
+        // die($query);
         $num = $result->rowCount();
 
         if ($num > 0) {
