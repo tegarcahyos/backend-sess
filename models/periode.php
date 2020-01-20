@@ -15,9 +15,10 @@ class Periode
            *
           FROM
              $tablename order by created_at asc";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
-
+        echo $result;
+        die($query);
         $num = $result->rowCount();
 
         if ($num > 0) {
