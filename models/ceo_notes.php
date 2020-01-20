@@ -156,7 +156,7 @@ class CeoNotes
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $data = $request[0]->data;
+        $data = json_encode($request[0]->data);
 
         $query = "UPDATE $tablename SET data = '$data' WHERE id = '$id' RETURNING *";
 
