@@ -15,12 +15,10 @@ class Periode
            *
           FROM
              $tablename order by id asc";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
-        echo $result;
         // die($query);
         $num = $result->rowCount();
-        echo $num;
 
         if ($num > 0) {
 
