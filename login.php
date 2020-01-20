@@ -107,10 +107,6 @@ class Login
 
     public function apiFactory()
     {
-        $data = json_decode(file_get_contents("php://input"));
-        $username = $data->username;
-        $password = $data->password;
-        die($username);
         $url = 'https://apifactory.telkom.co.id:8243/hcm/auth/v1/token';
         $data = array('username' => $username, 'password' => $password);
 

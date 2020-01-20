@@ -17,10 +17,8 @@ class Periode
              $tablename order by id asc";
         // die($query);
         $result = $this->db->execute($query);
-        echo $result;
         // die($query);
         $num = $result->rowCount();
-        echo $num;
 
         if ($num > 0) {
 
@@ -183,7 +181,6 @@ class Periode
         $name = $request[0]->name;
         $code = $request[0]->code;
         $status_active = $request[0]->status_active;
-
 
         $query = "INSERT INTO $tablename (name, code, status_active)";
         $query .= "VALUES ('$name', '$code', '$status_active')";
