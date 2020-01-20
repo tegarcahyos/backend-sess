@@ -214,7 +214,7 @@ class Attachment
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-
+        die(print_r($request));
         $group_id = $request->group_id;
         $group_message_id = $request->group_message_id;
         $file = $request->file;
@@ -226,7 +226,7 @@ class Attachment
                                          upload_date = '$upload_date',upload_time = '$upload_time',
                                          removed_status = '$removed_status' WHERE id= $id ";
 
-        die($query);
+        // die($query);
         $this->db->execute($query);
         $select_query = $this->select_id($id, $tablename);
 
