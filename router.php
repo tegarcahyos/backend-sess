@@ -22,8 +22,11 @@ include "models/priority_criteria.php";
 include "models/ceo_notes.php";
 include "models/user_detail.php";
 include "models/kpi.php";
+include "models/master_data.php";
+include "models/data_from_master.php";
 include "models/si_target.php";
 include "models/upload_file.php";
+include "models/expert_judgement.php";
 include "models/periode.php";
 include "login.php";
 if (file_exists('settings.php')) {
@@ -49,9 +52,17 @@ class Router
         return $this->db;
     }
     // MESSAGES
-    public function msg($type = null, $msg, $keterangan, $status)
+    public function msg($header, $type = null, $msg, $keterangan, $status)
     {
         if ($type == 200) {
+            $array = array(
+                'status' => $status,
+                'type' => $type,
+                'keterangan' => $keterangan . '',
+                'data' => $msg,
+            );
+            echo json_encode($array);
+        } else if ($type == 201) {
             $array = array(
                 'status' => $status,
                 'type' => $type,
@@ -117,7 +128,7 @@ class Router
 
             // --- LOGIN ---
             $r->post('/api/index.php/login', 'Login/authenticate');
-            $r->post('/api/index.php/login_chat', 'LoginChat/authenticate');
+            $r->post('/api/index.php/loginApiFactory', 'Login/apiFactory');
 
             // --- CHECK TOKEN ---
             // if (!empty($token)) {
@@ -136,6 +147,27 @@ class Router
             $r->get('/api/index.php/users/delete/{id}', 'User/delete');
             $r->post('/api/index.php/users/insert', 'User/insert');
             $r->post('/api/index.php/users/update/{id}', 'User/update');
+
+            // --- MASTER DATA ---
+            $r->get('/api/index.php/master_data/get', 'MasterData/get');
+            $r->get('/api/index.php/master_data/find_id/{id}', 'MasterData/findById');
+            $r->get('/api/index.php/master_data/delete/{id}', 'MasterData/delete');
+            $r->post('/api/index.php/master_data/insert', 'MasterData/insert');
+            $r->post('/api/index.php/master_data/update/{id}', 'MasterData/update');
+
+            // --- DATA FROM MASTER ---
+            $r->get('/api/index.php/data_from_master/get', 'DataMaster/get');
+            $r->get('/api/index.php/data_from_master/find_id/{id}', 'DataMaster/findById');
+            $r->get('/api/index.php/data_from_master/delete/{id}', 'DataMaster/delete');
+            $r->post('/api/index.php/data_from_master/insert', 'DataMaster/insert');
+            $r->post('/api/index.php/data_from_master/update/{id}', 'DataMaster/update');
+
+            // --- EXPERT JUDGEMENT ---
+            $r->get('/api/index.php/expert_judgement/get', 'ExpertJudgement/get');
+            $r->get('/api/index.php/expert_judgement/find_id/{id}', 'ExpertJudgement/findById');
+            $r->get('/api/index.php/expert_judgement/delete/{id}', 'ExpertJudgement/delete');
+            $r->post('/api/index.php/expert_judgement/insert', 'ExpertJudgement/insert');
+            $r->post('/api/index.php/expert_judgement/update/{id}', 'ExpertJudgement/update');
 
             // SI
             $r->get('/api/index.php/strategic_initiative/get', 'StraIn/get');
@@ -226,7 +258,7 @@ class Router
             $r->post('/api/index.php/kpi/insert', 'Kpi/insert');
             $r->post('/api/index.php/kpi/update/{id}', 'Kpi/update');
 
-            // KPI
+            // SI TARGET
             $r->get('/api/index.php/si_target/get', 'SITarget/get');
             $r->get('/api/index.php/si_target/find_id/{id}', 'SITarget/findById');
             $r->get('/api/index.php/si_target/delete/{id}', 'SITarget/delete');
@@ -339,7 +371,6 @@ class Router
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:
                 return header("HTTP/1.0 404 Not Found");
-                // return $this->msg(404, "", "Route URL Not Found", 404);
                 // ... 404 Not Found
                 break;
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
@@ -356,8 +387,11 @@ class Router
                 if ($explodeUri[3] == 'login') {
                     $result = call_user_func_array(array(new $class($connection), $method), array('users'));
 
-                } else if ($explodeUri[4] == "select_group_message_id") {
+                } else if (
+                    $explodeUri[3] == "loginApiFactory") {
+                    $result = call_user_func_array(array(new $class($connection), $method));
 
+                } else if ($explodeUri[4] == "select_group_message_id") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[3]));
 
                 } else if ($explodeUri[4] == "select_group_id" ||
@@ -463,9 +497,11 @@ class Router
 
         try {
             if ($result == [] || $result == 'Data Kosong') {
-                $this->msg(204, $result, "gagal", 0);
-            } else {
-                $this->msg(200, $result, "berhasil", 1);
+                $this->msg(http_response_code(204), 204, $result, "gagal", 0);
+            } else if ($httpMethod == 'POST') {
+                $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
+            } else if ($httpMethod == 'GET') {
+                $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
 
         } catch (\Throwable $th) {

@@ -1,6 +1,6 @@
 <?php
 
-class SITarget
+class MasterData
 {
     public $db;
 
@@ -26,9 +26,7 @@ class SITarget
 
                 $data_item = array(
                     'id' => $id,
-                    'si_id' => $si_id,
-                    'kpi_id' => $kpi_id,
-                    'target' => $target,
+                    'name' => $name,
                 );
 
                 array_push($data_arr, $data_item);
@@ -57,9 +55,7 @@ class SITarget
 
             $data_item = array(
                 'id' => $id,
-                'si_id' => $si_id,
-                'kpi_id' => $kpi_id,
-                'target' => $target,
+                'name' => $name,
             );
 
             $msg = $data_item;
@@ -73,12 +69,10 @@ class SITarget
         //
         $request = json_decode($data);
 
-        $si_id = $request[0]->si_id;
-        $kpi_id = $request[0]->kpi_id;
-        $target = $request[0]->target;
+        $name = $request[0]->name;
 
-        $query = 'INSERT INTO ' . $tablename . ' (si_id, kpi_id, target) ';
-        $query .= "VALUES ('$si_id','$kpi_id', '$target') RETURNING *";
+        $query = 'INSERT INTO ' . $tablename . ' (name) ';
+        $query .= "VALUES ('$name') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -95,9 +89,7 @@ class SITarget
 
                 $data_item = array(
                     'id' => $id,
-                    'si_id' => $si_id,
-                    'kpi_id' => $kpi_id,
-                    'target' => $target,
+                    'name' => $name,
                 );
 
                 array_push($data_arr, $data_item);
@@ -119,11 +111,9 @@ class SITarget
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $si_id = $request[0]->si_id;
-        $kpi_id = $request[0]->kpi_id;
-        $target = $request[0]->target;
+        $name = $request[0]->name;
 
-        $query = "UPDATE $tablename SET si_id = '$si_id', kpi_id = '$kpi_id',target = '$target' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET name = '$name' WHERE id = '$id' RETURNING *";
 
         // die($query);
 
@@ -142,9 +132,7 @@ class SITarget
 
                 $data_item = array(
                     'id' => $id,
-                    'si_id' => $si_id,
-                    'kpi_id' => $kpi_id,
-                    'target' => $target,
+                    'name' => $name
                 );
 
                 array_push($data_arr, $data_item);

@@ -1,6 +1,6 @@
 <?php
 
-class SITarget
+class ExpertJudgement
 {
     public $db;
 
@@ -26,9 +26,8 @@ class SITarget
 
                 $data_item = array(
                     'id' => $id,
-                    'si_id' => $si_id,
-                    'kpi_id' => $kpi_id,
-                    'target' => $target,
+                    'user_id' => $user_id,
+                    'program_charter' => $program_charter,
                 );
 
                 array_push($data_arr, $data_item);
@@ -57,9 +56,8 @@ class SITarget
 
             $data_item = array(
                 'id' => $id,
-                'si_id' => $si_id,
-                'kpi_id' => $kpi_id,
-                'target' => $target,
+                'user_id' => $user_id,
+                'program_charter' => $program_charter,
             );
 
             $msg = $data_item;
@@ -73,12 +71,11 @@ class SITarget
         //
         $request = json_decode($data);
 
-        $si_id = $request[0]->si_id;
-        $kpi_id = $request[0]->kpi_id;
-        $target = $request[0]->target;
+        $user_id = $request[0]->user_id;
+        $program_charter = json_encode($request[0]->program_charter);
 
-        $query = 'INSERT INTO ' . $tablename . ' (si_id, kpi_id, target) ';
-        $query .= "VALUES ('$si_id','$kpi_id', '$target') RETURNING *";
+        $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter) ';
+        $query .= "VALUES ('$user_id', '$program_charter') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -95,9 +92,8 @@ class SITarget
 
                 $data_item = array(
                     'id' => $id,
-                    'si_id' => $si_id,
-                    'kpi_id' => $kpi_id,
-                    'target' => $target,
+                    'user_id' => $user_id,
+                    'program_charter' => $program_charter,
                 );
 
                 array_push($data_arr, $data_item);
@@ -119,11 +115,10 @@ class SITarget
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $si_id = $request[0]->si_id;
-        $kpi_id = $request[0]->kpi_id;
-        $target = $request[0]->target;
+        $user_id = $request[0]->user_id;
+        $program_charter = json_encode($request[0]->program_charter);
 
-        $query = "UPDATE $tablename SET si_id = '$si_id', kpi_id = '$kpi_id',target = '$target' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter' WHERE id = '$id' RETURNING *";
 
         // die($query);
 
@@ -142,9 +137,8 @@ class SITarget
 
                 $data_item = array(
                     'id' => $id,
-                    'si_id' => $si_id,
-                    'kpi_id' => $kpi_id,
-                    'target' => $target,
+                    'user_id' => $user_id,
+                    'program_charter' => $program_charter,
                 );
 
                 array_push($data_arr, $data_item);
