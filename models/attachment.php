@@ -30,6 +30,7 @@ class Attachment
                 extract($row);
 
                 $data_item = array(
+                    'id'=> $id,
                     'group_id' => $group_id,
                     'group_message_id' => $group_message_id,
                     'file' => $file,
@@ -64,6 +65,7 @@ class Attachment
                 extract($row);
 
                 $data_item = array(
+                    'id'=> $id,
                     'group_id' => $group_id,
                     'group_message_id' => $group_message_id,
                     'file' => $file,
@@ -98,6 +100,7 @@ class Attachment
                 extract($row);
 
                 $data_item = array(
+                    'id'=> $id,
                     'group_id' => $group_id,
                     'group_message_id' => $group_message_id,
                     'file' => $file,
@@ -132,6 +135,7 @@ class Attachment
                 extract($row);
 
                 $data_item = array(
+                    'id'=> $id,
                     'group_id' => $group_id,
                     'group_message_id' => $group_message_id,
                     'file' => $file,
@@ -184,6 +188,7 @@ class Attachment
                 extract($row);
 
                 $data_item = array(
+                    'id'=> $id,
                     'group_id' => $group_id,
                     'group_message_id' => $group_message_id,
                     'file' => $file,
