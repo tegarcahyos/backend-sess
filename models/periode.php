@@ -20,6 +20,7 @@ class Periode
         echo $result;
         // die($query);
         $num = $result->rowCount();
+        echo $num;
 
         if ($num > 0) {
 
