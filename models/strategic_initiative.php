@@ -48,7 +48,7 @@ class StraIn
     public function getParentSIBy($id)
     {
         // Jika parent
-        if ($id == '') {
+        if ($id == '0') {
             // is root
         } else {
             // bukan root
