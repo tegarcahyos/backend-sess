@@ -72,7 +72,7 @@ class Quadran
         $request = json_decode($data);
 
         $user_id = $request[0]->user_id;
-        $program_charter = json_encode($request[0]->program_charter);
+        $program_charter = $request[0]->program_charter;
 
         $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter) ';
         $query .= "VALUES ('$user_id', '$program_charter') RETURNING *";
