@@ -54,7 +54,7 @@ class Unit
            *
           FROM
              $tablename WHERE parent_id = '0'";
-
+        die($query);
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
