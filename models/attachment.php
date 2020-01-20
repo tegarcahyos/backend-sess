@@ -214,7 +214,6 @@ class Attachment
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die(print_r($request));
         $group_id = $request->group_id;
         $group_message_id = $request->group_message_id;
         $file = $request->file;
