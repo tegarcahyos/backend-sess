@@ -206,9 +206,9 @@ class Periode
         $request = json_decode($data);
         $name = $request[0]->name;
         $code = $request[0]->code;
-        $parent_id = $request[0]->parent_id;
+        $status_active = $request[0]->status_active;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', parent_id = '$parent_id' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
