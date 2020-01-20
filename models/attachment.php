@@ -226,6 +226,7 @@ class Attachment
                                          upload_date = '$upload_date',upload_time = '$upload_time',
                                          removed_status = '$removed_status' WHERE id= $id ";
 
+        die($query);
         $this->db->execute($query);
         $select_query = $this->select_id($id, $tablename);
 
