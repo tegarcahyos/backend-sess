@@ -56,8 +56,9 @@ class StraIn
             $query = "SELECT * FROM strategic_initiative WHERE id = '$id'";
             //
             $result = $this->db->execute($query);
-            die(print_r($result->fetchRow()));
+            // die(print_r($result->fetchRow()));
             $row = $result->fetchRow();
+            die(print_r($row));
             extract($row);
 
             $nameTemp = $name;
