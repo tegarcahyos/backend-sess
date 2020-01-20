@@ -128,7 +128,7 @@ class Router
 
             // --- LOGIN ---
             $r->post('/api/index.php/login', 'Login/authenticate');
-            $r->post('/api/index.php/login_chat', 'LoginChat/authenticate');
+            $r->post('/api/index.php/loginApiFactory', 'Login/apiFactory');
 
             // --- CHECK TOKEN ---
             // if (!empty($token)) {

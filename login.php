@@ -5,6 +5,8 @@ use \Firebase\JWT\JWT;
 class Login
 {
     public $db;
+    private $username;
+    private $password;
 
     public function __construct($db)
     {
@@ -15,8 +17,8 @@ class Login
     {
         $data = json_decode(file_get_contents("php://input"));
 
-        $username = $data->username;
-        $password = $data->password;
+        $this->username = $data->username;
+        $this->password = $data->password;
 
         $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
         // die($query);
@@ -103,5 +105,25 @@ class Login
             $msg = array("message" => 'User Tidak Ditemukan', "code" => 400);
         }
         return $msg;
+    }
+
+    public function apiFactory()
+    {
+        $url = 'https://apifactory.telkom.co.id:8243/hcm/auth/v1/token ';
+        $data = array('username' => $this->username, 'password' => $this->password);
+
+        // use key 'http' even if you send the request to https://...
+        $options = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query($data),
+            ),
+        );
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        if ($result === false) { /* Handle error */}
+
+        die(print_r($result));
     }
 }
