@@ -14,10 +14,13 @@ class Periode
         $query = "SELECT
            *
           FROM
-             $tablename order by created_at asc";
-
+             $tablename order by id asc";
+        // die($query);
         $result = $this->db->execute($query);
+        echo $result;
+        // die($query);
         $num = $result->rowCount();
+        echo $num;
 
         if ($num > 0) {
 
