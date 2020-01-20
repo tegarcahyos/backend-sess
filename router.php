@@ -450,6 +450,7 @@ class Router
                     $explodeUri[4] == "select_file" ||
                     $explodeUri[4] == "select_group_member" ||
                     $explodeUri[4] == "select_attachment" ||
+                    $explodeUri[4] == "select" ||
                     $explodeUri[4] == "find_id" ||
                     $explodeUri[4] == "select_group_chat" ||
                     $explodeUri[4] == "get_layout" ||
