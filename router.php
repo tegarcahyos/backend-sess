@@ -129,7 +129,6 @@ class Router
             // --- LOGIN ---
             $r->post('/api/index.php/login', 'Login/authenticate');
             $r->post('/api/index.php/loginApiFactory', 'Login/apiFactory');
-
             // --- CHECK TOKEN ---
             // if (!empty($token)) {
             //     $passed = $this->check_token($token);
@@ -277,7 +276,6 @@ class Router
             $r->get('/api/index.php/unit/get_leaf_unit', 'Unit/getLeafUnit');
             $r->get('/api/index.php/unit/find_id/{id}', 'Unit/findById');
             $r->get('/api/index.php/unit/get_by_parent_unit_id/{parent_id}', 'Unit/getByParent');
-            $r->get('/api/index.php/unit/get_all_parent', 'Unit/getAllParent');
             $r->get('/api/index.php/unit/get_root_parent/{id}', 'Unit/getRootParent');
             $r->get('/api/index.php/unit/get_by_organization/{org_id}', 'Unit/findByOrgId');
             $r->get('/api/index.php/unit/delete/{id}', 'Unit/delete');
@@ -356,6 +354,27 @@ class Router
             // }
 
         });
+
+
+        if (isset($_SERVER['HTTP_ORIGIN'])) {
+            // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
+            // you want to allow, and if so:
+            header('Access-Control-Allow-Origin: *');
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Max-Age: 1000');
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
+                // may also be using PUT, PATCH, HEAD etc
+                header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+            }
+        
+            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+                header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
+            }
+            exit(0);
+        }
+
 
         // Fetch method and URI from somewhere
         $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -503,9 +522,7 @@ class Router
         try {
             if ($result == [] || $result == 'Data Kosong') {
                 $this->msg(http_response_code(404), 404, $result, "gagal", 0);
-            } else if ($httpMethod == 'POST') {
-                $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
-            } else if ($httpMethod == 'GET') {
+            } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
 
