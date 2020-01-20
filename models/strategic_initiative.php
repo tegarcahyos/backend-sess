@@ -64,7 +64,7 @@ class StraIn
             // SUNTIK nama array
             array_push($this->parentArray, $nameTemp);
             // Ambil parent id, buat dicari lagi atasnya
-            $idParentTemp = $parent_id;
+            $idParentTemp = $row['parent_id'];
             // Cari atasnya
             $this->getParentSIBy($idParentTemp);
         }
