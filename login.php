@@ -110,8 +110,8 @@ class Login
         $data = json_decode(file_get_contents("php://input"));
         $username = $data->username;
         $password = $data->password;
+        die($username);
         $url = 'https://apifactory.telkom.co.id:8243/hcm/auth/v1/token';
-        die($url);
         $data = array('username' => $username, 'password' => $password);
 
         // use key 'http' even if you send the request to https://...
