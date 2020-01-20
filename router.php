@@ -303,6 +303,7 @@ class Router
             //PERIOD
             $r->post('/api/index.php/periode/insert', 'Periode/insert');
             $r->get('/api/index.php/periode/get', 'Periode/get');
+            $r->get('/api/index.php/periode/delete/{id}','Periode/delete');
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
@@ -325,7 +326,7 @@ class Router
             $r->get('/api/index.php/attachment/select_attachment/{id}', 'Attachment/select_id');
             $r->get('/api/index.php/attachment/select_group_id/{group_id}', 'Attachment/select_group_id');
             $r->get('/api/index.php/attachment/select_group_message_id/{message_id}', 'Attachment/select_group_message_id');
-            $r->get('/api/index.php/attachment/update/{id}', 'Attachment/update');
+            $r->post('api/index.php/attachment/update/{id}', 'Attachment/update');
 
             //GROUP MEMBER
             $r->post('/api/index.php/group_member/insert_group_member', 'GroupMember/insert');
