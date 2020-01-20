@@ -78,7 +78,7 @@ class SITarget
         $target = $request[0]->target;
 
         $query = 'INSERT INTO ' . $tablename . ' (si_id, kpi_id, target) ';
-        $query .= "VALUES ('$si_id','$unit_id', '$target') RETURNING *";
+        $query .= "VALUES ('$si_id','$kpi_id', '$target') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
