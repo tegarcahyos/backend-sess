@@ -59,7 +59,7 @@ class StraIn
             // die(print_r($result->fetchRow()));
             $row = $result->fetchRow();
             extract($row);
-            die(print_r($row));
+            die(print_r($row['name']));
 
             $nameTemp = $name;
             // SUNTIK nama array
