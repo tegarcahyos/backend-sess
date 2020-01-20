@@ -322,7 +322,7 @@ class Router
             //ATTACHMENT
             $r->post('/api/index.php/attachment/insert_attachment', 'Attachment/insert');
             $r->get('/api/index.php/attachment/select_all_attachment', 'Attachment/get');
-            $r->get('/api/index.php/attachment/select_attachment', 'Attachment/select_id');
+            $r->get('/api/index.php/attachment/select_attachment/{id}', 'Attachment/select_id');
             $r->get('/api/index.php/attachment/select_group_id/{group_id}', 'Attachment/select_group_id');
             $r->get('/api/index.php/attachment/select_group_message_id/{message_id}', 'Attachment/select_group_message_id');
             $r->get('/api/index.php/attachment/update/{id}', 'Attachment/update');
@@ -421,6 +421,7 @@ class Router
                     $explodeUri[4] == "select_message" ||
                     $explodeUri[4] == "select_file" ||
                     $explodeUri[4] == "select_group_member" ||
+                    $explodeUri[4] == "select_attachment" ||
                     $explodeUri[4] == "find_id" ||
                     $explodeUri[4] == "select_group_chat" ||
                     $explodeUri[4] == "get_layout" ||
