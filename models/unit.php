@@ -48,7 +48,7 @@ class Unit
         return $msg;
     }
 
-    public function getAllParent()
+    public function getAllParent($tablename)
     {
         $query = "SELECT
            *
