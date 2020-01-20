@@ -311,7 +311,7 @@ class Router
             $r->get('/api/index.php/periode/get', 'Periode/get');
             $r->get('/api/index.php/periode/delete/{id}','Periode/delete');
             $r->get('/api/index.php/periode/select/{id}','Periode/select_id');
-            $r->post('/api/index.php/periode/update/{id}','Periode/select_id');
+            $r->post('/api/index.php/periode/update/{id}','Periode/update');
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
@@ -334,7 +334,7 @@ class Router
             $r->get('/api/index.php/attachment/select_attachment/{id}', 'Attachment/select_id');
             $r->get('/api/index.php/attachment/select_group_id/{group_id}', 'Attachment/select_group_id');
             $r->get('/api/index.php/attachment/select_group_message_id/{message_id}', 'Attachment/select_group_message_id');
-            $r->post('api/index.php/attachment/update/{id}', 'Attachment/update');
+            $r->post('/api/index.php/attachment/update/{id}', 'Attachment/update');
 
             //GROUP MEMBER
             $r->post('/api/index.php/group_member/insert_group_member', 'GroupMember/insert');
@@ -450,6 +450,7 @@ class Router
                     $explodeUri[4] == "select_file" ||
                     $explodeUri[4] == "select_group_member" ||
                     $explodeUri[4] == "select_attachment" ||
+                    $explodeUri[4] == "select" ||
                     $explodeUri[4] == "find_id" ||
                     $explodeUri[4] == "select_group_chat" ||
                     $explodeUri[4] == "get_layout" ||
