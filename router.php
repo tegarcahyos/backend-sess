@@ -277,6 +277,7 @@ class Router
             $r->get('/api/index.php/unit/get_leaf_unit', 'Unit/getLeafUnit');
             $r->get('/api/index.php/unit/find_id/{id}', 'Unit/findById');
             $r->get('/api/index.php/unit/get_by_parent_unit_id/{parent_id}', 'Unit/getByParent');
+            $r->get('/api/index.php/unit/get_all_parent', 'Unit/getAllParent');
             $r->get('/api/index.php/unit/get_root_parent/{id}', 'Unit/getRootParent');
             $r->get('/api/index.php/unit/get_by_organization/{org_id}', 'Unit/findByOrgId');
             $r->get('/api/index.php/unit/delete/{id}', 'Unit/delete');
@@ -302,7 +303,6 @@ class Router
             //PERIOD
             $r->post('/api/index.php/periode/insert', 'Periode/insert');
             $r->get('/api/index.php/periode/get', 'Periode/get');
-            
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
