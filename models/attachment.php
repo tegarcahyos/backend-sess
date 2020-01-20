@@ -230,7 +230,7 @@ class Attachment
         $select_query = $this->select_id($id, $tablename);
 
         $data_arr = array();
-        
+
         array_push($data_arr, $select_query);
 
         $msg = $data_arr;
