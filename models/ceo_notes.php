@@ -113,12 +113,12 @@ class CeoNotes
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-
+        die(print_r($request));
         $data = $request[0]->data;
 
         $query = 'INSERT INTO ' . $tablename . ' (data) ';
         $query .= "VALUES ('$data') RETURNING *";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
