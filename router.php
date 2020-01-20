@@ -482,7 +482,8 @@ class Router
                     $explodeUri[4] == "get_leaf_unit" ||
                     $explodeUri[4] == "get_leaf" ||
                     $explodeUri[4] == "insert_object" ||
-                    $explodeUri[4] == "select_all_get"
+                    $explodeUri[4] == "select_all_get" ||
+                    $explodeUri[4] == "get_all_parent"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
                 } else if ($explodeUri[4] == "select_where_get") {
