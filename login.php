@@ -5,8 +5,6 @@ use \Firebase\JWT\JWT;
 class Login
 {
     public $db;
-    private $username;
-    private $password;
 
     public function __construct($db)
     {
@@ -17,8 +15,8 @@ class Login
     {
         $data = json_decode(file_get_contents("php://input"));
 
-        $this->username = $data->username;
-        $this->password = $data->password;
+        $username = $data->username;
+        $password = $data->password;
 
         $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
         // die($query);
@@ -109,9 +107,12 @@ class Login
 
     public function apiFactory()
     {
+        $data = json_decode(file_get_contents("php://input"));
+        $username = $data->username;
+        $password = $data->password;
         $url = 'https://apifactory.telkom.co.id:8243/hcm/auth/v1/token';
         die($url);
-        $data = array('username' => $this->username, 'password' => $this->password);
+        $data = array('username' => $username, 'password' => $password);
 
         // use key 'http' even if you send the request to https://...
         $options = array(
