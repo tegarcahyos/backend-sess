@@ -269,6 +269,7 @@ class Router
 
             //PERIOD
             $r->post('/api/index.php/periode/insert', 'Periode/insert');
+            $r->get('.api/index.php/periode/get', 'Periode/get');
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
