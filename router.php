@@ -301,7 +301,7 @@ class Router
 
             //PERIOD
             $r->post('/api/index.php/periode/insert', 'Periode/insert');
-            $r->get('/api/index.php/periode/get', 'Periode/get');
+            $r->get('/api/index.php/periode/select_all', 'Periode/get');
             // $r->get('/api/index.php/periode/get', 'Periode/get');
 
             //GROUP CHAT
@@ -467,6 +467,7 @@ class Router
                     $explodeUri[4] == "insert_attachment" ||
                     $explodeUri[4] == "select_all_attachment" ||
                     $explodeUri[4] == "select_all_device" ||
+                    $explodeUri[4] == "select_all" ||
                     $explodeUri[4] == "insert_user_device" ||
                     $explodeUri[4] == "select_all_group_chat" ||
                     $explodeUri[4] == "insert_group_chat" ||
