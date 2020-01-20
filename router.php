@@ -115,6 +115,7 @@ class Router
     // REQUEST
     public function request()
     {
+        header("Access-Control-Allow-Origin: *");
 
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
 
