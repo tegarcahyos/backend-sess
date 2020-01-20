@@ -59,9 +59,8 @@ class StraIn
             // die(print_r($result->fetchRow()));
             $row = $result->fetchRow();
             extract($row);
-            die(print_r($row['name']));
 
-            $nameTemp = $name;
+            $nameTemp = $row['name'];
             // SUNTIK nama array
             array_push($this->parentArray, $nameTemp);
             // Ambil parent id, buat dicari lagi atasnya
