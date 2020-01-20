@@ -302,6 +302,8 @@ class Router
             $r->post('/api/index.php/periode/insert', 'Periode/insert');
             $r->get('/api/index.php/periode/get', 'Periode/get');
             $r->get('/api/index.php/periode/delete/{id}','Periode/delete');
+            $r->get('/api/index.php/periode/select/{id}','Periode/select_id');
+            $r->post('/api/index.php/periode/update/{id}','Periode/select_id');
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
