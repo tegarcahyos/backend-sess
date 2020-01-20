@@ -386,8 +386,11 @@ class Router
                 if ($explodeUri[3] == 'login') {
                     $result = call_user_func_array(array(new $class($connection), $method), array('users'));
 
-                } else if ($explodeUri[4] == "select_group_message_id") {
+                } else if (
+                    $explodeUri[3] == "loginApiFactory") {
+                    $result = call_user_func_array(array(new $class($connection), $method));
 
+                } else if ($explodeUri[4] == "select_group_message_id") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[3]));
 
                 } else if ($explodeUri[4] == "select_group_id" ||
@@ -475,8 +478,7 @@ class Router
                     $explodeUri[4] == "get_leaf_unit" ||
                     $explodeUri[4] == "get_leaf" ||
                     $explodeUri[4] == "insert_object" ||
-                    $explodeUri[4] == "select_all_get" ||
-                    $explodeUri[4] == "loginApiFactory"
+                    $explodeUri[4] == "select_all_get"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
                 } else if ($explodeUri[4] == "select_where_get") {
