@@ -132,7 +132,7 @@ class StraIn
             JOIN children c ON tp.parent_id::text = c.id::text
            )
            SELECT *
-           FROM children WHERE number_of_ancestors = (select max(children.number_of_ancestors) from children);";
+            FROM children t1 WHERE NOT EXISTS (SELECT * FROM children t2 WHERE t1.id::text = t2.parent_id::text);";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
