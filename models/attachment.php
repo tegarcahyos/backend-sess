@@ -120,7 +120,7 @@ class Attachment
             echo 'naon';
             $msg = 'Data Kosong';
         }
-
+        echo $msg;
         return $msg;
     }
 
