@@ -118,7 +118,7 @@ class Attachment
 
         } else {
             echo 'naon';
-            $msg = 'Data Kosong';
+            $msg = '0';
         }
         echo $msg;
         return $msg;
