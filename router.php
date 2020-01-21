@@ -29,6 +29,7 @@ include "models/upload_file.php";
 include "models/expert_judgement.php";
 include "models/quadran.php";
 include "models/periode.php";
+include "models/tara.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -87,58 +88,57 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
-        }else if ($type == 400){
+        } else if ($type == 400) {
             $array = array(
                 'type' => $type,
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
-                'data'=> $msg,
+                'data' => $msg,
             );
             echo json_encode($array);
 
-        }else if ($type == 401){
+        } else if ($type == 401) {
             $array = array(
                 'type' => $type,
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
-                'data'=> $msg,
+                'data' => $msg,
             );
             echo json_encode($array);
 
-        }else if ($type == 402){
+        } else if ($type == 402) {
             $array = array(
                 'type' => $type,
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
-                'data'=> $msg,
+                'data' => $msg,
             );
             echo json_encode($array);
 
-        }else if ($type == 403){
+        } else if ($type == 403) {
             $array = array(
                 'type' => $type,
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
-                'data'=> $msg,
+                'data' => $msg,
             );
             echo json_encode($array);
 
-        }else if ($type == 404){
+        } else if ($type == 404) {
             $array = array(
                 'type' => $type,
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
-                'data'=> $msg,
+                'data' => $msg,
             );
             echo json_encode($array);
 
-        }
-         else {
+        } else {
             return "kosong";
         }
     }
@@ -368,9 +368,9 @@ class Router
             //PERIOD
             $r->post('/api/index.php/periode/insert', 'Periode/insert');
             $r->get('/api/index.php/periode/get', 'Periode/get');
-            $r->get('/api/index.php/periode/delete/{id}','Periode/delete');
-            $r->get('/api/index.php/periode/select/{id}','Periode/select_id');
-            $r->post('/api/index.php/periode/update/{id}','Periode/update');
+            $r->get('/api/index.php/periode/delete/{id}', 'Periode/delete');
+            $r->get('/api/index.php/periode/select/{id}', 'Periode/select_id');
+            $r->post('/api/index.php/periode/update/{id}', 'Periode/update');
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
