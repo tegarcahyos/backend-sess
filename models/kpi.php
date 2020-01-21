@@ -31,6 +31,7 @@ class Kpi
                     'id' => $id,
                     'name' => $name,
                     'metric' => $metric,
+                    'status' => $status,
                 );
 
                 array_push($data_arr, $data_item);
@@ -59,6 +60,7 @@ class Kpi
                 'id' => $id,
                 'name' => $name,
                 'metric' => $metric,
+                'status' => $status,
             );
             return $data_item;
         }
@@ -72,19 +74,26 @@ class Kpi
         $request = json_decode($data);
         $name = $request[0]->name;
         $metric = $request[0]->metric;
+        $status = $request[0]->status;
 
-        $query = "INSERT INTO $tablename (name, metric)";
-        $query .= "VALUES ('$name', '$metric')";
+        $query = "INSERT INTO $tablename (name, metric, status)";
+        $query .= "VALUES ('$name', '$metric', '$status') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            extract($row);
+
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'metric' => $metric,
+                'status' => $status,
+            );
+            return $data_item;
         }
 
     }
@@ -97,16 +106,25 @@ class Kpi
         $request = json_decode($data);
         $name = $request[0]->name;
         $metric = $request[0]->metric;
-        $query = "UPDATE $tablename SET name = '$name', metric = '$metric' WHERE id = '$id'";
+        $status = $request[0]->status;
+
+        $query = "UPDATE $tablename SET name = '$name', metric = '$metric', status = '$status' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
-
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            extract($row);
+
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'metric' => $metric,
+                'status' => $status,
+            );
+            return $data_item;
         }
     }
 
