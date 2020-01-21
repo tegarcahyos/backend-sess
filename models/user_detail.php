@@ -244,7 +244,7 @@ class UserDetail
         $role_name = $request[0]->role_name;
         $user_avatar = $request[0]->user_avatar;
 
-        $query = "UPDATE $tablename SET user_id = '$user_id', user_name = '$user_name', unit_id = '$unit_id', unit_code = '$unit_code', unit_name = '$unit_name', role_id = '$role_id', role_name = '$role_name' WHERE user_id = '$user_id' RETURNING *";
+        $query = "UPDATE $tablename SET user_id = '$user_id', user_name = '$user_name', unit_id = '$unit_id', unit_code = '$unit_code', unit_name = '$unit_name', role_id = '$role_id', role_name = '$role_name', user_avatar = '$user_avatar' WHERE user_id = '$user_id' RETURNING *";
 
         // die($query);
 
