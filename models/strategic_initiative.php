@@ -133,6 +133,7 @@ class StraIn
            )
            SELECT *
            FROM children WHERE number_of_ancestors != 0;";
+        die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
