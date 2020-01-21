@@ -193,6 +193,13 @@ class Router
             $r->post('/api/index.php/main_program/insert', 'MainProgram/insert');
             $r->post('/api/index.php/main_program/update/{id}', 'MainProgram/update');
 
+            // Tara
+            $r->get('/api/index.php/tara/get', 'Tara/get');
+            $r->get('/api/index.php/tara/find_id/{id}', 'Tara/findById');
+            $r->get('/api/index.php/tara/delete/{id}', 'Tara/delete');
+            $r->post('/api/index.php/tara/insert', 'Tara/insert');
+            $r->post('/api/index.php/tara/update/{id}', 'Tara/update');
+
             // CEO Notes
             $r->get('/api/index.php/ceo_notes/get', 'CeoNotes/get');
             $r->get('/api/index.php/ceo_notes/find_id/{id}', 'CeoNotes/findById');
