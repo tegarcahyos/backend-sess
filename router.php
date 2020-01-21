@@ -271,6 +271,7 @@ class Router
             $r->get('/api/index.php/user_detail/delete/{id}', 'UserDetail/delete');
             $r->post('/api/index.php/user_detail/insert', 'UserDetail/insert');
             $r->post('/api/index.php/user_detail/update/{id}', 'UserDetail/update');
+            $r->post('/api/index.php/user_detail/update_user_id/{user_id}', 'UserDetail/update_user_id');
 
             // Criteria Priority
             $r->get('/api/index.php/criteria_priority/get', 'PriorityCriteria/get');
@@ -493,7 +494,8 @@ class Router
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['group_id'], $explodeUri[3]));
 
-                } else if ($explodeUri[4] == "select_user_id") {
+                } else if ($explodeUri[4] == "select_user_id" ||
+                           $explodeUri[4] == "update_user_id") {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[3]));
 

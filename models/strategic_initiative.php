@@ -31,6 +31,7 @@ class StraIn
                     'name' => $name,
                     'code' => $code,
                     'parent_id' => $parent_id,
+                    'periode_id'=>$periode_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -202,9 +203,6 @@ class StraIn
 
                 $data_item = array(
                     'id' => $id,
-                    // 'organization_id' => $organization_id,
-                    // 'organization_name' => $organization_name,
-                    // 'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -231,8 +229,9 @@ class StraIn
         $name = $request[0]->name;
         $code = $request[0]->code;
         $parent_id = $request[0]->parent_id;
-        $query = "INSERT INTO $tablename (name, code, parent_id)";
-        $query .= "VALUES ('$name', '$code', '$parent_id')";
+        $periode_id = $request[0]->periode_id;
+        $query = "INSERT INTO $tablename (name, code, parent_id,periode_id)";
+        $query .= "VALUES ('$name', '$code', '$parent_id','$periode_id')";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -256,8 +255,9 @@ class StraIn
         $name = $request[0]->name;
         $code = $request[0]->code;
         $parent_id = $request[0]->parent_id;
+        $periode_id = $request[0]->periode_id;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', parent_id = '$parent_id' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', parent_id = '$parent_id', periode_id = '$periode_id' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 

@@ -298,13 +298,22 @@ class GroupMember
         //
         $request = json_decode($data);
 
-        $query = "UPDATE  $tablename SET title = '$title', message_last = '$message_last' ,message_last_date = '$message_last_date',
-                                         message_last_time = '$message_last_time',message_sender_id = $message_sender_id ,
-                                         message_sender_name = '$message_sender_name',last_seen_date = '$last_seen_date',
-                                         last_seen_time = '$last_seen_time',last_seen_user_id = $last_seen_user_id,
-                                         last_seen_user_name = '$last_seen_user_name'  WHERE id =  $id";
+        $group_id = $request->group_id;
+        $group_name = $request->group_name;
+        $unit_id = $request->unit_id;
+        $unit_name = $request->unit_name;
+        $user_id = $request->user_id;
+        $user_name = $request->user_name;
+        $user_avatar = $request->user_avatar;
+        $type = $request->type;
+        $push_id = $request->push_id;
+
+
+        $query = "UPDATE  $tablename SET group_id = '$group_id', group_name = '$group_name' ,unit_id = '$unit_id',
+                                         unit_name = '$unit_name',user_id = '$user_id', user_name = '$user_name',user_avatar = '$user_avatar',
+                                         type = '$type',push_id = '$push_id' WHERE id =  $id";
         $this->db->execute($query);
-        $select_query = $this->findById($id, $tablename);
+        $select_query = $this->select_id($id, $tablename);
         $data_arr = array();
         array_push($data_arr, $select_query);
         $msg = $data_arr;

@@ -33,6 +33,7 @@ class UserDetail
                     'unit_name' => $unit_name,
                     'role_id' => $role_id,
                     'role_name' => $role_name,
+                    'user_avatar'=>$user_avatar,
                 );
 
                 array_push($data_arr, $data_item);
@@ -68,6 +69,7 @@ class UserDetail
                 'unit_name' => $unit_name,
                 'role_id' => $role_id,
                 'role_name' => $role_name,
+                'user_avatar'=>$user_avatar,
             );
 
             $msg = $data_item;
@@ -97,6 +99,7 @@ class UserDetail
                 'unit_name' => $unit_name,
                 'role_id' => $role_id,
                 'role_name' => $role_name,
+                'user_avatar'=>$user_avatar,
             );
 
             $msg = $data_item;
@@ -155,6 +158,7 @@ class UserDetail
                     'unit_name' => $unit_name,
                     'role_id' => $role_id,
                     'role_name' => $role_name,
+                    'user_avatar'=>$user_avatar,
                 );
 
                 array_push($data_arr, $data_item);
@@ -210,6 +214,63 @@ class UserDetail
                     'unit_name' => $unit_name,
                     'role_id' => $role_id,
                     'role_name' => $role_name,
+                    
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
+    public function update_user_id($user_id, $tablename)
+    {
+        // init attribute dan values
+
+        $data = file_get_contents("php://input");
+
+        $request = json_decode($data);
+        $user_id = $request[0]->user_id;
+        $user_name = $request[0]->user_name;
+        $unit_id = $request[0]->unit_id;
+        $unit_code = $request[0]->unit_code;
+        $unit_name = $request[0]->unit_name;
+        $role_id = $request[0]->role_id;
+        $role_name = $request[0]->role_name;
+        $user_avatar = $request[0]->user_avatar;
+
+        $query = "UPDATE $tablename SET user_id = '$user_id', user_name = '$user_name', unit_id = '$unit_id', unit_code = '$unit_code', unit_name = '$unit_name', role_id = '$role_id', role_name = '$role_name', user_avatar = '$user_avatar' WHERE user_id = '$user_id' RETURNING *";
+
+        // die($query);
+
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
+
+        // jika ada hasil
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                    'user_id' => $user_id,
+                    'user_name' => $user_name,
+                    'unit_id' => $unit_id,
+                    'unit_code' => $unit_code,
+                    'unit_name' => $unit_name,
+                    'role_id' => $role_id,
+                    'role_name' => $role_name,
+                    'user_avatar' => $user_avatar,
                 );
 
                 array_push($data_arr, $data_item);
