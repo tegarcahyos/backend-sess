@@ -187,6 +187,7 @@ class UserDetail
         $unit_name = $request[0]->unit_name;
         $role_id = $request[0]->role_id;
         $role_name = $request[0]->role_name;
+        $user_avatar = $request[0]->user_avatar;
 
         $query = "UPDATE $tablename SET user_id = '$user_id', user_name = '$user_name', unit_id = '$unit_id', unit_code = '$unit_code', unit_name = '$unit_name', role_id = '$role_id', role_name = '$role_name' WHERE id = '$id' RETURNING *";
 
@@ -214,6 +215,7 @@ class UserDetail
                     'unit_name' => $unit_name,
                     'role_id' => $role_id,
                     'role_name' => $role_name,
+                    'user_avatar' => $user_avatar,
                 );
 
                 array_push($data_arr, $data_item);
