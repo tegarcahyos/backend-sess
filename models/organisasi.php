@@ -78,8 +78,8 @@ class Organisasi
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request[0]->name;
-        $code = $request[0]->code;
+        $name = $request->name;
+        $code = $request->code;
         
 
         $query = "INSERT INTO $tablename (name, code)";
