@@ -45,6 +45,7 @@ class Attachment
             }
 
         } else {
+            echo 'naon';
             $msg = 'Data Kosong';
         }
 
