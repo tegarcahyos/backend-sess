@@ -257,7 +257,7 @@ class StraIn
         $parent_id = $request[0]->parent_id;
         $periode_id = $request[0]->periode_id;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', parent_id = '$parent_id', $periode_id = $periode_id WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', parent_id = '$parent_id', periode_id = $periode_id WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
