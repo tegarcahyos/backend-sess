@@ -90,10 +90,10 @@ class Organization
         // $type_id = 1;
         // $type_name = "Telkom";
         // $type_code = "T12";
-        $name = $request->name;
-        $code = $request->code;
+        $name = $request[0]->name;
+        $code = $request[0]->code;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "'" . " WHERE id = " . $id;
+        $query = "UPDATE $tablename SET name = '$name', code = '$code' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }

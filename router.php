@@ -29,7 +29,6 @@ include "models/upload_file.php";
 include "models/expert_judgement.php";
 include "models/quadran.php";
 include "models/periode.php";
-include "models/organisasi.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -182,6 +181,7 @@ class Router
             $r->get('/api/index.php/strategic_initiative/find_id/{id}', 'StraIn/findById');
             $r->get('/api/index.php/strategic_initiative/get_leaf', 'StraIn/getLeaf');
             $r->get('/api/index.php/strategic_initiative/get_by_parent/{parent_id}', 'StraIn/getByParent');
+            $r->get('/api/index.php/strategic_initiative/get_leaf_by_root_id/{id}', 'StraIn/getLeafByRootId');
             $r->get('/api/index.php/strategic_initiative/delete/{id}', 'StraIn/delete');
             $r->post('/api/index.php/strategic_initiative/insert', 'StraIn/insert');
             $r->post('/api/index.php/strategic_initiative/update/{id}', 'StraIn/update');
@@ -313,13 +313,6 @@ class Router
             $r->get('/api/index.php/periode/delete/{id}','Periode/delete');
             $r->get('/api/index.php/periode/select/{id}','Periode/select_id');
             $r->post('/api/index.php/periode/update/{id}','Periode/update');
-
-            //ORGANISASI
-            $r->post('/api/index.php/organisasi/insert', 'Organisasi/insert');
-            $r->get('/api/index.php/organisasi/get', 'Organisasi/get');
-            $r->get('/api/index.php/organisasi/delete/{id}','Organisasi/delete');
-            $r->get('/api/index.php/organisasi/select/{id}','Organisasi/select_id');
-            $r->post('/api/index.php/organisasi/update/{id}','Organisasi/update');
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
@@ -473,7 +466,8 @@ class Router
                     $explodeUri[4] == "delete" ||
                     $explodeUri[4] == "update_id" ||
                     $explodeUri[4] == "select_id_get" ||
-                    $explodeUri[4] == "get_root_parent"
+                    $explodeUri[4] == "get_root_parent" ||
+                    $explodeUri[4] == "get_leaf_by_root_id"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
                 } else if (

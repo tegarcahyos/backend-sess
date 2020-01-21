@@ -111,6 +111,56 @@ class StraIn
         return $msg;
     }
 
+    public function getLeafByRootId($id, $tablename)
+    {
+        $query = "WITH RECURSIVE children AS (
+            SELECT
+               id,
+                0               AS number_of_ancestors,
+               parent_id,
+               code,
+               name
+            FROM  $tablename where id = '$id'
+           UNION
+            SELECT
+               tp.id,
+               c.number_of_ancestors + 1                   AS ancestry_size,
+               tp.parent_id,
+               tp.code,
+               tp.name
+            FROM  $tablename tp
+            JOIN children c ON tp.parent_id::text = c.id::text
+           )
+           SELECT *
+           FROM children WHERE number_of_ancestors = (select max(children.number_of_ancestors) from children);";
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'code' => $code,
+                    'parent_id' => $parent_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
