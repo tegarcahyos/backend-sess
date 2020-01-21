@@ -32,6 +32,7 @@ class Periode
                     'name' => $name,
                     'code' => $code,
                     'status_active' => $status_active,
+                    'organisasi_id' => $organisasi_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -64,7 +65,7 @@ class Periode
                 'name' => $name,
                 'code' => $code,
                 'status_active' => $status_active,
-                
+                'organisasi_id' => $organisasi_id,
             );
             return $data_item;
         }
@@ -81,9 +82,10 @@ class Periode
         $name = $request[0]->name;
         $code = $request[0]->code;
         $status_active = $request[0]->status_active;
+        $organisasi_id = $request[0]->organisasi_id;
 
-        $query = "INSERT INTO $tablename (name, code, status_active)";
-        $query .= "VALUES ('$name', '$code', '$status_active')";
+        $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
+        $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -107,8 +109,9 @@ class Periode
         $name = $request[0]->name;
         $code = $request[0]->code;
         $status_active = $request[0]->status_active;
+        $organisasi_id = $request[0]->organisasi_id;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
 
