@@ -29,7 +29,6 @@ include "models/upload_file.php";
 include "models/expert_judgement.php";
 include "models/quadran.php";
 include "models/periode.php";
-include "models/organisasi.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -314,13 +313,6 @@ class Router
             $r->get('/api/index.php/periode/delete/{id}','Periode/delete');
             $r->get('/api/index.php/periode/select/{id}','Periode/select_id');
             $r->post('/api/index.php/periode/update/{id}','Periode/update');
-
-            //ORGANISASI
-            $r->post('/api/index.php/organisasi/insert', 'Organisasi/insert');
-            $r->get('/api/index.php/organisasi/get', 'Organisasi/get');
-            $r->get('/api/index.php/organisasi/delete/{id}','Organisasi/delete');
-            $r->get('/api/index.php/organisasi/select/{id}','Organisasi/select_id');
-            $r->post('/api/index.php/organisasi/update/{id}','Organisasi/update');
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
