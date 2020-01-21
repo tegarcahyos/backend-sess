@@ -537,7 +537,7 @@ class Router
         // die($result);
 
         try {
-            if ($result == [] || $result == 'Data Kosong') {
+            if ($result == [] || $result == 'Data Kosong' || $result == '0') {
                 $this->msg(http_response_code(404), 404, $result, "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
