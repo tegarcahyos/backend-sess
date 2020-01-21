@@ -265,7 +265,7 @@ class Router
             $r->get('/api/index.php/user_detail/delete/{id}', 'UserDetail/delete');
             $r->post('/api/index.php/user_detail/insert', 'UserDetail/insert');
             $r->post('/api/index.php/user_detail/update/{id}', 'UserDetail/update');
-            $r->post('/api/index.php/user_detail/update_user_id/{user_id}', 'UserDetail/update-user_id');
+            $r->post('/api/index.php/user_detail/update_user_id/{user_id}', 'UserDetail/update_user_id');
 
             // Criteria Priority
             $r->get('/api/index.php/criteria_priority/get', 'PriorityCriteria/get');
