@@ -45,7 +45,7 @@ class Organization
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
+        $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
@@ -100,7 +100,7 @@ class Organization
 
     public function delete($id, $tablename)
     {
-        $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
         // return $result;

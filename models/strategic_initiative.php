@@ -48,7 +48,7 @@ class StraIn
     public function getParentSIBy($id)
     {
         // Jika parent
-        if ($id == '') {
+        if ($id == '0') {
             // is root
         } else {
             // bukan root
@@ -56,14 +56,15 @@ class StraIn
             $query = "SELECT * FROM strategic_initiative WHERE id = '$id'";
             //
             $result = $this->db->execute($query);
+            // die(print_r($result->fetchRow()));
             $row = $result->fetchRow();
             extract($row);
 
-            $nameTemp = $name;
+            $nameTemp = $row['name'];
             // SUNTIK nama array
             array_push($this->parentArray, $nameTemp);
             // Ambil parent id, buat dicari lagi atasnya
-            $idParentTemp = $parent_id;
+            $idParentTemp = $row['parent_id'];
             // Cari atasnya
             $this->getParentSIBy($idParentTemp);
         }
@@ -75,7 +76,7 @@ class StraIn
            *
           FROM
              $tablename WHERE parent_id = '$parent_id'";
-
+        // die($query);
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
