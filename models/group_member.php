@@ -313,7 +313,7 @@ class GroupMember
                                          unit_name = '$unit_name',user_id = '$user_id', user_name = '$user_name',user_avatar = '$user_avatar',
                                          type = '$type',push_id = '$push_id' WHERE id =  $id";
         $this->db->execute($query);
-        $select_query = $this->findById($id, $tablename);
+        $select_query = $this->select_id($id, $tablename);
         $data_arr = array();
         array_push($data_arr, $select_query);
         $msg = $data_arr;
