@@ -33,6 +33,7 @@ class UserDetail
                     'unit_name' => $unit_name,
                     'role_id' => $role_id,
                     'role_name' => $role_name,
+                    'user_avatar'=>$user_avatar,
                 );
 
                 array_push($data_arr, $data_item);
@@ -68,6 +69,7 @@ class UserDetail
                 'unit_name' => $unit_name,
                 'role_id' => $role_id,
                 'role_name' => $role_name,
+                'user_avatar'=>$user_avatar,
             );
 
             $msg = $data_item;
@@ -97,6 +99,7 @@ class UserDetail
                 'unit_name' => $unit_name,
                 'role_id' => $role_id,
                 'role_name' => $role_name,
+                'user_avatar'=>$user_avatar,
             );
 
             $msg = $data_item;
@@ -155,6 +158,7 @@ class UserDetail
                     'unit_name' => $unit_name,
                     'role_id' => $role_id,
                     'role_name' => $role_name,
+                    'user_avatar'=>$user_avatar,
                 );
 
                 array_push($data_arr, $data_item);
