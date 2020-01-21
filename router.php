@@ -93,6 +93,7 @@ class Router
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
+                'data'=> $msg,
             );
             echo json_encode($array);
 
@@ -102,6 +103,7 @@ class Router
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
+                'data'=> $msg,
             );
             echo json_encode($array);
 
@@ -111,6 +113,7 @@ class Router
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
+                'data'=> $msg,
             );
             echo json_encode($array);
 
@@ -120,6 +123,7 @@ class Router
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
+                'data'=> $msg,
             );
             echo json_encode($array);
 
@@ -129,6 +133,7 @@ class Router
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
+                'data'=> $msg,
             );
             echo json_encode($array);
 
