@@ -3,8 +3,6 @@ include "adodb/adodb.inc.php";
 include "vendor/autoload.php";
 include "models/organization.php";
 include "models/unit.php";
-include "models/config_gann.php";
-include "models/config_alignment.php";
 include "models/metric.php";
 include "models/user.php";
 include "models/role.php";
@@ -27,6 +25,7 @@ include "models/data_from_master.php";
 include "models/si_target.php";
 include "models/upload_file.php";
 include "models/expert_judgement.php";
+include "models/ahp_criteria.php";
 include "models/quadran.php";
 include "models/periode.php";
 include "models/tara.php";
@@ -219,6 +218,13 @@ class Router
             $r->get('/api/index.php/expert_judgement/delete/{id}', 'ExpertJudgement/delete');
             $r->post('/api/index.php/expert_judgement/insert', 'ExpertJudgement/insert');
             $r->post('/api/index.php/expert_judgement/update/{id}', 'ExpertJudgement/update');
+
+            // --- EXPERT JUDGEMENT ---
+            $r->get('/api/index.php/ahp_criteria/get', 'AHPCriteria/get');
+            $r->get('/api/index.php/ahp_criteria/find_id/{id}', 'AHPCriteria/findById');
+            $r->get('/api/index.php/ahp_criteria/delete/{id}', 'AHPCriteria/delete');
+            $r->post('/api/index.php/ahp_criteria/insert', 'AHPCriteria/insert');
+            $r->post('/api/index.php/ahp_criteria/update/{id}', 'AHPCriteria/update');
 
             // --- QUADRAn ---
             $r->get('/api/index.php/quadran/get', 'Quadran/get');
