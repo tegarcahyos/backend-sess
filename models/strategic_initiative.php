@@ -145,7 +145,6 @@ class StraIn
                 'id' => $id,
                 'name' => $name,
                 'code' => $code,
-                'number_of_ancestor' => $number_of_ancestor,
                 'parent_id' => $parent_id,
             );
             return $data_item;
