@@ -134,21 +134,34 @@ class StraIn
            SELECT *
            FROM children WHERE number_of_ancestors != 0;";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
-        } else {
-            extract($row);
+        $num = $result->rowCount();
 
-            $data_item = array(
-                'id' => $id,
-                'name' => $name,
-                'code' => $code,
-                'parent_id' => $parent_id,
-            );
-            return $data_item;
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+                // ambil parent parentnya pake $parent_id
+                $data_item = array(
+                    'id' => $id,
+                    // 'organization_id' => $organization_id,
+                    // 'organization_name' => $organization_name,
+                    // 'organization_code' => $organization_code,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
         }
+
+        return $msg;
     }
 
     public function findById($id, $tablename)
