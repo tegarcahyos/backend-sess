@@ -31,6 +31,7 @@ class StraIn
                     'name' => $name,
                     'code' => $code,
                     'parent_id' => $parent_id,
+                    'periode_id'=>$periode_id,
                 );
 
                 array_push($data_arr, $data_item);
