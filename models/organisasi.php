@@ -17,7 +17,7 @@ class Organisasi
              $tablename order by id asc";
         // die($query);
         $result = $this->db->execute($query);
-        die($query);
+        // die($query);
         $num = $result->rowCount();
 
         if ($num > 0) {
