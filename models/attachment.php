@@ -45,6 +45,7 @@ class Attachment
             }
 
         } else {
+            
             $msg = 'Data Kosong';
         }
 
@@ -91,6 +92,7 @@ class Attachment
         $query = "SELECT * FROM  $tablename WHERE group_id = $group_id ORDER BY id";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
+        echo $num;
         // die($query);
         if ($num > 0) {
 
@@ -115,9 +117,10 @@ class Attachment
             }
 
         } else {
-            $msg = 'Data Kosong';
+            echo 'naon';
+            $msg = '0';
         }
-
+        echo $msg;
         return $msg;
     }
 
