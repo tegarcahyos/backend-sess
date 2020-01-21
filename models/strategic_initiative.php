@@ -133,7 +133,6 @@ class StraIn
            )
            SELECT *
            FROM children WHERE number_of_ancestors != 0;";
-        die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
@@ -143,15 +142,12 @@ class StraIn
 
             while ($row = $result->fetchRow()) {
                 extract($row);
-                // ambil parent parentnya pake $parent_id
+
                 $data_item = array(
                     'id' => $id,
-                    // 'organization_id' => $organization_id,
-                    // 'organization_name' => $organization_name,
-                    // 'organization_code' => $organization_code,
-                    'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
+                    'parent_id' => $parent_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -159,7 +155,7 @@ class StraIn
             }
 
         } else {
-            $msg = [];
+            $msg = 'Data Kosong';
         }
 
         return $msg;
