@@ -181,6 +181,7 @@ class Router
             $r->get('/api/index.php/strategic_initiative/find_id/{id}', 'StraIn/findById');
             $r->get('/api/index.php/strategic_initiative/get_leaf', 'StraIn/getLeaf');
             $r->get('/api/index.php/strategic_initiative/get_by_parent/{parent_id}', 'StraIn/getByParent');
+            $r->get('/api/index.php/strategic_initiative/get_leaf_by_root_id/{id}', 'StraIn/getLeafByRootId');
             $r->get('/api/index.php/strategic_initiative/delete/{id}', 'StraIn/delete');
             $r->post('/api/index.php/strategic_initiative/insert', 'StraIn/insert');
             $r->post('/api/index.php/strategic_initiative/update/{id}', 'StraIn/update');
@@ -465,7 +466,8 @@ class Router
                     $explodeUri[4] == "delete" ||
                     $explodeUri[4] == "update_id" ||
                     $explodeUri[4] == "select_id_get" ||
-                    $explodeUri[4] == "get_root_parent"
+                    $explodeUri[4] == "get_root_parent" ||
+                    $explodeUri[4] == "get_leaf_by_root_id"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
                 } else if (
