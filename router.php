@@ -87,7 +87,53 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
-        } else {
+        }else if ($type == 400){
+            $array = array(
+                'type' => $type,
+                'error-msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
+
+        }else if ($type == 401){
+            $array = array(
+                'type' => $type,
+                'error-msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
+
+        }else if ($type == 402){
+            $array = array(
+                'type' => $type,
+                'error-msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
+
+        }else if ($type == 403){
+            $array = array(
+                'type' => $type,
+                'error-msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
+
+        }else if ($type == 404){
+            $array = array(
+                'type' => $type,
+                'error-msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
+
+        }
+         else {
             return "kosong";
         }
     }
