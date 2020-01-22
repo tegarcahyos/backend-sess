@@ -111,8 +111,11 @@ class Periode
             // echo $msg.id;
             echo implode('',$msg_item);
             $id_periode = implode('',$msg_item);
+            echo $status_active;
+
           
-            if($status_active == 'true'){
+            if($status_active == 't'){
+                echo 'id adfsao';
                 $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$id_periode'";
                 // die($query_set_status);
             }else{
@@ -124,7 +127,7 @@ class Periode
 
             $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
             $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
-            // die($query);
+            die($query);
             $result = $this->db->execute($query);
             $num = $result->rowCount();
 
