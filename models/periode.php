@@ -108,7 +108,7 @@ class Periode
             }
             echo 'asu';
             print_r($msg);
-            echo $msg[0].id;
+            echo $msg[0].[id];
           
             // if($status_active == 'true'){
             //     $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = $data_arr[0].id";
