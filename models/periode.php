@@ -106,7 +106,7 @@ class Periode
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-            print_r($data_arr);
+            print_r($data_arr.id_periode);
             if($status_active == 'true'){
                 $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$data_arr.id_periode'";
             }else{
