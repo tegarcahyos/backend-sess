@@ -113,10 +113,10 @@ class Periode
             $id_periode = implode('',$msg);
           
             if($status_active == 'true'){
-                $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$msg.id'";
+                $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$id_periode'";
                 die($query_set_status);
             }else{
-                $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = '$msg.id'";
+                $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = '$id_periode'";
                 die($query_set_status);
             }
 
