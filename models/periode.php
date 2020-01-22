@@ -104,23 +104,23 @@ class Periode
                 );
             
                 // array_push($data_item);
-                $msg = $data_item;
+                $msg_item = $data_item;
             }
             // echo 'asu';
             // // print_r($msg);
             // echo $msg.id;
-            echo implode('',$msg);
-            $id_periode = implode('',$msg);
+            echo implode('',$msg_item);
+            $id_periode = implode('',$msg_item);
           
             if($status_active == 'true'){
                 $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$id_periode'";
-                die($query_set_status);
+                // die($query_set_status);
             }else{
                 $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = '$id_periode'";
-                die($query_set_status);
+                // die($query_set_status);
             }
 
-        }else{
+        }
 
             $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
             $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
@@ -135,7 +135,7 @@ class Periode
             } else {
                 $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
             }
-        }
+        
         return $msg;
     }
 
