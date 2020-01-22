@@ -55,7 +55,7 @@ class Router
     // MESSAGES
     public function msg($header, $type = null, $msg, $keterangan, $status)
     {
-        die($header);
+        die($msg);
         if ($type == 200) {
             $array = array(
                 'status' => $status,
