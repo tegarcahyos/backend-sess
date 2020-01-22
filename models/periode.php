@@ -93,7 +93,7 @@ class Periode
 
         if ($num > 0) {
 
-            $data_arr = array();
+            // $data_arr = array();
 
             while ($row = $result_select->fetchRow()) {
                 extract($row);
@@ -103,13 +103,13 @@ class Periode
                     
                 );
             
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
+                // array_push($data_item);
+                $msg = $data_item;
             }
             echo 'asu';
             print_r($msg);
-            $id_per = $data_arr[0].id;
-            echo $id_per;
+            // $id_per = $data_arr[0].id;
+            // echo $id_per;
             // if($status_active == 'true'){
             //     $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = $data_arr[0].id";
             //     die($query_set_status);
