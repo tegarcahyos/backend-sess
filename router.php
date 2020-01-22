@@ -131,6 +131,7 @@ class Router
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
+                'msg' => $msg,
             );
             echo json_encode($array);
 
