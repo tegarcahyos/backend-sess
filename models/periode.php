@@ -95,7 +95,7 @@ class Periode
 
             $data_arr = array();
 
-            while ($row = $result->fetchRow()) {
+            while ($row = $result_select->fetchRow()) {
                 extract($row);
 
                 $data_item = array(
