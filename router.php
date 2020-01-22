@@ -55,7 +55,6 @@ class Router
     // MESSAGES
     public function msg($header, $type = null, $msg, $keterangan, $status)
     {
-        die($msg);
         if ($type == 200) {
             $array = array(
                 'status' => $status,
@@ -585,7 +584,7 @@ class Router
                 break;
         }
 
-        // die($result);
+        die("ini result" . $result);
 
         try {
             if ($result == "405") {
