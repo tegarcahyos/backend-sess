@@ -110,14 +110,15 @@ class Periode
             // // print_r($msg);
             // echo $msg.id;
             echo implode('',$msg);
+            $id_periode = implode('',$msg);
           
-            // if($status_active == 'true'){
-            //     $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$msg.id'";
-            //     die($query_set_status);
-            // }else{
-            //     $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = '$msg.id'";
-            //     die($query_set_status);
-            // }
+            if($status_active == 'true'){
+                $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$msg.id'";
+                die($query_set_status);
+            }else{
+                $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = '$msg.id'";
+                die($query_set_status);
+            }
 
         }else{
 
