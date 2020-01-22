@@ -107,11 +107,11 @@ class Periode
                 $msg = $data_arr;
             }
             echo 'asu';
-            print_r($data_arr.id_periode);
+            print_r($data_arr[0].id_periode);
             if($status_active == 'true'){
-                $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$data_arr.id_periode'";
+                $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$data_arr[0].id_periode'";
             }else{
-                $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = '$data_arr.id_periode'";
+                $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = '$data_arr[0].id_periode'";
             }
 
         }else{
