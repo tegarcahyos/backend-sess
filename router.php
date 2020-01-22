@@ -464,7 +464,7 @@ class Router
                 break;
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $routeInfo[1];
-                $this->msg(http_response_code(405), 405, 'Method Not Allowed', "gagal", 0);
+                return header("HTTP/1.0 405 Method Not Allowed");
                 // ... 405 Method Not Allowed
                 break;
             case FastRoute\Dispatcher::FOUND:
@@ -591,7 +591,9 @@ class Router
         // die($result);
 
         try {
-            if ($result == [] || $result == 'Data Kosong' || $result == '0') {
+            if (!isset($result) && header("HTTP/1.0 405 Method Not Allowed")) {
+                $this->msg(http_response_code(405), 405, 'Method Not Allowed', "gagal", 0);
+            } else if ($result == [] || $result == 'Data Kosong' || $result == '0') {
                 $this->msg(http_response_code(404), 404, $result, "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
