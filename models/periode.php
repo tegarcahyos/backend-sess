@@ -111,6 +111,7 @@ class Periode
             // echo $msg.id;
             echo implode('',$msg_item);
             $id_periode = implode('',$msg_item);
+            echo $status_active;
 
           
             if($status_active == 't'){
