@@ -107,7 +107,7 @@ class Periode
                 $msg = $data_item;
             }
             echo 'asu';
-            print_r($msg);
+            // print_r($msg);
             echo $msg.id;
           
             // if($status_active == 'true'){
