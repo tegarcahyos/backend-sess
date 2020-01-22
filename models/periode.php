@@ -111,6 +111,7 @@ class Periode
             // echo $msg.id;
             echo implode('',$msg_item);
             $id_periode = implode('',$msg_item);
+
           
             if($status_active == 't'){
                 echo 'id adfsao';
@@ -125,7 +126,7 @@ class Periode
 
             $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
             $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
-            // die($query);
+            die($query);
             $result = $this->db->execute($query);
             $num = $result->rowCount();
 
