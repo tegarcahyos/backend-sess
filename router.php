@@ -455,7 +455,7 @@ class Router
 
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:
-                return header("HTTP/1.0 404 Not Found");
+                $result = "404";
                 // ... 404 Not Found
                 break;
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
@@ -589,8 +589,10 @@ class Router
         try {
             if ($result == "405") {
                 $this->msg(http_response_code(405), 405, 'Method Not Allowed', "gagal", 0);
+            } else if ($result == "404") {
+                $this->msg(http_response_code(404), 404, 'Page Not Found', "gagal", 0);
             } else if ($result == [] || $result == 'Data Kosong' || $result == '0') {
-                $this->msg(http_response_code(404), 404, $result, "gagal", 0);
+                $this->msg(http_response_code(204), 204, $result, "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
