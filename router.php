@@ -3,8 +3,6 @@ include "adodb/adodb.inc.php";
 include "vendor/autoload.php";
 include "models/organization.php";
 include "models/unit.php";
-include "models/config_gann.php";
-include "models/config_alignment.php";
 include "models/metric.php";
 include "models/user.php";
 include "models/role.php";
@@ -27,6 +25,7 @@ include "models/data_from_master.php";
 include "models/si_target.php";
 include "models/upload_file.php";
 include "models/expert_judgement.php";
+include "models/ahp_criteria.php";
 include "models/quadran.php";
 include "models/periode.php";
 include "models/tara.php";
@@ -114,7 +113,6 @@ class Router
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
-                'data' => $msg,
             );
             echo json_encode($array);
 
@@ -124,7 +122,6 @@ class Router
                 'error-msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
-                'data' => $msg,
             );
             echo json_encode($array);
 
@@ -135,6 +132,15 @@ class Router
                 'keterangan' => $keterangan . '',
                 'status' => $status,
                 'data' => $msg,
+            );
+            echo json_encode($array);
+
+        } else if ($type == 405) {
+            $array = array(
+                'type' => $type,
+                'error-msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
             );
             echo json_encode($array);
 
@@ -220,6 +226,13 @@ class Router
             $r->post('/api/index.php/expert_judgement/insert', 'ExpertJudgement/insert');
             $r->post('/api/index.php/expert_judgement/update/{id}', 'ExpertJudgement/update');
 
+            // --- AHP ---
+            $r->get('/api/index.php/ahp_criteria/get', 'AHPCriteria/get');
+            $r->get('/api/index.php/ahp_criteria/find_id/{id}', 'AHPCriteria/findById');
+            $r->get('/api/index.php/ahp_criteria/delete/{id}', 'AHPCriteria/delete');
+            $r->post('/api/index.php/ahp_criteria/insert', 'AHPCriteria/insert');
+            $r->post('/api/index.php/ahp_criteria/update/{id}', 'AHPCriteria/update');
+
             // --- QUADRAn ---
             $r->get('/api/index.php/quadran/get', 'Quadran/get');
             $r->get('/api/index.php/quadran/find_id/{id}', 'Quadran/findById');
@@ -287,22 +300,6 @@ class Router
             $r->get('/api/index.php/program_charter/delete/{id}', 'ProgramCharter/delete');
             $r->post('/api/index.php/program_charter/insert', 'ProgramCharter/insert');
             $r->post('/api/index.php/program_charter/update/{id}', 'ProgramCharter/update');
-
-            // // --- CONFIG ALIGNMENT ---
-            $r->get('/api/index.php/config_alignment/get', 'ConfigAlignment/get');
-            $r->get('/api/index.php/config_alignment/find_id/{id}', 'ConfigAlignment/findById');
-            $r->get('/api/index.php/config_alignment/delete/{id}', 'ConfigAlignment/delete');
-            $r->post('/api/index.php/config_alignment/insert_alignment', 'ConfigAlignment/insertAlignData');
-            $r->post('/api/index.php/config_alignment/insert_data_alignment/{id}', 'ConfigAlignment/insertData');
-            $r->post('/api/index.php/config_alignment/update/{id}', 'ConfigAlignment/update');
-
-            // // --- CONFIG GANN ---
-            $r->get('/api/index.php/config_gann/get', 'ConfigGann/get');
-            $r->get('/api/index.php/config_gann/find_id/{id}', 'ConfigGann/findById');
-            $r->get('/api/index.php/config_gann/delete/{id}', 'ConfigGann/delete');
-            $r->post('/api/index.php/config_gann/insert_gann', 'ConfigGann/insertGann');
-            $r->post('/api/index.php/config_gann/insert_gann_data/{id}', 'ConfigGann/insertGannData');
-            $r->post('/api/index.php/config_gann/update/{id}', 'ConfigGann/update');
 
             // METRIC
             $r->get('/api/index.php/metric/get', 'Metric/get');
@@ -459,12 +456,12 @@ class Router
 
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:
-                return header("HTTP/1.0 404 Not Found");
+                $result = "404";
                 // ... 404 Not Found
                 break;
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $routeInfo[1];
-                // return header("HTTP/1.0 405 Method Not Allowed");
+                $result = "405";
                 // ... 405 Method Not Allowed
                 break;
             case FastRoute\Dispatcher::FOUND:
@@ -489,7 +486,7 @@ class Router
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['group_id'], $explodeUri[3]));
 
                 } else if ($explodeUri[4] == "select_user_id" ||
-                           $explodeUri[4] == "update_user_id") {
+                    $explodeUri[4] == "update_user_id") {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[3]));
 
@@ -588,11 +585,15 @@ class Router
                 break;
         }
 
-        // die($result);
+        // die($result == 'Data Kosong');
 
         try {
-            if ($result == [] || $result == 'Data Kosong' || $result == '0') {
+            if ($result == [] || $result === 'Data Kosong' || $result == '0') {
                 $this->msg(http_response_code(404), 404, $result, "gagal", 0);
+            } else if ($result == "404") {
+                $this->msg(http_response_code(404), 404, 'Page Not Found', "gagal", 0);
+            } else if ($result == "405") {
+                $this->msg(http_response_code(405), 405, 'Method Not Allowed', "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
