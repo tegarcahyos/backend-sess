@@ -584,7 +584,7 @@ class Router
                 break;
         }
 
-        die($result == 'Data Kosong');
+        // die($result == 'Data Kosong');
 
         try {
             if ($result == "405") {
