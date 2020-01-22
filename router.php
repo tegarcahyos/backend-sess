@@ -137,6 +137,16 @@ class Router
             );
             echo json_encode($array);
 
+        } else if ($type == 405) {
+            $array = array(
+                'type' => $type,
+                'error-msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+                'data' => $msg,
+            );
+            echo json_encode($array);
+
         } else {
             return "kosong";
         }
@@ -454,7 +464,7 @@ class Router
                 break;
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $routeInfo[1];
-                return header("HTTP/1.0 405 Method Not Allowed");
+                $this->msg(http_response_code(405), 405, 'Method Not Allowed', "gagal", 0);
                 // ... 405 Method Not Allowed
                 break;
             case FastRoute\Dispatcher::FOUND:
