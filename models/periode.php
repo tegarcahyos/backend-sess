@@ -117,17 +117,19 @@ class Periode
             if($status_active == true){
                 echo 'id adfsao';
                 $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$id_periode'";
+                $this->db->execute($query_set_status);
                 // die($query_set_status);
             }else{
                 $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = '$id_periode'";
                 // die($query_set_status);
+                $this->db->execute($query_set_status);
             }
 
         }
 
             $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
             $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
-            die($query);
+            // die($query);
             $result = $this->db->execute($query);
             $num = $result->rowCount();
 
