@@ -14,7 +14,7 @@ class ProgramCharter
         $query = "SELECT
            *
           FROM
-             $tablename";
+             $tablename order by updated_at desc";
 
         // die($query);
         $result = $this->db->execute($query);
