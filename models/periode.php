@@ -107,6 +107,7 @@ class Periode
                 $msg = $data_arr;
             }
             echo 'asu';
+            print_r($msg);
             $id_per = $data_arr[0].id;
             echo $id_per;
             // if($status_active == 'true'){
