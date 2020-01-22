@@ -84,20 +84,51 @@ class Periode
         $status_active = $request[0]->status_active;
         $organisasi_id = $request[0]->organisasi_id;
 
-        $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
-        $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
-        // die($query);
-        $result = $this->db->execute($query);
-        $num = $result->rowCount();
+        $query_select_status = " SELECT id from $tablename where organisasi_id = '$organisasi_id' and status_active = '$status_active'";
+        
+        $result_select = $this->db->execute($query_select_status);
 
-        $res = $this->db->affected_rows();
+        $num = $result_select->rowCount();
 
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
-        } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id_periode' => $id,
+                    
+                );
+            
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+            print_r($data_arr);
+            if($status_active == 'true'){
+                $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$data_arr.id_periode'";
+            }else{
+                $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = '$data_arr.id_periode'";
+            }
+
+        }else{
+
+            $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
+            $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
+            // die($query);
+            $result = $this->db->execute($query);
+            $num = $result->rowCount();
+
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
+            } else {
+                $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
         }
-
+        return $msg;
     }
 
     public function update($id, $tablename)
@@ -111,8 +142,9 @@ class Periode
         $status_active = $request[0]->status_active;
         $organisasi_id = $request[0]->organisasi_id;
 
+        
         $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
 
         $res = $this->db->affected_rows();
