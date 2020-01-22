@@ -89,6 +89,7 @@ class Periode
         $result_select = $this->db->execute($query_select_status);
 
         $num = $result_select->rowCount();
+        echo $num;
 
         if ($num > 0) {
 
