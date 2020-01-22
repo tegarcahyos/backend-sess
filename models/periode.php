@@ -114,7 +114,7 @@ class Periode
             echo $status_active;
 
           
-            if($status_active == 't'){
+            if($status_active == true){
                 echo 'id adfsao';
                 $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = '$id_periode'";
                 // die($query_set_status);
