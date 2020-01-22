@@ -109,13 +109,13 @@ class Periode
             echo 'asu';
             $id_per = $data_arr[0].id;
             echo $id_per;
-            if($status_active == 'true'){
-                $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = $data_arr[0].id";
-                die($query_set_status);
-            }else{
-                $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = $data_arr[0].id";
-                die($query_set_status);
-            }
+            // if($status_active == 'true'){
+            //     $query_set_status = "UPDATE $tablename SET status_active == 'false' where id = $data_arr[0].id";
+            //     die($query_set_status);
+            // }else{
+            //     $query_set_status = "UPDATE $tablename SET status_active == 'true' where id = $data_arr[0].id";
+            //     die($query_set_status);
+            // }
 
         }else{
 
