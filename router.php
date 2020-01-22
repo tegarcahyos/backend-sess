@@ -26,6 +26,7 @@ include "models/si_target.php";
 include "models/upload_file.php";
 include "models/expert_judgement.php";
 include "models/ahp_criteria.php";
+include "models/approval.php";
 include "models/quadran.php";
 include "models/periode.php";
 include "models/tara.php";
@@ -256,6 +257,13 @@ class Router
             $r->get('/api/index.php/main_program/delete/{id}', 'MainProgram/delete');
             $r->post('/api/index.php/main_program/insert', 'MainProgram/insert');
             $r->post('/api/index.php/main_program/update/{id}', 'MainProgram/update');
+
+            // Approval
+            $r->get('/api/index.php/approval/get', 'Approval/get');
+            $r->get('/api/index.php/approval/find_id/{id}', 'Approval/findById');
+            $r->get('/api/index.php/approval/delete/{id}', 'Approval/delete');
+            $r->post('/api/index.php/approval/insert', 'Approval/insert');
+            $r->post('/api/index.php/approval/update/{id}', 'Approval/update');
 
             // Tara
             $r->get('/api/index.php/tara/get', 'Tara/get');
