@@ -310,6 +310,7 @@ class Router
             // Program Charter
             $r->get('/api/index.php/program_charter/get', 'ProgramCharter/get');
             $r->get('/api/index.php/program_charter/find_id/{id}', 'ProgramCharter/findById');
+            $r->get('/api/index.php/program_charter/find_by_pc/{id}', 'ProgramCharter/findByPCId');
             $r->get('/api/index.php/program_charter/delete/{id}', 'ProgramCharter/delete');
             $r->post('/api/index.php/program_charter/insert', 'ProgramCharter/insert');
             $r->post('/api/index.php/program_charter/update/{id}', 'ProgramCharter/update');
@@ -540,7 +541,8 @@ class Router
                     $explodeUri[4] == "update_id" ||
                     $explodeUri[4] == "select_id_get" ||
                     $explodeUri[4] == "get_root_parent" ||
-                    $explodeUri[4] == "get_leaf_by_root_id"
+                    $explodeUri[4] == "get_leaf_by_root_id" ||
+                    $explodeUri[4] == "find_by_pc"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
                 } else if (

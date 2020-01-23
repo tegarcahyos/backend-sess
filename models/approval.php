@@ -65,6 +65,30 @@ class Approval
         }
     }
 
+    public function findByPCId($id, $tablename)
+    {
+        $query = "SELECT * FROM $tablename WHERE pc_id = '$id'";
+        $result = $this->db->execute($query);
+        if (empty($result)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            $row = $result->fetchRow();
+            extract($row);
+
+            // Push to data_arr
+
+            $data_item = array(
+                'id' => $id,
+                'data' => json_decode($data),
+                'pc_id' => $pc_id,
+            );
+
+            $msg = $data_item;
+            return $msg;
+        }
+    }
+
     public function getPCByUserId($user_id, $tablename)
     {
         $pc_id;
@@ -83,7 +107,6 @@ class Approval
             $pc_id = $row['pc_id'];
         }
 
-        
         $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
         die($getPC);
     }
