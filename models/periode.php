@@ -165,7 +165,7 @@ class Periode
                 );
                 $msg_item = $data_item;
             }
-            $id_periode = implode('',$msg_item);
+            $id_periode = $msg_item;
             echo $id_periode;
           
             if($status_active == true){
