@@ -134,8 +134,6 @@ class Approval
 
                 $data_item = array(
                     'id' => $id,
-                    'data' => json_decode($data),
-                    'pc_id' => $pc_id,
                 );
             }
 
