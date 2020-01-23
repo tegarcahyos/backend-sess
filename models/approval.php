@@ -69,24 +69,30 @@ class Approval
     {
         $query = "SELECT * FROM $tablename WHERE pc_id = '$pc_id'";
         $result = $this->db->execute($query);
-        if (empty($result)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'data' => json_decode($data),
+                    'pc_id' => $pc_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
         } else {
-            $row = $result->fetchRow();
-            extract($row);
-
-            // Push to data_arr
-
-            $data_item = array(
-                'id' => $id,
-                'data' => json_decode($data),
-                'pc_id' => $pc_id,
-            );
-
-            $msg = $data_item;
-            return $msg;
+            $msg = 'Data Kosong';
         }
+
+        return $msg;
     }
 
     public function getPCByUserId($user_id, $tablename)
