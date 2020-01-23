@@ -179,9 +179,10 @@ class Periode
 
         }
 
-        echo "update laa";
+        // echo "update laa";
         $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
-        die($query);
+        // die($query);
+        echo ($query);
         $result = $this->db->execute($query);
 
         $res = $this->db->affected_rows();
