@@ -65,6 +65,13 @@ class Approval
         }
     }
 
+    public function getPCByUserId($user_id, $tablename)
+    {
+        $query = "SELECT * FROM $tablename
+                    WHERE data @> '[{user_id : $user_id}]'";
+        die($query);
+    }
+
     public function insert($tablename)
     {
         $data = file_get_contents("php://input");
