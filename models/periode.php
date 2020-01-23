@@ -152,7 +152,7 @@ class Periode
         $query_select_status = " SELECT id from $tablename where organisasi_id = '$organisasi_id' and status_active = '$status_active'";
         
         $result_select = $this->db->execute($query_select_status);
-        echo $result_select;
+        // echo $result_select;
 
         $num = $result_select->rowCount();
 
@@ -161,7 +161,7 @@ class Periode
                 extract($row);
 
                 $data_item = array(
-                    'id' => $id,                    
+                    'id_per' => $id,                    
                 );
                 $msg_item = $data_item;
             }
