@@ -134,13 +134,29 @@ class Approval
 
                 $data_item = array(
                     'id' => $id,
+                    'title' => $title,
+                    'code' => $code,
+                    'strategic_initiative' => $strategic_initiative,
+                    'cfu_fu' => $cfu_fu,
+                    'weight' => $weight,
+                    'matrix' => $matrix,
+                    'description' => $description,
+                    'refer_to' => $refer_to,
+                    'stakeholders' => $stakeholders,
+                    'kpi' => $kpi,
+                    'budget' => $budget,
+                    'main_activities' => $main_activities,
+                    'key_asks' => $key_asks,
+                    'risks' => $risks,
+                    'approval' => $approval,
+                    'status' => $status,
                 );
             }
 
             array_push($pc_collection, $data_item);
         }
 
-        die(print_r($pc_collection));
+        return $pc_collection;
     }
 
     public function insert($tablename)
