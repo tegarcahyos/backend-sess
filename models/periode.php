@@ -74,22 +74,30 @@ class Periode
     {
         $query = "SELECT * FROM $tablename WHERE organisasi_id = '$org_id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
-        } else {
-            extract($row);
+        $num = $result->rowCount();
+        if ($num > 0) {
 
-            $data_item = array(
-                'id' => $id,
-                'name' => $name,
-                'code' => $code,
-                'status_active' => $status_active,
-                'organisasi_id' => $organisasi_id,
-            );
-            return $data_item;
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'code' => $code,
+                    'status_active' => $status_active,
+                    'organisasi_id' => $organisasi_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+            
+        }else{
+            $msg='0';
         }
+        return $msg;
     }
 
     
