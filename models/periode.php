@@ -166,6 +166,7 @@ class Periode
                 $msg_item = $data_item;
             }
             $id_periode = implode('',$msg_item);
+            echo $id_periode;
           
             if($status_active == true){
                 $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
