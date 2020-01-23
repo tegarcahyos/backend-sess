@@ -118,7 +118,7 @@ class Approval
         } else {
             $msg = 'Data Kosong';
         }
-        die(count($msg));
+        die($msg);
         for ($i = 0; $i <= count($msg); $i++) {
             # code...
         }
