@@ -154,6 +154,7 @@ class Approval
             }
 
             array_push($pc_collection, $data_item);
+
         }
 
         return $pc_collection;
