@@ -70,6 +70,27 @@ class Periode
             return $data_item;
         }
     }
+    public function select_org_id($org_id, $tablename)
+    {
+        $query = "SELECT * FROM $tablename WHERE organisasi_id = '$org_id'";
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            extract($row);
+
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'code' => $code,
+                'status_active' => $status_active,
+                'organisasi_id' => $organisasi_id,
+            );
+            return $data_item;
+        }
+    }
 
     
 
