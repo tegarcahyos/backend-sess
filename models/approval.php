@@ -67,7 +67,7 @@ class Approval
 
     public function findByPCId($pc_id, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE pc_pc_id = '$id'";
+        $query = "SELECT * FROM $tablename WHERE pc_id = '$pc_id'";
         $result = $this->db->execute($query);
         if (empty($result)) {
             $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
