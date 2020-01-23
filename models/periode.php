@@ -176,7 +176,7 @@ class Periode
                 $this->db->execute($query_set_status);
             }
 
-        }
+        
 
             echo "update laa";
             $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
@@ -189,7 +189,21 @@ class Periode
             } else {
                 $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
             }
-            return $msg;
+        }else{
+            echo "update laa 2";
+            $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
+            die($query);
+            $result = $this->db->execute($query);
+
+            $res = $this->db->affected_rows();
+            if ($res == true) {
+                $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+            } else {
+                $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
+        }
+
+        return $msg;
     }
 
     public function delete($id, $tablename)
