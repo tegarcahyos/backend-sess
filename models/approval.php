@@ -82,6 +82,8 @@ class Approval
             $pc_id = $row['pc_id'];
         }
 
+        die($pc_id);
+
         $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
         die($getPC);
     }
