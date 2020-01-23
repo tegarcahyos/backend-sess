@@ -67,9 +67,23 @@ class Approval
 
     public function getPCByUserId($user_id, $tablename)
     {
+        $pc_id;
         $query = "SELECT * FROM $tablename
                     WHERE data @> '[{\"user_id\": \"" . $user_id . "\"}]'";
-        die($query);
+        // die($query);
+        $result = $this->db->execute($query);
+        if (empty($result)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            $row = $result->fetchRow();
+            extract($row);
+
+            $pc_id = $row['pc_id'];
+        }
+
+        $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
+        die($getPC);
     }
 
     public function insert($tablename)
