@@ -92,6 +92,8 @@ class Approval
     public function getPCByUserId($user_id, $tablename)
     {
         $pc_id;
+        $pc_collection = array();
+
         $query = "SELECT * FROM $tablename
                     WHERE data @> '[{\"user_id\": \"" . $user_id . "\"}]'";
         // die($query);
@@ -118,15 +120,33 @@ class Approval
         } else {
             $msg = 'Data Kosong';
         }
+
         for ($i = 0; $i < count($msg); $i++) {
             $pc_id = $msg[$i]['pc_id'];
-
             $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
             $PC = $this->db->execute($getPC);
-            $numPC = $PC->rowCount();
+            $num = $PC->rowCount();
+
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $PC->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                    );
+
+                    array_push($data_arr, $data_item);
+                }
+
+            }
+
+            array_push($data_arr, $pc_collection);
         }
 
-        die(print_r($numPC));
+        die(print_r($pc_collection));
     }
 
     public function insert($tablename)
