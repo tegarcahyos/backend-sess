@@ -119,7 +119,7 @@ class Approval
             $msg = 'Data Kosong';
         }
         die(count($msg));
-        for ($i = 0; $i < count($msg); $i++) {
+        for ($i = 0; $i <= count($msg); $i++) {
             # code...
         }
         die(print_r($msg[0]['pc_id']));
