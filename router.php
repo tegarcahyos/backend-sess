@@ -261,6 +261,7 @@ class Router
             // Approval
             $r->get('/api/index.php/approval/get', 'Approval/get');
             $r->get('/api/index.php/approval/find_id/{id}', 'Approval/findById');
+            $r->get('/api/index.php/approval/get_pc_by_user/{user_id}', 'Approval/getPCByUserId');
             $r->get('/api/index.php/approval/delete/{id}', 'Approval/delete');
             $r->post('/api/index.php/approval/insert', 'Approval/insert');
             $r->post('/api/index.php/approval/update/{id}', 'Approval/update');
@@ -493,8 +494,11 @@ class Router
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['group_id'], $explodeUri[3]));
 
-                } else if ($explodeUri[4] == "select_user_id" ||
-                    $explodeUri[4] == "update_user_id") {
+                } else if (
+                    $explodeUri[4] == "select_user_id" ||
+                    $explodeUri[4] == "update_user_id" ||
+                    $explodeUri[4] == "get_pc_by_user"
+                    ) {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[3]));
 
