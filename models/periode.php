@@ -138,7 +138,7 @@ class Periode
         return $msg;
     }
 
-    public function update($id, $tablename)
+    public function update($idP, $tablename)
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
@@ -183,7 +183,7 @@ class Periode
         }
 
         // echo "update laa";
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$idP'";
         // die($query);
         echo ($query);
         // $result = $this->db->execute($query);
