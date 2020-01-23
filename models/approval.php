@@ -77,12 +77,11 @@ class Approval
             return $msg;
         } else {
             $row = $result->fetchRow();
+            die(print_r($result));
             extract($row);
 
             $pc_id = $row['pc_id'];
         }
-
-        die($pc_id);
 
         $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
         die($getPC);
