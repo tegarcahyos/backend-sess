@@ -135,7 +135,7 @@ class Approval
                         'id' => $id[$i],
                     );
                 }
-                die($data_item[$i]);
+                die(print_r($data_item[$i]));
                 array_push($data_item[$i], $pc_collection);
             }
         }
