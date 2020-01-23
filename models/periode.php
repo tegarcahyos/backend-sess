@@ -167,7 +167,9 @@ class Periode
           
             if($status_active == true){
                 $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
+                echo 'asuuwww';
                 die($query_set_status);
+                echo 'asuuw';
                 $this->db->execute($query_set_status);
                 
                 echo "update laa";
