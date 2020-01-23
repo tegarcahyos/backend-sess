@@ -143,21 +143,6 @@ class User
 
     }
 
-    public function updatePhotoProfile($id, $tablename)
-    {
-        $data = file_get_contents("php://input");
-
-        $request = json_decode($data);
-        $upload_dir = '../upload/profile/';
-        $upload_file = $upload_dir . basename($request->photo);
-        $name = $request->photo;
-
-        move_uploaded_file($upload_file, $upload_dir);
-
-        $query = "UPDATE $tablename SET photo_profile = '$name' WHERE id = $id";
-        return $this->db->execute($query);
-    }
-
     public function update($id, $tablename)
     {
         // get data input from frontend

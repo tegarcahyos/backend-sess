@@ -65,9 +65,9 @@ class Approval
         }
     }
 
-    public function findByPCId($id, $tablename)
+    public function findByPCId($pc_id, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE pc_id = '$id'";
+        $query = "SELECT * FROM $tablename WHERE pc_id = '$pc_id'";
         $result = $this->db->execute($query);
         if (empty($result)) {
             $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
@@ -92,23 +92,71 @@ class Approval
     public function getPCByUserId($user_id, $tablename)
     {
         $pc_id;
+        $pc_collection = array();
+
         $query = "SELECT * FROM $tablename
                     WHERE data @> '[{\"user_id\": \"" . $user_id . "\"}]'";
         // die($query);
         $result = $this->db->execute($query);
-        if (empty($result)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
-        } else {
-            $row = $result->fetchRow();
-            die(print_r($row));
-            extract($row);
+        $num = $result->rowCount();
 
-            $pc_id = $row['pc_id'];
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'data' => json_decode($data),
+                    'pc_id' => $pc_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
         }
 
-        $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
-        die($getPC);
+        for ($i = 0; $i < count($msg); $i++) {
+            $pc_id = $msg[$i]['pc_id'];
+            $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
+            $PC = $this->db->execute($getPC);
+            if (empty($PC)) {
+                $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+                return $msg;
+            } else {
+                $row = $PC->fetchRow();
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'title' => $title,
+                    'code' => $code,
+                    'strategic_initiative' => $strategic_initiative,
+                    'cfu_fu' => $cfu_fu,
+                    'weight' => $weight,
+                    'matrix' => $matrix,
+                    'description' => $description,
+                    'refer_to' => json_decode($refer_to),
+                    'stakeholders' => json_decode($stakeholders),
+                    'kpi' => json_decode($kpi),
+                    'budget' => $budget,
+                    'main_activities' => json_decode($main_activities),
+                    'key_asks' => json_decode($key_asks),
+                    'risks' => $risks,
+                    'status' => $status,
+                );
+            }
+
+            array_push($pc_collection, $data_item);
+
+        }
+
+        return $pc_collection;
     }
 
     public function insert($tablename)
