@@ -548,7 +548,7 @@ class Router
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['org_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[4] == "get_by_user"
+                    $explodeUri[4] == "get_by_user" ||
                     $explodeUri[4] == "delete_by_user"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[3]));
