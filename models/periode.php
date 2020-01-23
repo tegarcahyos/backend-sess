@@ -160,7 +160,7 @@ class Periode
                 extract($row);
 
                 $data_item = array(
-                    'id_per' => $id,                    
+                    'id_per' => $idper,                    
                 );
                 $msg_item = $data_item;
             }
