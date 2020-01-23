@@ -131,11 +131,11 @@ class Approval
                 while ($row = $PC->fetchRow()) {
                     extract($row);
 
-                    $data_item[$i] = array(
+                    $data_item = array(
                         'id' => $id[$i],
                     );
                 }
-                die(print_r($data_item[$i]));
+                die(print_r($data_item));
                 array_push($data_item[$i], $pc_collection);
             }
         }
