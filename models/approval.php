@@ -68,7 +68,7 @@ class Approval
     public function getPCByUserId($user_id, $tablename)
     {
         $query = "SELECT * FROM $tablename
-                    WHERE data @> '[{\"" . $attr[$i] . "\": \"" . $values[$i] . "\"}]'";
+                    WHERE data @> '[{user_id : $user_id}]'";
         die($query);
     }
 
