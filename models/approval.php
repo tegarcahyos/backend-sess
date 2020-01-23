@@ -118,7 +118,7 @@ class Approval
         } else {
             $msg = 'Data Kosong';
         }
-        for ($i = 0; $i <= count($msg); $i++) {
+        for ($i = 0; $i <= count($data_arr); $i++) {
             die($i);
         }
         die(print_r($msg[0]['pc_id']));
