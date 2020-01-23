@@ -123,9 +123,29 @@ class Approval
 
             $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
             $PC = $this->db->execute($getPC);
+            $num = $PC->rowCount();
+
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $PC->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $pc_get = $data_arr;
+                }
+
+            } else {
+                $pc_get = 'Data Kosong';
+            }
         }
 
-        die(print_r($PC));
+        die(print_r($pc_get));
     }
 
     public function insert($tablename)
