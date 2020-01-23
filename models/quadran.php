@@ -65,6 +65,30 @@ class Quadran
         }
     }
 
+    public function findByUserId($user_id, $tablename)
+    {
+        $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
+        $result = $this->db->execute($query);
+        if (empty($result)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            $row = $result->fetchRow();
+            extract($row);
+
+            // Push to data_arr
+
+            $data_item = array(
+                'id' => $id,
+                'user_id' => $user_id,
+                'program_charter' => $program_charter,
+            );
+
+            $msg = $data_item;
+            return $msg;
+        }
+    }
+
     public function insert($tablename)
     {
         $data = file_get_contents("php://input");
@@ -155,6 +179,21 @@ class Quadran
     public function delete($id, $tablename)
     {
         $query = "DELETE FROM $tablename WHERE id = '$id'";
+
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
+
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
+    }
+
+    public function deleteByUserId($user_id, $tablename)
+    {
+        $query = "DELETE FROM $tablename WHERE user_id = '$user_id'";
 
         $result = $this->db->execute($query);
         // return $result;
