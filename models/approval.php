@@ -139,7 +139,7 @@ class Approval
                 );
             }
 
-            array_push($data_item, $pc_collection);
+            array_push($pc_collection, $data_item);
         }
 
         die(print_r($pc_collection));
