@@ -69,6 +69,33 @@ class Approval
     {
         $query = "SELECT * FROM $tablename WHERE pc_id = '$pc_id'";
         $result = $this->db->execute($query);
+        if (empty($result)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            $row = $result->fetchRow();
+            extract($row);
+
+            // Push to data_arr
+
+            $data_item = array(
+                'id' => $id,
+                'data' => json_decode($data),
+                'pc_id' => $pc_id,
+            );
+
+            $msg = $data_item;
+            return $msg;
+        }
+    }
+
+    public function getPCByUserId($user_id, $tablename)
+    {
+        $pc_id;
+        $query = "SELECT * FROM $tablename
+                    WHERE data @> '[{\"user_id\": \"" . $user_id . "\"}]'";
+        // die($query);
+        $result = $this->db->execute($query);
         $num = $result->rowCount();
 
         if ($num > 0) {
@@ -91,27 +118,7 @@ class Approval
         } else {
             $msg = 'Data Kosong';
         }
-
-        return $msg;
-    }
-
-    public function getPCByUserId($user_id, $tablename)
-    {
-        $pc_id;
-        $query = "SELECT * FROM $tablename
-                    WHERE data @> '[{\"user_id\": \"" . $user_id . "\"}]'";
-        // die($query);
-        $result = $this->db->execute($query);
-        if (empty($result)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
-        } else {
-            $row = $result->fetchRow();
-            die(print_r($row));
-            extract($row);
-
-            $pc_id = $row['pc_id'];
-        }
+        die(print_r($msg));
 
         $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
         die($getPC);
