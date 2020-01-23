@@ -167,15 +167,15 @@ class Periode
           
             if($status_active == true){
                 $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
-                echo 'asuuwww';
+                // echo 'asuuwww';
                 echo ($query_set_status);
-                echo 'asuuw';
+                // echo 'asuuw';
                 // $this->db->execute($query_set_status);
                 
-                echo "update laa";
-                $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
-                die($query);
-                $result = $this->db->execute($query);           
+                // echo "update laa";
+                // $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
+                // die($query);
+                // $result = $this->db->execute($query);           
             }else{
                 $query_set_status = "UPDATE $tablename SET status_active = 'true' where id = '$id_periode'";
                 die($query_set_status);
