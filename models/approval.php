@@ -148,7 +148,6 @@ class Approval
                     'main_activities' => json_decode($main_activities),
                     'key_asks' => json_decode($key_asks),
                     'risks' => $risks,
-                    'approval' => $approval,
                     'status' => $status,
                 );
             }
