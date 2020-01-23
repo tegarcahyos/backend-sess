@@ -153,12 +153,14 @@ class Periode
         
         $result_select = $this->db->execute($query_select_status);
 
-        
+        $num = $result_select->rowCount();
+
+        if ($num > 0) {
             while ($row = $result_select->fetchRow()) {
                 extract($row);
 
                 $data_item = array(
-                    'id' => $id,                    
+                    'id_per' => $id,                    
                 );
                 $msg_item = $data_item;
             }
@@ -167,35 +169,28 @@ class Periode
           
             if($status_active == true){
                 $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
-                // echo 'asuuwww';
-                echo ($query_set_status);
-                // echo 'asuuw';
-                // $this->db->execute($query_set_status);
-                
-                // echo "update laa";
-                // $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
-                // die($query);
-                // $result = $this->db->execute($query);           
+                // die($query_set_status);
+                $this->db->execute($query_set_status);           
             }else{
                 $query_set_status = "UPDATE $tablename SET status_active = 'true' where id = '$id_periode'";
-                die($query_set_status);
+                // die($query_set_status);
                 $this->db->execute($query_set_status);
             }
 
-        
+        }
 
-            echo "update laa";
-            $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
-            die($query);
-            $result = $this->db->execute($query);
+        echo "update laa";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
+        die($query);
+        $result = $this->db->execute($query);
 
-            $res = $this->db->affected_rows();
-            if ($res == true) {
-                $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
-            } else {
-                $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-            }
+        $res = $this->db->affected_rows();
 
+        if ($res == true) {
+            $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+        } else {
+            $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
         return $msg;
     }
 
