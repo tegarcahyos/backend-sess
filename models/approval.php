@@ -121,26 +121,14 @@ class Approval
             $msg = 'Data Kosong';
         }
 
-        die(print_r($msg));
-
         for ($i = 0; $i < count($msg); $i++) {
             $pc_id = $msg[$i]['pc_id'];
-            $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
-            $PC = $this->db->execute($getPC);
-            $num = $PC->rowCount();
-
-            if ($num > 0) {
-                while ($row = $PC->fetchRow()) {
-                    extract($row);
-
-                    $data_item = array(
-                        'id' => $id,
-                    );
-                }
-                die(print_r($data_item));
-                array_push($data_item[$i], $pc_collection);
-            }
         }
+        $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
+
+        $PC = $this->db->execute($getPC);
+        $numPC = $PC->rowCount();
+        die(print_r($numPC));
 
         die(print_r($pc_collection));
     }
