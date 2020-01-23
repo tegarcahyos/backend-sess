@@ -161,7 +161,7 @@ class Periode
                 extract($row);
 
                 $data_item = array(
-                    'id_per' => $idper,                    
+                    'id' => $idper,                    
                 );
                 $msg_item = $data_item;
             }
@@ -184,7 +184,7 @@ class Periode
         $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
         // die($query);
         echo ($query);
-        $result = $this->db->execute($query);
+        // $result = $this->db->execute($query);
 
         $res = $this->db->affected_rows();
 
