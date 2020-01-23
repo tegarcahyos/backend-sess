@@ -223,7 +223,9 @@ class Router
             // --- EXPERT JUDGEMENT ---
             $r->get('/api/index.php/expert_judgement/get', 'ExpertJudgement/get');
             $r->get('/api/index.php/expert_judgement/find_id/{id}', 'ExpertJudgement/findById');
+            $r->get('/api/index.php/expert_judgement/get_by_user/{user_id}', 'ExpertJudgement/findByUserId');
             $r->get('/api/index.php/expert_judgement/delete/{id}', 'ExpertJudgement/delete');
+            $r->get('/api/index.php/expert_judgement/delete_by_user/{user_id}', 'ExpertJudgement/deleteByUserId');
             $r->post('/api/index.php/expert_judgement/insert', 'ExpertJudgement/insert');
             $r->post('/api/index.php/expert_judgement/update/{id}', 'ExpertJudgement/update');
 
@@ -237,7 +239,9 @@ class Router
             // --- QUADRAn ---
             $r->get('/api/index.php/quadran/get', 'Quadran/get');
             $r->get('/api/index.php/quadran/find_id/{id}', 'Quadran/findById');
+            $r->get('/api/index.php/quadran/get_by_user/{user_id}', 'Quadran/findByUserId');
             $r->get('/api/index.php/quadran/delete/{id}', 'Quadran/delete');
+            $r->get('/api/index.php/quadran/delete_by_user/{user_id}', 'Quadran/deleteByUserId');
             $r->post('/api/index.php/quadran/insert', 'Quadran/insert');
             $r->post('/api/index.php/quadran/update/{id}', 'Quadran/update');
 
@@ -498,7 +502,7 @@ class Router
                     $explodeUri[4] == "select_user_id" ||
                     $explodeUri[4] == "update_user_id" ||
                     $explodeUri[4] == "get_pc_by_user"
-                    ) {
+                ) {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[3]));
 
@@ -544,7 +548,8 @@ class Router
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['org_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[4] == "get_by_user"
+                    $explodeUri[4] == "get_by_user" ||
+                    $explodeUri[4] == "delete_by_user"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[3]));
                 } else if (
