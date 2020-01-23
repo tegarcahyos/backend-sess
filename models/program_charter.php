@@ -44,7 +44,6 @@ class ProgramCharter
                     'main_activities' => $main_activities,
                     'key_asks' => $key_asks,
                     'risks' => $risks,
-                    'approval' => $approval,
                     'status' => $status,
                 );
 
@@ -86,7 +85,6 @@ class ProgramCharter
                 'main_activities' => $main_activities,
                 'key_asks' => $key_asks,
                 'risks' => $risks,
-                'approval' => $approval,
                 'status' => $status,
             );
             return $data_item;
@@ -113,7 +111,6 @@ class ProgramCharter
         $main_activities = json_encode($request[0]->main_activities);
         $key_asks = json_encode($request[0]->key_asks);
         $risks = $request[0]->risks;
-        $approval = $request[0]->approval;
         $status = $request[0]->status;
 
         if (empty($description)) {
@@ -141,7 +138,6 @@ class ProgramCharter
         main_activities,
         key_asks,
         risks,
-        approval,
         status)";
         $query .= "VALUES (
             '$title',
@@ -158,7 +154,6 @@ class ProgramCharter
             '$main_activities',
             '$key_asks',
             NULLIF('$risks', 'NULL'),
-            NULLIF('$approval', 'NULL'),
             '$status'
             ) RETURNING *";
         // die($query);
@@ -211,7 +206,6 @@ class ProgramCharter
         $main_activities = json_encode($request[0]->main_activities);
         $key_asks = json_encode($request[0]->key_asks);
         $risks = $request[0]->risks;
-        $approval = $request[0]->approval;
         $status = $request[0]->status;
 
         if (empty($description)) {
@@ -239,7 +233,6 @@ class ProgramCharter
             main_activities = '$main_activities',
             key_asks = '$key_asks' ,
             risks = NULLIF('$risks', 'NULL'),
-            approval = NULLIF('$approval', 'NULL'),
             status = '$status'
         WHERE id = '$id'";
         // die($query);
