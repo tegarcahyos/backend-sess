@@ -123,8 +123,8 @@ class Approval
 
         for ($i = 0; $i < count($msg); $i++) {
             $pc_id = $msg[$i]['pc_id'];
+            $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
         }
-        $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
 
         $PC = $this->db->execute($getPC);
         $numPC = $PC->rowCount();
