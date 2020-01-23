@@ -118,10 +118,12 @@ class Approval
         } else {
             $msg = 'Data Kosong';
         }
-        for ($i = 0; $i <= count($data_arr); $i++) {
-            die($i);
+        foreach ($msg as $key => $value) {
+            if ($key == 'pc_id') {
+                $pc_id = $key;
+            }
+            die($pc_id);
         }
-        die(print_r($msg[0]['pc_id']));
 
         $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
         die($getPC);
