@@ -118,7 +118,7 @@ class Approval
         } else {
             $msg = 'Data Kosong';
         }
-        die(print_r($msg));
+        die(print_r($msg[0]['pc_id']));
 
         $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
         die($getPC);
