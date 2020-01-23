@@ -154,8 +154,6 @@ class Periode
         $result_select = $this->db->execute($query_select_status);
 
         $num = $result_select->rowCount();
-        // echo $num;
-
         if ($num > 0) {
             while ($row = $result_select->fetchRow()) {
                 extract($row);
@@ -180,19 +178,18 @@ class Periode
 
         }
 
-        echo "update laa";
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
-        die($query);
-        $result = $this->db->execute($query);
+            echo "update laa";
+            $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$id'";
+            die($query);
+            $result = $this->db->execute($query);
 
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
-        } else {
-            $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-        }
-        return $msg;
+            $res = $this->db->affected_rows();
+            if ($res == true) {
+                $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+            } else {
+                $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
+            return $msg;
     }
 
     public function delete($id, $tablename)
