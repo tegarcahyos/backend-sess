@@ -152,7 +152,7 @@ class Periode
         $query_select_status = " SELECT id from $tablename where organisasi_id = '$organisasi_id' and status_active = '$status_active'";
         
         $result_select = $this->db->execute($query_select_status);
-        echo $result_select;
+        // echo $result_select;
 
         $num = $result_select->rowCount();
 
@@ -165,13 +165,13 @@ class Periode
                 );
                 $msg_item = $data_item;
             }
-            $id_periode = implode('',$msg_item);
+            $id_periode = $msg_item;
             echo $id_periode;
           
             if($status_active == true){
                 $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
                 // die($query_set_status);
-                echo $status_active;
+                echo $query_set_status;
                 // $this->db->execute($query_set_status);           
             }else{
                 $query_set_status = "UPDATE $tablename SET status_active = 'true' where id = '$id_periode'";
