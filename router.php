@@ -266,7 +266,7 @@ class Router
             $r->get('/api/index.php/approval/get', 'Approval/get');
             $r->get('/api/index.php/approval/find_id/{id}', 'Approval/findById');
             $r->get('/api/index.php/approval/get_pc_by_user/{user_id}', 'Approval/getPCByUserId');
-            $r->get('/api/index.php/approval/find_by_pc/{pc_id}', 'ProgramCharter/findByPCId');
+            $r->get('/api/index.php/approval/find_by_pc/{pc_id}', 'Approval/findByPCId');
             $r->get('/api/index.php/approval/delete/{id}', 'Approval/delete');
             $r->post('/api/index.php/approval/insert', 'Approval/insert');
             $r->post('/api/index.php/approval/update/{id}', 'Approval/update');
