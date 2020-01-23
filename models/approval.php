@@ -142,9 +142,8 @@ class Approval
                 }
 
             }
-            die(print_r($data_arr));
-            array_push($data_arr, $pc_collection);
         }
+        array_push($data_arr, $pc_collection);
 
         die(print_r($pc_collection));
     }
