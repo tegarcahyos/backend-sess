@@ -186,7 +186,7 @@ class Router
                 }
             }
 
-            print_r("ini token yang kekirim" . $token);
+            // print_r("ini token yang kekirim" . $token);
 
             // --- LOGIN ---
             $r->post('/api/index.php/login', 'Login/authenticate');
