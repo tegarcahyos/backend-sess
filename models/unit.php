@@ -159,6 +159,7 @@ class Unit
                     'name' => $name,
                     'code' => $code,
                     'parent_list' => $this->parentArray,
+                    'organization_id' => $organization_id
                 );
 
                 array_push($data_arr, $data_item);
