@@ -191,7 +191,7 @@ class Router
             $r->post('/api/index.php/loginApiFactory', 'Login/apiFactory');
             // --- CHECK TOKEN ---
             if (!empty($token)) {
-                echo "ini token yang kekirim:" . $token;
+                // echo "ini token yang kekirim:" . $token;
                 $passed = $this->check_token($token);
                 if ($passed == 'true') {
                     //FILES
