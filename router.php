@@ -177,18 +177,20 @@ class Router
     {
 
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
-            // --- LOGIN ---
-            $r->post('/api/index.php/login', 'Login/authenticate');
-            $r->post('/api/index.php/loginApiFactory', 'Login/apiFactory');
-            // --- CHECK TOKEN ---
-            $getHeader = getallheaders();
 
+            $getHeader = getallheaders();
+            die(print_r($getHeader));
             $token = "";
             foreach ($getHeader as $key => $value) {
                 if ($key == 'Authorization') {
                     $token = $value;
                 }
             }
+
+            // --- LOGIN ---
+            $r->post('/api/index.php/login', 'Login/authenticate');
+            $r->post('/api/index.php/loginApiFactory', 'Login/apiFactory');
+            // --- CHECK TOKEN ---
             if (!empty($token)) {
                 $passed = $this->check_token($token);
                 if ($passed == 'true') {
