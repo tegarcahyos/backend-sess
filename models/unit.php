@@ -35,7 +35,7 @@ class Unit
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
-                    'organization' => $organization_id
+                    'organization_id' => $organization_id
                 );
 
                 array_push($data_arr, $data_item);
