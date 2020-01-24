@@ -179,6 +179,7 @@ class Router
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
 
             $getHeader = getallheaders();
+            die(print_r($getHeader));
             $token = "";
             foreach ($getHeader as $key => $value) {
                 if ($key == 'Authorization') {
