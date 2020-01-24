@@ -27,6 +27,7 @@ include "models/upload_file.php";
 include "models/expert_judgement.php";
 include "models/ahp_criteria.php";
 include "models/approval.php";
+include "models/reviewer_plan.php";
 include "models/quadran.php";
 include "models/periode.php";
 include "models/tara.php";
@@ -271,6 +272,13 @@ class Router
             $r->post('/api/index.php/approval/insert', 'Approval/insert');
             $r->post('/api/index.php/approval/update/{id}', 'Approval/update');
 
+            // Reviewer Plan
+            $r->get('/api/index.php/reviewer_plan/get', 'ReviewerPlan/get');
+            $r->get('/api/index.php/reviewer_plan/find_id/{id}', 'ReviewerPlan/findById');
+            $r->get('/api/index.php/reviewer_plan/delete/{id}', 'ReviewerPlan/delete');
+            $r->post('/api/index.php/reviewer_plan/insert', 'ReviewerPlan/insert');
+            $r->post('/api/index.php/reviewer_plan/update/{id}', 'ReviewerPlan/update');
+
             // Tara
             $r->get('/api/index.php/tara/get', 'Tara/get');
             $r->get('/api/index.php/tara/find_id/{id}', 'Tara/findById');
@@ -381,11 +389,11 @@ class Router
             $r->post('/api/index.php/matrix/update/{id}', 'Matrix/update');
 
             //PERIOD
-            $r->post('/api/index.php/periode/insert', 'Periode/insert');
             $r->get('/api/index.php/periode/get', 'Periode/get');
-            $r->get('/api/index.php/periode/delete/{id}', 'Periode/delete');
             $r->get('/api/index.php/periode/select/{id}', 'Periode/select_id');
             $r->get('/api/index.php/periode/select_org_id/{org_id}', 'Periode/select_org_id');
+            $r->get('/api/index.php/periode/delete/{id}', 'Periode/delete');
+            $r->post('/api/index.php/periode/insert', 'Periode/insert');
             $r->post('/api/index.php/periode/update/{id}', 'Periode/update');
 
             //GROUP CHAT
@@ -398,10 +406,10 @@ class Router
             $r->get('/api/index.php/group_chat/group_member/join_group_chat/{user_id}/{group_id}', 'GroupChat/join_group_chat');
 
             //USER LOGIN
-            $r->post('/api/index.php/user_login/insert_user_device', 'UserLogin/insert');
             $r->get('/api/index.php/user_login/select_all_device', 'UserLogin/get');
             $r->get('/api/index.php/user_login/select_device/{device_id}', 'UserLogin/findByDeviceId');
             $r->get('/api/index.php/user_login/delete_device/{device_id}', 'UserLogin/delete');
+            $r->post('/api/index.php/user_login/insert_user_device', 'UserLogin/insert');
 
             //ATTACHMENT
             $r->post('/api/index.php/attachment/insert_attachment', 'Attachment/insert');
