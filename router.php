@@ -440,8 +440,6 @@ class Router
                 } else {
                     return $this->msg(http_response_code(401), 401, 'Unauthorized', "gagal", 0);
                 }
-            } else {
-                return $this->msg( http_response_code(403),403, 'Forbidden', "gagal", 0);
             }
 
         });
