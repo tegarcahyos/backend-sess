@@ -186,16 +186,14 @@ class Router
                 }
             }
 
-            print_r("ini token yang kekirim" . $token);
-
             // --- LOGIN ---
             $r->post('/api/index.php/login', 'Login/authenticate');
             $r->post('/api/index.php/loginApiFactory', 'Login/apiFactory');
             // --- CHECK TOKEN ---
             if (!empty($token)) {
                 $passed = $this->check_token($token);
+                print_r("ini token yang kekirim" . $token);
                 if ($passed == 'true') {
-
                     //FILES
                     $r->post('/api/index.php/file/upload', 'Upload/upload_file');
                     $r->get('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
