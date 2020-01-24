@@ -68,6 +68,42 @@ class Kpi
         }
     }
 
+    public function getByParent($parent_id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE parent_id = '$parent_id'";
+
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+                $data_item = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'metric' => $metric,
+                    'status' => $status,
+                    'parent_id' => $parent_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+    }
+
     public function getLeafKpi($tablename)
     {
         $query = "SELECT
