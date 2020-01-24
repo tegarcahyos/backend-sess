@@ -354,6 +354,13 @@ class Router
             $r->post('/api/index.php/si_target/insert', 'SITarget/insert');
             $r->post('/api/index.php/si_target/update/{id}', 'SITarget/update');
 
+            // UNIT TARGET
+            $r->get('/api/index.php/unit_target/get', 'UnitTarget/get');
+            $r->get('/api/index.php/unit_target/find_id/{id}', 'UnitTarget/findById');
+            $r->get('/api/index.php/unit_target/delete/{id}', 'UnitTarget/delete');
+            $r->post('/api/index.php/unit_target/insert', 'UnitTarget/insert');
+            $r->post('/api/index.php/unit_target/update/{id}', 'UnitTarget/update');
+
             // ORGANIZATION
             $r->get('/api/index.php/organization/get', 'Organization/get');
             $r->get('/api/index.php/organization/find_id/{id}', 'Organization/findById');
