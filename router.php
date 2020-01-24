@@ -438,10 +438,10 @@ class Router
                     $r->get('/api/index.php/group_message/status_read/{group_id}', 'GroupMessage/status_read');
 
                 } else {
-                    return $this->msg(405, 'Token Expired', "gagal", 0);
+                    return $this->msg(http_response_code(401), 401, 'Unauthorized', "gagal", 0);
                 }
             } else {
-                return $this->msg(407, 'Token Not Found', "gagal", 0);
+                return $this->msg( http_response_code(403),403, 'Forbidden', "gagal", 0);
             }
 
         });
