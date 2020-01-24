@@ -289,11 +289,12 @@ class Unit
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
+        $organization_id = $request[0]->organization_id;
 
         $query = "INSERT INTO $tablename (
-            parent_id, name, code)";
+            parent_id, name, code, organization_id)";
         $query .= "VALUES (
-            '$parent_id' , '$name', '$code')";
+            '$parent_id' , '$name', '$code','$organization_id')";
         // die($query);
         return $this->db->execute($query);
 
@@ -309,8 +310,9 @@ class Unit
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
+        $organization_id = $request[0]->organization_id;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
