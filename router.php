@@ -206,19 +206,19 @@ class Router
             $r->post('/api/index.php/users/insert', 'User/insert');
             $r->post('/api/index.php/users/update/{id}', 'User/update');
 
-            // --- MASTER DATA ---
-            $r->get('/api/index.php/master_data/get', 'MasterData/get');
-            $r->get('/api/index.php/master_data/find_id/{id}', 'MasterData/findById');
-            $r->get('/api/index.php/master_data/delete/{id}', 'MasterData/delete');
-            $r->post('/api/index.php/master_data/insert', 'MasterData/insert');
-            $r->post('/api/index.php/master_data/update/{id}', 'MasterData/update');
+            // // --- MASTER DATA ---
+            // $r->get('/api/index.php/master_data/get', 'MasterData/get');
+            // $r->get('/api/index.php/master_data/find_id/{id}', 'MasterData/findById');
+            // $r->get('/api/index.php/master_data/delete/{id}', 'MasterData/delete');
+            // $r->post('/api/index.php/master_data/insert', 'MasterData/insert');
+            // $r->post('/api/index.php/master_data/update/{id}', 'MasterData/update');
 
-            // --- DATA FROM MASTER ---
-            $r->get('/api/index.php/data_from_master/get', 'DataMaster/get');
-            $r->get('/api/index.php/data_from_master/find_id/{id}', 'DataMaster/findById');
-            $r->get('/api/index.php/data_from_master/delete/{id}', 'DataMaster/delete');
-            $r->post('/api/index.php/data_from_master/insert', 'DataMaster/insert');
-            $r->post('/api/index.php/data_from_master/update/{id}', 'DataMaster/update');
+            // // --- DATA FROM MASTER ---
+            // $r->get('/api/index.php/data_from_master/get', 'DataMaster/get');
+            // $r->get('/api/index.php/data_from_master/find_id/{id}', 'DataMaster/findById');
+            // $r->get('/api/index.php/data_from_master/delete/{id}', 'DataMaster/delete');
+            // $r->post('/api/index.php/data_from_master/insert', 'DataMaster/insert');
+            // $r->post('/api/index.php/data_from_master/update/{id}', 'DataMaster/update');
 
             // --- EXPERT JUDGEMENT ---
             $r->get('/api/index.php/expert_judgement/get', 'ExpertJudgement/get');
@@ -316,12 +316,12 @@ class Router
             $r->post('/api/index.php/program_charter/insert', 'ProgramCharter/insert');
             $r->post('/api/index.php/program_charter/update/{id}', 'ProgramCharter/update');
 
-            // METRIC
-            $r->get('/api/index.php/metric/get', 'Metric/get');
-            $r->get('/api/index.php/metric/find_id/{id}', 'Metric/findById');
-            $r->get('/api/index.php/metric/delete/{id}', 'Metric/delete');
-            $r->post('/api/index.php/metric/insert', 'Metric/insert');
-            $r->post('/api/index.php/metric/update/{id}', 'Metric/update');
+            // // METRIC
+            // $r->get('/api/index.php/metric/get', 'Metric/get');
+            // $r->get('/api/index.php/metric/find_id/{id}', 'Metric/findById');
+            // $r->get('/api/index.php/metric/delete/{id}', 'Metric/delete');
+            // $r->post('/api/index.php/metric/insert', 'Metric/insert');
+            // $r->post('/api/index.php/metric/update/{id}', 'Metric/update');
 
             // ROLE
             $r->get('/api/index.php/role/get', 'Role/get');
@@ -363,13 +363,13 @@ class Router
             $r->post('/api/index.php/unit/insert', 'Unit/insert');
             $r->post('/api/index.php/unit/update/{id}', 'Unit/update');
 
-            // OBJECT DATA
-            $r->get('/api/index.php/{tablename}/select_all_get', 'ObjectData/select_all_get');
-            $r->get('/api/index.php/{tablename}/select_id_get/{id}', 'ObjectData/select_id_get');
-            $r->get('/api/index.php/{tablename}/select_where_get/{attr}/{val}', 'ObjectData/select_where_get');
-            $r->get('/api/index.php/{tablename}/delete_all_get/{id}', 'ObjectData/delete_all_get');
-            $r->post('/api/index.php/{tablename}/insert_object', 'ObjectData/insert');
-            $r->post('/api/index.php/{tablename}/update_id/{id}', 'ObjectData/update_id');
+            // // OBJECT DATA
+            // $r->get('/api/index.php/{tablename}/select_all_get', 'ObjectData/select_all_get');
+            // $r->get('/api/index.php/{tablename}/select_id_get/{id}', 'ObjectData/select_id_get');
+            // $r->get('/api/index.php/{tablename}/select_where_get/{attr}/{val}', 'ObjectData/select_where_get');
+            // $r->get('/api/index.php/{tablename}/delete_all_get/{id}', 'ObjectData/delete_all_get');
+            // $r->post('/api/index.php/{tablename}/insert_object', 'ObjectData/insert');
+            // $r->post('/api/index.php/{tablename}/update_id/{id}', 'ObjectData/update_id');
 
             // MATRIX
             $r->get('/api/index.php/matrix/get', 'Matrix/get');
