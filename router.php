@@ -192,7 +192,6 @@ class Router
             if (!empty($token)) {
                 $passed = $this->check_token($token);
                 if ($passed == 'true') {
-                    die(print_r($getHeader));
                     //FILES
                     $r->post('/api/index.php/file/upload', 'Upload/upload_file');
                     $r->get('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
