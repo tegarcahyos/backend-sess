@@ -23,10 +23,12 @@ include "models/kpi.php";
 include "models/master_data.php";
 include "models/data_from_master.php";
 include "models/si_target.php";
+include "models/unit_target.php";
 include "models/upload_file.php";
 include "models/expert_judgement.php";
 include "models/ahp_criteria.php";
 include "models/approval.php";
+include "models/reviewer_plan.php";
 include "models/quadran.php";
 include "models/periode.php";
 include "models/tara.php";
@@ -178,6 +180,7 @@ class Router
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
 
             $getHeader = getallheaders();
+            // die(print_r($getHeader));
             $token = "";
             foreach ($getHeader as $key => $value) {
                 if ($key == 'Authorization') {
@@ -192,7 +195,6 @@ class Router
             // if (!empty($token)) {
             //     $passed = $this->check_token($token);
             //     if ($passed == 'true') {
-
             //FILES
             $r->post('/api/index.php/file/upload', 'Upload/upload_file');
             $r->get('/api/index.php/upload_file/download/{id_file}', 'Upload/downloadFile');
@@ -206,19 +208,19 @@ class Router
             $r->post('/api/index.php/users/insert', 'User/insert');
             $r->post('/api/index.php/users/update/{id}', 'User/update');
 
-            // --- MASTER DATA ---
-            $r->get('/api/index.php/master_data/get', 'MasterData/get');
-            $r->get('/api/index.php/master_data/find_id/{id}', 'MasterData/findById');
-            $r->get('/api/index.php/master_data/delete/{id}', 'MasterData/delete');
-            $r->post('/api/index.php/master_data/insert', 'MasterData/insert');
-            $r->post('/api/index.php/master_data/update/{id}', 'MasterData/update');
+            // // --- MASTER DATA ---
+            // $r->get('/api/index.php/master_data/get', 'MasterData/get');
+            // $r->get('/api/index.php/master_data/find_id/{id}', 'MasterData/findById');
+            // $r->get('/api/index.php/master_data/delete/{id}', 'MasterData/delete');
+            // $r->post('/api/index.php/master_data/insert', 'MasterData/insert');
+            // $r->post('/api/index.php/master_data/update/{id}', 'MasterData/update');
 
-            // --- DATA FROM MASTER ---
-            $r->get('/api/index.php/data_from_master/get', 'DataMaster/get');
-            $r->get('/api/index.php/data_from_master/find_id/{id}', 'DataMaster/findById');
-            $r->get('/api/index.php/data_from_master/delete/{id}', 'DataMaster/delete');
-            $r->post('/api/index.php/data_from_master/insert', 'DataMaster/insert');
-            $r->post('/api/index.php/data_from_master/update/{id}', 'DataMaster/update');
+            // // --- DATA FROM MASTER ---
+            // $r->get('/api/index.php/data_from_master/get', 'DataMaster/get');
+            // $r->get('/api/index.php/data_from_master/find_id/{id}', 'DataMaster/findById');
+            // $r->get('/api/index.php/data_from_master/delete/{id}', 'DataMaster/delete');
+            // $r->post('/api/index.php/data_from_master/insert', 'DataMaster/insert');
+            // $r->post('/api/index.php/data_from_master/update/{id}', 'DataMaster/update');
 
             // --- EXPERT JUDGEMENT ---
             $r->get('/api/index.php/expert_judgement/get', 'ExpertJudgement/get');
@@ -271,6 +273,13 @@ class Router
             $r->post('/api/index.php/approval/insert', 'Approval/insert');
             $r->post('/api/index.php/approval/update/{id}', 'Approval/update');
 
+            // Reviewer Plan
+            $r->get('/api/index.php/reviewer_plan/get', 'ReviewerPlan/get');
+            $r->get('/api/index.php/reviewer_plan/find_id/{id}', 'ReviewerPlan/findById');
+            $r->get('/api/index.php/reviewer_plan/delete/{id}', 'ReviewerPlan/delete');
+            $r->post('/api/index.php/reviewer_plan/insert', 'ReviewerPlan/insert');
+            $r->post('/api/index.php/reviewer_plan/update/{id}', 'ReviewerPlan/update');
+
             // Tara
             $r->get('/api/index.php/tara/get', 'Tara/get');
             $r->get('/api/index.php/tara/find_id/{id}', 'Tara/findById');
@@ -316,12 +325,12 @@ class Router
             $r->post('/api/index.php/program_charter/insert', 'ProgramCharter/insert');
             $r->post('/api/index.php/program_charter/update/{id}', 'ProgramCharter/update');
 
-            // METRIC
-            $r->get('/api/index.php/metric/get', 'Metric/get');
-            $r->get('/api/index.php/metric/find_id/{id}', 'Metric/findById');
-            $r->get('/api/index.php/metric/delete/{id}', 'Metric/delete');
-            $r->post('/api/index.php/metric/insert', 'Metric/insert');
-            $r->post('/api/index.php/metric/update/{id}', 'Metric/update');
+            // // METRIC
+            // $r->get('/api/index.php/metric/get', 'Metric/get');
+            // $r->get('/api/index.php/metric/find_id/{id}', 'Metric/findById');
+            // $r->get('/api/index.php/metric/delete/{id}', 'Metric/delete');
+            // $r->post('/api/index.php/metric/insert', 'Metric/insert');
+            // $r->post('/api/index.php/metric/update/{id}', 'Metric/update');
 
             // ROLE
             $r->get('/api/index.php/role/get', 'Role/get');
@@ -333,6 +342,8 @@ class Router
             // KPI
             $r->get('/api/index.php/kpi/get', 'Kpi/get');
             $r->get('/api/index.php/kpi/find_id/{id}', 'Kpi/findById');
+            $r->get('/api/index.php/kpi/get_leaf', 'Kpi/getLeafKpi');
+            $r->get('/api/index.php/kpi/get_by_parent/{parent_id}', 'Kpi/getByParent');
             $r->get('/api/index.php/kpi/delete/{id}', 'Kpi/delete');
             $r->post('/api/index.php/kpi/insert', 'Kpi/insert');
             $r->post('/api/index.php/kpi/update/{id}', 'Kpi/update');
@@ -343,6 +354,13 @@ class Router
             $r->get('/api/index.php/si_target/delete/{id}', 'SITarget/delete');
             $r->post('/api/index.php/si_target/insert', 'SITarget/insert');
             $r->post('/api/index.php/si_target/update/{id}', 'SITarget/update');
+
+            // UNIT TARGET
+            $r->get('/api/index.php/unit_target/get', 'UnitTarget/get');
+            $r->get('/api/index.php/unit_target/find_id/{id}', 'UnitTarget/findById');
+            $r->get('/api/index.php/unit_target/delete/{id}', 'UnitTarget/delete');
+            $r->post('/api/index.php/unit_target/insert', 'UnitTarget/insert');
+            $r->post('/api/index.php/unit_target/update/{id}', 'UnitTarget/update');
 
             // ORGANIZATION
             $r->get('/api/index.php/organization/get', 'Organization/get');
@@ -362,13 +380,13 @@ class Router
             $r->post('/api/index.php/unit/insert', 'Unit/insert');
             $r->post('/api/index.php/unit/update/{id}', 'Unit/update');
 
-            // OBJECT DATA
-            $r->get('/api/index.php/{tablename}/select_all_get', 'ObjectData/select_all_get');
-            $r->get('/api/index.php/{tablename}/select_id_get/{id}', 'ObjectData/select_id_get');
-            $r->get('/api/index.php/{tablename}/select_where_get/{attr}/{val}', 'ObjectData/select_where_get');
-            $r->get('/api/index.php/{tablename}/delete_all_get/{id}', 'ObjectData/delete_all_get');
-            $r->post('/api/index.php/{tablename}/insert_object', 'ObjectData/insert');
-            $r->post('/api/index.php/{tablename}/update_id/{id}', 'ObjectData/update_id');
+            // // OBJECT DATA
+            // $r->get('/api/index.php/{tablename}/select_all_get', 'ObjectData/select_all_get');
+            // $r->get('/api/index.php/{tablename}/select_id_get/{id}', 'ObjectData/select_id_get');
+            // $r->get('/api/index.php/{tablename}/select_where_get/{attr}/{val}', 'ObjectData/select_where_get');
+            // $r->get('/api/index.php/{tablename}/delete_all_get/{id}', 'ObjectData/delete_all_get');
+            // $r->post('/api/index.php/{tablename}/insert_object', 'ObjectData/insert');
+            // $r->post('/api/index.php/{tablename}/update_id/{id}', 'ObjectData/update_id');
 
             // MATRIX
             $r->get('/api/index.php/matrix/get', 'Matrix/get');
@@ -379,11 +397,11 @@ class Router
             $r->post('/api/index.php/matrix/update/{id}', 'Matrix/update');
 
             //PERIOD
-            $r->post('/api/index.php/periode/insert', 'Periode/insert');
             $r->get('/api/index.php/periode/get', 'Periode/get');
-            $r->get('/api/index.php/periode/delete/{id}', 'Periode/delete');
             $r->get('/api/index.php/periode/select/{id}', 'Periode/select_id');
             $r->get('/api/index.php/periode/select_org_id/{org_id}', 'Periode/select_org_id');
+            $r->get('/api/index.php/periode/delete/{id}', 'Periode/delete');
+            $r->post('/api/index.php/periode/insert', 'Periode/insert');
             $r->post('/api/index.php/periode/update/{id}', 'Periode/update');
 
             //GROUP CHAT
@@ -396,10 +414,10 @@ class Router
             $r->get('/api/index.php/group_chat/group_member/join_group_chat/{user_id}/{group_id}', 'GroupChat/join_group_chat');
 
             //USER LOGIN
-            $r->post('/api/index.php/user_login/insert_user_device', 'UserLogin/insert');
             $r->get('/api/index.php/user_login/select_all_device', 'UserLogin/get');
             $r->get('/api/index.php/user_login/select_device/{device_id}', 'UserLogin/findByDeviceId');
             $r->get('/api/index.php/user_login/delete_device/{device_id}', 'UserLogin/delete');
+            $r->post('/api/index.php/user_login/insert_user_device', 'UserLogin/insert');
 
             //ATTACHMENT
             $r->post('/api/index.php/attachment/insert_attachment', 'Attachment/insert');
@@ -427,13 +445,9 @@ class Router
             $r->post('/api/index.php/group_message/update/{id}', 'GroupMessage/update');
             $r->get('/api/index.php/group_message/status_read/{group_id}', 'GroupMessage/status_read');
 
-            //
-
-            //     } else {
-            //         return $this->msg(405, 'Token Expired', "gagal", 0);
-            //     }
             // } else {
-            //     return $this->msg(407, 'Token Not Found', "gagal", 0);
+            //     return $this->msg(http_response_code(401), 401, 'Unauthorized', "gagal", 0);
+            // }
             // }
 
         });

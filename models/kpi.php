@@ -32,6 +32,7 @@ class Kpi
                     'name' => $name,
                     'metric' => $metric,
                     'status' => $status,
+                    'parent_id' => $parent_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -61,9 +62,113 @@ class Kpi
                 'name' => $name,
                 'metric' => $metric,
                 'status' => $status,
+                'parent_id' => $parent_id,
             );
             return $data_item;
         }
+    }
+
+    private $parentArray = [""];
+    public function getParentKpiBy($id)
+    {
+        // Jika parent
+        if ($id == '0') {
+            // is root
+        } else {
+            // bukan root
+            // select name, parentId by $id,
+            $query = "SELECT * FROM kpi WHERE id = '$id'";
+            //
+            $result = $this->db->execute($query);
+            // die(print_r($result->fetchRow()));
+            $row = $result->fetchRow();
+            extract($row);
+
+            $nameTemp = $row['name'];
+            // SUNTIK nama array
+            array_push($this->parentArray, $nameTemp);
+            // Ambil parent id, buat dicari lagi atasnya
+            $idParentTemp = $row['parent_id'];
+            // Cari atasnya
+            $this->getParentKpiBy($idParentTemp);
+        }
+    }
+
+    public function getByParent($parent_id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE parent_id = '$parent_id'";
+        // die($query);
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+                // ambil parent parentnya pake $parent_id
+                $this->getParentKpiBy($parent_id);
+                $data_item = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'metric' => $metric,
+                    'status' => $status,
+                    'parent_id' => $parent_id,
+                    'parent_list' => $this->parentArray,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+    }
+
+    public function getLeafKpi($tablename)
+    {
+        $query = "SELECT
+        *
+       FROM
+          $tablename t1
+           WHERE NOT EXISTS (SELECT * FROM $tablename t2 WHERE t1.id::text = t2.parent_id::text)";
+        // die($query);
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'metric' => $metric,
+                    'status' => $status,
+                    'parent_id' => $parent_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+
     }
 
     public function insert($tablename)
@@ -75,9 +180,10 @@ class Kpi
         $name = $request[0]->name;
         $metric = $request[0]->metric;
         $status = $request[0]->status;
+        $parent_id = $request[0]->parent_id;
 
-        $query = "INSERT INTO $tablename (name, metric, status)";
-        $query .= "VALUES ('$name', '$metric', '$status') RETURNING *";
+        $query = "INSERT INTO $tablename (name, metric, status, parent_id)";
+        $query .= "VALUES ('$name', '$metric', '$status', '$parent_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
@@ -92,6 +198,7 @@ class Kpi
                 'name' => $name,
                 'metric' => $metric,
                 'status' => $status,
+                'parent_id' => $parent_id,
             );
             return $data_item;
         }
@@ -107,8 +214,9 @@ class Kpi
         $name = $request[0]->name;
         $metric = $request[0]->metric;
         $status = $request[0]->status;
+        $parent_id = $request[0]->parent_id;
 
-        $query = "UPDATE $tablename SET name = '$name', metric = '$metric', status = '$status' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', metric = '$metric', status = '$status', parent_id = '$parent_id' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
@@ -123,6 +231,7 @@ class Kpi
                 'name' => $name,
                 'metric' => $metric,
                 'status' => $status,
+                'parent_id' => $parent_id,
             );
             return $data_item;
         }
