@@ -100,7 +100,7 @@ class Kpi
            *
           FROM
              $tablename WHERE parent_id = '$parent_id'";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
