@@ -68,6 +68,32 @@ class Kpi
         }
     }
 
+    private $parentArray = [""];
+    public function getParentKpiBy($id)
+    {
+        // Jika parent
+        if ($id == '0') {
+            // is root
+        } else {
+            // bukan root
+            // select name, parentId by $id,
+            $query = "SELECT * FROM kpi WHERE id = '$id'";
+            //
+            $result = $this->db->execute($query);
+            // die(print_r($result->fetchRow()));
+            $row = $result->fetchRow();
+            extract($row);
+
+            $nameTemp = $row['name'];
+            // SUNTIK nama array
+            array_push($this->parentArray, $nameTemp);
+            // Ambil parent id, buat dicari lagi atasnya
+            $idParentTemp = $row['parent_id'];
+            // Cari atasnya
+            $this->getParentKpiBy($idParentTemp);
+        }
+    }
+
     public function getByParent($parent_id, $tablename)
     {
         $query = "SELECT
@@ -85,12 +111,15 @@ class Kpi
 
             while ($row = $result->fetchRow()) {
                 extract($row);
+                // ambil parent parentnya pake $parent_id
+                $this->getParentKpiBy($parent_id);
                 $data_item = array(
                     'id' => $id,
                     'name' => $name,
                     'metric' => $metric,
                     'status' => $status,
                     'parent_id' => $parent_id,
+                    'parent_list' => $this->parentArray,
                 );
 
                 array_push($data_arr, $data_item);
