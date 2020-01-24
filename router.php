@@ -192,7 +192,7 @@ class Router
             // --- CHECK TOKEN ---
             if (!empty($token)) {
                 $passed = $this->check_token($token);
-                print_r("ini token yang kekirim" . $token);
+                echo "ini token yang kekirim:" . $token;
                 if ($passed == 'true') {
                     //FILES
                     $r->post('/api/index.php/file/upload', 'Upload/upload_file');
