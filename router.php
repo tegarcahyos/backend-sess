@@ -333,6 +333,7 @@ class Router
             // KPI
             $r->get('/api/index.php/kpi/get', 'Kpi/get');
             $r->get('/api/index.php/kpi/find_id/{id}', 'Kpi/findById');
+            $r->get('/api/index.php/kpi/get_leaf/{id}', 'Kpi/getLeafKpi');
             $r->get('/api/index.php/kpi/delete/{id}', 'Kpi/delete');
             $r->post('/api/index.php/kpi/insert', 'Kpi/insert');
             $r->post('/api/index.php/kpi/update/{id}', 'Kpi/update');
