@@ -374,6 +374,20 @@ class Unit
 
     public function delete($id, $tablename)
     {
+        $get_refs = "SELECT EXISTS(SELECT 1
+        from (
+            select unit_id as unit_id from group_member
+            union all
+            select unit_id from matrix
+            union all
+            select unit_id from main_program
+            union all
+            select unit_id from unit_target
+            union all
+            select unit_id from user_detail
+        ) a
+        where unit_id = '$id')";
+        die($get_refs);
         $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
