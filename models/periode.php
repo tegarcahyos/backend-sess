@@ -14,7 +14,7 @@ class Periode
         $query = "SELECT
            *
           FROM
-             $tablename order by id asc";
+             $tablename";
         // die($query);
         $result = $this->db->execute($query);
         // die($query);
