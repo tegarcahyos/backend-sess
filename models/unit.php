@@ -392,20 +392,19 @@ class Unit
         $result = $this->db->execute($get_refs);
         $row = $result->fetchRow();
         if ($row['exists'] == 't') {
-            die("403");
+            return "403";
         } else {
-            die("LUL");
-        }
-        $query = "DELETE FROM $tablename WHERE id = '$id'";
-        // die($query);
-        $result = $this->db->execute($query);
-        // return $result;
-        $res = $this->db->affected_rows();
+            $query = "DELETE FROM $tablename WHERE id = '$id'";
+            // die($query);
+            $result = $this->db->execute($query);
+            // return $result;
+            $res = $this->db->affected_rows();
 
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
-        } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            if ($res == true) {
+                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+            } else {
+                return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
         }
     }
 }
