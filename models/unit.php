@@ -378,16 +378,24 @@ class Unit
         from (
             select unit_id as unit_id from group_member
             union all
-            select unit_id from matrix
+            select unit_id::text from matrix
             union all
-            select unit_id from main_program
+            select unit_id::text from main_program
             union all
-            select unit_id from unit_target
+            select unit_id::text from unit_target
             union all
-            select unit_id from user_detail
+            select unit_id::text from user_detail
+			union all
+            select parent_id::text from unit
         ) a
         where unit_id = '$id')";
-        die($get_refs);
+        $result = $this->db->execute($get_unit);
+        $row = $result->fetchRow();
+        if ($row['exists'] == 't') {
+            die("403");
+        } else {
+            die("LUL");
+        }
         $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
