@@ -291,12 +291,39 @@ class Unit
         $code = $request[0]->code;
 
         $query = "INSERT INTO $tablename (
-            parent_id, name, code, organization_id, organiation_code, organization_name)";
+            parent_id, name, code, organization_id, organization_code, organization_name)";
         $query .= "VALUES (
-            '$parent_id' , '$name', '$code','$organization_id','$organization_code','$organization_name')";
+            '$parent_id' , '$name', '$code','$organization_id','$organization_code','$organization_name') RETURNING *";
         // die($query);
-        return $this->db->execute($query);
+        $this->db->execute($query);
+        if ($num > 0) {
 
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
     }
 
     public function update($id, $tablename)
@@ -310,9 +337,37 @@ class Unit
         $code = $request[0]->code;
         $organization_id = $request[0]->organization_id;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name' WHERE id = '$id' RETURNING *";
         // die($query);
-        return $this->db->execute($query);
+        $this->db->execute($query);
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
     }
 
     public function delete($id, $tablename)
