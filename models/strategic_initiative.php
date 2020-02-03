@@ -31,7 +31,7 @@ class StraIn
                     'name' => $name,
                     'code' => $code,
                     'parent_id' => $parent_id,
-                    'periode_id'=>$periode_id,
+                    'periode_id' => $periode_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -272,16 +272,31 @@ class StraIn
 
     public function delete($id, $tablename)
     {
-        $query = "DELETE FROM $tablename WHERE id = '$id'";
-        // die($query);
-        $result = $this->db->execute($query);
-        // return $result;
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        $get_refs = "SELECT EXISTS(SELECT 1
+        from (
+            select si_id::text as si_id from matrix
+            union all
+            select si_id::text from si_target
+			union all
+            select parent_id::text from strategic_initiative
+        ) a
+        where si_id = '$id')";
+        $result = $this->db->execute($get_refs);
+        $row = $result->fetchRow();
+        if ($row['exists'] == 't') {
+            return "403";
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $query = "DELETE FROM $tablename WHERE id = '$id'";
+            // die($query);
+            $result = $this->db->execute($query);
+            // return $result;
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+            } else {
+                return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
         }
     }
 }
