@@ -100,7 +100,7 @@ class Organization
 
     public function delete($id, $tablename)
     {
-        $get_unit = "SELECT EXISTS(SELECT * FROM unit WHERE organization_id = $id)";
+        $get_unit = "SELECT EXISTS(SELECT * FROM unit WHERE organization_id = '$id')";
         $result = $this->db->execute($get_unit);
         // die(print_r($result));
         $row = $result->fetchRow();
