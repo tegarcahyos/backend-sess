@@ -104,8 +104,8 @@ class Organization
         $result = $this->db->execute($get_unit);
         // die(print_r($result));
         $row = $result->fetchRow();
-        // die($row['exists'] != 't');
-        if ($row['exists'] != 't') {
+        die($row['exists'] == 't');
+        if ($row['exists'] == 't') {
             die("403");
         }
         $query = "DELETE FROM $tablename WHERE id = '$id'";
