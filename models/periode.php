@@ -154,12 +154,10 @@ class Periode
         $res = $this->db->affected_rows();
 
         if ($res == true) {
-            $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
+            return $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
         } else {
-            $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
         }
-
-        return $msg;
     }
 
     public function update($idP, $tablename)
