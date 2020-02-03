@@ -46,9 +46,6 @@ class Periode
         return $msg;
     }
 
-    
-
-
     public function select_id($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
@@ -93,14 +90,12 @@ class Periode
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-            
-        }else{
-            $msg='0';
+
+        } else {
+            $msg = '0';
         }
         return $msg;
     }
-
-    
 
     public function insert($tablename)
     {
@@ -114,7 +109,7 @@ class Periode
         $organisasi_id = $request[0]->organisasi_id;
 
         $query_select_status = " SELECT id from $tablename where organisasi_id = '$organisasi_id' and status_active = '$status_active'";
-        
+
         $result_select = $this->db->execute($query_select_status);
 
         $num = $result_select->rowCount();
@@ -129,20 +124,20 @@ class Periode
 
                 $data_item = array(
                     'id' => $id,
-                    
+
                 );
-            
+
                 // array_push($data_item);
                 $msg_item = $data_item;
             }
-            $id_periode = implode('',$msg_item);
-          
-            if($status_active == true){
+            $id_periode = implode('', $msg_item);
+
+            if ($status_active == true) {
                 $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
                 // die($query_set_status);
                 $this->db->execute($query_set_status);
-                
-            }else{
+
+            } else {
                 $query_set_status = "UPDATE $tablename SET status_active = 'true' where id = '$id_periode'";
                 // die($query_set_status);
                 $this->db->execute($query_set_status);
@@ -150,20 +145,20 @@ class Periode
 
         }
 
-            $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
-            $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
-            // die($query);
-            $result = $this->db->execute($query);
-            $num = $result->rowCount();
+        $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
+        $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
+        // die($query);
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
 
-            $res = $this->db->affected_rows();
+        $res = $this->db->affected_rows();
 
-            if ($res == true) {
-                $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
-            } else {
-                $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-            }
-        
+        if ($res == true) {
+            $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
+        } else {
+            $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+        }
+
         return $msg;
     }
 
@@ -179,7 +174,7 @@ class Periode
         $organisasi_id = $request[0]->organisasi_id;
 
         $query_select_status = " SELECT id from $tablename where organisasi_id = '$organisasi_id' and status_active = '$status_active'";
-        
+
         $result_select = $this->db->execute($query_select_status);
         // echo $result_select;
 
@@ -190,20 +185,20 @@ class Periode
                 extract($row);
 
                 $data_item = array(
-                    'id' => $id,                    
+                    'id' => $id,
                 );
                 $msg_item = $data_item;
             }
             var_dump($msg_item);
-            $id_periode = implode('',$msg_item);
+            $id_periode = implode('', $msg_item);
             echo $id_periode;
-          
-            if($status_active == true){
+
+            if ($status_active == true) {
                 $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
                 // die($query_set_status);
                 echo $query_set_status;
-                $this->db->execute($query_set_status);           
-            }else{
+                $this->db->execute($query_set_status);
+            } else {
                 $query_set_status = "UPDATE $tablename SET status_active = 'true' where id = '$id_periode'";
                 // die($query_set_status);
                 $this->db->execute($query_set_status);
@@ -229,16 +224,23 @@ class Periode
 
     public function delete($id, $tablename)
     {
-        $query = "DELETE FROM $tablename WHERE id = '$id'";
-        // die($query);
-        $result = $this->db->execute($query);
-        // return $result;
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        $get_refs = "SELECT EXISTS(SELECT * FROM strategic_initiative WHERE periode_id = '$id')";
+        $result = $this->db->execute($get_refs);
+        $row = $result->fetchRow();
+        if ($row['exists'] == 't') {
+            return "403";
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $query = "DELETE FROM $tablename WHERE id = '$id'";
+            // die($query);
+            $result = $this->db->execute($query);
+            // return $result;
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+            } else {
+                return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
         }
     }
 }
