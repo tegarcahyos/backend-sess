@@ -100,14 +100,14 @@ class Organization
 
     public function delete($id, $tablename)
     {
-        $get_unit = "SELECT EXISTS(SELECT * FROM unit WHERE organization_id = $id)";
-        $result = $this->db->execute($get_unit);
-        // die(print_r($result));
-        $row = $result->fetchRow();
-        // die($row['exists'] != 't');
-        if ($row['exists'] != 't') {
-            die("403");
-        }
+        // $get_unit = "SELECT EXISTS(SELECT * FROM unit WHERE organization_id = $id)";
+        // $result = $this->db->execute($get_unit);
+        // // die(print_r($result));
+        // $row = $result->fetchRow();
+        // // die($row['exists'] != 't');
+        // if ($row['exists'] != 't') {
+        //     die("403");
+        // }
         $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
