@@ -389,7 +389,7 @@ class Unit
             select parent_id::text from unit
         ) a
         where unit_id = '$id')";
-        $result = $this->db->execute($get_unit);
+        $result = $this->db->execute($get_refs);
         $row = $result->fetchRow();
         if ($row['exists'] == 't') {
             die("403");
