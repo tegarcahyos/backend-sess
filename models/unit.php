@@ -29,13 +29,12 @@ class Unit
 
                 $data_item = array(
                     'id' => $id,
-                    // 'organization_id' => $organization_id,
-                    // 'organization_name' => $organization_name,
-                    // 'organization_code' => $organization_code,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
-                    'organization_id' => $organization_id
+                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -152,14 +151,13 @@ class Unit
                 $this->getParentUnitBy($parent_id);
                 $data_item = array(
                     'id' => $id,
-                    // 'organization_id' => $organization_id,
-                    // 'organization_name' => $organization_name,
-                    // 'organization_code' => $organization_code,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
                     'parent_list' => $this->parentArray,
-                    'organization_id' => $organization_id
+                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -193,9 +191,9 @@ class Unit
 
                 $data_item = array(
                     'id' => $id,
-                    // 'organization_id' => $organization_id,
-                    // 'organization_name' => $organization_name,
-                    // 'organization_code' => $organization_code,
+                    'organization_id' => $organization_id,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -267,9 +265,9 @@ class Unit
 
             $data_item = array(
                 'id' => $id,
-                // 'organization_id' => $organization_id,
-                // 'organization_name' => $organization_name,
-                // 'organization_code' => $organization_code,
+                'organization_id' => $organization_id,
+                'organization_name' => $organization_name,
+                'organization_code' => $organization_code,
                 'parent_id' => $parent_id,
                 'name' => $name,
                 'code' => $code,
@@ -285,13 +283,12 @@ class Unit
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        // $organization_id = $request[0]->organization_id;
-        // $organization_name = $request[0]->organization_name;
-        // $organization_code = $request[0]->organization_code;
+        $organization_id = $request[0]->organization_id;
+        $organization_name = $request[0]->organization_name;
+        $organization_code = $request[0]->organization_code;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
-        $organization_id = $request[0]->organization_id;
 
         $query = "INSERT INTO $tablename (
             parent_id, name, code, organization_id)";
@@ -306,9 +303,8 @@ class Unit
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        // $organization_id = $request->organization_id;
-        // $organization_name = $request->organization_name;
-        // $organization_code = $request->organization_code;
+        $organization_name = $request->organization_name;
+        $organization_code = $request->organization_code;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
