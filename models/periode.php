@@ -32,7 +32,7 @@ class Periode
                     'name' => $name,
                     'code' => $code,
                     'status_active' => $status_active,
-                    'organisasi_id' => $organisasi_id,
+                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -62,14 +62,14 @@ class Periode
                 'name' => $name,
                 'code' => $code,
                 'status_active' => $status_active,
-                'organisasi_id' => $organisasi_id,
+                'organization_id' => $organization_id,
             );
             return $data_item;
         }
     }
     public function select_org_id($org_id, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE organisasi_id = '$org_id'";
+        $query = "SELECT * FROM $tablename WHERE organization_id = '$org_id'";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
         if ($num > 0) {
@@ -84,7 +84,7 @@ class Periode
                     'name' => $name,
                     'code' => $code,
                     'status_active' => $status_active,
-                    'organisasi_id' => $organisasi_id,
+                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -106,9 +106,9 @@ class Periode
         $name = $request[0]->name;
         $code = $request[0]->code;
         $status_active = $request[0]->status_active;
-        $organisasi_id = $request[0]->organisasi_id;
+        $organization_id = $request[0]->organization_id;
 
-        $query_select_status = " SELECT id from $tablename where organisasi_id = '$organisasi_id' and status_active = '$status_active'";
+        $query_select_status = " SELECT id from $tablename where organization_id = '$organization_id' and status_active = '$status_active'";
 
         $result_select = $this->db->execute($query_select_status);
 
@@ -145,8 +145,8 @@ class Periode
 
         }
 
-        $query = "INSERT INTO $tablename (name, code, status_active,organisasi_id)";
-        $query .= "VALUES ('$name', '$code', '$status_active', '$organisasi_id')";
+        $query = "INSERT INTO $tablename (name, code, status_active,organization_id)";
+        $query .= "VALUES ('$name', '$code', '$status_active', '$organization_id')";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -171,9 +171,9 @@ class Periode
         $name = $request[0]->name;
         $code = $request[0]->code;
         $status_active = $request[0]->status_active;
-        $organisasi_id = $request[0]->organisasi_id;
+        $organization_id = $request[0]->organization_id;
 
-        $query_select_status = " SELECT id from $tablename where organisasi_id = '$organisasi_id' and status_active = '$status_active'";
+        $query_select_status = " SELECT id from $tablename where organization_id = '$organization_id' and status_active = '$status_active'";
 
         $result_select = $this->db->execute($query_select_status);
         // echo $result_select;
@@ -207,7 +207,7 @@ class Periode
         }
 
         // echo "update laa";
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organisasi_id = '$organisasi_id' WHERE id = '$idP'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organization_id = '$organization_id' WHERE id = '$idP'";
         // die($query);
         echo ($query);
         $result = $this->db->execute($query);
