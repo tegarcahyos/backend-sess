@@ -295,7 +295,7 @@ class Unit
         $query .= "VALUES (
             '$parent_id' , '$name', '$code','$organization_id','$organization_code','$organization_name') RETURNING *";
         // die($query);
-        $this->db->execute($query);
+        $result = $this->db->execute($query);
         $num = $result->rowCount();
         if ($num > 0) {
 
@@ -340,7 +340,7 @@ class Unit
 
         $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name' WHERE id = '$id' RETURNING *";
         // die($query);
-        $this->db->execute($query);
+        $result = $this->db->execute($query);
         $num = $result->rowCount();
         if ($num > 0) {
 
