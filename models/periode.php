@@ -211,6 +211,7 @@ class Periode
 
         if ($status_active == 't') {
             $update_periode_active = "UPDATE periode_active SET periode_id = " . $row['id'] . ", periode_name = " . $row['name'] . "";
+            die($update_periode_active);
             $this->db->execute($update_periode_active);
         }
         // die($query);
