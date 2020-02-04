@@ -194,17 +194,17 @@ class ProgramCharter
 
     }
 
-    public function sync($table, $id)
-    {
-        $query = "SELECT * FROM $table WHERE id = '$id'";
-        $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        $implode = implode(",", $row);
-        $insert = "INSERT INTO $table VALUES ($implode)";
+    // public function sync($table, $id)
+    // {
+        // $query = "SELECT * FROM $table WHERE id = '$id'";
+        // $result = $this->db->execute($query);
+        // $row = $result->fetchRow();
+        // $implode = implode(",", $row);
+        // $insert = "INSERT INTO $table VALUES ($implode)";
         // die($insert);
         // $connecttf = $this->db_transformer->transformer_connect();
-        $connecttf->execute($insert);
-    }
+        // $connecttf->execute($insert);
+    // }
 
     public function update($id, $tablename)
     {
