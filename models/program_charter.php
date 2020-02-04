@@ -3,11 +3,15 @@
 class ProgramCharter
 {
     public $db;
+    public $db_transformer;
 
-    public function __construct($db)
+    public function __construct($db, $db_transformer)
     {
         $this->db = $db;
+        $this->db_transformer = $db_transformer;
     }
+
+    
 
     public function get($tablename)
     {
@@ -197,6 +201,7 @@ class ProgramCharter
         $row = $result->fetchOne();
         $implode = implode($row);
         $insert = "INSERT INTO $table VALUES $implode";
+        die($insert);
         $this->db_transformer->execute($insert);
     }
 
