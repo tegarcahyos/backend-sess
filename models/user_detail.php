@@ -81,12 +81,12 @@ class UserDetail
     { 
         $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
         $result = $this->db->execute($query);
-        die(print_r($result));
+        $row = $result->fetchRow();
+        die(print_r($row));
         if (empty($result)) {
             $msg = "404";
             return $msg;
         } else {
-            $row = $result->fetchRow();
             extract($row);
 
             // Push to data_arr
