@@ -82,8 +82,7 @@ class UserDetail
         $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
-        die(print_r($row));
-        if (empty($result)) {
+        if (empty($row)) {
             $msg = "404";
             return $msg;
         } else {
