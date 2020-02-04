@@ -191,6 +191,15 @@ class ProgramCharter
 
     }
 
+    public function sync($table, $id){
+        $query = "SELECT * FROM $table WHERE id = '$id'";
+        $result = $this->db->execute($query);
+        $row = $result->fetchOne();
+        $implode = implode($row);
+        $insert = "INSERT INTO $table VALUES $implode";
+        $this->db_transformer->execute($insert);
+    }
+
     public function update($id, $tablename)
     {
         // get data input from frontend
@@ -244,6 +253,7 @@ class ProgramCharter
         WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
+
         $res = $this->db->affected_rows();
 
         if ($res == true) {

@@ -52,7 +52,9 @@ class Router
     {
 
         $this->db = newADOConnection('pgsql');
-        $this->db->connect(db_host, db_username, db_password, db_name1);
+        $this->db->connect(db_host, db_username, db_password, db_name_sess);
+        $this->db_transformer = newADOConnection('pgsql');
+        $this->db_transformer->connect(db_host, db_username, db_password, db_name_transformer);
         return $this->db;
     }
     // MESSAGES
