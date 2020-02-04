@@ -208,8 +208,8 @@ class Periode
         $query = "UPDATE $tablename SET name = '$name',  code = '$code' ,organization_id = '$organization_id' WHERE id = '$idP' RETURNING *";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
-        die($status_active);
-        if ($status_active == true) {
+
+        if ($status_active == 't') {
             $update_periode_active = "UPDATE periode_active SET periode_id = " . $row['id'] . ", periode_name = " . $row['name'] . "";
             $this->db->execute($update_periode_active);
         }
