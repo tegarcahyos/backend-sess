@@ -1,6 +1,9 @@
 <?php
-
-include "../adodb/adodb.inc.php";
+try {
+  include "../adodb/adodb.inc.php";
+} catch (\Throwable $th) {
+  
+}
 
 class TransformerConnect
 {
