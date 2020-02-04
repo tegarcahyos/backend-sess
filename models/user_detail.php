@@ -83,7 +83,7 @@ class UserDetail
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (empty($row)) {
-            $msg = "404";
+            $msg = "Data Kosong";
             return $msg;
         } else {
             extract($row);
