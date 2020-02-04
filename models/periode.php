@@ -206,12 +206,10 @@ class Periode
         // }
 
         $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id' WHERE id = '$idP' RETURNING *";
-        die($status_active == true);
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
             $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
         } else {
             if ($status_active == true) {
                 $update_periode_active = "UPDATE periode_active SET periode_id = " . $row['id'] . ", periode_name = " . $row['name'] . "";
