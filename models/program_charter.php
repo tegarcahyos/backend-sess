@@ -194,17 +194,17 @@ class ProgramCharter
 
     }
 
-    // public function sync($table, $id)
-    // {
-        // $query = "SELECT * FROM $table WHERE id = '$id'";
-        // $result = $this->db->execute($query);
-        // $row = $result->fetchRow();
-        // $implode = implode(",", $row);
-        // $insert = "INSERT INTO $table VALUES ($implode)";
-        // die($insert);
-        // $connecttf = $this->db_transformer->transformer_connect();
-        // $connecttf->execute($insert);
-    // }
+    public function sync($table, $id)
+    {
+        $query = "SELECT * FROM $table WHERE id = '$id'";
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        $implode = implode(",", $row);
+        $insert = "INSERT INTO $table VALUES ($implode)";
+        die($insert);
+        $connecttf = $this->db_transformer->transformer_connect();
+        $connecttf->execute($insert);
+    }
 
     public function update($id, $tablename)
     {
@@ -260,9 +260,9 @@ class ProgramCharter
         // die($query);
         $result = $this->db->execute($query);
 
-        // if (strpos($status, 'accepted')) {
-        //     $this->sync('program_charter', $id);
-        // }
+        if (strpos($status, 'accepted')) {
+            $this->sync('program_charter', $id);
+        }
 
         $res = $this->db->affected_rows();
 
