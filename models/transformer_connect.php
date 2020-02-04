@@ -1,9 +1,5 @@
 <?php
-// try {
-//   include "../adodb/adodb.inc.php";
-// } catch (\Throwable $th) {
-  
-// }
+  require __DIR__ . "../adodb/adodb.inc.php";
 
 class TransformerConnect
 {

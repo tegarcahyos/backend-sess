@@ -198,9 +198,9 @@ class ProgramCharter
     {
         $query = "SELECT * FROM $table WHERE id = '$id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchOne();
-        $implode = implode($row);
-        $insert = "INSERT INTO $table VALUES $implode";
+        $row = $result->fetchRow();
+        $implode = implode(",", $row);
+        $insert = "INSERT INTO $table VALUES ($implode)";
         die($insert);
         $connecttf = $this->db_transformer->transformer_connect();
         $connecttf->execute($insert);
