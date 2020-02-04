@@ -45,6 +45,7 @@ class ProgramCharter
                     'key_asks' => json_decode($key_asks),
                     'risks' => $risks,
                     'status' => $status,
+                    'generator_id' => $generator_id
                 );
 
                 array_push($data_arr, $data_item);
@@ -86,6 +87,7 @@ class ProgramCharter
                 'key_asks' => json_decode($key_asks),
                 'risks' => $risks,
                 'status' => $status,
+                'generator_id' => $generator_id
             );
             return $data_item;
         }
@@ -112,6 +114,7 @@ class ProgramCharter
         $key_asks = json_encode($request[0]->key_asks);
         $risks = $request[0]->risks;
         $status = $request[0]->status;
+        $generator_id = $request[0]->generator_id;
 
         if (empty($description)) {
             $description = 'NULL';
@@ -138,7 +141,8 @@ class ProgramCharter
         main_activities,
         key_asks,
         risks,
-        status)";
+        status,
+        generator_id)";
         $query .= "VALUES (
             '$title',
             '$code',
@@ -154,7 +158,8 @@ class ProgramCharter
             '$main_activities',
             '$key_asks',
             NULLIF('$risks', 'NULL'),
-            '$status'
+            '$status',
+            '$generator_id'
             ) RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
@@ -207,6 +212,7 @@ class ProgramCharter
         $key_asks = json_encode($request[0]->key_asks);
         $risks = $request[0]->risks;
         $status = $request[0]->status;
+        $generator_id = $request[0]->generator_id;
 
         if (empty($description)) {
             $description = 'NULL';
@@ -233,7 +239,8 @@ class ProgramCharter
             main_activities = '$main_activities',
             key_asks = '$key_asks' ,
             risks = NULLIF('$risks', 'NULL'),
-            status = '$status'
+            status = '$status',
+            generator_id = '$generator_id'
         WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
