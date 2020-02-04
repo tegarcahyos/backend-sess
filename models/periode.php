@@ -187,12 +187,12 @@ class Periode
             }
             var_dump($msg_item);
             $id_periode = implode('', $msg_item);
-            echo $id_periode;
+            // echo $id_periode;
 
             if ($status_active == true) {
                 $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
                 // die($query_set_status);
-                echo $query_set_status;
+                // echo $query_set_status;
                 $this->db->execute($query_set_status);
             } else {
                 $query_set_status = "UPDATE $tablename SET status_active = 'true' where id = '$id_periode'";
@@ -205,7 +205,6 @@ class Periode
         // echo "update laa";
         $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organization_id = '$organization_id' WHERE id = '$idP'";
         // die($query);
-        echo ($query);
         $result = $this->db->execute($query);
 
         $res = $this->db->affected_rows();
