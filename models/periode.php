@@ -243,7 +243,6 @@ class Periode
                 );
             }
         }
-        die(print_r($msg));
 
         return $msg;
     }
