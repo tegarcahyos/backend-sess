@@ -252,6 +252,7 @@ class Router
             $r->get('/api/index.php/strategic_initiative/find_id/{id}', 'StraIn/findById');
             $r->get('/api/index.php/strategic_initiative/get_leaf', 'StraIn/getLeaf');
             $r->get('/api/index.php/strategic_initiative/get_by_parent/{parent_id}', 'StraIn/getByParent');
+            $r->get('/api/index.php/strategic_initiative/get_by_periode_id/{periode_id}', 'StraIn/select_periode');
             $r->get('/api/index.php/strategic_initiative/get_leaf_by_root_id/{id}', 'StraIn/getLeafByRootId');
             $r->get('/api/index.php/strategic_initiative/delete/{id}', 'StraIn/delete');
             $r->post('/api/index.php/strategic_initiative/insert', 'StraIn/insert');
@@ -578,6 +579,10 @@ class Router
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['page_id'], $explodeUri[3]));
                 } else if (
+                    $explodeUri[4] == "get_by_periode_id"
+                ) {
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['periode_id'], $explodeUri[3]));
+                }else if (
                     $explodeUri[4] == "download"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id_file'], $explodeUri[3]));

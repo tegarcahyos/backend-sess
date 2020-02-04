@@ -112,6 +112,45 @@ class StraIn
         return $msg;
     }
 
+    public function select_periode($periode_id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE periode_id = '$periode_id'";
+        // die($query);
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+                $data_item = array(
+                    'id' => $id,
+                    // 'organization_id' => $organization_id,
+                    // 'organization_name' => $organization_name,
+                    // 'organization_code' => $organization_code,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                    'periode_id' => $periode_id
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+    }
+
     public function getLeafByRootId($id, $tablename)
     {
         $query = "WITH RECURSIVE children AS (
