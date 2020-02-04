@@ -205,7 +205,7 @@ class Periode
 
         // }
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id' WHERE id = '$idP' RETURNING *";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = $status_active, organization_id = '$organization_id' WHERE id = '$idP' RETURNING *";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         die(print_r($row));
