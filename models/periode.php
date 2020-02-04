@@ -185,7 +185,7 @@ class Periode
                 );
                 $msg_item = $data_item;
             }
-            var_dump($msg_item);
+            // var_dump($msg_item);
             $id_periode = implode('', $msg_item);
             // echo $id_periode;
 
