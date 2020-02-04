@@ -205,24 +205,35 @@ class Periode
 
         // }
 
-        $query = "UPDATE $tablename SET name = '$name',  code = '$code' ,organization_id = '$organization_id' WHERE id = '$idP' RETURNING *";
-        $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        die($status_active == 't');
         if ($status_active == 't') {
+            $query = "UPDATE $tablename SET name = '$name',  code = '$code' ,organization_id = '$organization_id' WHERE id = '$idP' RETURNING *";
+            $result = $this->db->execute($query);
+            $row = $result->fetchRow();
+
             $update_periode_active = "UPDATE periode_active SET periode_id = " . $row['id'] . ", periode_name = " . $row['name'] . "";
             die($update_periode_active);
             $this->db->execute($update_periode_active);
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+            } else {
+                $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
+        } else {
+            $query = "UPDATE $tablename SET name = '$name',  code = '$code' ,organization_id = '$organization_id' WHERE id = '$idP'";
+            $result = $this->db->execute($query);
+
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+            } else {
+                $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
         }
         // die($query);
 
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
-        } else {
-            $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-        }
         return $msg;
     }
 
