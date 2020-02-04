@@ -254,6 +254,11 @@ class ProgramCharter
         // die($query);
         $result = $this->db->execute($query);
 
+        
+        if(strpos($status, 'accepted')){
+            $this->sync('program_charter', $id);
+        }
+
         $res = $this->db->affected_rows();
 
         if ($res == true) {
