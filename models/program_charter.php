@@ -256,7 +256,7 @@ class ProgramCharter
             generator_id = '$generator_id'
         WHERE id = '$id'";
         // die($query);
-        $result = $this->db->execute($query);
+        // $result = $this->db->execute($query);
 
         
         if(strpos($status, 'accepted')){
