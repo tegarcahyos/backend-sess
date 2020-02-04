@@ -168,44 +168,22 @@ class Periode
         $code = $request[0]->code;
         $status_active = $request[0]->status_active;
         $organization_id = $request[0]->organization_id;
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id' WHERE id = '$idP' RETURNING *";
 
-        $query_select_status = " SELECT id from $tablename where organization_id = '$organization_id' and status_active = '$status_active'";
-
-        $result_select = $this->db->execute($query_select_status);
-        // echo $result_select;
-
-        $num = $result_select->rowCount();
-
-        if ($num > 0) {
-            while ($row = $result_select->fetchRow()) {
-                extract($row);
-
-                $data_item = array(
-                    'id' => $id,
-                );
-                $msg_item = $data_item;
-            }
-            // var_dump($msg_item);
-            $id_periode = implode('', $msg_item);
-            // echo $id_periode;
-
-            if ($status_active == true) {
-                $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
-                // die($query_set_status);
-                // echo $query_set_status;
-                $this->db->execute($query_set_status);
-            } else {
-                $query_set_status = "UPDATE $tablename SET status_active = 'true' where id = '$id_periode'";
-                // die($query_set_status);
-                $this->db->execute($query_set_status);
-            }
-
-        }
-
-        // echo "update laa";
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', status_active = '$status_active', organization_id = '$organization_id' WHERE id = '$idP'";
-        // die($query);
         $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
+        } else {
+            if ($status_active == true) {
+                $update_periode_active = "UPDATE periode_active SET periode_id = " . $row['id'] . ", periode_name = " . $row['name'] . "";
+                $this->db->execute($update_periode_active);
+            } else {
+
+            }
+        }
+        // die($query);
 
         $res = $this->db->affected_rows();
 
