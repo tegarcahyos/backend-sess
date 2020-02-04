@@ -1,4 +1,5 @@
 <?php
+include 'transformer_connect.php';
 
 class ProgramCharter
 {
@@ -8,10 +9,8 @@ class ProgramCharter
     public function __construct($db)
     {
         $this->db = $db;
-        // $this->db_transformer = $db_transformer;
+        $this->db_transformer = new TransformerConnect();
     }
-
-    
 
     public function get($tablename)
     {
@@ -49,7 +48,7 @@ class ProgramCharter
                     'key_asks' => json_decode($key_asks),
                     'risks' => $risks,
                     'status' => $status,
-                    'generator_id' => $generator_id
+                    'generator_id' => $generator_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -91,7 +90,7 @@ class ProgramCharter
                 'key_asks' => json_decode($key_asks),
                 'risks' => $risks,
                 'status' => $status,
-                'generator_id' => $generator_id
+                'generator_id' => $generator_id,
             );
             return $data_item;
         }
@@ -195,14 +194,16 @@ class ProgramCharter
 
     }
 
-    public function sync($table, $id){
+    public function sync($table, $id)
+    {
         $query = "SELECT * FROM $table WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchOne();
         $implode = implode($row);
         $insert = "INSERT INTO $table VALUES $implode";
         die($insert);
-        $this->db_transformer->execute($insert);
+        $connecttf = $this->db_transformer->transformer_connect();
+        $connecttf->execute($insert);
     }
 
     public function update($id, $tablename)
@@ -259,8 +260,7 @@ class ProgramCharter
         // die($query);
         $result = $this->db->execute($query);
 
-        
-        if(strpos($status, 'accepted')){
+        if (strpos($status, 'accepted')) {
             $this->sync('program_charter', $id);
         }
 

@@ -56,13 +56,7 @@ class Router
         
         return $this->db;
     }
-    public function transformer_connect()
-    {
-
-        $this->db_transformer = newADOConnection('pgsql');
-        $this->db_transformer->connect(db_host, db_username, db_password, db_name_transformer);
-        return $this->db_transformer;
-    }
+    
     // MESSAGES
     public function msg($header, $type = null, $msg, $keterangan, $status)
     {
@@ -624,9 +618,7 @@ class Router
                     $explodeUri[4] == "select_all_get" ||
                     $explodeUri[4] == "get_all_parent"
                 ) {
-                    $temp_class = new $class($connection);
-                    echo $class;
-                    $result = call_user_func_array(array($temp_class, $method), array($explodeUri[3]));
+                    $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
                 } else if ($explodeUri[4] == "select_where_get") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['attr'], $vars['val'], $explodeUri[3]));
                 } else if ($explodeUri[5] == "join_chat" ||
