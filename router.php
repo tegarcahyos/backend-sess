@@ -452,6 +452,7 @@ class Router
             // }
 
         });
+        header('Content-Type: application/json');
 
         if (isset($_SERVER['HTTP_ORIGIN'])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -639,6 +640,8 @@ class Router
                 $this->msg(http_response_code(404), 404, 'Page Not Found', "gagal", 0);
             } else if ($result == "405") {
                 $this->msg(http_response_code(405), 405, 'Method Not Allowed', "gagal", 0);
+            } else if ($result == "403") {
+                $this->msg(http_response_code(403), 403, 'You Can\'t Delete This Data ', "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }

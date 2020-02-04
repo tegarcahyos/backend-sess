@@ -29,13 +29,12 @@ class Unit
 
                 $data_item = array(
                     'id' => $id,
-                    // 'organization_id' => $organization_id,
-                    // 'organization_name' => $organization_name,
-                    // 'organization_code' => $organization_code,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
-                    'organization_id' => $organization_id
+                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -149,17 +148,16 @@ class Unit
             while ($row = $result->fetchRow()) {
                 extract($row);
                 // ambil parent parentnya pake $parent_id
-                $this->getParentUnitBy($parent_id);
+                // $this->getParentUnitBy($parent_id);
                 $data_item = array(
                     'id' => $id,
-                    // 'organization_id' => $organization_id,
-                    // 'organization_name' => $organization_name,
-                    // 'organization_code' => $organization_code,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
-                    'parent_list' => $this->parentArray,
-                    'organization_id' => $organization_id
+                    // 'parent_list' => $this->parentArray,
+                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -193,9 +191,9 @@ class Unit
 
                 $data_item = array(
                     'id' => $id,
-                    // 'organization_id' => $organization_id,
-                    // 'organization_name' => $organization_name,
-                    // 'organization_code' => $organization_code,
+                    'organization_id' => $organization_id,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -267,9 +265,9 @@ class Unit
 
             $data_item = array(
                 'id' => $id,
-                // 'organization_id' => $organization_id,
-                // 'organization_name' => $organization_name,
-                // 'organization_code' => $organization_code,
+                'organization_id' => $organization_id,
+                'organization_name' => $organization_name,
+                'organization_code' => $organization_code,
                 'parent_id' => $parent_id,
                 'name' => $name,
                 'code' => $code,
@@ -285,52 +283,128 @@ class Unit
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        // $organization_id = $request[0]->organization_id;
-        // $organization_name = $request[0]->organization_name;
-        // $organization_code = $request[0]->organization_code;
+        $organization_id = $request[0]->organization_id;
+        $organization_name = $request[0]->organization_name;
+        $organization_code = $request[0]->organization_code;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
-        $organization_id = $request[0]->organization_id;
 
         $query = "INSERT INTO $tablename (
-            parent_id, name, code, organization_id)";
+            parent_id, name, code, organization_id, organization_code, organization_name)";
         $query .= "VALUES (
-            '$parent_id' , '$name', '$code','$organization_id')";
+            '$parent_id' , '$name', '$code','$organization_id','$organization_code','$organization_name') RETURNING *";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
+        if ($num > 0) {
 
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
     }
 
     public function update($id, $tablename)
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        // $organization_id = $request->organization_id;
-        // $organization_name = $request->organization_name;
-        // $organization_code = $request->organization_code;
+        $organization_name = $request[0]->organization_name;
+        $organization_code = $request[0]->organization_code;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
         $organization_id = $request[0]->organization_id;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name' WHERE id = '$id' RETURNING *";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'organization_name' => $organization_name,
+                    'organization_code' => $organization_code,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
     }
 
     public function delete($id, $tablename)
     {
-        $query = "DELETE FROM $tablename WHERE id = '$id'";
-        // die($query);
-        $result = $this->db->execute($query);
-        // return $result;
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        $get_refs = "SELECT EXISTS(SELECT 1
+        from (
+            select unit_id as unit_id from group_member
+            union all
+            select unit_id::text from matrix
+            union all
+            select unit_id::text from main_program
+            union all
+            select unit_id::text from unit_target
+            union all
+            select unit_id::text from user_detail
+			union all
+            select parent_id::text from unit
+        ) a
+        where unit_id = '$id')";
+        $result = $this->db->execute($get_refs);
+        $row = $result->fetchRow();
+        if ($row['exists'] == 't') {
+            return "403";
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $query = "DELETE FROM $tablename WHERE id = '$id'";
+            // die($query);
+            $result = $this->db->execute($query);
+            // return $result;
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+            } else {
+                return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            }
         }
     }
 }

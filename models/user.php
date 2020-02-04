@@ -163,8 +163,29 @@ class User
 
     public function delete($id, $tablename)
     {
+        $get_refs = "SELECT EXISTS(SELECT 1
+        from (
+            select user_id::text as user_id from expert_judgement
+            union all
+            select message_sender_id::text from group_chat
+            union all
+            select user_id::text from group_member
+            union all
+            select user_id::text from group_message
+            union all
+            select user_id::text from user_detail
+			union all
+            select user_id::text from quadran
+			union all
+            select user_id::text from user_login
+        ) a
+        where user_id = '$id')";
+        $result = $this->db->execute($get_refs);
+        $row = $result->fetchRow();
         if ($id == '22fd32c8-10e5-468b-8abd-56c04a50847f') {
-            return $msg = array("message" => 'Data Tidak Dapat Dihapus', "code" => 403);
+            return '403';
+        } else if ($row['exists'] == 't') {
+            return '403';
         } else {
             $query = "DELETE FROM $tablename WHERE id = '$id'";
             // die($query);
