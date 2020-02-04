@@ -1,5 +1,5 @@
 <?php
-  require __DIR__ . "../adodb/adodb.inc.php";
+  require __DIR__ . "/../adodb/adodb.inc.php";
 
 class TransformerConnect
 {
