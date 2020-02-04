@@ -206,7 +206,7 @@ class Periode
         // }
 
         $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id' WHERE id = '$idP' RETURNING *";
-
+        die($query);
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
