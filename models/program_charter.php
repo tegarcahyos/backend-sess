@@ -5,10 +5,9 @@ class ProgramCharter
     public $db;
     public $db_transformer;
 
-    public function __construct($db, $db_transformer)
+    public function __construct($db)
     {
         $this->db = $db;
-        $this->db_transformer = $db_transformer;
     }
 
     
