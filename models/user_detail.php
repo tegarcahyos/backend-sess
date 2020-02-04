@@ -80,8 +80,8 @@ class UserDetail
     public function getByUser($user_id, $tablename)
     { 
         $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
-        die($query);
         $result = $this->db->execute($query);
+        die(print_r($result));
         if (empty($result)) {
             $msg = "404";
             return $msg;
