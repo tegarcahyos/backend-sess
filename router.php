@@ -47,15 +47,21 @@ class Router
 {
     public $url;
     public $db;
-    public $db_config;
+    public $db_transformer;
     public function core_connect()
     {
 
         $this->db = newADOConnection('pgsql');
         $this->db->connect(db_host, db_username, db_password, db_name_sess);
+        
+        return $this->db;
+    }
+    public function transformer_connect()
+    {
+
         $this->db_transformer = newADOConnection('pgsql');
         $this->db_transformer->connect(db_host, db_username, db_password, db_name_transformer);
-        return $this->db;
+        return $this->db_transformer;
     }
     // MESSAGES
     public function msg($header, $type = null, $msg, $keterangan, $status)
@@ -618,7 +624,9 @@ class Router
                     $explodeUri[4] == "select_all_get" ||
                     $explodeUri[4] == "get_all_parent"
                 ) {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
+                    $temp_class = new $class($connection);
+                    echo $class;
+                    $result = call_user_func_array(array($temp_class, $method), array($explodeUri[3]));
                 } else if ($explodeUri[4] == "select_where_get") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['attr'], $vars['val'], $explodeUri[3]));
                 } else if ($explodeUri[5] == "join_chat" ||

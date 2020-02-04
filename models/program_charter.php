@@ -5,9 +5,10 @@ class ProgramCharter
     public $db;
     public $db_transformer;
 
-    public function __construct($db)
+    public function __construct($db, $db_transformer)
     {
         $this->db = $db;
+        $this->db_transformer = $db_transformer;
     }
 
     
@@ -256,7 +257,7 @@ class ProgramCharter
             generator_id = '$generator_id'
         WHERE id = '$id'";
         // die($query);
-        // $result = $this->db->execute($query);
+        $result = $this->db->execute($query);
 
         
         if(strpos($status, 'accepted')){
