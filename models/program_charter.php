@@ -237,13 +237,31 @@ class ProgramCharter
         WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
-        $res = $this->db->affected_rows();
+        $num = $result->rowCount();
 
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Diubah', "code" => 200);
+        // jika ada hasil
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $msg = 'Data Kosong';
         }
+
+        return $msg;
     }
 
     public function delete($id, $tablename)

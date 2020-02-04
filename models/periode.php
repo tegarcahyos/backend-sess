@@ -222,7 +222,9 @@ class Periode
                     'organization_id' => $organization_id,
                 );
             }
-            $update_periode_active = "UPDATE periode_active SET periode_id = '" . $row['id'] . "', periode_name = '" . $row['name'] . "' WHERE id = 1; INSERT INTO periode_active (periode_id, periode_name) SELECT '" . $row['id'] . "', '" . $row['name'] . "' WHERE NOT EXISTS(SELECT 1 FROM periode_active WHERE id=1)";
+            $update_periode_active =
+                "UPDATE periode_active SET periode_id = '" . $row['id'] . "', periode_name = '" . $row['name'] . "' WHERE id = 1;
+                INSERT INTO periode_active (periode_id, periode_name) SELECT '" . $row['id'] . "', '" . $row['name'] . "' WHERE NOT EXISTS(SELECT 1 FROM periode_active WHERE id=1)";
             // die($update_periode_active);
             $this->db->execute($update_periode_active);
 
