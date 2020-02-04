@@ -201,8 +201,8 @@ class ProgramCharter
         $row = $result->fetchRow();
         $implode = implode(",", $row);
         $insert = "INSERT INTO $table VALUES ($implode)";
-        die($insert);
-        $connecttf = $this->db_transformer->transformer_connect();
+        // die($insert);
+        // $connecttf = $this->db_transformer->transformer_connect();
         $connecttf->execute($insert);
     }
 
