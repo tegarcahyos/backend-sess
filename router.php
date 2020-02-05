@@ -80,7 +80,7 @@ class Router
         } else if ($type == 203) {
             $array = array(
                 'type' => $type,
-                'error-msg' => $msg,
+                'error_msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
             );
@@ -88,7 +88,7 @@ class Router
         } else if ($type == 204) {
             $array = array(
                 'type' => $type,
-                'error-msg' => $msg,
+                'error_msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
             );
@@ -96,7 +96,7 @@ class Router
         } else if ($type == 400) {
             $array = array(
                 'type' => $type,
-                'error-msg' => $msg,
+                'error_msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
                 'data' => $msg,
@@ -106,7 +106,7 @@ class Router
         } else if ($type == 401) {
             $array = array(
                 'type' => $type,
-                'error-msg' => $msg,
+                'error_msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
                 'data' => $msg,
@@ -116,7 +116,7 @@ class Router
         } else if ($type == 402) {
             $array = array(
                 'type' => $type,
-                'error-msg' => $msg,
+                'error_msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
             );
@@ -125,7 +125,7 @@ class Router
         } else if ($type == 403) {
             $array = array(
                 'type' => $type,
-                'error-msg' => $msg,
+                'error_msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
             );
@@ -134,7 +134,7 @@ class Router
         } else if ($type == 404) {
             $array = array(
                 'type' => $type,
-                'error-msg' => $msg,
+                'error_msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
                 'data' => $msg,
@@ -144,7 +144,7 @@ class Router
         } else if ($type == 405) {
             $array = array(
                 'type' => $type,
-                'error-msg' => $msg,
+                'error_msg' => $msg,
                 'keterangan' => $keterangan . '',
                 'status' => $status,
             );
