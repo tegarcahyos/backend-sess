@@ -166,8 +166,6 @@ class CfuFu
             while ($row = $result->fetchRow()) {
                 extract($row);
 
-                // Push to data_arr
-
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
