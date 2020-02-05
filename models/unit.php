@@ -286,7 +286,7 @@ class Unit
             parent_id, name, code, organization_id, cfu_fu_id)";
         $query .= "VALUES (
             '$parent_id' , '$name', '$code','$organization_id','$cfu_fu_id') RETURNING *";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
         if ($num > 0) {
