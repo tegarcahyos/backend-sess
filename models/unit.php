@@ -413,7 +413,6 @@ class Unit
             }
 
             for ($i = 0; $i < count($msg); $i++) {
-                die();
                 $query = "DELETE FROM $tablename WHERE id = '" . $msg[$i]['id'] . "'";
                 die($query);
                 $this->db->execute($query);
