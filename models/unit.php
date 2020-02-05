@@ -394,7 +394,7 @@ class Unit
             if ($num > 0) {
                 $row = $result->fetchRow();
                 for ($i = 0; $i < $num; $i++) {
-                    die($i[0]);
+                    die($i[1]);
                 }
                 $query = "DELETE FROM $tablename WHERE id = '" . $row['id'] . "'";
                 // die($query);
