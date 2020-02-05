@@ -390,7 +390,7 @@ class Unit
             // die($select);
             $result = $this->db->execute($select);
             $num = $result->rowCount();
-
+            die($num);
             if ($num > 0) {
 
                 while ($row = $result->fetchRow()) {
