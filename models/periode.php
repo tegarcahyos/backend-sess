@@ -173,7 +173,7 @@ class Periode
         $this->db->execute($set_false);
 
         $activate = "UPDATE $tablename SET name = '$name',  code = '$code' ,organization_id = '$organization_id', status_active = '$status_active' WHERE id = '$idP' RETURNING *";
-        die($activate);
+        // die($activate);
         $result = $this->db->execute($activate);
         $row = $result->fetchRow();
         if (is_bool($row)) {
@@ -183,7 +183,7 @@ class Periode
             extract($row);
 
             $data_item = array(
-                'id' => $id,
+                'id' => $idP,
                 'name' => $name,
                 'code' => $code,
                 'status_active' => $status_active,
