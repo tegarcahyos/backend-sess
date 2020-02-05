@@ -11,6 +11,7 @@ include "models/group_chat.php";
 include "models/group_member.php";
 include "models/group_message.php";
 include "models/user_login.php";
+include "models/cfu_fu.php";
 include "models/matrix.php";
 include "models/strategic_initiative.php";
 include "models/main_program.php";
@@ -53,10 +54,10 @@ class Router
 
         $this->db = newADOConnection('pgsql');
         $this->db->connect(db_host, db_username, db_password, db_name_sess);
-        
+
         return $this->db;
     }
-    
+
     // MESSAGES
     public function msg($header, $type = null, $msg, $keterangan, $status)
     {
@@ -296,6 +297,13 @@ class Router
             $r->get('/api/index.php/ceo_notes/delete/{id}', 'CeoNotes/delete');
             $r->post('/api/index.php/ceo_notes/insert', 'CeoNotes/insert');
             $r->post('/api/index.php/ceo_notes/update/{id}', 'CeoNotes/update');
+
+            // CEO Notes
+            $r->get('/api/index.php/cfu_fu/get', 'CfuFu/get');
+            $r->get('/api/index.php/cfu_fu/find_id/{id}', 'CfuFu/findById');
+            $r->get('/api/index.php/cfu_fu/delete/{id}', 'CfuFu/delete');
+            $r->post('/api/index.php/cfu_fu/insert', 'CfuFu/insert');
+            $r->post('/api/index.php/cfu_fu/update/{id}', 'CfuFu/update');
 
             // User Detail
             $r->get('/api/index.php/user_detail/get', 'UserDetail/get');
@@ -584,7 +592,7 @@ class Router
                     $explodeUri[4] == "get_by_periode_id"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['periode_id'], $explodeUri[3]));
-                }else if (
+                } else if (
                     $explodeUri[4] == "download"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id_file'], $explodeUri[3]));
