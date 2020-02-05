@@ -397,17 +397,21 @@ class Unit
                     $query = "DELETE FROM $tablename WHERE id = '" . $row['id'] . "'";
                     die($query);
                     $result = $this->db->execute($query);
+
+                    return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
                 }
 
+            } else {
+                return "403";
             }
             // return $result;
-            $res = $this->db->affected_rows();
+            // $res = $this->db->affected_rows();
 
-            if ($res == true) {
-                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
-            } else {
-                return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-            }
+            // if ($res == true) {
+            //     return $msg =
+            // } else {
+            //     return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            // }
         }
     }
 }
