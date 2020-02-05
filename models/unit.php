@@ -395,12 +395,11 @@ class Unit
 
                 while ($row = $result->fetchRow()) {
                     $query = "DELETE FROM $tablename WHERE id = '" . $row['id'] . "'";
-                    die($query);
+                    // die($query);
                     $result = $this->db->execute($query);
 
-                    return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
                 }
-
+                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
             } else {
                 return "403";
             }
