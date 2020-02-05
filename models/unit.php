@@ -29,8 +29,6 @@ class Unit
 
                 $data_item = array(
                     'id' => $id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'organization_id' => $organization_id,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
@@ -152,8 +150,6 @@ class Unit
                 // $this->getParentUnitBy($parent_id);
                 $data_item = array(
                     'id' => $id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'organization_id' => $organization_id,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
@@ -194,8 +190,6 @@ class Unit
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
@@ -235,8 +229,6 @@ class Unit
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
@@ -268,8 +260,6 @@ class Unit
             $data_item = array(
                 'id' => $id,
                 'organization_id' => $organization_id,
-                'organization_name' => $organization_name,
-                'organization_code' => $organization_code,
                 'cfu_fu_id' => $cfu_fu_id,
                 'parent_id' => $parent_id,
                 'name' => $name,
@@ -287,17 +277,15 @@ class Unit
         $request = json_decode($data);
         // die(json_encode($request));
         $organization_id = $request[0]->organization_id;
-        $organization_name = $request[0]->organization_name;
-        $organization_code = $request[0]->organization_code;
         $cfu_fu_id = $request[0]->cfu_fu_id;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
 
         $query = "INSERT INTO $tablename (
-            parent_id, name, code, organization_id, organization_code, organization_name, cfu_fu_id)";
+            parent_id, name, code, organization_id, cfu_fu_id)";
         $query .= "VALUES (
-            '$parent_id' , '$name', '$code','$organization_id','$organization_code','$organization_name','$cfu_fu_id') RETURNING *";
+            '$parent_id' , '$name', '$code','$organization_id','$cfu_fu_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -313,8 +301,6 @@ class Unit
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
@@ -336,15 +322,13 @@ class Unit
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        $organization_name = $request[0]->organization_name;
-        $organization_code = $request[0]->organization_code;
         $organization_id = $request[0]->organization_id;
         $cfu_fu_id = $request[0]->cfu_fu_id;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name', cfu_fu_id = '$cfu_fu_id', cfu_fu_code = '$cfu_fu_code', cfu_fu_name = '$cfu_fu_name' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', cfu_fu_id = '$cfu_fu_id', cfu_fu_code = '$cfu_fu_code', cfu_fu_name = '$cfu_fu_name' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -360,8 +344,6 @@ class Unit
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
