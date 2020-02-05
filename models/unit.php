@@ -383,9 +383,23 @@ class Unit
         if ($row['exists'] == 't') {
             return "403";
         } else {
-            $query = "DELETE FROM $tablename WHERE id = '$id'";
-            // die($query);
-            $result = $this->db->execute($query);
+            $select = "WITH RECURSIVE tree (id) as
+            (SELECT unit.id, unit.parent_id, unit.name from unit where id='$id'
+              UNION ALL
+              SELECT unit.id, unit.parent_id, unit.name from rec, unit where unit.parent_id = rec.id::varchar)
+            SELECT * FROM tree;";
+            $result = $this->db->execute($select);
+            $num = $result->rowCount();
+
+            if ($num > 0) {
+
+                while ($row = $result->fetchRow()) {
+                    $query = "DELETE FROM $tablename WHERE id = '" . $row['id'] . "'";
+                    die($query);
+                    $result = $this->db->execute($query);
+                }
+
+            }
             // return $result;
             $res = $this->db->affected_rows();
 
