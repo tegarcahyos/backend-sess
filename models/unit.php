@@ -32,8 +32,6 @@ class Unit
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
                     'organization_id' => $organization_id,
-                    'cfu_fu_name' => $cfu_fu_name,
-                    'cfu_fu_code' => $cfu_fu_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
@@ -157,8 +155,6 @@ class Unit
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
                     'organization_id' => $organization_id,
-                    'cfu_fu_name' => $cfu_fu_name,
-                    'cfu_fu_code' => $cfu_fu_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
@@ -200,8 +196,6 @@ class Unit
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
-                    'cfu_fu_name' => $cfu_fu_name,
-                    'cfu_fu_code' => $cfu_fu_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
@@ -243,8 +237,6 @@ class Unit
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
-                    'cfu_fu_name' => $cfu_fu_name,
-                    'cfu_fu_code' => $cfu_fu_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
@@ -278,8 +270,6 @@ class Unit
                 'organization_id' => $organization_id,
                 'organization_name' => $organization_name,
                 'organization_code' => $organization_code,
-                'cfu_fu_name' => $cfu_fu_name,
-                'cfu_fu_code' => $cfu_fu_code,
                 'cfu_fu_id' => $cfu_fu_id,
                 'parent_id' => $parent_id,
                 'name' => $name,
@@ -300,16 +290,14 @@ class Unit
         $organization_name = $request[0]->organization_name;
         $organization_code = $request[0]->organization_code;
         $cfu_fu_id = $request[0]->cfu_fu_id;
-        $cfu_fu_name = $request[0]->cfu_fu_name;
-        $cfu_fu_code = $request[0]->cfu_fu_code;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
 
         $query = "INSERT INTO $tablename (
-            parent_id, name, code, organization_id, organization_code, organization_name, cfu_fu_id, cfu_fu_name, cfu_fu_code)";
+            parent_id, name, code, organization_id, organization_code, organization_name, cfu_fu_id)";
         $query .= "VALUES (
-            '$parent_id' , '$name', '$code','$organization_id','$organization_code','$organization_name','$cfu_fu_id','$cfu_fu_code','$cfu_fu_name') RETURNING *";
+            '$parent_id' , '$name', '$code','$organization_id','$organization_code','$organization_name','$cfu_fu_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -327,8 +315,6 @@ class Unit
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
-                    'cfu_fu_name' => $cfu_fu_name,
-                    'cfu_fu_code' => $cfu_fu_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
@@ -354,8 +340,6 @@ class Unit
         $organization_code = $request[0]->organization_code;
         $organization_id = $request[0]->organization_id;
         $cfu_fu_id = $request[0]->cfu_fu_id;
-        $cfu_fu_name = $request[0]->cfu_fu_name;
-        $cfu_fu_code = $request[0]->cfu_fu_code;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
@@ -378,8 +362,6 @@ class Unit
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
-                    'cfu_fu_name' => $cfu_fu_name,
-                    'cfu_fu_code' => $cfu_fu_code,
                     'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,

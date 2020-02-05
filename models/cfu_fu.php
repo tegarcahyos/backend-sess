@@ -29,8 +29,6 @@ class CfuFu
 
                 $data_item = array(
                     'id' => $id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'name' => $name,
                     'code' => $code,
                     'organization_id' => $organization_id,
@@ -68,8 +66,6 @@ class CfuFu
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'name' => $name,
                     'code' => $code,
                 );
@@ -99,8 +95,6 @@ class CfuFu
             $data_item = array(
                 'id' => $id,
                 'organization_id' => $organization_id,
-                'organization_name' => $organization_name,
-                'organization_code' => $organization_code,
                 'name' => $name,
                 'code' => $code,
             );
@@ -122,9 +116,9 @@ class CfuFu
         $code = $request[0]->code;
 
         $query = "INSERT INTO $tablename (
-            name, code, organization_id, organization_code, organization_name)";
+            name, code, organization_id)";
         $query .= "VALUES (
-            '$name', '$code','$organization_id','$organization_code','$organization_name') RETURNING *";
+            '$name', '$code','$organization_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -140,8 +134,6 @@ class CfuFu
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'name' => $name,
                     'code' => $code,
                 );
@@ -161,13 +153,11 @@ class CfuFu
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        $organization_name = $request[0]->organization_name;
-        $organization_code = $request[0]->organization_code;
         $name = $request[0]->name;
         $code = $request[0]->code;
         $organization_id = $request[0]->organization_id;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -183,8 +173,6 @@ class CfuFu
                 $data_item = array(
                     'id' => $id,
                     'organization_id' => $organization_id,
-                    'organization_name' => $organization_name,
-                    'organization_code' => $organization_code,
                     'name' => $name,
                     'code' => $code,
                 );
