@@ -413,7 +413,7 @@ class Unit
             }
 
             for ($i = 0; $i < count($msg); $i++) {
-                die($msg[0]);
+                die($msg[0]['id']);
             }
 
             $query = "DELETE FROM $tablename WHERE id = '" . $row['id'] . "'";
