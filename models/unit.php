@@ -390,15 +390,15 @@ class Unit
             // die($select);
             $result = $this->db->execute($select);
             $num = $result->rowCount();
-            die(print_r($num));
+
             if ($num > 0) {
-
-                while ($row = $result->fetchRow()) {
-                    $query = "DELETE FROM $tablename WHERE id = '" . $row['id'] . "'";
-                    // die($query);
-                    $result = $this->db->execute($query);
-
+                $row = $result->fetchRow();
+                for ($i = 0; $i < $num; $i++) {
+                    die($i[0]);
                 }
+                $query = "DELETE FROM $tablename WHERE id = '" . $row['id'] . "'";
+                // die($query);
+                $result = $this->db->execute($query);
                 return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
             } else {
                 return "403";
