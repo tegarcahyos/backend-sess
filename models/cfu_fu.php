@@ -188,31 +188,31 @@ class CfuFu
 
     public function delete($id, $tablename)
     {
-        $get_refs = "SELECT EXISTS(SELECT 1
-        from (
-            select cfu_fu_id as cfu_fu_id from program_charter
-            union all
-            select cfu_fu_id::text from matrix
-            union all
-            select cfu_fu_id::text from main_program
-        ) a
-        where cfu_fu_id = '$id')";
-        $result = $this->db->execute($get_refs);
-        $row = $result->fetchRow();
-        if ($row['exists'] == 't') {
-            return "403";
-        } else {
-            $query = "DELETE FROM $tablename WHERE id = '$id'";
-            // die($query);
-            $result = $this->db->execute($query);
-            // return $result;
-            $res = $this->db->affected_rows();
+        // $get_refs = "SELECT EXISTS(SELECT 1
+        // from (
+        //     select cfu_fu_id as cfu_fu_id from program_charter
+        //     union all
+        //     select cfu_fu_id::text from matrix
+        //     union all
+        //     select cfu_fu_id::text from main_program
+        // ) a
+        // where cfu_fu_id = '$id')";
+        // $result = $this->db->execute($get_refs);
+        // $row = $result->fetchRow();
+        // if ($row['exists'] == 't') {
+        //     return "403";
+        // } else {
+        $query = "DELETE FROM $tablename WHERE id = '$id'";
+        // die($query);
+        $result = $this->db->execute($query);
+        // return $result;
+        $res = $this->db->affected_rows();
 
-            if ($res == true) {
-                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
-            } else {
-                return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-            }
+        if ($res == true) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
         }
+        // }
     }
 }
