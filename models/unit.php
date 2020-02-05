@@ -387,6 +387,7 @@ class Unit
               UNION ALL
               SELECT unit.id, unit.parent_id, unit.name from rec, unit where unit.parent_id = rec.id::varchar)
             SELECT * FROM tree;";
+            die($select);
             $result = $this->db->execute($select);
             $num = $result->rowCount();
 
