@@ -378,6 +378,7 @@ class Unit
             select parent_id::text from unit
         ) a
         where unit_id = '$id')";
+        die($get_refs);
         $result = $this->db->execute($get_refs);
         $row = $result->fetchRow();
         if ($row['exists'] == 't') {
