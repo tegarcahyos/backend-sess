@@ -413,21 +413,19 @@ class Unit
             }
 
             for ($i = 0; $i < count($msg); $i++) {
-                die($msg[1]['id']);
+                die();
+                $query = "DELETE FROM $tablename WHERE id = '" . $msg[$i]['id'] . "'";
+                // die($query);
+                $result = $this->db->execute($query);
+                $res = $this->db->affected_rows();
+
+                if ($res == true) {
+                    return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+                } else {
+                    return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+                }
             }
 
-            $query = "DELETE FROM $tablename WHERE id = '" . $row['id'] . "'";
-            // die($query);
-            $result = $this->db->execute($query);
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
-            // return $result;
-            // $res = $this->db->affected_rows();
-
-            // if ($res == true) {
-            //     return $msg =
-            // } else {
-            //     return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-            // }
         }
     }
 }
