@@ -328,7 +328,7 @@ class Unit
         $name = $request[0]->name;
         $code = $request[0]->code;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', cfu_fu_id = '$cfu_fu_id', cfu_fu_code = '$cfu_fu_code', cfu_fu_name = '$cfu_fu_name' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', cfu_fu_id = '$cfu_fu_id' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
