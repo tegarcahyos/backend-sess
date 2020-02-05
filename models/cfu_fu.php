@@ -110,8 +110,6 @@ class CfuFu
         $request = json_decode($data);
         // die(json_encode($request));
         $organization_id = $request[0]->organization_id;
-        $organization_name = $request[0]->organization_name;
-        $organization_code = $request[0]->organization_code;
         $name = $request[0]->name;
         $code = $request[0]->code;
 
