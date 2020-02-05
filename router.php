@@ -298,9 +298,10 @@ class Router
             $r->post('/api/index.php/ceo_notes/insert', 'CeoNotes/insert');
             $r->post('/api/index.php/ceo_notes/update/{id}', 'CeoNotes/update');
 
-            // CEO Notes
+            // CFU FU
             $r->get('/api/index.php/cfu_fu/get', 'CfuFu/get');
             $r->get('/api/index.php/cfu_fu/find_id/{id}', 'CfuFu/findById');
+            $r->get('/api/index.php/cfu_fu/get_by_organization/{org_id}', 'CfuFu/findByOrgId');
             $r->get('/api/index.php/cfu_fu/delete/{id}', 'CfuFu/delete');
             $r->post('/api/index.php/cfu_fu/insert', 'CfuFu/insert');
             $r->post('/api/index.php/cfu_fu/update/{id}', 'CfuFu/update');
