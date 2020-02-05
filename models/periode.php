@@ -172,7 +172,8 @@ class Periode
         $set_false = "UPDATE $tablename SET status_active = false";
         $this->db->execute($set_false);
 
-        $activate = "UPDATE $tablename SET status_active = '$status_active' WHERE id = '$idP' RETURNING *";
+        $activate = "UPDATE $tablename SET name = '$name',  code = '$code' ,organization_id = '$organization_id', status_active = '$status_active' WHERE id = '$idP' RETURNING *";
+        die($activate);
         $result = $this->db->execute($activate);
         $row = $result->fetchRow();
         if (is_bool($row)) {
