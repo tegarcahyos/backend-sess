@@ -374,8 +374,6 @@ class Unit
             select unit_id::text from unit_target
             union all
             select unit_id::text from user_detail
-			union all
-            select parent_id::text from unit
         ) a
         where unit_id = '$id')";
         die($get_refs);
