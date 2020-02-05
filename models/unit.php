@@ -376,7 +376,7 @@ class Unit
             select unit_id::text from user_detail
         ) a
         where unit_id = '$id')";
-        die($get_refs);
+        // die($get_refs);
         $result = $this->db->execute($get_refs);
         $row = $result->fetchRow();
         if ($row['exists'] == 't') {
