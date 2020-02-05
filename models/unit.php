@@ -31,10 +31,13 @@ class Unit
                     'id' => $id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
+                    'organization_id' => $organization_id,
+                    'cfu_fu_name' => $cfu_fu_name,
+                    'cfu_fu_code' => $cfu_fu_code,
+                    'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
-                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -153,11 +156,14 @@ class Unit
                     'id' => $id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
+                    'organization_id' => $organization_id,
+                    'cfu_fu_name' => $cfu_fu_name,
+                    'cfu_fu_code' => $cfu_fu_code,
+                    'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
                     // 'parent_list' => $this->parentArray,
-                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -194,6 +200,9 @@ class Unit
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
+                    'cfu_fu_name' => $cfu_fu_name,
+                    'cfu_fu_code' => $cfu_fu_code,
+                    'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -216,9 +225,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename WHERE organization_id = '$org_id'
-          ORDER BY
-            id ASC";
+             $tablename WHERE organization_id = '$org_id'";
 
         $result = $this->db->execute($query);
 
@@ -236,6 +243,9 @@ class Unit
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
+                    'cfu_fu_name' => $cfu_fu_name,
+                    'cfu_fu_code' => $cfu_fu_code,
+                    'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -268,6 +278,9 @@ class Unit
                 'organization_id' => $organization_id,
                 'organization_name' => $organization_name,
                 'organization_code' => $organization_code,
+                'cfu_fu_name' => $cfu_fu_name,
+                'cfu_fu_code' => $cfu_fu_code,
+                'cfu_fu_id' => $cfu_fu_id,
                 'parent_id' => $parent_id,
                 'name' => $name,
                 'code' => $code,
@@ -286,14 +299,17 @@ class Unit
         $organization_id = $request[0]->organization_id;
         $organization_name = $request[0]->organization_name;
         $organization_code = $request[0]->organization_code;
+        $cfu_fu_id = $request[0]->cfu_fu_id;
+        $cfu_fu_name = $request[0]->cfu_fu_name;
+        $cfu_fu_code = $request[0]->cfu_fu_code;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
 
         $query = "INSERT INTO $tablename (
-            parent_id, name, code, organization_id, organization_code, organization_name)";
+            parent_id, name, code, organization_id, organization_code, organization_name, cfu_fu_id, cfu_fu_name, cfu_fu_code)";
         $query .= "VALUES (
-            '$parent_id' , '$name', '$code','$organization_id','$organization_code','$organization_name') RETURNING *";
+            '$parent_id' , '$name', '$code','$organization_id','$organization_code','$organization_name','$cfu_fu_id','$cfu_fu_code','$cfu_fu_name') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -311,6 +327,9 @@ class Unit
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
+                    'cfu_fu_name' => $cfu_fu_name,
+                    'cfu_fu_code' => $cfu_fu_code,
+                    'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
@@ -333,12 +352,15 @@ class Unit
         $request = json_decode($data);
         $organization_name = $request[0]->organization_name;
         $organization_code = $request[0]->organization_code;
+        $organization_id = $request[0]->organization_id;
+        $cfu_fu_id = $request[0]->cfu_fu_id;
+        $cfu_fu_name = $request[0]->cfu_fu_name;
+        $cfu_fu_code = $request[0]->cfu_fu_code;
         $parent_id = $request[0]->parent_id;
         $name = $request[0]->name;
         $code = $request[0]->code;
-        $organization_id = $request[0]->organization_id;
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', organization_code = '$organization_code', organization_name = '$organization_name', cfu_fu_id = '$cfu_fu_id', cfu_fu_code = '$cfu_fu_code', cfu_fu_name = '$cfu_fu_name' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -356,6 +378,9 @@ class Unit
                     'organization_id' => $organization_id,
                     'organization_name' => $organization_name,
                     'organization_code' => $organization_code,
+                    'cfu_fu_name' => $cfu_fu_name,
+                    'cfu_fu_code' => $cfu_fu_code,
+                    'cfu_fu_id' => $cfu_fu_id,
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
