@@ -38,12 +38,10 @@ class ProgramCharter
                     'strategic_initiative' => $strategic_initiative,
                     'cfu_fu' => $cfu_fu,
                     'weight' => $weight,
-                    'matrix' => $matrix,
                     'description' => $description,
                     'refer_to' => json_decode($refer_to),
                     'stakeholders' => json_decode($stakeholders),
                     'kpi' => json_decode($kpi),
-                    'budget' => $budget,
                     'main_activities' => json_decode($main_activities),
                     'key_asks' => json_decode($key_asks),
                     'risks' => $risks,
@@ -80,12 +78,10 @@ class ProgramCharter
                 'strategic_initiative' => $strategic_initiative,
                 'cfu_fu' => $cfu_fu,
                 'weight' => $weight,
-                'matrix' => $matrix,
                 'description' => $description,
                 'refer_to' => json_decode($refer_to),
                 'stakeholders' => json_decode($stakeholders),
                 'kpi' => json_decode($kpi),
-                'budget' => $budget,
                 'main_activities' => json_decode($main_activities),
                 'key_asks' => json_decode($key_asks),
                 'risks' => $risks,
@@ -107,12 +103,10 @@ class ProgramCharter
         $strategic_initiative = $request[0]->strategic_initiative;
         $cfu_fu = $request[0]->cfu_fu;
         $weight = $request[0]->weight;
-        $matrix = $request[0]->matrix;
         $description = $request[0]->description;
         $refer_to = json_encode($request[0]->refer_to);
         $stakeholders = json_encode($request[0]->stakeholders);
         $kpi = json_encode($request[0]->kpi);
-        $budget = json_encode($request[0]->budget);
         $main_activities = json_encode($request[0]->main_activities);
         $key_asks = json_encode($request[0]->key_asks);
         $risks = $request[0]->risks;
@@ -135,12 +129,10 @@ class ProgramCharter
         strategic_initiative,
         cfu_fu,
         weight,
-        matrix,
         description,
         refer_to,
         stakeholders,
         kpi,
-        budget,
         main_activities,
         key_asks,
         risks,
@@ -152,12 +144,10 @@ class ProgramCharter
             '$strategic_initiative',
             '$cfu_fu',
             '$weight',
-            '$matrix',
             NULLIF('$description', 'NULL'),
             '$refer_to',
             '$stakeholders',
             '$kpi',
-            '$budget',
             '$main_activities',
             '$key_asks',
             NULLIF('$risks', 'NULL'),
@@ -185,12 +175,10 @@ class ProgramCharter
                     'strategic_initiative' => $strategic_initiative,
                     'cfu_fu' => $cfu_fu,
                     'weight' => $weight,
-                    'matrix' => $matrix,
                     'description' => $description,
                     'refer_to' => json_decode($refer_to),
                     'stakeholders' => json_decode($stakeholders),
                     'kpi' => json_decode($kpi),
-                    'budget' => $budget,
                     'main_activities' => json_decode($main_activities),
                     'key_asks' => json_decode($key_asks),
                     'risks' => $risks,
@@ -233,12 +221,10 @@ class ProgramCharter
         $strategic_initiative = $request[0]->strategic_initiative;
         $cfu_fu = $request[0]->cfu_fu;
         $weight = $request[0]->weight;
-        $matrix = $request[0]->matrix;
         $description = $request[0]->description;
         $refer_to = json_encode($request[0]->refer_to);
         $stakeholders = json_encode($request[0]->stakeholders);
         $kpi = json_encode($request[0]->kpi);
-        $budget = json_encode($request[0]->budget);
         $main_activities = json_encode($request[0]->main_activities);
         $key_asks = json_encode($request[0]->key_asks);
         $risks = $request[0]->risks;
@@ -261,12 +247,10 @@ class ProgramCharter
             strategic_initiative = '$strategic_initiative',
             cfu_fu = '$cfu_fu',
             weight = '$weight',
-            matrix = '$matrix',
             description = NULLIF('$description', 'NULL'),
             refer_to = '$refer_to',
             stakeholders = '$stakeholders',
             kpi = '$kpi',
-            budget = '$budget',
             main_activities = '$main_activities',
             key_asks = '$key_asks' ,
             risks = NULLIF('$risks', 'NULL'),
