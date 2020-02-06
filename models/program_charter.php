@@ -36,7 +36,7 @@ class ProgramCharter
                     'title' => $title,
                     'code' => $code,
                     'strategic_initiative' => $strategic_initiative,
-                    'cfu_fu' => $cfu_fu,
+                    'unit_id' => $unit_id,
                     'weight' => $weight,
                     'description' => $description,
                     'refer_to' => json_decode($refer_to),
@@ -76,7 +76,7 @@ class ProgramCharter
                 'title' => $title,
                 'code' => $code,
                 'strategic_initiative' => $strategic_initiative,
-                'cfu_fu' => $cfu_fu,
+                'unit_id' => $unit_id,
                 'weight' => $weight,
                 'description' => $description,
                 'refer_to' => json_decode($refer_to),
@@ -101,7 +101,7 @@ class ProgramCharter
         $title = $request[0]->title;
         $code = $request[0]->code;
         $strategic_initiative = $request[0]->strategic_initiative;
-        $cfu_fu = $request[0]->cfu_fu;
+        $unit_id = $request[0]->unit_id;
         $weight = $request[0]->weight;
         $description = $request[0]->description;
         $refer_to = json_encode($request[0]->refer_to);
@@ -127,7 +127,7 @@ class ProgramCharter
         title,
         code,
         strategic_initiative,
-        cfu_fu,
+        unit_id,
         weight,
         description,
         refer_to,
@@ -142,7 +142,7 @@ class ProgramCharter
             '$title',
             '$code',
             '$strategic_initiative',
-            '$cfu_fu',
+            '$unit_id',
             '$weight',
             NULLIF('$description', 'NULL'),
             '$refer_to',
@@ -173,7 +173,7 @@ class ProgramCharter
                     'title' => $title,
                     'code' => $code,
                     'strategic_initiative' => $strategic_initiative,
-                    'cfu_fu' => $cfu_fu,
+                    'unit_id' => $unit_id,
                     'weight' => $weight,
                     'description' => $description,
                     'refer_to' => json_decode($refer_to),
@@ -219,7 +219,7 @@ class ProgramCharter
         $title = $request[0]->title;
         $code = $request[0]->code;
         $strategic_initiative = $request[0]->strategic_initiative;
-        $cfu_fu = $request[0]->cfu_fu;
+        $unit_id = $request[0]->unit_id;
         $weight = $request[0]->weight;
         $description = $request[0]->description;
         $refer_to = json_encode($request[0]->refer_to);
@@ -245,7 +245,7 @@ class ProgramCharter
             title = '$title',
             code = '$code',
             strategic_initiative = '$strategic_initiative',
-            cfu_fu = '$cfu_fu',
+            unit_id = '$unit_id',
             weight = '$weight',
             description = NULLIF('$description', 'NULL'),
             refer_to = '$refer_to',
