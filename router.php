@@ -30,6 +30,7 @@ include "models/reviewer_plan.php";
 include "models/quadran.php";
 include "models/periode.php";
 include "models/tara.php";
+include "models/help.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -356,6 +357,13 @@ class Router
             $r->get('/api/index.php/organization/delete/{id}', 'Organization/delete');
             $r->post('/api/index.php/organization/insert', 'Organization/insert');
             $r->post('/api/index.php/organization/update/{id}', 'Organization/update');
+
+            // HELP
+            $r->get('/api/index.php/help/get', 'Help/get');
+            $r->get('/api/index.php/help/find_id/{id}', 'Help/findById');
+            $r->get('/api/index.php/help/delete/{id}', 'Help/delete');
+            $r->post('/api/index.php/help/insert', 'Help/insert');
+            $r->post('/api/index.php/help/update/{id}', 'Help/update');
 
             // UNIT
             $r->get('/api/index.php/unit/get', 'Unit/get');

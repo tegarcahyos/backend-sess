@@ -1,6 +1,5 @@
 <?php
-
-class Metric
+class Help
 {
     public $db;
 
@@ -14,9 +13,8 @@ class Metric
         $query = "SELECT
            *
           FROM
-             $tablename
-          ORDER BY
-            id ASC";
+             $tablename";
+
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
@@ -30,8 +28,7 @@ class Metric
 
                 $data_item = array(
                     'id' => $id,
-                    'name' => $name,
-                    'code' => $code,
+                    'keterangan' => $keterangan,
                 );
 
                 array_push($data_arr, $data_item);
@@ -47,8 +44,7 @@ class Metric
 
     public function findById($id, $tablename)
     {
-        $query = 'SELECT * FROM ' . $tablename . ' WHERE id = ' . $id . "";
-        // die($query);
+        $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
@@ -59,8 +55,7 @@ class Metric
 
             $data_item = array(
                 'id' => $id,
-                'name' => $name,
-                'code' => $code,
+                'keterangan' => $keterangan,
             );
             return $data_item;
         }
@@ -70,14 +65,11 @@ class Metric
     {
         // get data input from frontend
         $data = file_get_contents("php://input");
-        //
         $request = json_decode($data);
-        // die(json_encode($request));
-        $name = $request[0]->name;
-        $code = $request[0]->code;
+        $keterangan = $request[0]->keterangan;
 
-        $query = "INSERT INTO $tablename (name, code)";
-        $query .= "VALUES ('$name', '$code')";
+        $query = "INSERT INTO $tablename (keterangan)";
+        $query .= "VALUES ('$keterangan')";
         // die($query);
         return $this->db->execute($query);
 
@@ -85,21 +77,18 @@ class Metric
 
     public function update($id, $tablename)
     {
-        // get data input from frontend
         $data = file_get_contents("php://input");
-        //
         $request = json_decode($data);
-        $name = $request[0]->name;
-        $code = $request[0]->code;
+        $keterangan = $request[0]->keterangan;
 
-        $query = "UPDATE " . $tablename . " SET name = '" . $name . "', code = '" . $code . "'" . " WHERE id = " . $id;
+        $query = "UPDATE $tablename SET keterangan = '$keterangan' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
 
     public function delete($id, $tablename)
     {
-        $query = 'DELETE FROM ' . $tablename . ' WHERE id = ' . $id;
+        $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
         // return $result;
