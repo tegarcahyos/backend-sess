@@ -28,7 +28,8 @@ class Help
 
                 $data_item = array(
                     'id' => $id,
-                    'keterangan' => $keterangan,
+                    'name' => $name,
+                    'description' => $description,
                 );
 
                 array_push($data_arr, $data_item);
@@ -55,7 +56,8 @@ class Help
 
             $data_item = array(
                 'id' => $id,
-                'keterangan' => $keterangan,
+                'name' => $name,
+                'description' => $description,
             );
             return $data_item;
         }
@@ -66,10 +68,11 @@ class Help
         // get data input from frontend
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        $keterangan = $request[0]->keterangan;
+        $name = $request[0]->name;
+        $description = $request[0]->description;
 
-        $query = "INSERT INTO $tablename (keterangan)";
-        $query .= "VALUES ('$keterangan')";
+        $query = "INSERT INTO $tablename (name, description)";
+        $query .= "VALUES ('$name','$description')";
         // die($query);
         return $this->db->execute($query);
 
@@ -79,9 +82,10 @@ class Help
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        $keterangan = $request[0]->keterangan;
+        $name = $request[0]->name;
+        $description = $request[0]->description;
 
-        $query = "UPDATE $tablename SET keterangan = '$keterangan' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', description = '$description' WHERE id = '$id'";
         // die($query);
         return $this->db->execute($query);
     }
