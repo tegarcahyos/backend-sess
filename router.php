@@ -3,7 +3,6 @@ include "adodb/adodb.inc.php";
 include "vendor/autoload.php";
 include "models/organization.php";
 include "models/unit.php";
-include "models/metric.php";
 include "models/user.php";
 include "models/role.php";
 include "models/attachment.php";
@@ -21,8 +20,6 @@ include "models/priority_criteria.php";
 include "models/ceo_notes.php";
 include "models/user_detail.php";
 include "models/kpi.php";
-include "models/master_data.php";
-include "models/data_from_master.php";
 include "models/si_target.php";
 include "models/unit_target.php";
 include "models/upload_file.php";
@@ -211,20 +208,6 @@ class Router
             $r->post('/api/index.php/users/insert', 'User/insert');
             $r->post('/api/index.php/users/update/{id}', 'User/update');
 
-            // // --- MASTER DATA ---
-            // $r->get('/api/index.php/master_data/get', 'MasterData/get');
-            // $r->get('/api/index.php/master_data/find_id/{id}', 'MasterData/findById');
-            // $r->get('/api/index.php/master_data/delete/{id}', 'MasterData/delete');
-            // $r->post('/api/index.php/master_data/insert', 'MasterData/insert');
-            // $r->post('/api/index.php/master_data/update/{id}', 'MasterData/update');
-
-            // // --- DATA FROM MASTER ---
-            // $r->get('/api/index.php/data_from_master/get', 'DataMaster/get');
-            // $r->get('/api/index.php/data_from_master/find_id/{id}', 'DataMaster/findById');
-            // $r->get('/api/index.php/data_from_master/delete/{id}', 'DataMaster/delete');
-            // $r->post('/api/index.php/data_from_master/insert', 'DataMaster/insert');
-            // $r->post('/api/index.php/data_from_master/update/{id}', 'DataMaster/update');
-
             // --- EXPERT JUDGEMENT ---
             $r->get('/api/index.php/expert_judgement/get', 'ExpertJudgement/get');
             $r->get('/api/index.php/expert_judgement/find_id/{id}', 'ExpertJudgement/findById');
@@ -337,13 +320,6 @@ class Router
             $r->post('/api/index.php/program_charter/insert', 'ProgramCharter/insert');
             $r->post('/api/index.php/program_charter/update/{id}', 'ProgramCharter/update');
 
-            // // METRIC
-            // $r->get('/api/index.php/metric/get', 'Metric/get');
-            // $r->get('/api/index.php/metric/find_id/{id}', 'Metric/findById');
-            // $r->get('/api/index.php/metric/delete/{id}', 'Metric/delete');
-            // $r->post('/api/index.php/metric/insert', 'Metric/insert');
-            // $r->post('/api/index.php/metric/update/{id}', 'Metric/update');
-
             // ROLE
             $r->get('/api/index.php/role/get', 'Role/get');
             $r->get('/api/index.php/role/find_id/{id}', 'Role/findById');
@@ -391,14 +367,6 @@ class Router
             $r->get('/api/index.php/unit/delete/{id}', 'Unit/delete');
             $r->post('/api/index.php/unit/insert', 'Unit/insert');
             $r->post('/api/index.php/unit/update/{id}', 'Unit/update');
-
-            // // OBJECT DATA
-            // $r->get('/api/index.php/{tablename}/select_all_get', 'ObjectData/select_all_get');
-            // $r->get('/api/index.php/{tablename}/select_id_get/{id}', 'ObjectData/select_id_get');
-            // $r->get('/api/index.php/{tablename}/select_where_get/{attr}/{val}', 'ObjectData/select_where_get');
-            // $r->get('/api/index.php/{tablename}/delete_all_get/{id}', 'ObjectData/delete_all_get');
-            // $r->post('/api/index.php/{tablename}/insert_object', 'ObjectData/insert');
-            // $r->post('/api/index.php/{tablename}/update_id/{id}', 'ObjectData/update_id');
 
             // MATRIX
             $r->get('/api/index.php/matrix/get', 'Matrix/get');
