@@ -289,6 +289,7 @@ class Unit
             }
         } catch (\Throwable $th) {
             //throw $th;
+            die("EROR");
         }
         // $organization_id = $request[0]->organization_id;
         // $cfu_fu_id = $request[0]->cfu_fu_id;
