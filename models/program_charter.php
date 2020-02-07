@@ -190,7 +190,7 @@ class ProgramCharter
                 $msg = $data_arr;
 
                 $unit_push = array();
-                $unit_push = array();
+                $user_push = array();
                 $main_activities_push = array();
 
                 // STAKEHOLDER
@@ -203,7 +203,6 @@ class ProgramCharter
                 );
 
                 for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
-                    die(print_r($data_item['stakeholders']->member[$i]));
                     array_push($user_push, $data_item['stakeholders']->member[$i]);
                 }
 
