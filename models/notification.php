@@ -37,7 +37,7 @@ class Notification
                 return $result;
                 break;
             } else {
-                return "Data Kosong";
+                sleep(1);
             }
         }
     }
