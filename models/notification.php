@@ -44,7 +44,7 @@ class Notification
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE unit_id_or_user_id = '$id' AND status = 0";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
