@@ -286,8 +286,7 @@ class Unit
         // $a = $request[0];
         // $list = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code')
         for ($i = 0; $i < count($a); $i++) {
-            die(print_r($a[$i]));
-            if (isset($a[$i])) {
+            if (!isset($a[$i])) {
                 die("ASU");
             }
         }
