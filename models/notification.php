@@ -71,7 +71,7 @@ class Notification
             }
 
         } else {
-            $msg = 'Data Kosong';
+            $msg = [];
         }
 
         return $msg;
