@@ -119,9 +119,6 @@ class ProgramCharter
         if (empty($description)) {
             $description = 'NULL';
         }
-        if (empty($refer_to)) {
-            $refer_to = 'NULL';
-        }
         if (empty($risks)) {
             $risks = 'NULL';
         }
@@ -163,9 +160,9 @@ class ProgramCharter
             '$unit_id',
             NULLIF('$weight', 'NULL'),
             NULLIF('$description', 'NULL'),
-            NULLIF('$refer_to', 'NULL'),
+            '$refer_to',
             NULLIF('$stakeholders', 'NULL'),
-            NULLIF('$kpi', 'NULL'),
+            '$kpi',
             NULLIF('$main_activities', 'NULL'),
             NULLIF('$key_asks', 'NULL'),
             NULLIF('$risks', 'NULL'),
