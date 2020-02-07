@@ -232,10 +232,8 @@ class ProgramCharter
                         die($pushKeyAsk);
                         $this->db->execute($pushKeyAsk);
                     }
-                } else {
-                    die("UNIT KOSONG");
                 }
- 
+
                 if (!empty($data_push['user_id'])) {
                     // STAKEHOLDER INSERT
                     for ($i = 0; $i < count($data_push['user_id']); $i++) {
