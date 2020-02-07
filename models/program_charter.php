@@ -197,9 +197,12 @@ class ProgramCharter
                 $stakeholders_push = array(
                     $data_item['stakeholders']->boe,
                     $data_item['stakeholders']->controller,
+                    $data_item['stakeholders']->coordinator,
                     $data_item['stakeholders']->program_leader,
 
                 );
+
+                die(print_r($data_item['stakeholders']->member));
 
                 for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
                     array_push($user_push, $data_item['stakeholders']->member[$i]);
@@ -353,7 +356,6 @@ class ProgramCharter
                 $unit_push = array();
                 $main_activities_push = array();
 
-
                 // STAKEHOLDER
                 $stakeholders_push = array(
                     $data_item['stakeholders']->boe,
@@ -415,7 +417,7 @@ class ProgramCharter
         }
 
         return $msg;
-        
+
     }
 
     public function delete($id, $tablename)
