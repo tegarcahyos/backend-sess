@@ -280,7 +280,7 @@ class Unit
         try {
             for ($i = 0; $i < count($variable); $i++) {
                 print_r($request[0]->{$variable[$i]});
-                if (isset($request[0]->{$variable[$i]})) {
+                if (!isset($request[0]->{$variable[$i]})) {
                     print_r($variable[$i]);
                 }
                 // $$variable[$i] = ;
