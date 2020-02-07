@@ -32,7 +32,7 @@ class Notification
         $counterCheck = 0;
 
         while (true) {
-            $result = findById($id, $tablename);
+            $result = $this->findById($id, $tablename);
             if (count($result) > 0) {
                 return $result;
             } else if (++$counterCheck == $limitCheck) {
