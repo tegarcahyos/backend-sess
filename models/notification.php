@@ -17,7 +17,7 @@ class Notification
         extract($row);
         $data_item = array(
             'id' => $id,
-            'unit_or_user_id' => $unit_or_user_id,
+            'unit_or_user_id' => $unit_id_or_user_id,
             'pc_id' => $pc_id,
             'type' => $type,
             'status' => $status,
