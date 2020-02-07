@@ -10,7 +10,7 @@ class Notification
 
     public function readNotification($id, $tablename)
     {
-        $update = "UPDATE $tablename SET status = 1 RETURNING *";
+        $update = "UPDATE $tablename SET status = 1 WHERE id = '$id' RETURNING *";
 
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
