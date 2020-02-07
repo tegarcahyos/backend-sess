@@ -202,11 +202,11 @@ class ProgramCharter
 
                 );
 
-                die(print_r($data_item['stakeholders']->member));
-
                 for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
                     array_push($user_push, $data_item['stakeholders']->member[$i]);
                 }
+
+                die(print_r($user_push));
 
                 for ($i = 0; $i < count($stakeholders_push); $i++) {
                     array_push($user_push, $stakeholders_push[$i]);
