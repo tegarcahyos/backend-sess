@@ -189,40 +189,60 @@ class ProgramCharter
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
 
-                $user_push = array(
+                $unit_push = array();
+                $unit_push = array();
+                $main_activities_push = array();
+
+                // STAKEHOLDER
+                $stakeholders_push = array(
                     $data_item['stakeholders']->boe,
                     $data_item['stakeholders']->controller,
                     $data_item['stakeholders']->program_leader,
-                    $data_item['main_activities']->mainAct->task->data[0]->assign,
+
                 );
 
-                $unit_push = array();
-
-                // STAKEHOLDER
                 for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
                     array_push($user_push, $data_item['stakeholders']->member[$i]);
                 }
 
+                for ($i = 0; $i < count($stakeholders_push); $i++) {
+                    array_push($user_push, $stakeholders_push[$i]);
+                }
+
                 // KEY ASKS
+                for ($i = 1; $i < count($data_item['main_activities']->mainAct->task->data); $i++) {
+                    array_push($unit_push, $data_item['main_activities']->mainAct->task->data[$i]->assign);
+                }
+
+                // MAIN ACTIVITIES
                 for ($i = 1; $i < count($data_item['key_asks']->alignment->nodeDataArray); $i++) {
-                    array_push($unit_push, $data_item['key_asks']->alignment->nodeDataArray[$i]->assign);
+                    array_push($main_activities_push, $data_item['key_asks']->alignment->nodeDataArray[$i]->assign);
                 }
 
                 $data_push = array(
                     "user_id" => $user_push,
                     "unit_id" => $unit_push,
+                    "main_activities" => $main_act_push,
                 );
 
-                for ($i = 0; $i < count($login); $i++) {
-                    $pushKeyAsk = "INSERT INTO log_notification (login) VALUES ('" . $login[$i] . "')";
+                // KEY ASK INSERT
+                for ($i = 0; $i < count($data_push['unit_id']); $i++) {
+                    $pushKeyAsk = "INSERT INTO log_notification (unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
                     // die($pushKeyAsk);
                     $this->db->execute($pushKeyAsk);
                 }
 
+                // STAKEHOLDER INSERT
                 for ($i = 0; $i < count($data_push['user_id']); $i++) {
-                    $pushU = "INSERT INTO log_notification (user_id, pc_id, type) VALUES ('" . $data_push['user_id'][$i] . "', '$id', )";
-                    // die($pushU);
+                    $pushU = "INSERT INTO log_notification (user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Stakeholder', 0, '$generator_id')";
                     $this->db->execute($pushU);
+                }
+
+                // MAIN ACT INSERT
+                for ($i = 0; $i < count($data_push['user_id']); $i++) {
+                    $pushKeyAsk = "INSERT INTO log_notification (user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Main Activities', 0, '$generator_id')";
+                    // die($pushKeyAsk);
+                    $this->db->execute($pushKeyAsk);
                 }
 
             }
@@ -296,18 +316,106 @@ class ProgramCharter
         WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
+        $num = $result->rowCount();
 
-        // if (strpos($status, 'accepted')) {
-        //     $this->sync('program_charter', $id);
-        // }
+        // jika ada hasil
+        if ($num > 0) {
 
-        $res = $this->db->affected_rows();
+            $data_arr = array();
 
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Diubah', "code" => 200);
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                // Push to data_arr
+
+                $data_item = array(
+                    'id' => $id,
+                    'title' => $title,
+                    'code' => $code,
+                    'strategic_initiative' => $strategic_initiative,
+                    'unit_id' => $unit_id,
+                    'weight' => $weight,
+                    'description' => $description,
+                    'refer_to' => json_decode($refer_to),
+                    'stakeholders' => json_decode($stakeholders),
+                    'kpi' => json_decode($kpi),
+                    'main_activities' => json_decode($main_activities),
+                    'key_asks' => json_decode($key_asks),
+                    'risks' => $risks,
+                    'status' => $status,
+                    'generator_id' => $generator_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+
+                $unit_push = array();
+                $unit_push = array();
+                $main_activities_push = array();
+
+
+                // STAKEHOLDER
+                $stakeholders_push = array(
+                    $data_item['stakeholders']->boe,
+                    $data_item['stakeholders']->controller,
+                    $data_item['stakeholders']->program_leader,
+
+                );
+
+                for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
+                    array_push($user_push, $data_item['stakeholders']->member[$i]);
+                }
+
+                for ($i = 0; $i < count($stakeholders_push); $i++) {
+                    array_push($user_push, $stakeholders_push[$i]);
+                }
+
+                // KEY ASKS
+                for ($i = 1; $i < count($data_item['main_activities']->mainAct->task->data); $i++) {
+                    array_push($unit_push, $data_item['main_activities']->mainAct->task->data[$i]->assign);
+                }
+
+                // MAIN ACTIVITIES
+                for ($i = 1; $i < count($data_item['key_asks']->alignment->nodeDataArray); $i++) {
+                    array_push($main_activities_push, $data_item['key_asks']->alignment->nodeDataArray[$i]->assign);
+                }
+
+                $data_push = array(
+                    "user_id" => $user_push,
+                    "unit_id" => $unit_push,
+                    "main_activities" => $main_act_push,
+                );
+
+                $delete = "DELETE FROM log_notification WHERE pc_id = '$id'";
+
+                // KEY ASK INSERT
+                for ($i = 0; $i < count($data_push['unit_id']); $i++) {
+                    $pushKeyAsk = "INSERT INTO log_notification (unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
+                    // die($pushKeyAsk);
+                    $this->db->execute($pushKeyAsk);
+                }
+
+                // STAKEHOLDER INSERT
+                for ($i = 0; $i < count($data_push['user_id']); $i++) {
+                    $pushU = "INSERT INTO log_notification (user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Stakeholder', 0, '$generator_id')";
+                    $this->db->execute($pushU);
+                }
+
+                // MAIN ACT INSERT
+                for ($i = 0; $i < count($data_push['user_id']); $i++) {
+                    $pushKeyAsk = "INSERT INTO log_notification (user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Main Activities', 0, '$generator_id')";
+                    // die($pushKeyAsk);
+                    $this->db->execute($pushKeyAsk);
+                }
+
+            }
+
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $msg = 'Data Kosong';
         }
+
+        return $msg;
+        
     }
 
     public function delete($id, $tablename)
