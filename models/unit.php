@@ -283,7 +283,7 @@ class Unit
             $name = $request[0]->name;
             $code = $request[0]->code;
         } catch (\Error $err) {
-            return "422";
+            return "402";
         }
 
         $query = "INSERT INTO $tablename (
