@@ -285,15 +285,15 @@ class Unit
         //         die("ASU");
         //     }
         // }
-        try {
-            $organization_id = $request[0]->organization_id;
-            $cfu_fu_id = $request[0]->cfu_fu_id;
-            $parent_id = $request[0]->parent_id;
-            $name = $request[0]->name;
-            $code = $request[0]->code;
-        } catch (\Exception $err) {
-            return "402";
-        }
+        // try {
+        $organization_id = $request[0]->organization_id;
+        $cfu_fu_id = $request[0]->cfu_fu_id;
+        $parent_id = $request[0]->parent_id;
+        $name = $request[0]->name;
+        $code = $request[0]->code;
+        // } catch (\Exception $err) {
+        //     return "402";
+        // }
 
         $query = "INSERT INTO $tablename (
             parent_id, name, code, organization_id, cfu_fu_id)";
