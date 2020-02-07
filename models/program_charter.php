@@ -226,12 +226,12 @@ class ProgramCharter
                 );
 
                 // $delete = "DELETE FROM notif WHERE pc_id = '$id'";
-                $this->db->execute($delete);
+                // $this->db->execute($delete);
                 // die("Terdelete");
                 // KEY ASK INSERT
                 for ($i = 0; $i < count($data_push['unit_id']); $i++) {
                     $pushKeyAsk = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
-                    // die($pushKeyAsk);
+                    die($pushKeyAsk);
                     $this->db->execute($pushKeyAsk);
                 }
 
@@ -389,7 +389,7 @@ class ProgramCharter
                     "main_activities" => $main_activities_push,
                 );
 
-                $delete = "DELETE FROM notif WHERE pc_id = '$id'";
+                $delete = "DELETE FROM log_notification WHERE pc_id = '$id'";
                 $this->db->execute($delete);
                 // die("Terdelete");
                 // KEY ASK INSERT
