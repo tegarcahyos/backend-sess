@@ -169,7 +169,7 @@ class Periode
         $status_active = $request[0]->status_active;
         $organization_id = $request[0]->organization_id;
 
-        $set_false = "UPDATE $tablename SET status_active = false WHERE organization_id = '$organization_id'";
+        $set_false = "UPDATE $tablename SET status_active = false";
         $this->db->execute($set_false);
 
         $activate = "UPDATE $tablename SET name = '$name',  code = '$code' ,organization_id = '$organization_id', status_active = '$status_active' WHERE id = '$idP' RETURNING *";
