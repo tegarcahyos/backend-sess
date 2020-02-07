@@ -5,6 +5,7 @@ include "models/organization.php";
 include "models/unit.php";
 include "models/user.php";
 include "models/role.php";
+include "models/notification.php";
 include "models/attachment.php";
 include "models/group_chat.php";
 include "models/group_member.php";
@@ -351,6 +352,10 @@ class Router
             $r->post('/api/index.php/unit_target/insert', 'UnitTarget/insert');
             $r->post('/api/index.php/unit_target/update/{id}', 'UnitTarget/update');
 
+            // NOTIFICATION
+            $r->get('/api/index.php/notification/read_notification/{id}', 'Notification/readNotification');
+            $r->get('/api/index.php/notification/find_id/{id}', 'Notification/findById');
+
             // ORGANIZATION
             $r->get('/api/index.php/organization/get', 'Organization/get');
             $r->get('/api/index.php/organization/find_id/{id}', 'Organization/findById');
@@ -549,7 +554,8 @@ class Router
                     $explodeUri[4] == "update_id" ||
                     $explodeUri[4] == "select_id_get" ||
                     $explodeUri[4] == "get_root_parent" ||
-                    $explodeUri[4] == "get_leaf_by_root_id"
+                    $explodeUri[4] == "get_leaf_by_root_id" ||
+                    $explodeUri[4] == "read_notification"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
                 } else if (
