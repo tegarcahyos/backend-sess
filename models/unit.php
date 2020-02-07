@@ -277,29 +277,13 @@ class Unit
 
         $request = json_decode($data);
         $variable = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code');
-        try {
-            // for ($i = 0; $i < count($variable); $i++) {
-            // print($variable[$i]);
-            foreach ($variable as $item) {
-                if (!isset($request[0]->{$item})) {
-                    return '402';
-                }
-                // die("ini type: " . $request[0]->{$item});
-                $$item = $request[0]->{$item};
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
             }
 
-            // }
-        } catch (\Throwable $th) {
-            //throw ;
-            die($th);
+            $$item = $request[0]->{$item};
         }
-
-        die($parent_id);
-        // $organization_id = $request[0]->organization_id;
-        // $cfu_fu_id = $request[0]->cfu_fu_id;
-        // $parent_id = $request[0]->parent_id;
-        // $name = $request[0]->name;
-        // $code = $request[0]->code;
 
         $query = "INSERT INTO $tablename (
             parent_id, name, code, organization_id, cfu_fu_id)";
