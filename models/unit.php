@@ -274,7 +274,12 @@ class Unit
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        $request = json_decode($data);
+        try{
+            $request = json_decode($data);
+
+        } catch (\Exception $err) {
+            return "402";
+        }
         // die(json_encode($request));
         // $a = array(
         // );
