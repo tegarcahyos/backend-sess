@@ -283,7 +283,7 @@ class Unit
                 if (!isset($request[0]->{$variable[$i]})) {
                     return '402';
                 }
-                die("ini type: " . gettype($$variable[$i]));
+                die("ini type: " . gettype($request[0]->{$variable[$i]}));
                 // $$variable[$i] = $request[0]->{$variable[$i]};
             }
         } catch (\Throwable $th) {
