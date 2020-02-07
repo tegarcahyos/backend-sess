@@ -280,8 +280,8 @@ class Unit
         try {
             for ($i = 0; $i < count($variable); $i++) {
                 print($variable[$i]);
-                if (isset($request[0]->{$variable[$i]})) {
-                    return $variable[$i];
+                if (!isset($request[0]->{$variable[$i]})) {
+                    return '402';
                 }
                 $$variable[$i] = $request[0]->{$variable[$i]};
             }
