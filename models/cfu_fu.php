@@ -113,6 +113,15 @@ class CfuFu
         $name = $request[0]->name;
         $code = $request[0]->code;
 
+        $variable = array('organization_id', 'name', 'code');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+
         $query = "INSERT INTO $tablename (
             name, code, organization_id)";
         $query .= "VALUES (
@@ -151,9 +160,18 @@ class CfuFu
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        $name = $request[0]->name;
-        $code = $request[0]->code;
-        $organization_id = $request[0]->organization_id;
+        // $name = $request[0]->name;
+        // $code = $request[0]->code;
+        // $organization_id = $request[0]->organization_id;
+
+        $variable = array('name', 'code', 'organization');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
 
         $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id' WHERE id = '$id' RETURNING *";
         // die($query);

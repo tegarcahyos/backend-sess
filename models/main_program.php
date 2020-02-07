@@ -75,10 +75,20 @@ class MainProgram
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $title = $request[0]->title;
-        $code = $request[0]->code;
-        $unit_id = $request[0]->unit_id;
-        $periode_id = $request[0]->periode_id;
+        // $title = $request[0]->title;
+        // $code = $request[0]->code;
+        // $unit_id = $request[0]->unit_id;
+        // $periode_id = $request[0]->periode_id;
+
+        $variable = array('title', 'code', 'unit_id', 'periode_id');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+
         $query = "INSERT INTO $tablename (title, code, unit_id, periode_id)";
         $query .= "VALUES ('$title', '$code','$unit_id','$periode_id')";
         // die($query);
@@ -101,10 +111,20 @@ class MainProgram
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $title = $request[0]->title;
-        $code = $request[0]->code;
-        $unit_id = $request[0]->unit_id;
-        $periode_id = $request[0]->periode_id;
+        // $title = $request[0]->title;
+        // $code = $request[0]->code;
+        // $unit_id = $request[0]->unit_id;
+        // $periode_id = $request[0]->periode_id;
+
+        $variable = array('title', 'code', 'unit_id', 'periode_id');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+
         $query = "UPDATE $tablename SET title = '$title', unit_id = '$unit_id', code = '$code', periode_id = '$periode_id' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);

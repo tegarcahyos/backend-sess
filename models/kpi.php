@@ -177,10 +177,18 @@ class Kpi
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request[0]->name;
-        $metric = $request[0]->metric;
-        $status = $request[0]->status;
-        $parent_id = $request[0]->parent_id;
+        $variable = array('name', 'metric', 'status', 'parent_id');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+        // $name = $request[0]->name;
+        // $metric = $request[0]->metric;
+        // $status = $request[0]->status;
+        // $parent_id = $request[0]->parent_id;
 
         $query = "INSERT INTO $tablename (name, metric, status, parent_id)";
         $query .= "VALUES ('$name', '$metric', '$status', '$parent_id') RETURNING *";
@@ -211,10 +219,18 @@ class Kpi
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request[0]->name;
-        $metric = $request[0]->metric;
-        $status = $request[0]->status;
-        $parent_id = $request[0]->parent_id;
+        $variable = array('name', 'metric', 'status', 'parent_id');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+        // $name = $request[0]->name;
+        // $metric = $request[0]->metric;
+        // $status = $request[0]->status;
+        // $parent_id = $request[0]->parent_id;
 
         $query = "UPDATE $tablename SET name = '$name', metric = '$metric', status = '$status', parent_id = '$parent_id' WHERE id = '$id'";
         // die($query);

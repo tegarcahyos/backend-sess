@@ -68,12 +68,17 @@ class Organization
         // get data input from frontend
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        // die(print_r($request[0]));
-        // $type_id = 1;
-        // $type_name = "Telkom";
-        // $type_code = "T12";
-        $name = $request[0]->name;
-        $code = $request[0]->code;
+        // $name = $request[0]->name;
+        // $code = $request[0]->code;
+
+        $variable = array('name', 'code');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
 
         $query = "INSERT INTO $tablename (name, code)";
         // $query .= "VALUES ($type_id , '$type_name', '$type_code', '$name', '$code')";
@@ -87,11 +92,17 @@ class Organization
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        // $type_id = 1;
-        // $type_name = "Telkom";
-        // $type_code = "T12";
-        $name = $request[0]->name;
-        $code = $request[0]->code;
+        // $name = $request[0]->name;
+        // $code = $request[0]->code;
+
+        $variable = array('name', 'code');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
 
         $query = "UPDATE $tablename SET name = '$name', code = '$code' WHERE id = '$id'";
         // die($query);

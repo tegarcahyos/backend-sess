@@ -98,6 +98,15 @@ class ExpertJudgement
         $user_id = $request[0]->user_id;
         $program_charter = json_encode($request[0]->program_charter);
 
+        $variable = array('user_id', 'program_charter');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+
         $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter) ';
         $query .= "VALUES ('$user_id', '$program_charter') RETURNING *";
         // die($query);
@@ -139,8 +148,17 @@ class ExpertJudgement
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $user_id = $request[0]->user_id;
-        $program_charter = json_encode($request[0]->program_charter);
+        // $user_id = $request[0]->user_id;
+        // $program_charter = json_encode($request[0]->program_charter);
+
+        $variable = array('user_id', 'program_charter');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
 
         $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter' WHERE id = '$id' RETURNING *";
 

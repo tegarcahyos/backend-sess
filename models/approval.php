@@ -165,8 +165,17 @@ class Approval
         //
         $request = json_decode($data);
         // die(print_r($request));
-        $data = json_encode($request[0]->data);
-        $pc_id = $request[0]->pc_id;
+        $variable = array('data', 'pc_id');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+
+        // $data = json_encode($request[0]->data);
+        // $pc_id = $request[0]->pc_id;
 
         $query = 'INSERT INTO ' . $tablename . ' (data, pc_id) ';
         $query .= "VALUES ('$data', '$pc_id') RETURNING *";
@@ -209,8 +218,17 @@ class Approval
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $data = json_encode($request[0]->data);
-        $pc_id = $request[0]->pc_id;
+        // $data = json_encode($request[0]->data);
+        // $pc_id = $request[0]->pc_id;
+
+        $variable = array('data', 'pc_id');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
 
         $query = "UPDATE $tablename SET data = '$data', pc_id = '$pc_id' WHERE id = '$id' RETURNING *";
 

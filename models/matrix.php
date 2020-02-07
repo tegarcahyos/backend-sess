@@ -118,10 +118,17 @@ class Matrix
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
+        $variable = array('si_id', 'unit_id', 'matrix');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
 
-        $si_id = $request[0]->si_id;
-        $unit_id = $request[0]->unit_id;
-        $matrix = $request[0]->matrix;
+            $$item = $request[0]->{$item};
+        }
+        // $si_id = $request[0]->si_id;
+        // $unit_id = $request[0]->unit_id;
+        // $matrix = $request[0]->matrix;
 
         $query = 'INSERT INTO ' . $tablename . ' (si_id, unit_id, matrix) ';
         $query .= "VALUES ('$si_id','$unit_id', '$matrix') RETURNING *";
@@ -165,9 +172,19 @@ class Matrix
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $si_id = $request[0]->si_id;
-        $unit_id = $request[0]->unit_id;
-        $matrix = $request[0]->matrix;
+
+        $variable = array('si_id', 'unit_id', 'matrix');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+
+        // $si_id = $request[0]->si_id;
+        // $unit_id = $request[0]->unit_id;
+        // $matrix = $request[0]->matrix;
 
         $query = "UPDATE $tablename SET si_id = '$si_id', unit_id = '$unit_id',matrix = '$matrix' WHERE id = '$id' RETURNING *";
 
