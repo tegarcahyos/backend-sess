@@ -113,14 +113,8 @@ class ProgramCharter
         $status = $request[0]->status;
         $generator_id = $request[0]->generator_id;
 
-        if (empty($description)) {
+        if (empty($description) || empty($risks) || empty($weight) || empty($refer_to) || empty($stakeholders) || empty($kpi) || empty($main_activities) || empty($key_asks) || empty($risks)) {
             $description = 'NULL';
-        }
-        if (empty($risks)) {
-            $risks = 'NULL';
-        }
-        if (empty($approval)) {
-            $approval = 'NULL';
         }
 
         $query = "INSERT INTO $tablename (
@@ -143,13 +137,13 @@ class ProgramCharter
             '$code',
             '$strategic_initiative',
             '$unit_id',
-            '$weight',
+            NULLIF('$weight', 'NULL'),
             NULLIF('$description', 'NULL'),
-            '$refer_to',
-            '$stakeholders',
-            '$kpi',
-            '$main_activities',
-            '$key_asks',
+            NULLIF('$refer_to', 'NULL'),
+            NULLIF('$stakeholders', 'NULL'),
+            NULLIF('$kpi', 'NULL'),
+            NULLIF('$main_activities', 'NULL'),
+            NULLIF('$key_asks', 'NULL'),
             NULLIF('$risks', 'NULL'),
             '$status',
             '$generator_id'
