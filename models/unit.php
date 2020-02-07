@@ -283,6 +283,7 @@ class Unit
                 if (!isset($request[0]->{$variable[$i]})) {
                     return '402';
                 }
+                die("ini type: " . gettype($$variable[$i]));
                 // $$variable[$i] = $request[0]->{$variable[$i]};
             }
         } catch (\Throwable $th) {
@@ -290,7 +291,7 @@ class Unit
             die($th);
         }
 
-        // die($parent_id);
+        die($parent_id);
         // $organization_id = $request[0]->organization_id;
         // $cfu_fu_id = $request[0]->cfu_fu_id;
         // $parent_id = $request[0]->parent_id;
