@@ -224,25 +224,32 @@ class ProgramCharter
                     "unit_id" => $unit_push,
                     "main_activities" => $main_activities_push,
                 );
-                // KEY ASK INSERT
-                for ($i = 0; $i < count($data_push['unit_id']); $i++) {
-                    $pushKeyAsk = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
-                    die($pushKeyAsk);
-                    $this->db->execute($pushKeyAsk);
+
+                if (!empty($data_push['unit_id'])) {
+                    // KEY ASK INSERT
+                    for ($i = 0; $i < count($data_push['unit_id']); $i++) {
+                        $pushKeyAsk = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
+                        die($pushKeyAsk);
+                        $this->db->execute($pushKeyAsk);
+                    }
                 }
 
-                // STAKEHOLDER INSERT
-                for ($i = 0; $i < count($data_push['user_id']); $i++) {
-                    $pushU = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Stakeholder', 0, '$generator_id')";
-                    // die($pushU);
-                    $this->db->execute($pushU);
+                if (!empty($data_push['user_id'])) {
+                    // STAKEHOLDER INSERT
+                    for ($i = 0; $i < count($data_push['user_id']); $i++) {
+                        $pushU = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Stakeholder', 0, '$generator_id')";
+                        // die($pushU);
+                        $this->db->execute($pushU);
+                    }
                 }
 
-                // MAIN ACT INSERT
-                for ($i = 0; $i < count($data_push['main_activities']); $i++) {
-                    $pushKeyMain = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Main Activities', 0, '$generator_id')";
-                    // die($pushKeyMain);
-                    $this->db->execute($pushKeyMain);
+                if (!empty($data_push['main_activities'])) {
+                    // MAIN ACT INSERT
+                    for ($i = 0; $i < count($data_push['main_activities']); $i++) {
+                        $pushKeyMain = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Main Activities', 0, '$generator_id')";
+                        // die($pushKeyMain);
+                        $this->db->execute($pushKeyMain);
+                    }
                 }
 
             }
