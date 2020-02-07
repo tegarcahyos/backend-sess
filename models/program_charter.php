@@ -197,7 +197,6 @@ class ProgramCharter
                 $stakeholders_push = array(
                     $data_item['stakeholders']->boe,
                     $data_item['stakeholders']->controller,
-                    $data_item['stakeholders']->coordinator,
                     $data_item['stakeholders']->program_leader,
 
                 );
@@ -210,42 +209,44 @@ class ProgramCharter
                     array_push($user_push, $stakeholders_push[$i]);
                 }
 
-                // KEY ASKS
-                for ($i = 1; $i < count($data_item['main_activities']->mainAct->task->data); $i++) {
-                    array_push($unit_push, $data_item['main_activities']->mainAct->task->data[$i]->assign);
+                // MAIN ACTIVITIES
+                for ($i = 0; $i < count($data_item['main_activities']->mainAct->task->data); $i++) {
+                    array_push($main_activities_push, $data_item['main_activities']->mainAct->task->data[$i]->assign);
                 }
 
-                // MAIN ACTIVITIES
+                // KEY ASKS
                 for ($i = 1; $i < count($data_item['key_asks']->alignment->nodeDataArray); $i++) {
-                    array_push($main_activities_push, $data_item['key_asks']->alignment->nodeDataArray[$i]->assign);
+                    array_push($unit_push, $data_item['key_asks']->alignment->nodeDataArray[$i]->assign);
                 }
 
                 $data_push = array(
                     "user_id" => $user_push,
                     "unit_id" => $unit_push,
-                    "main_activities" => $main_act_push,
+                    "main_activities" => $main_activities_push,
                 );
 
-                die(print_r($data_push));
-
+                // $delete = "DELETE FROM notif WHERE pc_id = '$id'";
+                $this->db->execute($delete);
+                // die("Terdelete");
                 // KEY ASK INSERT
                 for ($i = 0; $i < count($data_push['unit_id']); $i++) {
-                    $pushKeyAsk = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
+                    $pushKeyAsk = "INSERT INTO notif (unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
                     // die($pushKeyAsk);
                     $this->db->execute($pushKeyAsk);
                 }
 
                 // STAKEHOLDER INSERT
                 for ($i = 0; $i < count($data_push['user_id']); $i++) {
-                    $pushU = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Stakeholder', 0, '$generator_id')";
+                    $pushU = "INSERT INTO notif (user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Stakeholder', 0, '$generator_id')";
+                    // die($pushU);
                     $this->db->execute($pushU);
                 }
 
                 // MAIN ACT INSERT
-                for ($i = 0; $i < count($data_push['user_id']); $i++) {
-                    $pushKeyAsk = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Main Activities', 0, '$generator_id')";
-                    // die($pushKeyAsk);
-                    $this->db->execute($pushKeyAsk);
+                for ($i = 0; $i < count($data_push['main_activities']); $i++) {
+                    $pushKeyMain = "INSERT INTO notif (user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Main Activities', 0, '$generator_id')";
+                    // die($pushKeyMain);
+                    $this->db->execute($pushKeyMain);
                 }
 
             }
