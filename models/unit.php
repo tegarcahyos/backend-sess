@@ -279,8 +279,11 @@ class Unit
         $variable = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code');
         try {
             for ($i = 0; $i < count($variable); $i++) {
-                print($variable[$i]);
-                // $$variable[$i] = $request[0][$variable[$i]];
+
+                if (!isset($request[0][$variable[$i]])) {
+                    print($variable[$i]);
+                }
+                // $$variable[$i] = ;
             }
         } catch (\Throwable $th) {
             //throw $th;
