@@ -274,31 +274,22 @@ class Unit
         // get data input from frontend
         $data = file_get_contents("php://input");
         //
-        try{
-            $request = json_decode($data);
 
-        } catch (\Exception $err) {
-            return "402";
+        $request = json_decode($data);
+        $variable = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code');
+        try {
+            for ($i = 0; $i < count($variable); $i++) {
+                print($variable[$i]);
+                // $$variable[$i] = $request[0][$variable[$i]];
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
-        // die(json_encode($request));
-        // $a = array(
-        // );
-        // $a = $request[0];
-        // $list = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code')
-        // for ($i = 0; $i < count($a); $i++) {
-        //     if (!isset($a[$i])) {
-        //         die("ASU");
-        //     }
-        // }
-        // try {
-        $organization_id = $request[0]->organization_id;
-        $cfu_fu_id = $request[0]->cfu_fu_id;
-        $parent_id = $request[0]->parent_id;
-        $name = $request[0]->name;
-        $code = $request[0]->code;
-        // } catch (\Exception $err) {
-        //     return "402";
-        // }
+        // $organization_id = $request[0]->organization_id;
+        // $cfu_fu_id = $request[0]->cfu_fu_id;
+        // $parent_id = $request[0]->parent_id;
+        // $name = $request[0]->name;
+        // $code = $request[0]->code;
 
         $query = "INSERT INTO $tablename (
             parent_id, name, code, organization_id, cfu_fu_id)";
