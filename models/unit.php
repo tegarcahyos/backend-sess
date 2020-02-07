@@ -283,12 +283,15 @@ class Unit
                 if (!isset($request[0]->{$variable[$i]})) {
                     return '402';
                 }
-                $$variable[$i] = json_encode($request[0]->{$variable[$i]});
+                $$variable[$i] = "HELLo";
+                // json_encode($request[0]->{$variable[$i]});
             }
         } catch (\Throwable $th) {
             //throw ;
             die($th);
         }
+
+        die($parent_id);
         // $organization_id = $request[0]->organization_id;
         // $cfu_fu_id = $request[0]->cfu_fu_id;
         // $parent_id = $request[0]->parent_id;
