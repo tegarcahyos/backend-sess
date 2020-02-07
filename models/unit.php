@@ -288,8 +288,8 @@ class Unit
                 print('\n');
             }
         } catch (\Throwable $th) {
-            //throw $th;
-            die("EROR");
+            //throw ;
+            die($th);
         }
         // $organization_id = $request[0]->organization_id;
         // $cfu_fu_id = $request[0]->cfu_fu_id;
