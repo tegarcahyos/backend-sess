@@ -282,7 +282,7 @@ class Unit
             $parent_id = $request[0]->parent_id;
             $name = $request[0]->name;
             $code = $request[0]->code;
-        } catch (Exception $err) {
+        } catch (Throwable $err) {
             return "402";
         }
 
