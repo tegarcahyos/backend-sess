@@ -224,10 +224,7 @@ class ProgramCharter
                     "unit_id" => $unit_push,
                     "main_activities" => $main_activities_push,
                 );
-
-                // $delete = "DELETE FROM notif WHERE pc_id = '$id'";
-                // $this->db->execute($delete);
-                // die("Terdelete");
+                die($data_push['unit_id']);
                 // KEY ASK INSERT
                 for ($i = 0; $i < count($data_push['unit_id']); $i++) {
                     $pushKeyAsk = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
