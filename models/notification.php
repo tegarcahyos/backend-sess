@@ -33,9 +33,10 @@ class Notification
 
         while (true) {
             $result = $this->findById($id, $tablename);
-            if (count($result) > 0) {
+            if (++$counterCheck == $limitCheck || count($result) > 0) {
                 return $result;
-            } else if (++$counterCheck == $limitCheck) {
+                break;
+            } else {
                 return "Data Kosong";
             }
         }
