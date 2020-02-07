@@ -332,7 +332,7 @@ class Unit
         $code = $request[0]->code;
 
         $query = "UPDATE $tablename SET name = '$name', code = '$code',parent_id = '$parent_id', organization_id = '$organization_id', cfu_fu_id = '$cfu_fu_id' WHERE id = '$id' RETURNING *";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
         if ($num > 0) {
