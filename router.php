@@ -354,7 +354,7 @@ class Router
 
             // NOTIFICATION
             $r->get('/api/index.php/notification/read_notification/{id}', 'Notification/readNotification');
-            $r->get('/api/index.php/notification/find_id/{id}', 'Notification/findById');
+            $r->get('/api/index.php/notification/check_notif/{id}', 'Notification/checkNotification');
 
             // ORGANIZATION
             $r->get('/api/index.php/organization/get', 'Organization/get');
@@ -540,6 +540,7 @@ class Router
                     $explodeUri[4] == "select_attachment" ||
                     $explodeUri[4] == "select" ||
                     $explodeUri[4] == "find_id" ||
+                    $explodeUri[4] == "check_notif" ||
                     $explodeUri[4] == "select_group_chat" ||
                     $explodeUri[4] == "get_layout" ||
                     $explodeUri[4] == "update" ||

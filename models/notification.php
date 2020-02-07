@@ -26,9 +26,24 @@ class Notification
         return $data_item;
     }
 
+    public function checkNotif($id, $tablename)
+    {
+        $limitCheck = 15;
+        $counterCheck = 0;
+
+        while (true) {
+            $result = findById($id, $tablename);
+            if (count($result) > 0) {
+                return $result;
+            } else if (++$counterCheck == $limitCheck) {
+                return "Data Kosong";
+            }
+        }
+    }
+
     public function findById($id, $tablename)
     {
-        $query = "SELECT * FROM $tablename WHERE unit_id_or_user_id = '$id'";
+        $query = "SELECT * FROM $tablename WHERE unit_id_or_user_id = '$id' AND status = 0";
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
