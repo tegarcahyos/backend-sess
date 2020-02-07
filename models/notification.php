@@ -12,7 +12,7 @@ class Notification
     {
         $update = "UPDATE $tablename SET status = 1 WHERE id = '$id' RETURNING *";
 
-        $result = $this->db->execute($query);
+        $result = $this->db->execute($update);
         $row = $result->fetchRow();
         extract($row);
         $data_item = array(
