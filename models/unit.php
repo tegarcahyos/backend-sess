@@ -278,14 +278,17 @@ class Unit
         $request = json_decode($data);
         $variable = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code');
         try {
-            for ($i = 0; $i < count($variable); $i++) {
-                // print($variable[$i]);
-                if (!isset($request[0]->{$variable[$i]})) {
+            // for ($i = 0; $i < count($variable); $i++) {
+            // print($variable[$i]);
+            foreach ($variable as $item) {
+                if (!isset($request[0]->{$item})) {
                     return '402';
                 }
-                // die("ini type: " . $request[0]->{$variable[$i]});
-                $variable[$i] = $request[0]->{$variable[$i]};
+                // die("ini type: " . $request[0]->{$item});
+                $$item = $request[0]->{$item};
             }
+
+            // }
         } catch (\Throwable $th) {
             //throw ;
             die($th);
