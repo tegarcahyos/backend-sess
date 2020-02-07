@@ -353,8 +353,8 @@ class Router
             $r->post('/api/index.php/unit_target/update/{id}', 'UnitTarget/update');
 
             // NOTIFICATION
-            $r->get('/api/index.php/notification/read_notification/{id}', 'Notification/readNotification');
-            $r->get('/api/index.php/notification/check_notif/{id}', 'Notification/checkNotif');
+            $r->get('/api/index.php/log_notification/read_notification/{id}', 'Notification/readNotification');
+            $r->get('/api/index.php/log_notification/check_notif/{id}', 'Notification/checkNotif');
 
             // ORGANIZATION
             $r->get('/api/index.php/organization/get', 'Organization/get');
