@@ -188,6 +188,43 @@ class ProgramCharter
 
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
+
+                $user_push = array(
+                    $data_item['stakeholders']->boe,
+                    $data_item['stakeholders']->controller,
+                    $data_item['stakeholders']->program_leader,
+                    $data_item['main_activities']->mainAct->task->data[0]->assign,
+                );
+
+                $unit_push = array();
+
+                // STAKEHOLDER
+                for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
+                    array_push($user_push, $data_item['stakeholders']->member[$i]);
+                }
+
+                // KEY ASKS
+                for ($i = 1; $i < count($data_item['key_asks']->alignment->nodeDataArray); $i++) {
+                    array_push($unit_push, $data_item['key_asks']->alignment->nodeDataArray[$i]->assign);
+                }
+
+                $data_push = array(
+                    "user_id" => $user_push,
+                    "unit_id" => $unit_push,
+                );
+
+                for ($i = 0; $i < count($login); $i++) {
+                    $pushKeyAsk = "INSERT INTO log_notification (login) VALUES ('" . $login[$i] . "')";
+                    // die($pushKeyAsk);
+                    $this->db->execute($pushKeyAsk);
+                }
+
+                for ($i = 0; $i < count($data_push['user_id']); $i++) {
+                    $pushU = "INSERT INTO log_notification (user_id, pc_id, type) VALUES ('" . $data_push['user_id'][$i] . "', '$id', )";
+                    // die($pushU);
+                    $this->db->execute($pushU);
+                }
+
             }
 
         } else {

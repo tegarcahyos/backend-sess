@@ -276,12 +276,17 @@ class Unit
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $organization_id = $request[0]->organization_id;
-        $cfu_fu_id = $request[0]->cfu_fu_id;
-        $parent_id = $request[0]->parent_id;
-        $name = $request[0]->name;
-        $code = $request[0]->code;
-
+        try {
+            $organization_id = $request[0]->organization_id;
+            $cfu_fu_id = $request[0]->cfu_fu_id;
+            $parent_id = $request[0]->parent_id;
+            $name = $request[0]->name;
+            $code = $request[0]->code;
+    
+        } catch (\Throwable $th) {
+            return "422";
+        }
+        
         $query = "INSERT INTO $tablename (
             parent_id, name, code, organization_id, cfu_fu_id)";
         $query .= "VALUES (

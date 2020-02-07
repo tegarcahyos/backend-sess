@@ -623,12 +623,14 @@ class Router
         try {
             if ($result == [] || $result === 'Data Kosong' || $result == '0') {
                 $this->msg(http_response_code(404), 404, $result, "gagal", 0);
+            } else if ($result == "402") {
+                $this->msg(http_response_code(402), 402, 'Incomplete Data', "gagal", 0);
+            } else if ($result == "403") {
+                $this->msg(http_response_code(403), 403, 'You Can\'t Delete This Data ', "gagal", 0);
             } else if ($result == "404") {
                 $this->msg(http_response_code(404), 404, 'Page Not Found', "gagal", 0);
             } else if ($result == "405") {
                 $this->msg(http_response_code(405), 405, 'Method Not Allowed', "gagal", 0);
-            } else if ($result == "403") {
-                $this->msg(http_response_code(403), 403, 'You Can\'t Delete This Data ', "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
