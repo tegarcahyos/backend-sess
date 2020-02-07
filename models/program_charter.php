@@ -172,7 +172,7 @@ class ProgramCharter
             '$status',
             '$generator_id'
             ) RETURNING *";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
