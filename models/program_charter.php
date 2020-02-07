@@ -238,7 +238,7 @@ class ProgramCharter
                     // STAKEHOLDER INSERT
                     for ($i = 0; $i < count($data_push['user_id']); $i++) {
                         $pushU = "INSERT INTO log_notification (user_id_or_unit_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['user_id'][$i] . "', '$id', 'Stakeholder', 0, '$generator_id')";
-                        // die($pushU);
+                        die($pushU);
                         $this->db->execute($pushU);
                     }
                 }
