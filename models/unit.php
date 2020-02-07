@@ -276,12 +276,23 @@ class Unit
         //
         $request = json_decode($data);
         // die(json_encode($request));
+        $a = array(
+            $organization_id = $request[0]->organization_id,
+            $cfu_fu_id = $request[0]->cfu_fu_id,
+            $parent_id = $request[0]->parent_id,
+            $name = $request[0]->name,
+            $code = $request[0]->code,
+        );
+        // $a = $request[0];
+        // $list = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code')
+        for ($i = 0; $i < count($a); $i++) {
+            die(print_r($a[$i]));
+            if (isset($a[$i])) {
+                die("ASU");
+            }
+        }
         try {
-            $organization_id = $request[0]->organization_id;
-            $cfu_fu_id = $request[0]->cfu_fu_id;
-            $parent_id = $request[0]->parent_id;
-            $name = $request[0]->name;
-            $code = $request[0]->code;
+
         } catch (Throwable $err) {
             return "402";
         }
