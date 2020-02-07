@@ -279,12 +279,12 @@ class Unit
         $variable = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code');
         try {
             for ($i = 0; $i < count($variable); $i++) {
-                print($variable[$i]);
+                // print($variable[$i]);
                 if (!isset($request[0]->{$variable[$i]})) {
                     return '402';
                 }
-                die("ini type: " . $request[0]->{$variable[$i]});
-                // $$variable[$i] = $request[0]->{$variable[$i]};
+                // die("ini type: " . $request[0]->{$variable[$i]});
+                $variable[$i] = $request[0]->{$variable[$i]};
             }
         } catch (\Throwable $th) {
             //throw ;
