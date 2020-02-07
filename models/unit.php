@@ -283,7 +283,7 @@ class Unit
                 if (!isset($request[0]->{$variable[$i]})) {
                     return '402';
                 }
-                $$variable[$i] = $request[0]->{$variable[$i]};
+                $$variable[$i] = json_encode($request[0]->{$variable[$i]});
             }
         } catch (\Throwable $th) {
             //throw ;
