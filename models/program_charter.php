@@ -479,7 +479,7 @@ class ProgramCharter
             if (strpos($string, ',') !== false) {
                 $explode = array($string);
             } else {
-                echo "kampret";
+                die("kampret");
                 $explode = explode(', ', $string);
             }
             die(print_r($explode));
