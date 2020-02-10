@@ -163,9 +163,9 @@ class ExpertJudgement
         }
 
         $program_charter = json_encode($program_charter);
-        die($program_charter);
+        // die($program_charter);
 
-        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter '$program_charter' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = $program_charter WHERE id = '$id' RETURNING *";
 
         die($query);
 
