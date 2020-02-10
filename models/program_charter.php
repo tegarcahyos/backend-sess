@@ -469,8 +469,9 @@ class ProgramCharter
 
             }
         }
-        $array = $data_arr[1]['program_charter'];
-        die(print_r(gettype($array)));
+        $string = $data_arr[1]['program_charter'];
+        $explode = explode(',', $string);
+        die(print_r($explode));
         if (($key = array_search('' . $id . '', $array)) !== false) {
             die("true");
         } else {
