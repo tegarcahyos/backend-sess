@@ -486,7 +486,7 @@ class ProgramCharter
                 unset($kampang);
             }
 
-            $update = "UPDATE expert_judgement SET program_charter = $explode";
+            $update = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
             $this->db->execute($update);
         }
 
