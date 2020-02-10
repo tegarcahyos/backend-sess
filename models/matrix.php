@@ -135,8 +135,7 @@ class Matrix
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            $msg = array("message" => 'Failed Input Data', "code" => 400);
-            return $msg;
+            return "402";
         } else {
             $num = $result->rowCount();
 
