@@ -480,6 +480,8 @@ class ProgramCharter
             if ($key !== false) {
                 die('true');
                 unset($explode["\"$key\""]);
+            } else {
+                die('false');
             }
         }
 
