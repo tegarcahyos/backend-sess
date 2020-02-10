@@ -161,10 +161,10 @@ class ProgramCharter
             NULLIF('$weight', 'NULL'),
             NULLIF('$description', 'NULL'),
             '$refer_to',
-            NULLIF('$stakeholders', 'NULL'),
+            '$stakeholders',
             '$kpi',
-            NULLIF('$main_activities', 'NULL'),
-            NULLIF('$key_asks', 'NULL'),
+            '$main_activities',
+            '$key_asks',
             NULLIF('$risks', 'NULL'),
             '$status',
             '$generator_id'
