@@ -469,7 +469,7 @@ class ProgramCharter
 
             }
         }
-        die(print_r(json_decode($data_arr)));
+        die(print_r($data_arr));
 
         for ($i = 0; $i < count($data_arr); $i++) {
             $data = json_decode($data_arr[0]['program_charter']);
