@@ -98,6 +98,7 @@ class StraIn
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
+                    'periode_id' => $periode_id,
                     'parent_list' => $this->parentArray,
                 );
 
@@ -188,6 +189,7 @@ class StraIn
                     'name' => $name,
                     'code' => $code,
                     'parent_id' => $parent_id,
+                    'periode_id' => $periode_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -217,6 +219,7 @@ class StraIn
                 'name' => $name,
                 'code' => $code,
                 'parent_id' => $parent_id,
+                'periode_id' => $periode_id,
             );
             return $data_item;
         }
@@ -245,6 +248,7 @@ class StraIn
                     'parent_id' => $parent_id,
                     'name' => $name,
                     'code' => $code,
+                    'periode_id' => $periode_id,
                 );
 
                 array_push($data_arr, $data_item);
