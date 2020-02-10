@@ -474,10 +474,8 @@ class ProgramCharter
         $string = str_replace(']', "", $string);
         $string = str_replace('"', "", $string);
         $explode = explode(', ', $string);
-
-        die(gettype('e204e2e0-ea96-43f0-9811-43dce22cc7ac'));
         for ($i = 0; $i < count($data_arr); $i++) {
-            // $key = array_search(, $explode);
+            $key = array_search($id, $explode);
             // die($key);
             if ($key !== false) {
                 die('true');
