@@ -499,8 +499,9 @@ class ProgramCharter
                 die($update_ej);
                 $this->db->execute($update_ej);
             } else {
-                $update = "UPDATE expert_judgement SET program_charter = [] WHERE program_charter LIKE '%$id_pc%'";
-                $this->db->execute($update);
+                $update_ej = "UPDATE expert_judgement SET program_charter = [] WHERE program_charter LIKE '%$id_pc%'";
+                die($update_ej);
+                $this->db->execute($update_ej);
             }
         }
 
