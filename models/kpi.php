@@ -202,14 +202,12 @@ class Kpi
                 while ($row = $result->fetchRow()) {
                     extract($row);
                     // ambil parent parentnya pake $parent_id
-                    $this->getParentKpiBy($parent_id);
                     $data_item = array(
                         'id' => $id,
                         'name' => $name,
                         'metric' => $metric,
                         'status' => $status,
                         'parent_id' => $parent_id,
-                        'parent_list' => $this->parentArray,
                     );
 
                     array_push($data_arr, $data_item);
