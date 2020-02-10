@@ -432,16 +432,16 @@ class ProgramCharter
 
     }
 
-    public function delete($id, $tablename)
+    public function delete($id_pc, $tablename)
     {
-        $query = "DELETE FROM $tablename WHERE id = '$id'";
+        $query = "DELETE FROM $tablename WHERE id = '$id_pc'";
         // die($query);
         // $result = $this->db->execute($query);
 
         // $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id'";
         // $this->db->execute($delete_notif);
 
-        $delete_ej = "SELECT * FROM expert_judgement WHERE program_charter LIKE '%$id%'";
+        $delete_ej = "SELECT * FROM expert_judgement WHERE program_charter LIKE '%$id_pc%'";
         $result = $this->db->execute($delete_ej);
         if (empty($result)) {
             return "404";
@@ -468,7 +468,6 @@ class ProgramCharter
 
             }
         }
-        die($id);
 
         // die(gettype());
         for ($i = 0; $i < count($data_arr); $i++) {
@@ -481,8 +480,8 @@ class ProgramCharter
             } else {
                 $explode = array($string);
             }
-            die($id);
-            $key = array_search("'" . $id . "'", $explode);
+            die($id_pc);
+            $key = array_search("'" . $id_pc . "'", $explode);
             // die($key);
             if ($key !== false) {
                 die('true');
