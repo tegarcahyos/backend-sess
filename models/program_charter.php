@@ -469,7 +469,7 @@ class ProgramCharter
 
             }
         }
-        $array = array($data_arr[1]['program_charter'][0]);
+        $array = $data_arr[1]['program_charter'];
         die(print_r($array));
         if (($key = array_search('' . $id . '', $array)) !== false) {
             die("true");
