@@ -107,7 +107,7 @@ class ExpertJudgement
             $$item = $request[0]->{$item};
         }
 
-        die($program_charter);
+        // die($program_charter);
 
         $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter) ';
         $query .= "VALUES ('$user_id', '$program_charter') RETURNING *";
