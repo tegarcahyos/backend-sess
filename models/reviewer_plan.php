@@ -80,6 +80,8 @@ class ReviewerPlan
             $$item = $request[0]->{$item};
         }
 
+        $data = json_encode($data);
+
         $query = 'INSERT INTO ' . $tablename . ' (data, name) ';
         $query .= "VALUES ('$data', '$name') RETURNING *";
         // die($query);
@@ -131,6 +133,8 @@ class ReviewerPlan
 
             $$item = $request[0]->{$item};
         }
+
+        $data = json_encode($data);
 
         $query = "UPDATE $tablename SET data = '$data', name = '$name' WHERE id = '$id' RETURNING *";
 
