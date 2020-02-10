@@ -480,7 +480,7 @@ class ProgramCharter
             } else {
                 $explode = array($string);
             }
-            $key = array_search("'" . $id_pc . "'", $explode);
+            $key = array_search($id_pc, $explode);
             // die($key);
             if ($key !== false) {
                 die('true');
