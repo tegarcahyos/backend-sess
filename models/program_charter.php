@@ -469,7 +469,7 @@ class ProgramCharter
 
             }
         }
-        die(print_r($data_arr[0]['program_charter'][0]));
+        die(print_r($data_arr[0]['program_charter']));
 
         for ($i = 0; $i < count($data_arr); $i++) {
             $data = str_replace('"', "", $data_arr[$i]['program_charter']);
