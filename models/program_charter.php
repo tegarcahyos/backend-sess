@@ -472,7 +472,7 @@ class ProgramCharter
         $string = $data_arr[1]['program_charter'];
         $string = str_replace('[', "", $string);
         $string = str_replace(']', "", $string);
-        $explode = explode(',', $string);
+        $explode = explode(', ', $string);
         die(print_r($explode));
         if (($key = array_search('' . $id . '', $array)) !== false) {
             die("true");
