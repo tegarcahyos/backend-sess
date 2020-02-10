@@ -471,7 +471,7 @@ class ProgramCharter
 
         // die(gettype());
         for ($i = 0; $i < count($data_arr); $i++) {
-            $string = $data_arr[1]['program_charter'];
+            $string = $data_arr[$i]['program_charter'];
             $string = str_replace('[', "", $string);
             $string = str_replace(']', "", $string);
             $string = str_replace('"', "", $string);
@@ -496,10 +496,11 @@ class ProgramCharter
             if (count($explode) > 0) {
                 $explode = json_encode($explode);
                 $update = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
-                die($update);
+
                 $this->db->execute($update);
             } else {
                 $update = "UPDATE expert_judgement SET program_charter = [] WHERE program_charter LIKE '%$id_pc%'";
+                die($update);
                 $this->db->execute($update);
             }
         }
