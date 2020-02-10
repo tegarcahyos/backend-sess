@@ -489,16 +489,9 @@ class ProgramCharter
                     array_splice($explode, $j, 1);
                 }
             }
-
-            if (true) {
-                $explode = json_encode($explode);
-                $update_ej = "UPDATE expert_judgement SET program_charter = '$explode' WHERE id = '$current_temp'";
-                $this->db->execute($update_ej);
-            } else {
-                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = '$current_temp'";
-                $this->db->execute($update_ej);
-            }
-            echo $update_ej . "\n";
+            $explode = json_encode($explode);
+            $update_ej = "UPDATE expert_judgement SET program_charter = '$explode' WHERE id = '$current_temp'";
+            $this->db->execute($update_ej);
         }
 
         $res = $this->db->affected_rows();
