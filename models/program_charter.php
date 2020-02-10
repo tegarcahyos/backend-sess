@@ -436,10 +436,41 @@ class ProgramCharter
     {
         $query = "DELETE FROM $tablename WHERE id = '$id'";
         // die($query);
-        $result = $this->db->execute($query);
+        // $result = $this->db->execute($query);
 
-        $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id'";
-        $this->db->execute($delete_notif);
+        // $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id'";
+        // $this->db->execute($delete_notif);
+
+        $delete_ej = "SELECT * FROM expert_judgement WHERE program_charter LIKE '%$id%'";
+        $result = $this->db->execute($delete_ej);
+        if (empty($result)) {
+            return "404";
+        } else {
+            $num = $result->rowCount();
+
+            // jika ada hasil
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    // Push to data_arr
+
+                    $data_item = array(
+                        'id' => $id,
+                        'user_id' => $user_id,
+                        'program_charter' => $program_charter,
+                    );
+
+                    array_push($data_arr, $data_item);
+                }
+
+            }
+        }
+
+        die(print_r($data_arr));
 
         $res = $this->db->affected_rows();
 
