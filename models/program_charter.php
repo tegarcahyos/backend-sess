@@ -470,6 +470,7 @@ class ProgramCharter
         }
 
         // die(gettype());
+        die(count($data_arr));
         for ($i = 0; $i < count($data_arr); $i++) {
             $string = $data_arr[1]['program_charter'];
             $string = str_replace('[', "", $string);
