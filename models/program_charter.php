@@ -470,7 +470,11 @@ class ProgramCharter
             }
         }
         $array = array($data_arr[1]['program_charter']);
-        die(($key = array_search("'.$id.'", $array)) !== false);
+        if (($key = array_search("'.$id.'", $array)) !== false) {
+            die("true");
+        } else {
+            die("false");
+        }
 
         for ($i = 0; $i < count($data_arr); $i++) {
             $array = array($data_arr[1]['program_charter']);
