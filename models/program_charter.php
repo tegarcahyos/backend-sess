@@ -476,7 +476,7 @@ class ProgramCharter
             $string = str_replace('[', "", $string);
             $string = str_replace(']', "", $string);
             $string = str_replace('"', "", $string);
-            $current_temp = $data_arr[$i]['id_ej'];
+            $current_temp = $data_arr[1]['id_ej'];
 
             if (strpos($string, ',') !== false) {
                 $explode = explode(', ', $string);
