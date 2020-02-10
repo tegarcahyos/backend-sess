@@ -478,12 +478,6 @@ class ProgramCharter
         } else {
             die("false");
         }
-        die(print_r($explode));
-        if (($key = array_search('' . $id . '', $array)) !== false) {
-            die("true");
-        } else {
-            die("false");
-        }
 
         for ($i = 0; $i < count($data_arr); $i++) {
             $array = array($data_arr[1]['program_charter']);
