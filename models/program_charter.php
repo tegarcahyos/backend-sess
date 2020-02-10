@@ -325,8 +325,8 @@ class ProgramCharter
             risks = NULLIF('$risks', 'NULL'),
             status = '$status',
             generator_id = '$generator_id'
-        WHERE id = '$id'";
-        // die($query);
+        WHERE id = '$id' RETURNING *";
+        die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "402";
