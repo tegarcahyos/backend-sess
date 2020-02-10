@@ -486,7 +486,7 @@ class ProgramCharter
                 unset($kampang);
             }
 
-            die($explode);
+            die(print_r($explode));
         }
 
         $res = $this->db->affected_rows();
