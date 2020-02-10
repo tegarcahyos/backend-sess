@@ -482,9 +482,11 @@ class ProgramCharter
             }
             $key = array_search($id_pc, $explode);
             if ($key !== false) {
-                $kampang = '"' . $explode[$key] . '"';
-                unset($kampang);
+                // $kampang = '"' . $explode[$key] . '"';
+                unset($explode[$key]);
             }
+
+            die($explode);
 
             $update = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
             $this->db->execute($update);
