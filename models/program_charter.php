@@ -481,12 +481,6 @@ class ProgramCharter
             } else {
                 $explode = array($string);
             }
-            // die(print_r($explode));
-            // $key = array_search($id_pc, $explode);
-            // if (($key = array_search($id_pc, $explode)) !== false) {
-            //     // $kampang = '"' . $explode[$key] . '"';
-            //     array_splice($explode[$key]);
-            // }
 
             for ($i = 0; $i < count($explode); $i++) {
                 if ($explode[$i] == $id_pc) {
@@ -500,7 +494,7 @@ class ProgramCharter
                 die($update_ej);
                 $this->db->execute($update_ej);
             } else {
-                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = " . $data_arr['id'] . "";
+                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = " . $data_arr[$i]['id'] . "";
                 die($update_ej);
                 $this->db->execute($update_ej);
             }
