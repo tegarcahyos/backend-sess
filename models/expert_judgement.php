@@ -169,7 +169,7 @@ class ExpertJudgement
 
         $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = {'$program_charter'} WHERE id = '$id' RETURNING *";
 
-        // die($query);
+        die($query);
 
         $result = $this->db->execute($query);
         if (empty($result)) {
