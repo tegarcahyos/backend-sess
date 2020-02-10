@@ -482,12 +482,18 @@ class ProgramCharter
             }
             // die(print_r($explode));
             // $key = array_search($id_pc, $explode);
-            if (($key = array_search($id_pc, $explode)) !== false) {
-                // $kampang = '"' . $explode[$key] . '"';
-                unset($explode[$key]);
+            // if (($key = array_search($id_pc, $explode)) !== false) {
+            //     // $kampang = '"' . $explode[$key] . '"';
+            //     array_splice($explode[$key]);
+            // }
+
+            for ($i = 0; $i < count($explode); $i++) {
+                if ($explode[$i] == $id_pc) {
+                    array_splice($explode, $i, 1);
+                }
             }
 
-            die(print_r($explode[1]));
+            die($explode);
 
             if (count($explode) > 0) {
                 $update = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
