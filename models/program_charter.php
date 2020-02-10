@@ -482,7 +482,7 @@ class ProgramCharter
             }
             $key = array_search($id_pc, $explode);
             if ($key !== false) {
-                die($true);
+                die($explode[$key]);
                 unset($explode[$key]);
             }
         }
