@@ -486,7 +486,8 @@ class ProgramCharter
                 unset($kampang);
             }
 
-            die(print_r($string));
+            $update = "UPDATE expert_judgement SET program_charter = $explode";
+            $this->db->execute($update);
         }
 
         $res = $this->db->affected_rows();
