@@ -470,6 +470,8 @@ class ProgramCharter
             }
         }
 
+        die(print_r($data_arr));
+
         // die(gettype());
         for ($i = 0; $i < count($data_arr); $i++) {
             $string = $data_arr[$i]['program_charter'];
