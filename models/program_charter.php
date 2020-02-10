@@ -473,6 +473,8 @@ class ProgramCharter
         $string = str_replace('[', "", $string);
         $string = str_replace(']', "", $string);
         $explode = explode(', ', $string);
+        $key = array_search("'$id'", $explode);
+        die($key);
         if (($key = array_search("'$id'", $explode)) !== false) {
             die("true");
         } else {
