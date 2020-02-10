@@ -476,8 +476,8 @@ class ProgramCharter
             $string = str_replace('[', "", $string);
             $string = str_replace(']', "", $string);
             $string = str_replace('"', "", $string);
+            $current_temp = $data_arr[$i]['id_ej'];
 
-            echo $data_arr[$i]['id_ej'];
             if (strpos($string, ',') !== false) {
                 $explode = explode(', ', $string);
             } else {
@@ -492,11 +492,11 @@ class ProgramCharter
 
             if (count($explode) > 0) {
                 $explode = json_encode($explode);
-                $update_ej = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
+                $update_ej = "UPDATE expert_judgement SET program_charter = $explode WHERE id = '$current_temp'";
                 die($update_ej);
                 $this->db->execute($update_ej);
             } else {
-                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = '" . $data_arr[$i]['id_ej'] . "'";
+                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = '$current_temp'";
                 die($update_ej);
                 $this->db->execute($update_ej);
             }
