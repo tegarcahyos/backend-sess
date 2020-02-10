@@ -478,6 +478,7 @@ class ProgramCharter
             $string = str_replace('"', "", $string);
             if (strpos($string, ',') !== false) {
                 $explode = array($string);
+                echo "kampret";
             } else {
                 $explode = explode(', ', $string);
             }
