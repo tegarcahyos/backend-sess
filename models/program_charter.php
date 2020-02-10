@@ -459,7 +459,7 @@ class ProgramCharter
                     // Push to data_arr
 
                     $data_item = array(
-                        'id' => $id,
+                        'id_ej' => $id,
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
                     );
@@ -470,7 +470,7 @@ class ProgramCharter
             }
         }
 
-        die(print_r($data_arr));
+        die(print_r($data_arr[0]['id_ej']));
 
         // die(gettype());
         for ($i = 0; $i < count($data_arr); $i++) {
@@ -496,7 +496,7 @@ class ProgramCharter
                 die($update_ej);
                 $this->db->execute($update_ej);
             } else {
-                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = '" . $data_arr[$i]['id'] . "'";
+                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = '" . $data_arr[$i]['id_ej'] . "'";
                 die($update_ej);
                 $this->db->execute($update_ej);
             }
