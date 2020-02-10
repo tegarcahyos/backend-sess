@@ -470,8 +470,6 @@ class ProgramCharter
             }
         }
 
-        die(print_r($data_arr));
-
         // die(gettype());
         for ($i = 0; $i < count($data_arr); $i++) {
             $string = $data_arr[$i]['program_charter'];
@@ -479,6 +477,7 @@ class ProgramCharter
             $string = str_replace(']', "", $string);
             $string = str_replace('"', "", $string);
             $explode = explode(', ', $string);
+            die(print_r($explode));
             $key = array_search('e204e2e0-ea96-43f0-9811-43dce22cc7ac', $explode);
             die($key);
             if ($key !== false) {
