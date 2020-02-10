@@ -163,11 +163,11 @@ class ExpertJudgement
         }
 
         $program_charter = json_encode($program_charter);
-        $tes = str_replace('"', "", $program_charter);
+        $program_charter = str_replace('"', "", $program_charter);
 
-        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$tes' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter' WHERE id = '$id' RETURNING *";
 
-        die($query);
+        // die($query);
 
         $result = $this->db->execute($query);
         if (empty($result)) {
