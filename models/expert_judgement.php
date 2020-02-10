@@ -164,7 +164,6 @@ class ExpertJudgement
 
         $program_charter = json_encode($program_charter);
         $tes = str_replace('"', "", $program_charter);
-        die($tes);
 
         $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter' WHERE id = '$id' RETURNING *";
 
