@@ -472,6 +472,7 @@ class ProgramCharter
         $string = $data_arr[1]['program_charter'];
         $string = str_replace('[', "", $string);
         $string = str_replace(']', "", $string);
+        $string = str_replace('"', "", $string);
         $explode = explode(', ', $string);
         $key = array_search('e204e2e0-ea96-43f0-9811-43dce22cc7ac', $explode);
         if ($key !== false) {
