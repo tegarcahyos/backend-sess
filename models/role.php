@@ -68,22 +68,44 @@ class Role
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request[0]->name;
+        $variable = array('name');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
 
-        $query = "INSERT INTO $tablename (name)";
-        $query .= "VALUES ('$name')";
-        // die($query);
-        $result = $this->db->execute($query);
-        $num = $result->rowCount();
-
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
-        } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $$item = $request[0]->{$item};
         }
 
+        $query = "INSERT INTO $tablename (name)";
+        $query .= "VALUES ('$name') RETURNING *";
+        // die($query);
+        $result = $this->db->execute($query);
+        if (empty($result)) {
+            return "402";
+        } else {
+            $num = $result->rowCount();
+
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'name' => $name,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
+        }
+
+        return $msg;
     }
 
     public function update($id, $tablename)
@@ -92,19 +114,43 @@ class Role
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request[0]->name;
+        $variable = array('name');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
 
-        $query = "UPDATE $tablename  SET name = '$name ' WHERE id = '$id'";
+            $$item = $request[0]->{$item};
+        }
+
+        $query = "UPDATE $tablename  SET name = '$name ' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+        if (empty($result)) {
+            return "402";
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $num = $result->rowCount();
+
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'name' => $name,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
+
+        return $msg;
     }
 
     public function delete($id, $tablename)

@@ -70,38 +70,46 @@ class ReviewerPlan
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        // die(print_r($request));
-        $data = json_encode($request[0]->data);
-        $name = $request[0]->name;
+
+        $variable = array('name', 'data');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
 
         $query = 'INSERT INTO ' . $tablename . ' (data, name) ';
         $query .= "VALUES ('$data', '$name') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-
-        // jika ada hasil
-        if ($num > 0) {
-
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-
-                // Push to data_arr
-
-                $data_item = array(
-                    'id' => $id,
-                    'data' => json_decode($data),
-                    'name' => $name,
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
+        if (empty($result)) {
+            return "402";
         } else {
-            $msg = 'Data Kosong';
+            $num = $result->rowCount();
+
+            // jika ada hasil
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    // Push to data_arr
+
+                    $data_item = array(
+                        'id' => $id,
+                        'data' => json_decode($data),
+                        'name' => $name,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
 
         return $msg;
@@ -115,38 +123,46 @@ class ReviewerPlan
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $data = json_encode($request[0]->data);
-        $name = $request[0]->name;
+        $variable = array('name', 'data');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
 
         $query = "UPDATE $tablename SET data = '$data', name = '$name' WHERE id = '$id' RETURNING *";
 
         // die($query);
 
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-
-        // jika ada hasil
-        if ($num > 0) {
-
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-
-                // Push to data_arr
-
-                $data_item = array(
-                    'id' => $id,
-                    'data' => json_decode($data),
-                    'name' => $name,
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
+        if (empty($result)) {
+            return "402";
         } else {
-            $msg = 'Data Kosong';
+            $num = $result->rowCount();
+
+            // jika ada hasil
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    // Push to data_arr
+
+                    $data_item = array(
+                        'id' => $id,
+                        'data' => json_decode($data),
+                        'name' => $name,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
 
         return $msg;

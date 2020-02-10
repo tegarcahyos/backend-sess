@@ -84,24 +84,35 @@ class PriorityData
         }
 
         $query = "INSERT INTO $tablename (id_program, program_name, data)";
-        $query .= "VALUES ('$id_program', '$program_name', '$data')";
+        $query .= "VALUES ('$id_program', '$program_name', '$data') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        if (is_bool($row)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
+        if (empty($result)) {
+            return "402";
         } else {
-            extract($row);
+            $num = $result->rowCount();
 
-            $data_item = array(
-                'id' => $id,
-                'id_program' => $id_program,
-                'program_name' => $program_name,
-                'data' => json_decode($data),
-            );
-            return $data_item;
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'id_program' => $id_program,
+                        'program_name' => $program_name,
+                        'data' => json_decode($data),
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
-
+        return $msg;
     }
 
     public function update($id, $tablename)
@@ -118,23 +129,35 @@ class PriorityData
 
             $$item = $request[0]->{$item};
         }
-        $query = "UPDATE $tablename SET id_program = '$id_program', program_name = '$program_name', data = '$data' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET id_program = '$id_program', program_name = '$program_name', data = '$data' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        if (is_bool($row)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
+        if (empty($result)) {
+            return "402";
         } else {
-            extract($row);
+            $num = $result->rowCount();
 
-            $data_item = array(
-                'id' => $id,
-                'id_program' => $id_program,
-                'program_name' => $program_name,
-                'data' => json_decode($data),
-            );
-            return $data_item;
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'id_program' => $id_program,
+                        'program_name' => $program_name,
+                        'data' => json_decode($data),
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
+        return $msg;
     }
 
     public function delete($id, $tablename)

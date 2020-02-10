@@ -85,24 +85,36 @@ class MainProgram
         }
 
         $query = "INSERT INTO $tablename (title, code, unit_id, periode_id)";
-        $query .= "VALUES ('$title', '$code','$unit_id','$periode_id')";
+        $query .= "VALUES ('$title', '$code','$unit_id','$periode_id') RETURNING *";
 
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
+        if (empty($result)) {
             return "402";
         } else {
-            extract($row);
+            $num = $result->rowCount();
 
-            $data_item = array(
-                'id' => $id,
-                'title' => $title,
-                'code' => $code,
-                'unit_id' => $unit_id,
-                'periode_id' => $periode_id,
-            );
-            return $data_item;
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'title' => $title,
+                        'code' => $code,
+                        'unit_id' => $unit_id,
+                        'periode_id' => $periode_id,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
+        return $msg;
     }
 
     public function update($id, $tablename)
@@ -121,17 +133,36 @@ class MainProgram
             $$item = $request[0]->{$item};
         }
 
-        $query = "UPDATE $tablename SET title = '$title', unit_id = '$unit_id', code = '$code', periode_id = '$periode_id' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET title = '$title', unit_id = '$unit_id', code = '$code', periode_id = '$periode_id' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+        if (empty($result)) {
+            return "402";
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            $num = $result->rowCount();
+
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'title' => $title,
+                        'code' => $code,
+                        'unit_id' => $unit_id,
+                        'periode_id' => $periode_id,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
+        return $msg;
     }
 
     public function delete($id, $tablename)

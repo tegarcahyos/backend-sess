@@ -220,8 +220,6 @@ class Approval
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        // $data = json_encode($request[0]->data);
-        // $pc_id = $request[0]->pc_id;
 
         $variable = array('data', 'pc_id');
         foreach ($variable as $item) {

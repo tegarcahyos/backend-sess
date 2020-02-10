@@ -113,9 +113,6 @@ class CeoNotes
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        // die(print_r($request));
-
-        // $data = json_encode($request[0]->data);
         $variable = array('data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
@@ -167,7 +164,7 @@ class CeoNotes
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        // $data = json_encode($request[0]->data);
+        
         $variable = array('data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {

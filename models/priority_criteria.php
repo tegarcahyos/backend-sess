@@ -81,22 +81,33 @@ class PriorityCriteria
         }
 
         $query = "INSERT INTO $tablename (criteria)";
-        $query .= "VALUES ('$criteria')";
+        $query .= "VALUES ('$criteria') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
+        if (empty($result)) {
             return "402";
         } else {
-            extract($row);
+            $num = $result->rowCount();
 
-            $data_item = array(
-                'id' => $id,
-                'criteria' => json_decode($criteria),
-            );
-            return $data_item;
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'criteria' => json_decode($criteria),
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
-
+        return $msg;
     }
 
     public function update($id, $tablename)
@@ -114,21 +125,33 @@ class PriorityCriteria
             $$item = $request[0]->{$item};
         }
 
-        $query = "UPDATE $tablename SET criteria = '$criteria' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET criteria = '$criteria' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
+        if (empty($result)) {
             return "402";
         } else {
-            extract($row);
+            $num = $result->rowCount();
 
-            $data_item = array(
-                'id' => $id,
-                'criteria' => json_decode($criteria),
-            );
-            return $data_item;
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'criteria' => json_decode($criteria),
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
+        return $msg;
     }
 
     public function delete($id, $tablename)

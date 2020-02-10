@@ -109,9 +109,6 @@ class CfuFu
         //
         $request = json_decode($data);
         // die(json_encode($request));
-        $organization_id = $request[0]->organization_id;
-        $name = $request[0]->name;
-        $code = $request[0]->code;
 
         $variable = array('organization_id', 'name', 'code');
         foreach ($variable as $item) {

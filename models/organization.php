@@ -79,23 +79,34 @@ class Organization
         }
 
         $query = "INSERT INTO $tablename (name, code)";
-        $query .= "VALUES ('$name', '$code')";
+        $query .= "VALUES ('$name', '$code') RETURING *";
         // die($query);
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
+        if (empty($result)) {
             return "402";
         } else {
-            extract($row);
+            $num = $result->rowCount();
 
-            $data_item = array(
-                'id' => $id,
-                'name' => $name,
-                'code' => $code,
-            );
-            return $data_item;
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'name' => $name,
+                        'code' => $code,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
-
+        return $msg;
     }
 
     public function update($id, $tablename)
@@ -112,22 +123,34 @@ class Organization
             $$item = $request[0]->{$item};
         }
 
-        $query = "UPDATE $tablename SET name = '$name', code = '$code' WHERE id = '$id'";
+        $query = "UPDATE $tablename SET name = '$name', code = '$code' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
+        if (empty($result)) {
             return "402";
         } else {
-            extract($row);
+            $num = $result->rowCount();
 
-            $data_item = array(
-                'id' => $id,
-                'name' => $name,
-                'code' => $code,
-            );
-            return $data_item;
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'name' => $name,
+                        'code' => $code,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
+        return $msg;
     }
 
     public function delete($id, $tablename)
