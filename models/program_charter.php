@@ -494,7 +494,7 @@ class ProgramCharter
                 die($update_ej);
                 $this->db->execute($update_ej);
             } else {
-                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = " . $data_arr[$i]['id'] . "";
+                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = '" . $data_arr[$i]['id'] . "'";
                 die($update_ej);
                 $this->db->execute($update_ej);
             }
