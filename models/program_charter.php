@@ -493,7 +493,7 @@ class ProgramCharter
                 }
             }
 
-            die($explode);
+            die(print_r($explode));
 
             if (count($explode) > 0) {
                 $update = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
