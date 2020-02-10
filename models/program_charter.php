@@ -459,7 +459,6 @@ class ProgramCharter
                     // Push to data_arr
 
                     $data_item = array(
-                        'id' => $id,
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
                     );
