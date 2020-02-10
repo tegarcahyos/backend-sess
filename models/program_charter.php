@@ -481,7 +481,7 @@ class ProgramCharter
             } else {
                 $explode = array($string);
             }
-            $key = array_search('"' . $id . '"', $explode);
+            $key = array_search("'" . $id . "'", $explode);
             // die($key);
             if ($key !== false) {
                 die('true');
