@@ -122,6 +122,8 @@ class CeoNotes
             $$item = $request[0]->{$item};
         }
 
+        $data = json_encode($data);
+
         $query = 'INSERT INTO ' . $tablename . ' (data) ';
         $query .= "VALUES ('$data') RETURNING *";
         // die($query);
@@ -164,7 +166,7 @@ class CeoNotes
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        
+
         $variable = array('data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
@@ -173,6 +175,8 @@ class CeoNotes
 
             $$item = $request[0]->{$item};
         }
+
+        $data = json_encode($data);
 
         $query = "UPDATE $tablename SET data = '$data' WHERE id = '$id' RETURNING *";
 

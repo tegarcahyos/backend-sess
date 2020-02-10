@@ -83,6 +83,8 @@ class PriorityData
             $$item = $request[0]->{$item};
         }
 
+        $data = json_encode($data);
+
         $query = "INSERT INTO $tablename (id_program, program_name, data)";
         $query .= "VALUES ('$id_program', '$program_name', '$data') RETURNING *";
         // die($query);
@@ -129,6 +131,9 @@ class PriorityData
 
             $$item = $request[0]->{$item};
         }
+
+        $data = json_encode($data);
+
         $query = "UPDATE $tablename SET id_program = '$id_program', program_name = '$program_name', data = '$data' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);

@@ -122,6 +122,8 @@ class Tara
             $$item = $request[0]->{$item};
         }
 
+        $data = json_encode($data);
+
         $query = 'INSERT INTO ' . $tablename . ' (data) ';
         $query .= "VALUES ('$data') RETURNING *";
         // die($query);
@@ -172,6 +174,8 @@ class Tara
 
             $$item = $request[0]->{$item};
         }
+
+        $data = json_encode($data);
 
         $query = "UPDATE $tablename SET data = '$data' WHERE id = '$id' RETURNING *";
 

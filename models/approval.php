@@ -174,8 +174,7 @@ class Approval
             $$item = $request[0]->{$item};
         }
 
-        // $data = json_encode($request[0]->data);
-        // $pc_id = $request[0]->pc_id;
+        $data = json_encode($data);
 
         $query = 'INSERT INTO ' . $tablename . ' (data, pc_id) ';
         $query .= "VALUES ('$data', '$pc_id') RETURNING *";
@@ -229,6 +228,8 @@ class Approval
 
             $$item = $request[0]->{$item};
         }
+
+        $data = json_encode($data);
 
         $query = "UPDATE $tablename SET data = '$data', pc_id = '$pc_id' WHERE id = '$id' RETURNING *";
 
