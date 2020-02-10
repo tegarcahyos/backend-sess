@@ -471,7 +471,7 @@ class ProgramCharter
         }
 
         for ($i = 0; $i < count($data_arr); $i++) {
-            $data = str_replace('"', "", $data_arr[$i]['program_charter']);
+            $data = $data_arr[$i]['program_charter'];
             die(gettype($data));
             if (($key = array_search($id, $data)) !== false) {
                 unset($data[$key]);
