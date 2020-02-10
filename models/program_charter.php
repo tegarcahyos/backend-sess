@@ -470,7 +470,6 @@ class ProgramCharter
             }
         }
         // die(gettype());
-        echo count($data_arr) . "\n";
         for ($i = 0; $i < count($data_arr); $i++) {
 
             $string = $data_arr[$i]['program_charter'];
@@ -485,9 +484,9 @@ class ProgramCharter
                 $explode = array($string);
             }
 
-            for ($i = 0; $i < count($explode); $i++) {
-                if ($explode[$i] == $id_pc) {
-                    array_splice($explode, $i, 1);
+            for ($j = 0; $j < count($explode); $j++) {
+                if ($explode[$j] == $id_pc) {
+                    array_splice($explode, $j, 1);
                 }
             }
 
