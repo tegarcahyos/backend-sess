@@ -480,8 +480,8 @@ class ProgramCharter
             } else {
                 $explode = array($string);
             }
-            $key = array_search($id_pc, $explode);
-            if ($key !== false) {
+            // $key = array_search($id_pc, $explode);
+            if (($key = array_search($id_pc, $explode)) !== false) {
                 // $kampang = '"' . $explode[$key] . '"';
                 unset($explode[$key]);
             }
