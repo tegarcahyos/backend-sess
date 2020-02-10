@@ -498,7 +498,7 @@ class ProgramCharter
                 $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = '$current_temp'";
                 $this->db->execute($update_ej);
             }
-            echo $update_ej+"\n";
+            echo $update_ej . "\n";
         }
 
         $res = $this->db->affected_rows();
