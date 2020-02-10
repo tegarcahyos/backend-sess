@@ -326,7 +326,7 @@ class ProgramCharter
             status = '$status',
             generator_id = '$generator_id'
         WHERE id = '$id' RETURNING *";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "402";
