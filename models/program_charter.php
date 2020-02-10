@@ -493,9 +493,8 @@ class ProgramCharter
                 }
             }
 
-            die(json_encode($explode));
-
             if (count($explode) > 0) {
+                $explode = json_encode($explode);
                 $update = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
                 $this->db->execute($update);
             } else {
