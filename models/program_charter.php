@@ -438,6 +438,9 @@ class ProgramCharter
         // die($query);
         $result = $this->db->execute($query);
 
+        $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id'";
+        $this->db->execute($delete_notif);
+
         $res = $this->db->affected_rows();
 
         if ($res == true) {
