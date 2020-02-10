@@ -474,7 +474,7 @@ class ProgramCharter
         $string = str_replace(']', "", $string);
         $explode = explode(', ', $string);
         $key = array_search("e204e2e0-ea96-43f0-9811-43dce22cc7ac", $explode);
-        if (($key = array_search("'$id'", $explode)) !== false) {
+        if ($key !== false) {
             die("true");
         } else {
             die("false");
