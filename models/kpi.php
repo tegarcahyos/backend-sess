@@ -190,7 +190,7 @@ class Kpi
         $query .= "VALUES ('$name', '$metric', '$status', '$parent_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        if (is_bool($row)) {
+        if (empty($result)) {
             return "402";
         } else {
             $num = $result->rowCount();
