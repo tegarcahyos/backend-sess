@@ -470,7 +470,6 @@ class ProgramCharter
         }
 
         // die(gettype());
-        die(count($data_arr));
         for ($i = 0; $i < count($data_arr); $i++) {
             $string = $data_arr[1]['program_charter'];
             $string = str_replace('[', "", $string);
@@ -488,7 +487,7 @@ class ProgramCharter
                 unset($explode[$key]);
             }
 
-            die(count($explode));
+            die(print_r(count($explode)));
 
             $update = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
             $this->db->execute($update);
