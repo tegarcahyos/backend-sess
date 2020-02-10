@@ -500,7 +500,6 @@ class ProgramCharter
                 $this->db->execute($update);
             } else {
                 $update = "UPDATE expert_judgement SET program_charter = [] WHERE program_charter LIKE '%$id_pc%'";
-                die($update);
                 $this->db->execute($update);
             }
         }
