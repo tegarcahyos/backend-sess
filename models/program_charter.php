@@ -470,7 +470,13 @@ class ProgramCharter
             }
         }
 
-        die(print_r($data_arr));
+        for ($i = 0; $i < count($data_arr); $i++) {
+            $data = str_replace('"', "", $data_arr[$i]['program_charter']);
+            die($data);
+            if (($key = array_search($id, $data)) !== false) {
+                unset($data[$key]);
+            }
+        }
 
         $res = $this->db->affected_rows();
 
