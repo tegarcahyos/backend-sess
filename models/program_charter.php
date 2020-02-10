@@ -483,9 +483,10 @@ class ProgramCharter
             $key = array_search($id_pc, $explode);
             if ($key !== false) {
                 $kampang = '"' . $explode[$key] . '"';
-                die($kampang);
                 unset($kampang);
             }
+
+            die($explode);
         }
 
         $res = $this->db->affected_rows();
