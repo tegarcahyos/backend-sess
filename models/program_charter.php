@@ -487,10 +487,15 @@ class ProgramCharter
                 unset($explode[$key]);
             }
 
-            die(print_r(count($explode)));
+            die(print_r($explode[1]));
 
-            $update = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
-            $this->db->execute($update);
+            if (count($explode) > 0) {
+                $update = "UPDATE expert_judgement SET program_charter = $explode WHERE program_charter LIKE '%$id_pc%'";
+                $this->db->execute($update);
+            } else {
+                $update = "UPDATE expert_judgement SET program_charter = [] WHERE program_charter LIKE '%$id_pc%'";
+                $this->db->execute($update);
+            }
         }
 
         $res = $this->db->affected_rows();
