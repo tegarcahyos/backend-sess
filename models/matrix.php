@@ -134,35 +134,37 @@ class Matrix
         $query .= "VALUES ('$si_id','$unit_id', '$matrix') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
+        if (empty($result)) {
+            $msg = array("message" => 'Failed Input Data', "code" => 400);
+            return $msg;
+        } else {
+            $num = $result->rowCount();
 
-        // jika ada hasil
-        if ($num > 0) {
+            // jika ada hasil
+            if ($num > 0) {
 
-            $data_arr = array();
+                $data_arr = array();
 
-            while ($row = $result->fetchRow()) {
-                extract($row);
+                while ($row = $result->fetchRow()) {
+                    extract($row);
 
-                // Push to data_arr
+                    // Push to data_arr
 
-                $data_item = array(
-                    'id' => $id,
-                    'si_id' => $si_id,
-                    'unit_id' => $unit_id,
-                    'matrix' => $matrix,
-                );
+                    $data_item = array(
+                        'id' => $id,
+                        'si_id' => $si_id,
+                        'unit_id' => $unit_id,
+                        'matrix' => $matrix,
+                    );
 
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
             }
 
-        } else {
-            $msg = 'Data Kosong';
+            return $msg;
+
         }
-
-        return $msg;
-
     }
 
     public function update($id, $tablename)
