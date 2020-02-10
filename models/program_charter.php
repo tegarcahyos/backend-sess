@@ -482,6 +482,7 @@ class ProgramCharter
                 $explode = array($string);
             }
             $key = array_search($id, $explode);
+            die($key);
             if ($key !== false) {
                 die('true');
                 unset($explode["\"$key\""]);
