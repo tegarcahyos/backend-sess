@@ -71,10 +71,7 @@ class Login
                 } else {
                     extract($row);
                     $unit_id = $row['unit_id'];
-                    $unit_code = $row['unit_code'];
-                    $unit_name = $row['unit_name'];
                     $role_id = $row['role_id'];
-                    $role_name = $row['role_name'];
                 }
 
                 $msg = array(
@@ -87,10 +84,7 @@ class Login
                     "phone" => $phone,
                     "expireAt" => $expire_claim,
                     "role_id" => $role_id,
-                    "role_name" => $role_name,
                     "unit_id" => $unit_id,
-                    "unit_code" => $unit_code,
-                    "unit_name" => $unit_name,
                     "token" => $jwt,
                 );
 

@@ -75,11 +75,6 @@ class MainProgram
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        // $title = $request[0]->title;
-        // $code = $request[0]->code;
-        // $unit_id = $request[0]->unit_id;
-        // $periode_id = $request[0]->periode_id;
-
         $variable = array('title', 'code', 'unit_id', 'periode_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
@@ -91,18 +86,23 @@ class MainProgram
 
         $query = "INSERT INTO $tablename (title, code, unit_id, periode_id)";
         $query .= "VALUES ('$title', '$code','$unit_id','$periode_id')";
-        // die($query);
+
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            return "402";
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-        }
+            extract($row);
 
+            $data_item = array(
+                'id' => $id,
+                'title' => $title,
+                'code' => $code,
+                'unit_id' => $unit_id,
+                'periode_id' => $periode_id,
+            );
+            return $data_item;
+        }
     }
 
     public function update($id, $tablename)
@@ -111,10 +111,6 @@ class MainProgram
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        // $title = $request[0]->title;
-        // $code = $request[0]->code;
-        // $unit_id = $request[0]->unit_id;
-        // $periode_id = $request[0]->periode_id;
 
         $variable = array('title', 'code', 'unit_id', 'periode_id');
         foreach ($variable as $item) {

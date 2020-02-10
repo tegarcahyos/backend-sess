@@ -128,29 +128,31 @@ class CfuFu
             '$name', '$code','$organization_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-        if ($num > 0) {
-
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-
-                // Push to data_arr
-
-                $data_item = array(
-                    'id' => $id,
-                    'organization_id' => $organization_id,
-                    'name' => $name,
-                    'code' => $code,
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
+        if (empty($result)) {
+            return "402";
         } else {
-            $msg = 'Data Kosong';
+            $num = $result->rowCount();
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    // Push to data_arr
+
+                    $data_item = array(
+                        'id' => $id,
+                        'organization_id' => $organization_id,
+                        'name' => $name,
+                        'code' => $code,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
 
         return $msg;
@@ -160,9 +162,6 @@ class CfuFu
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        // $name = $request[0]->name;
-        // $code = $request[0]->code;
-        // $organization_id = $request[0]->organization_id;
 
         $variable = array('name', 'code', 'organization');
         foreach ($variable as $item) {
@@ -176,27 +175,29 @@ class CfuFu
         $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-        if ($num > 0) {
-
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-
-                $data_item = array(
-                    'id' => $id,
-                    'organization_id' => $organization_id,
-                    'name' => $name,
-                    'code' => $code,
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
+        if (empty($result)) {
+            return "402";
         } else {
-            $msg = 'Data Kosong';
+            $num = $result->rowCount();
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'organization_id' => $organization_id,
+                        'name' => $name,
+                        'code' => $code,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
 
         return $msg;

@@ -73,21 +73,33 @@ class PriorityData
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $data = json_encode($request[0]->data);
-        $id_program = $request[0]->id_program;
-        $program_name = $request[0]->program_name;
+
+        $variable = array('id_program', 'program_name', 'data');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+
         $query = "INSERT INTO $tablename (id_program, program_name, data)";
         $query .= "VALUES ('$id_program', '$program_name', '$data')";
         // die($query);
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            extract($row);
+
+            $data_item = array(
+                'id' => $id,
+                'id_program' => $id_program,
+                'program_name' => $program_name,
+                'data' => json_decode($data),
+            );
+            return $data_item;
         }
 
     }
@@ -98,19 +110,30 @@ class PriorityData
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $data = json_encode($request[0]->data);
-        $id_program = $request[0]->id_program;
-        $program_name = $request[0]->program_name;
+        $variable = array('id_program', 'program_name', 'data');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "402";
+            }
+
+            $$item = $request[0]->{$item};
+        }
         $query = "UPDATE $tablename SET id_program = '$id_program', program_name = '$program_name', data = '$data' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
-
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data berhasil diperbaharui', "code" => 200);
+        if (is_bool($row)) {
+            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            return $msg;
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            extract($row);
+
+            $data_item = array(
+                'id' => $id,
+                'id_program' => $id_program,
+                'program_name' => $program_name,
+                'data' => json_decode($data),
+            );
+            return $data_item;
         }
     }
 

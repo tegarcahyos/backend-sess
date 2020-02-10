@@ -68,8 +68,6 @@ class Organization
         // get data input from frontend
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        // $name = $request[0]->name;
-        // $code = $request[0]->code;
 
         $variable = array('name', 'code');
         foreach ($variable as $item) {
@@ -81,10 +79,22 @@ class Organization
         }
 
         $query = "INSERT INTO $tablename (name, code)";
-        // $query .= "VALUES ($type_id , '$type_name', '$type_code', '$name', '$code')";
         $query .= "VALUES ('$name', '$code')";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            return "402";
+        } else {
+            extract($row);
+
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'code' => $code,
+            );
+            return $data_item;
+        }
 
     }
 
@@ -92,8 +102,6 @@ class Organization
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        // $name = $request[0]->name;
-        // $code = $request[0]->code;
 
         $variable = array('name', 'code');
         foreach ($variable as $item) {
@@ -106,7 +114,20 @@ class Organization
 
         $query = "UPDATE $tablename SET name = '$name', code = '$code' WHERE id = '$id'";
         // die($query);
-        return $this->db->execute($query);
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            return "402";
+        } else {
+            extract($row);
+
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'code' => $code,
+            );
+            return $data_item;
+        }
     }
 
     public function delete($id, $tablename)

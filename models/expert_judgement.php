@@ -111,30 +111,32 @@ class ExpertJudgement
         $query .= "VALUES ('$user_id', '$program_charter') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-
-        // jika ada hasil
-        if ($num > 0) {
-
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-
-                // Push to data_arr
-
-                $data_item = array(
-                    'id' => $id,
-                    'user_id' => $user_id,
-                    'program_charter' => $program_charter,
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
+        if (empty($result)) {
+            return "402";
         } else {
-            $msg = 'Data Kosong';
+            $num = $result->rowCount();
+
+            // jika ada hasil
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    // Push to data_arr
+
+                    $data_item = array(
+                        'id' => $id,
+                        'user_id' => $user_id,
+                        'program_charter' => $program_charter,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
 
         return $msg;
@@ -148,8 +150,6 @@ class ExpertJudgement
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        // $user_id = $request[0]->user_id;
-        // $program_charter = json_encode($request[0]->program_charter);
 
         $variable = array('user_id', 'program_charter');
         foreach ($variable as $item) {
@@ -165,30 +165,32 @@ class ExpertJudgement
         // die($query);
 
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-
-        // jika ada hasil
-        if ($num > 0) {
-
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-
-                // Push to data_arr
-
-                $data_item = array(
-                    'id' => $id,
-                    'user_id' => $user_id,
-                    'program_charter' => $program_charter,
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
+        if (empty($result)) {
+            return "402";
         } else {
-            $msg = 'Data Kosong';
+            $num = $result->rowCount();
+
+            // jika ada hasil
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    // Push to data_arr
+
+                    $data_item = array(
+                        'id' => $id,
+                        'user_id' => $user_id,
+                        'program_charter' => $program_charter,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            }
         }
 
         return $msg;

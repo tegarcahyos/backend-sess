@@ -185,10 +185,6 @@ class Kpi
 
             $$item = $request[0]->{$item};
         }
-        // $name = $request[0]->name;
-        // $metric = $request[0]->metric;
-        // $status = $request[0]->status;
-        // $parent_id = $request[0]->parent_id;
 
         $query = "INSERT INTO $tablename (name, metric, status, parent_id)";
         $query .= "VALUES ('$name', '$metric', '$status', '$parent_id') RETURNING *";
@@ -196,8 +192,7 @@ class Kpi
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
+            return "402";
         } else {
             extract($row);
 
@@ -227,18 +222,13 @@ class Kpi
 
             $$item = $request[0]->{$item};
         }
-        // $name = $request[0]->name;
-        // $metric = $request[0]->metric;
-        // $status = $request[0]->status;
-        // $parent_id = $request[0]->parent_id;
 
         $query = "UPDATE $tablename SET name = '$name', metric = '$metric', status = '$status', parent_id = '$parent_id' WHERE id = '$id'";
         // die($query);
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
+            return "402";
         } else {
             extract($row);
 
