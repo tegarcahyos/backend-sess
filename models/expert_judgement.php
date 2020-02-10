@@ -163,7 +163,7 @@ class ExpertJudgement
         }
 
         $program_charter = json_encode($program_charter);
-        $program_charter = str_replace('"', "", $program_charter);
+        // $program_charter = str_replace('"', "", $program_charter);
         // $program_charter = str_replace('[', "", $program_charter);
         // $program_charter = str_replace(']', "", $program_charter);
 
