@@ -469,6 +469,7 @@ class ProgramCharter
 
             }
         }
+        $array = array($data_arr[1]['program_charter']);
         die(($key = array_search("'.$id.'", $array)) !== false);
 
         for ($i = 0; $i < count($data_arr); $i++) {
