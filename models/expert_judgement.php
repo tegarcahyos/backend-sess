@@ -163,9 +163,9 @@ class ExpertJudgement
         }
 
         $program_charter = json_encode($program_charter);
-        // $program_charter = str_replace('"', "", $program_charter);
-        $program_charter = str_replace('[', "{", $program_charter);
-        $program_charter = str_replace(']', "}", $program_charter);
+        // // $program_charter = str_replace('"', "", $program_charter);
+        // $program_charter = str_replace('[', "{", $program_charter);
+        // $program_charter = str_replace(']', "}", $program_charter);
 
         $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter' WHERE id = '$id' RETURNING *";
         $result = $this->db->execute($query);
