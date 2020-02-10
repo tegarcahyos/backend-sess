@@ -459,6 +459,7 @@ class ProgramCharter
                     // Push to data_arr
 
                     $data_item = array(
+                        'id' => $id,
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
                     );
@@ -499,7 +500,7 @@ class ProgramCharter
                 die($update_ej);
                 $this->db->execute($update_ej);
             } else {
-                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE program_charter LIKE '%$id_pc%'";
+                $update_ej = "UPDATE expert_judgement SET program_charter = '[]' WHERE id = " . $data_arr['id'] . "";
                 die($update_ej);
                 $this->db->execute($update_ej);
             }
