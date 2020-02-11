@@ -469,6 +469,9 @@ class ProgramCharter
 
             }
 
+        }
+
+        if (!empty($data_arr)) {
             for ($i = 0; $i < count($data_arr); $i++) {
 
                 $string = $data_arr[$i]['program_charter'];
@@ -493,6 +496,7 @@ class ProgramCharter
                 $this->db->execute($update_ej);
             }
         }
+
         $res = $this->db->affected_rows();
 
         if ($res == true) {
