@@ -192,11 +192,66 @@ class Quadran
         return $msg;
     }
 
-    public function delete($id, $tablename)
+    public function delete($id_pc, $tablename)
     {
-        $query = "DELETE FROM $tablename WHERE id = '$id'";
+        $query = "DELETE FROM $tablename WHERE id = '$id_pc'";
 
         $result = $this->db->execute($query);
+        $delete_ej = "SELECT * FROM quadran WHERE program_charter LIKE '%$id_pc%'";
+        $result = $this->db->execute($delete_ej);
+        if (empty($result)) {
+            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        } else {
+            $num = $result->rowCount();
+
+            // jika ada hasil
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    // Push to data_arr
+
+                    $data_item = array(
+                        'id_ej' => $id,
+                        'user_id' => $user_id,
+                        'program_charter' => $program_charter,
+                    );
+
+                    array_push($data_arr, $data_item);
+                }
+
+            }
+
+        }
+
+        if (!empty($data_arr)) {
+            for ($i = 0; $i < count($data_arr); $i++) {
+
+                $string = $data_arr[$i]['program_charter'];
+                $string = str_replace('[', "", $string);
+                $string = str_replace(']', "", $string);
+                $string = str_replace('"', "", $string);
+                $current_temp = $data_arr[$i]['id_ej'];
+
+                if (strpos($string, ',') !== false) {
+                    $explode = explode(', ', $string);
+                } else {
+                    $explode = array($string);
+                }
+
+                for ($j = 0; $j < count($explode); $j++) {
+                    if ($explode[$j] == $id_pc) {
+                        array_splice($explode, $j, 1);
+                    }
+                }
+                $explode = json_encode($explode);
+                $update_ej = "UPDATE expert_judgement SET program_charter = '$explode' WHERE id = '$current_temp'";
+                $this->db->execute($update_ej);
+            }
+        }
         // return $result;
         $res = $this->db->affected_rows();
 
