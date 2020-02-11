@@ -91,10 +91,10 @@ class Login
             } else {
 
                 // http_response_code(401);
-                $msg = "404";
+                $msg = "506";
             }
         } else {
-            $msg = "404";
+            $msg = "203";
         }
         return $msg;
     }

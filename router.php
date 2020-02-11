@@ -149,6 +149,14 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
+        } else if ($type == 506) {
+            $array = array(
+                'type' => $type,
+                'error_msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
 
         } else {
             return "kosong";
@@ -639,10 +647,14 @@ class Router
                 $this->msg(http_response_code(402), 402, 'Incomplete Data', "gagal", 0);
             } else if ($result == "403") {
                 $this->msg(http_response_code(403), 403, 'You Can\'t Delete This Data ', "gagal", 0);
+            } else if ($result == "203") {
+                $this->msg(http_response_code(203), 203, 'Account Not Found', "gagal", 0);
             } else if ($result == "404") {
                 $this->msg(http_response_code(404), 404, 'Page Not Found', "gagal", 0);
             } else if ($result == "405") {
                 $this->msg(http_response_code(405), 405, 'Method Not Allowed', "gagal", 0);
+            } else if ($result == "506") {
+                $this->msg(http_response_code(506), 506, 'Wrong Password', "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
