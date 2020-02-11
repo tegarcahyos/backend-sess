@@ -5,6 +5,7 @@ include "models/organization.php";
 include "models/unit.php";
 include "models/user.php";
 include "models/role.php";
+include "models/employee.php";
 include "models/notification.php";
 include "models/attachment.php";
 include "models/group_chat.php";
@@ -252,6 +253,10 @@ class Router
             $r->get('/api/index.php/main_program/delete/{id}', 'MainProgram/delete');
             $r->post('/api/index.php/main_program/insert', 'MainProgram/insert');
             $r->post('/api/index.php/main_program/update/{id}', 'MainProgram/update');
+
+            //Employee
+            $r->get('/api/index.php/employee/get', 'Employee/get');
+            $r->get('/api/index.php/employee/find/{value}', 'Employee/find');
 
             // Approval
             $r->get('/api/index.php/approval/get', 'Approval/get');
