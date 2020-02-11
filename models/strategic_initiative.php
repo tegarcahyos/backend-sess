@@ -160,7 +160,8 @@ class StraIn
                 0               AS number_of_ancestors,
                parent_id,
                code,
-               name
+               name,
+               periode_id
             FROM  $tablename where id = '$id'
            UNION
             SELECT
@@ -168,7 +169,8 @@ class StraIn
                c.number_of_ancestors + 1                   AS ancestry_size,
                tp.parent_id,
                tp.code,
-               tp.name
+               tp.name,
+               tp.periode_id
             FROM  $tablename tp
             JOIN children c ON tp.parent_id::text = c.id::text
            )
