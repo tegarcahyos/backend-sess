@@ -91,10 +91,10 @@ class Login
             } else {
 
                 // http_response_code(401);
-                $msg = array("message" => "Login failed Wrong Password.", "code" => 401);
+                $msg = "404";
             }
         } else {
-            $msg = array("message" => 'User Tidak Ditemukan', "code" => 400);
+            $msg = "404";
         }
         return $msg;
     }
