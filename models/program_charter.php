@@ -438,7 +438,7 @@ class ProgramCharter
         // die($query);
         $result = $this->db->execute($query);
 
-        $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id'";
+        $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id_pc'";
         $this->db->execute($delete_notif);
 
         $delete_ej = "SELECT * FROM expert_judgement WHERE program_charter LIKE '%$id_pc%'";
