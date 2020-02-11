@@ -91,7 +91,7 @@ class Login
             } else {
 
                 // http_response_code(401);
-                $msg = "506";
+                $msg = json_decode("506");
             }
         } else {
             $msg = "203";

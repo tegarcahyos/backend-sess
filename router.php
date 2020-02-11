@@ -85,6 +85,14 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
+        } else if ($type == 506) {
+            $array = array(
+                'type' => $type,
+                'error_msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
         } else if ($type == 204) {
             $array = array(
                 'type' => $type,
@@ -102,7 +110,6 @@ class Router
                 'data' => $msg,
             );
             echo json_encode($array);
-
         } else if ($type == 401) {
             $array = array(
                 'type' => $type,
@@ -112,7 +119,6 @@ class Router
                 'data' => $msg,
             );
             echo json_encode($array);
-
         } else if ($type == 402) {
             $array = array(
                 'type' => $type,
@@ -121,7 +127,6 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
-
         } else if ($type == 403) {
             $array = array(
                 'type' => $type,
@@ -130,7 +135,6 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
-
         } else if ($type == 404) {
             $array = array(
                 'type' => $type,
@@ -140,7 +144,6 @@ class Router
                 'data' => $msg,
             );
             echo json_encode($array);
-
         } else if ($type == 405) {
             $array = array(
                 'type' => $type,
@@ -149,15 +152,6 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
-        } else if ($type == 506) {
-            $array = array(
-                'type' => $type,
-                'error_msg' => $msg,
-                'keterangan' => $keterangan . '',
-                'status' => $status,
-            );
-            echo json_encode($array);
-
         } else {
             return "kosong";
         }
