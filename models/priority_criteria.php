@@ -80,6 +80,8 @@ class PriorityCriteria
             $$item = $request[0]->{$item};
         }
 
+        $criteria = json_encode($criteria);
+
         $query = "INSERT INTO $tablename (criteria)";
         $query .= "VALUES ('$criteria') RETURNING *";
         // die($query);
@@ -124,6 +126,8 @@ class PriorityCriteria
 
             $$item = $request[0]->{$item};
         }
+
+        $criteria = json_encode($criteria);
 
         $query = "UPDATE $tablename SET criteria = '$criteria' WHERE id = '$id' RETURNING *";
         // die($query);
