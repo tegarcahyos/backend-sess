@@ -27,6 +27,7 @@ include "models/unit_target.php";
 include "models/upload_file.php";
 include "models/expert_judgement.php";
 include "models/ahp_criteria.php";
+include "models/ahp_data.php";
 include "models/approval.php";
 include "models/reviewer_plan.php";
 include "models/quadran.php";
@@ -228,6 +229,13 @@ class Router
             $r->get('/api/index.php/ahp_criteria/delete/{id}', 'AHPCriteria/delete');
             $r->post('/api/index.php/ahp_criteria/insert', 'AHPCriteria/insert');
             $r->post('/api/index.php/ahp_criteria/update/{id}', 'AHPCriteria/update');
+
+             // Data AHP
+             $r->get('/api/index.php/ahp_data/get', 'AHPData/get');
+             $r->get('/api/index.php/ahp_data/find_id/{id}', 'AHPData/findById');
+             $r->get('/api/index.php/ahp_data/delete/{id}', 'AHPData/delete');
+             $r->post('/api/index.php/ahp_data/insert', 'AHPData/insert');
+             $r->post('/api/index.php/ahp_data/update/{id}', 'AHPData/update');
 
             // --- QUADRAn ---
             $r->get('/api/index.php/quadran/get', 'Quadran/get');
