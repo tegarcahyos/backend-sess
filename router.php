@@ -13,6 +13,7 @@ include "models/group_member.php";
 include "models/group_message.php";
 include "models/user_login.php";
 include "models/cfu_fu.php";
+include "models/request_account.php";
 include "models/matrix.php";
 include "models/strategic_initiative.php";
 include "models/main_program.php";
@@ -214,6 +215,13 @@ class Router
             $r->post('/api/index.php/users/insert', 'User/insert');
             $r->post('/api/index.php/users/update/{id}', 'User/update');
 
+            // --- ACCOUNT REQUEST ---
+            $r->get('/api/index.php/account_request/get', 'RequestAccount/get');
+            $r->get('/api/index.php/account_request/find_id/{id}', 'RequestAccount/findById');
+            $r->get('/api/index.php/account_request/delete/{id}', 'RequestAccount/delete');
+            $r->post('/api/index.php/account_request/insert', 'RequestAccount/insert');
+            $r->post('/api/index.php/account_request/update/{id}', 'RequestAccount/update');
+
             // --- EXPERT JUDGEMENT ---
             $r->get('/api/index.php/expert_judgement/get', 'ExpertJudgement/get');
             $r->get('/api/index.php/expert_judgement/find_id/{id}', 'ExpertJudgement/findById');
@@ -230,12 +238,12 @@ class Router
             $r->post('/api/index.php/ahp_criteria/insert', 'AHPCriteria/insert');
             $r->post('/api/index.php/ahp_criteria/update/{id}', 'AHPCriteria/update');
 
-             // Data AHP
-             $r->get('/api/index.php/ahp_data/get', 'AHPData/get');
-             $r->get('/api/index.php/ahp_data/find_id/{id}', 'AHPData/findById');
-             $r->get('/api/index.php/ahp_data/delete/{id}', 'AHPData/delete');
-             $r->post('/api/index.php/ahp_data/insert', 'AHPData/insert');
-             $r->post('/api/index.php/ahp_data/update/{id}', 'AHPData/update');
+            // Data AHP
+            $r->get('/api/index.php/ahp_data/get', 'AHPData/get');
+            $r->get('/api/index.php/ahp_data/find_id/{id}', 'AHPData/findById');
+            $r->get('/api/index.php/ahp_data/delete/{id}', 'AHPData/delete');
+            $r->post('/api/index.php/ahp_data/insert', 'AHPData/insert');
+            $r->post('/api/index.php/ahp_data/update/{id}', 'AHPData/update');
 
             // --- QUADRAn ---
             $r->get('/api/index.php/quadran/get', 'Quadran/get');
