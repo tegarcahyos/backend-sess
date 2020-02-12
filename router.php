@@ -520,7 +520,7 @@ class Router
                     $result = call_user_func_array(array(new $class($connection), $method), array('users'));
 
                 } else if (
-                    $explodeUri[3] == "loginApiFactory") {
+                    $explodeUri[3] == "loginLdap") {
                     $result = call_user_func_array(array(new $class($connection), $method));
 
                 } else if ($explodeUri[4] == "select_group_message_id") {
