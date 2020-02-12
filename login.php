@@ -99,12 +99,11 @@ class Login
         return $msg;
     }
 
-    public function apiFactory()
+    public function LDAPLogin()
     {
-        $url = 'https://apifactory.telkom.co.id:8243/hcm/auth/v1/token';
-        $data = array('username' => $username, 'password' => $password);
+        $url = 'https://auth.telkom.co.id/account/validate';
+        $data = array('account' => $username, 'privatekey' => $password);
 
-        // use key 'http' even if you send the request to https://...
         $options = array(
             'http' => array(
                 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
