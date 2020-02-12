@@ -500,6 +500,7 @@ class Router
         $explodeUri = explode("/", $uri);
         $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
         $connection = $this->core_connect();
+        die($routeInfo);
 
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:
