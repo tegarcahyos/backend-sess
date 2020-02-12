@@ -111,9 +111,7 @@ class Login
             "privatekey" => $password,
         );
         $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
-
-        $response = json_decode($login);
-        die($response);
+        die($login);
         return $response;
     }
 
