@@ -441,6 +441,7 @@ class ProgramCharter
         $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id_pc'";
         $this->db->execute($delete_notif);
 
+        // Delete PC inside Expert Judgement
         $delete_ej = "SELECT * FROM expert_judgement WHERE program_charter LIKE '%$id_pc%'";
         $result = $this->db->execute($delete_ej);
         if (empty($result)) {
@@ -469,32 +470,32 @@ class ProgramCharter
 
             }
 
-        }
+            if (!empty($data_arr)) {
+                for ($i = 0; $i < count($data_arr); $i++) {
 
-        if (!empty($data_arr)) {
-            for ($i = 0; $i < count($data_arr); $i++) {
+                    $string = $data_arr[$i]['program_charter'];
+                    $string = str_replace('[', "", $string);
+                    $string = str_replace(']', "", $string);
+                    $string = str_replace('"', "", $string);
+                    $current_temp = $data_arr[$i]['id_ej'];
 
-                $string = $data_arr[$i]['program_charter'];
-                $string = str_replace('[', "", $string);
-                $string = str_replace(']', "", $string);
-                $string = str_replace('"', "", $string);
-                $current_temp = $data_arr[$i]['id_ej'];
-
-                if (strpos($string, ',') !== false) {
-                    $explode = explode(', ', $string);
-                } else {
-                    $explode = array($string);
-                }
-
-                for ($j = 0; $j < count($explode); $j++) {
-                    if ($explode[$j] == $id_pc) {
-                        array_splice($explode, $j, 1);
+                    if (strpos($string, ',') !== false) {
+                        $explode = explode(', ', $string);
+                    } else {
+                        $explode = array($string);
                     }
+
+                    for ($j = 0; $j < count($explode); $j++) {
+                        if ($explode[$j] == $id_pc) {
+                            array_splice($explode, $j, 1);
+                        }
+                    }
+                    $explode = json_encode($explode);
+                    $update_ej = "UPDATE expert_judgement SET program_charter = '$explode' WHERE id = '$current_temp'";
+                    $this->db->execute($update_ej);
                 }
-                $explode = json_encode($explode);
-                $update_ej = "UPDATE expert_judgement SET program_charter = '$explode' WHERE id = '$current_temp'";
-                $this->db->execute($update_ej);
             }
+
         }
 
         $res = $this->db->affected_rows();

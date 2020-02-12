@@ -1,6 +1,6 @@
 <?php
 
-class Quadran
+class AHPData
 {
     public $db;
 
@@ -11,10 +11,14 @@ class Quadran
 
     public function get($tablename)
     {
-        $query = "SELECT * FROM  $tablename ";
+        $query = "SELECT
+           *
+          FROM
+             $tablename";
+
         // die($query);
         $result = $this->db->execute($query);
-        // hitung result
+
         $num = $result->rowCount();
 
         if ($num > 0) {
@@ -26,8 +30,9 @@ class Quadran
 
                 $data_item = array(
                     'id' => $id,
-                    'user_id' => $user_id,
-                    'program_charter' => $program_charter,
+                    'pc_id' => $pc_id,
+                    'cfu_fu_id' => $cfu_fu_id,
+                    'data' => json_decode($data),
                 );
 
                 array_push($data_arr, $data_item);
@@ -45,57 +50,31 @@ class Quadran
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
-        if (empty($result)) {
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
             $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
             return $msg;
         } else {
-            $row = $result->fetchRow();
             extract($row);
-
-            // Push to data_arr
 
             $data_item = array(
                 'id' => $id,
-                'user_id' => $user_id,
-                'program_charter' => $program_charter,
+                'pc_id' => $pc_id,
+                'cfu_fu_id' => $cfu_fu_id,
+                'data' => json_decode($data),
             );
-
-            $msg = $data_item;
-            return $msg;
-        }
-    }
-
-    public function findByUserId($user_id, $tablename)
-    {
-        $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
-        $result = $this->db->execute($query);
-        if (empty($result)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
-        } else {
-            $row = $result->fetchRow();
-            extract($row);
-
-            // Push to data_arr
-
-            $data_item = array(
-                'id' => $id,
-                'user_id' => $user_id,
-                'program_charter' => $program_charter,
-            );
-
-            $msg = $data_item;
-            return $msg;
+            return $data_item;
         }
     }
 
     public function insert($tablename)
     {
+        // get data input from frontend
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
 
-        $variable = array('user_id', 'program_charter');
+        $variable = array('pc_id', 'cfu_fu_id', 'data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "402";
@@ -104,8 +83,10 @@ class Quadran
             $$item = $request[0]->{$item};
         }
 
-        $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter) ';
-        $query .= "VALUES ('$user_id', '$program_charter') RETURNING *";
+        $data = json_encode($data);
+
+        $query = "INSERT INTO $tablename (pc_id, cfu_fu_id, data)";
+        $query .= "VALUES ('$pc_id', '$cfu_fu_id', '$data') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -113,7 +94,6 @@ class Quadran
         } else {
             $num = $result->rowCount();
 
-            // jika ada hasil
             if ($num > 0) {
 
                 $data_arr = array();
@@ -121,12 +101,11 @@ class Quadran
                 while ($row = $result->fetchRow()) {
                     extract($row);
 
-                    // Push to data_arr
-
                     $data_item = array(
                         'id' => $id,
-                        'user_id' => $user_id,
-                        'program_charter' => $program_charter,
+                        'pc_id' => $pc_id,
+                        'cfu_fu_id' => $cfu_fu_id,
+                        'data' => json_decode($data),
                     );
 
                     array_push($data_arr, $data_item);
@@ -135,19 +114,16 @@ class Quadran
 
             }
         }
-
         return $msg;
-
     }
 
     public function update($id, $tablename)
     {
-        // init attribute dan values
-
+        // get data input from frontend
         $data = file_get_contents("php://input");
-
+        //
         $request = json_decode($data);
-        $variable = array('user_id', 'program_charter');
+        $variable = array('pc_id', 'cfu_fu_id', 'data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "402";
@@ -156,17 +132,16 @@ class Quadran
             $$item = $request[0]->{$item};
         }
 
-        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter' WHERE id = '$id' RETURNING *";
+        $data = json_encode($data);
 
+        $query = "UPDATE $tablename SET pc_id = '$pc_id', cfu_fu_id = '$cfu_fu_id', data = '$data' WHERE id = '$id' RETURNING *";
         // die($query);
-
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "402";
         } else {
             $num = $result->rowCount();
 
-            // jika ada hasil
             if ($num > 0) {
 
                 $data_arr = array();
@@ -174,12 +149,11 @@ class Quadran
                 while ($row = $result->fetchRow()) {
                     extract($row);
 
-                    // Push to data_arr
-
                     $data_item = array(
                         'id' => $id,
-                        'user_id' => $user_id,
-                        'program_charter' => $program_charter,
+                        'pc_id' => $pc_id,
+                        'cfu_fu_id' => $cfu_fu_id,
+                        'data' => json_decode($data),
                     );
 
                     array_push($data_arr, $data_item);
@@ -188,30 +162,13 @@ class Quadran
 
             }
         }
-
         return $msg;
     }
 
     public function delete($id, $tablename)
     {
         $query = "DELETE FROM $tablename WHERE id = '$id'";
-
-        $result = $this->db->execute($query);
-        
-        // return $result;
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
-        } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
-        }
-    }
-
-    public function deleteByUserId($user_id, $tablename)
-    {
-        $query = "DELETE FROM $tablename WHERE user_id = '$user_id'";
-
+        // die($query);
         $result = $this->db->execute($query);
         // return $result;
         $res = $this->db->affected_rows();
@@ -222,5 +179,4 @@ class Quadran
             return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
         }
     }
-
 }
