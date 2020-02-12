@@ -652,6 +652,7 @@ class Router
 
         try {
             if ($result == [] || $result === "Data Kosong" || $result == '0') {
+                die($result);
                 $this->msg(http_response_code(404), 404, $result, "gagal", 0);
             } else if ($result == "402") {
                 $this->msg(http_response_code(402), 402, 'Incomplete Data', "gagal", 0);
