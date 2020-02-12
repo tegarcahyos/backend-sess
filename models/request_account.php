@@ -89,7 +89,7 @@ class RequestAccount
         $unit_id = $request[0]->unit_id;
         // $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "INSERT INTO $tablename (name, email, phone, username, password)";
+        $query = "INSERT INTO $tablename (name, email, phone, username, password, role_id, unit_id)";
         $query .= "VALUES ('$name', '$email', $phone ,'$username', '$password', '$role_id', '$unit_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
