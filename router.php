@@ -197,7 +197,7 @@ class Router
 
             // --- LOGIN ---
             $r->post('/api/index.php/login', 'Login/authenticate');
-            $r->post('/api/index.php/loginApiFactory', 'Login/apiFactory');
+            $r->post('/api/index.php/loginLdap', 'Login/LDAPLogin');
             // --- CHECK TOKEN ---
             // if (!empty($token)) {
             //     $passed = $this->check_token($token);
