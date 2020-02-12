@@ -64,11 +64,10 @@ class ProgramCharter
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
+        if (empty($result)) {
+            $msg = "404";
         } else {
+            $row = $result->fetchRow();
             extract($row);
 
             $data_item = array(
