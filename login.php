@@ -105,7 +105,7 @@ class Login
 
         $username = $data->username;
         $password = $data->password;
-
+        die($username);
         $url = 'https://auth.telkom.co.id/account/validate';
         $data = array('account' => $username, 'privatekey' => $password);
 
