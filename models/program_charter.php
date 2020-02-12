@@ -436,17 +436,16 @@ class ProgramCharter
     {
         $query = "DELETE FROM $tablename WHERE id = '$id_pc'";
         // die($query);
-        $result = $this->db->execute($query);
+        // $result = $this->db->execute($query);
 
+        // Delete Notification Where Has PC ID
         $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id_pc'";
-        $this->db->execute($delete_notif);
+        // $this->db->execute($delete_notif);
 
         // Delete PC inside Expert Judgement
         $delete_ej = "SELECT * FROM expert_judgement WHERE program_charter LIKE '%$id_pc%'";
-        $result = $this->db->execute($delete_ej);
-        if (empty($result)) {
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
-        } else {
+        // $result = $this->db->execute($delete_ej);
+        if (!empty($result)) {
             $num = $result->rowCount();
 
             // jika ada hasil
@@ -492,10 +491,41 @@ class ProgramCharter
                     }
                     $explode = json_encode($explode);
                     $update_ej = "UPDATE expert_judgement SET program_charter = '$explode' WHERE id = '$current_temp'";
-                    $this->db->execute($update_ej);
+                    // $this->db->execute($update_ej);
                 }
             }
+        }
 
+        // Delete PC ID Inside Quadran
+        $get_key = "SELECT q.id, d.key, d.value
+        FROM quadran q
+        INNER JOIN json_each_text(q.program_charter::json) d ON true
+        WHERE d.value LIKE '%$id_pc%'
+        ORDER BY 1, 2";
+        $result = $this->db->execute($get_key);
+        if (!empty($result)) {
+            $num = $result->rowCount();
+            if ($num > 0) {
+                $data_arr = array();
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id_quad' => $id,
+                        'key' => $key,
+                    );
+
+                    array_push($data_arr, $data_item);
+                }
+
+                die($data_arr[0]['id_quad']);
+
+                if (!empty($data_arr)) {
+                    for ($i = 0; $i < count($data_arr); $i++) {
+                        $query = "UPDATE quadran SET program_charter = program_charter - 'X' WHERE id = '$data_arr[$i]['id_quad']'";
+                    }
+                }
+            }
         }
 
         $res = $this->db->affected_rows();
