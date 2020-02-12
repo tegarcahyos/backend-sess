@@ -34,8 +34,8 @@ class RequestAccount
                     'phone' => $phone,
                     'username' => $username,
                     'password' => $password,
-                    'role' => $role_name,
-                    'unit' => $unit_name,
+                    'role' => $role_id,
+                    'unit' => $unit_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -67,8 +67,8 @@ class RequestAccount
                 'phone' => $phone,
                 'username' => $username,
                 'password' => $password,
-                'role' => $role_name,
-                'unit' => $unit_name,
+                'role' => $role_id,
+                'unit' => $unit_id,
             );
             return $data_item;
         }
@@ -112,8 +112,8 @@ class RequestAccount
                         'phone' => $phone,
                         'username' => $username,
                         'password' => $password,
-                        'role' => $role_name,
-                        'unit' => $unit_name,
+                        'role' => $role_id,
+                        'unit' => $unit_id,
                     );
 
                     array_push($data_arr, $data_item);
@@ -163,8 +163,8 @@ class RequestAccount
                         'phone' => $phone,
                         'username' => $username,
                         'password' => $password,
-                        'role' => $role_name,
-                        'unit' => $unit_name,
+                        'role' => $role_id,
+                        'unit' => $unit_id,
                     );
 
                     array_push($data_arr, $data_item);
