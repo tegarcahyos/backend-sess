@@ -534,7 +534,7 @@ class ProgramCharter
 
         // Delete data priority AHP where has PC ID
 
-        $delete_ahp = "DELETE FROM ahp_data WHERE id_program = '$id_pc'";
+        $delete_ahp = "DELETE FROM ahp_data WHERE pc_id = '$id_pc'";
         $this->db->execute($delete_ahp);
 
         //
