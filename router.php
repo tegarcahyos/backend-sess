@@ -216,11 +216,11 @@ class Router
             $r->post('/api/index.php/users/update/{id}', 'User/update');
 
             // --- ACCOUNT REQUEST ---
-            $r->get('/api/index.php/account_request/get', 'RequestAccount/get');
-            $r->get('/api/index.php/account_request/find_id/{id}', 'RequestAccount/findById');
-            $r->get('/api/index.php/account_request/delete/{id}', 'RequestAccount/delete');
-            $r->post('/api/index.php/account_request/insert', 'RequestAccount/insert');
-            $r->post('/api/index.php/account_request/update/{id}', 'RequestAccount/update');
+            $r->get('/api/index.php/request_account/get', 'RequestAccount/get');
+            $r->get('/api/index.php/request_account/find_id/{id}', 'RequestAccount/findById');
+            $r->get('/api/index.php/request_account/delete/{id}', 'RequestAccount/delete');
+            $r->post('/api/index.php/request_account/insert', 'RequestAccount/insert');
+            $r->post('/api/index.php/request_account/update/{id}', 'RequestAccount/update');
 
             // --- EXPERT JUDGEMENT ---
             $r->get('/api/index.php/expert_judgement/get', 'ExpertJudgement/get');
