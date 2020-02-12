@@ -65,7 +65,7 @@ class ProgramCharter
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "Data Kosong";
+            return "0";
         } else {
             $row = $result->fetchRow();
             extract($row);
