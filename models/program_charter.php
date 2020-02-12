@@ -518,11 +518,10 @@ class ProgramCharter
                     array_push($data_arr, $data_item);
                 }
 
-                die($data_arr[0]['id_quad']);
-
                 if (!empty($data_arr)) {
                     for ($i = 0; $i < count($data_arr); $i++) {
-                        $query = "UPDATE quadran SET program_charter = program_charter - 'X' WHERE id = '$data_arr[$i]['id_quad']'";
+                        $query = "UPDATE quadran SET program_charter = program_charter - '$data_arr[$i]['key']' WHERE id = '$data_arr[$i]['id_quad']'";
+                        die($query);
                     }
                 }
             }
