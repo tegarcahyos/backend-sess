@@ -519,8 +519,8 @@ class ProgramCharter
                 }
 
                 if (!empty($data_arr)) {
-                    die($data_arr[$i]['id_quad']);
                     for ($i = 0; $i < count($data_arr); $i++) {
+                        die($data_arr[$i]['id_quad']);
                         $query = "UPDATE quadran SET program_charter = program_charter - '" . $data_arr[$i]['key_name'] . "' WHERE id = '$data_arr[$i]['id_quad']'";
                         die($query);
                     }
