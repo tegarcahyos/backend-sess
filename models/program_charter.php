@@ -436,15 +436,15 @@ class ProgramCharter
     {
         $query = "DELETE FROM $tablename WHERE id = '$id_pc'";
         // die($query);
-        $result = $this->db->execute($query);
+        // $result = $this->db->execute($query);
 
         // Delete Notification Where Has PC ID
         $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id_pc'";
-        $this->db->execute($delete_notif);
+        // $this->db->execute($delete_notif);
 
         // Delete PC inside Expert Judgement
         $delete_ej = "SELECT * FROM expert_judgement WHERE program_charter LIKE '%$id_pc%'";
-        $result = $this->db->execute($delete_ej);
+        // $result = $this->db->execute($delete_ej);
         if (!empty($result)) {
             $num = $result->rowCount();
 
@@ -491,7 +491,7 @@ class ProgramCharter
                     }
                     $explode = json_encode($explode);
                     $update_ej = "UPDATE expert_judgement SET program_charter = '$explode' WHERE id = '$current_temp'";
-                    $this->db->execute($update_ej);
+                    // $this->db->execute($update_ej);
                 }
             }
         }
@@ -521,11 +521,22 @@ class ProgramCharter
                 if (!empty($data_arr)) {
                     for ($i = 0; $i < count($data_arr); $i++) {
                         $query = "UPDATE quadran SET program_charter = program_charter - '" . $data_arr[$i]['key_name'] . "' WHERE id = '" . $data_arr[$i]['id_quad'] . "'";
-                        $this->db->execute($query);
+                        // $this->db->execute($query);
                     }
                 }
             }
         }
+
+        // Delete data priority six sigma where has PC ID
+
+        $delete_six = "DELETE FROM data_priority WHERE id_program = '$id_pc'";
+        die($delete_six);
+        // $this->db->execute($delete_six);
+
+        // Delete data priority AHP where has PC ID
+
+        $delete_ahp = "DELETE FROM ahp_data WHERE id_program = '$id_pc'";
+        // $this->db->execute($delete_ahp);
 
         //
 
