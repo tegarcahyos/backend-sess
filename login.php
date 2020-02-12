@@ -105,7 +105,7 @@ class Login
 
         $username = $data->username;
         $password = $data->password;
-        die($username);
+
         $data_array = array(
             "account" => $username,
             "privatekey" => $password,
@@ -113,7 +113,7 @@ class Login
         $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
 
         $response = json_decode($login);
-
+        die(print_r($response));
         return $response;
     }
 
