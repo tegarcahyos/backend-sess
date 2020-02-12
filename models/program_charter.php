@@ -436,15 +436,15 @@ class ProgramCharter
     {
         $query = "DELETE FROM $tablename WHERE id = '$id_pc'";
         // die($query);
-        // $result = $this->db->execute($query);
+        $result = $this->db->execute($query);
 
         // Delete Notification Where Has PC ID
         $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id_pc'";
-        // $this->db->execute($delete_notif);
+        $this->db->execute($delete_notif);
 
         // Delete PC inside Expert Judgement
         $delete_ej = "SELECT * FROM expert_judgement WHERE program_charter LIKE '%$id_pc%'";
-        // $result = $this->db->execute($delete_ej);
+        $result = $this->db->execute($delete_ej);
         if (!empty($result)) {
             $num = $result->rowCount();
 
@@ -491,7 +491,7 @@ class ProgramCharter
                     }
                     $explode = json_encode($explode);
                     $update_ej = "UPDATE expert_judgement SET program_charter = '$explode' WHERE id = '$current_temp'";
-                    // $this->db->execute($update_ej);
+                    $this->db->execute($update_ej);
                 }
             }
         }
