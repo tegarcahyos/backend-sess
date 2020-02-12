@@ -101,6 +101,10 @@ class Login
 
     public function LDAPLogin()
     {
+        $data = json_decode(file_get_contents("php://input"));
+
+        $username = $data->username;
+        $password = $data->password;
         $url = 'https://auth.telkom.co.id/account/validate';
         $data = array('account' => $username, 'privatekey' => $password);
 
