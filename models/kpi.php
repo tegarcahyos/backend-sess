@@ -192,10 +192,9 @@ class Kpi
 
         $query = "INSERT INTO $tablename (name, metric, status, parent_id)";
         $query .= "VALUES ('$name', '$metric', '$status', NULLIF('$parent_id', 'NULL')) RETURNING *";
-        die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "422";
+            $msg = "422";
         } else {
             $num = $result->rowCount();
 
