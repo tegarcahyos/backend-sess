@@ -219,6 +219,8 @@ class Router
             // Data AHP
             $r->get('/api/index.php/stakeholders/get', 'Stakeholders/get');
             $r->get('/api/index.php/stakeholders/find_id/{id}', 'Stakeholders/findById');
+            $r->get('/api/index.php/stakeholders/find_unit_id/{id}', 'Stakeholders/findByUnitId');
+            $r->get('/api/index.php/stakeholders/find_id/{id}', 'Stakeholders/findById');
             $r->get('/api/index.php/stakeholders/delete/{id}', 'Stakeholders/delete');
             $r->post('/api/index.php/stakeholders/insert', 'Stakeholders/insert');
             $r->post('/api/index.php/stakeholders/update/{id}', 'Stakeholders/update');
@@ -570,6 +572,7 @@ class Router
                     $explodeUri[4] == "select_attachment" ||
                     $explodeUri[4] == "select" ||
                     $explodeUri[4] == "find_id" ||
+                    $explodeUri[4] == "find_unit_id" ||
                     $explodeUri[4] == "check_notif" ||
                     $explodeUri[4] == "select_group_chat" ||
                     $explodeUri[4] == "get_layout" ||

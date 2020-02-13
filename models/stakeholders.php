@@ -48,11 +48,37 @@ class Stakeholders
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
-        if (empty($result)) {
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
             $msg = "Data Kosong";
             return $msg;
         } else {
-            $row = $result->fetchRow();
+            extract($row);
+
+            // Push to data_arr
+
+            $data_item = array(
+                'id' => $id,
+                'unit_id' => $unit_id,
+                'boe' => $boe,
+                'controller' => $controller,
+                'coordinator' => $coordinator,
+                'program_leader' => $program_leader,
+            );
+
+            $msg = $data_item;
+            return $msg;
+        }
+    }
+    public function findByUnitId($id, $tablename)
+    {
+        $query = "SELECT * FROM $tablename WHERE unit_id = '$id'";
+        $result = $this->db->execute($query);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            $msg = "Data Kosong";
+            return $msg;
+        } else {
             extract($row);
 
             // Push to data_arr
