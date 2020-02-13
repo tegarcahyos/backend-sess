@@ -60,7 +60,7 @@ class Employee
     public function find($value)
     {
         $query = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$value' OR v_nama_karyawan ilike '%$value%'";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
             $msg = "Data Kosong";
