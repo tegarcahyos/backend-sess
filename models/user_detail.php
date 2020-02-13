@@ -119,7 +119,7 @@ class UserDetail
         $result = $this->db->execute($query);
 
         if (is_bool($result)) {
-            $msg = "Data Kosong";
+            $msg = "Gagal";
             return $msg;
         } else {
             $row = $result->fetchRow();
