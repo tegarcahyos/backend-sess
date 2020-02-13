@@ -79,8 +79,8 @@ class Organization
         }
 
         $query = "INSERT INTO $tablename (name, code)";
-        $query .= "VALUES ('$name', '$code') RETURING *";
-        die($query);
+        $query .= "VALUES ('$name', '$code') RETURNING *";
+        // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "402";
