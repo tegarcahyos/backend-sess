@@ -245,7 +245,7 @@ class ProgramCharter
                     // KEY ASK INSERT
                     for ($i = 0; $i < count($data_push['unit_id']); $i++) {
                         $pushKeyAsk = "INSERT INTO log_notification (unit_id_or_user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
-                        die($pushKeyAsk);
+                        // die($pushKeyAsk);
                         $this->db->execute($pushKeyAsk);
                     }
                 }

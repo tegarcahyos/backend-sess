@@ -45,6 +45,7 @@ class Tara
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
+        die($row);
         if (empty($row)) {
             $msg = "Data Kosong";
         } else {
