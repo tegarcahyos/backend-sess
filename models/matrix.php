@@ -129,7 +129,7 @@ class Matrix
 
         $query = 'INSERT INTO ' . $tablename . ' (si_id, unit_id, matrix) ';
         $query .= "VALUES ('$si_id','$unit_id', '$matrix') RETURNING *";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "422";
