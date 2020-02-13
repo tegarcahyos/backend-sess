@@ -45,8 +45,7 @@ class CeoNotes
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         if (empty($result)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
-            return $msg;
+            $msg = "Data Kosong";
         } else {
             $row = $result->fetchRow();
             extract($row);
@@ -59,8 +58,8 @@ class CeoNotes
             );
 
             $msg = $data_item;
-            return $msg;
         }
+        return $msg;
     }
 
     public function getByValues($attr, $val, $tablename)
