@@ -5,6 +5,7 @@ include "models/organization.php";
 include "models/unit.php";
 include "models/user.php";
 include "models/role.php";
+include "models/stakeholders.php";
 include "models/employee.php";
 include "models/notification.php";
 include "models/attachment.php";
@@ -214,6 +215,13 @@ class Router
             $r->get('/api/index.php/users/delete/{id}', 'User/delete');
             $r->post('/api/index.php/users/insert', 'User/insert');
             $r->post('/api/index.php/users/update/{id}', 'User/update');
+
+             // Data AHP
+             $r->get('/api/index.php/stakeholders/get', 'Stakeholders/get');
+             $r->get('/api/index.php/stakeholders/find_id/{id}', 'Stakeholders/findById');
+             $r->get('/api/index.php/stakeholders/delete/{id}', 'Stakeholders/delete');
+             $r->post('/api/index.php/stakeholders/insert', 'Stakeholders/insert');
+             $r->post('/api/index.php/stakeholders/update/{id}', 'Stakeholders/update');
 
             // --- ACCOUNT REQUEST ---
             $r->get('/api/index.php/request_account/get', 'RequestAccount/get');
