@@ -58,8 +58,9 @@ class Tara
             );
 
             $msg = $data_item;
-            return $msg;
+
         }
+        return $msg;
     }
 
     public function getByValues($attr, $val, $tablename)
