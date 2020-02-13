@@ -29,7 +29,7 @@ class UserDetail
                     'user_id' => $user_id,
                     'unit_id' => $unit_id,
                     'role_id' => $role_id,
-                    'user_avatar'=>$user_avatar,
+                    'user_avatar' => $user_avatar,
                 );
 
                 array_push($data_arr, $data_item);
@@ -61,7 +61,7 @@ class UserDetail
                 'user_id' => $user_id,
                 'unit_id' => $unit_id,
                 'role_id' => $role_id,
-                'user_avatar'=>$user_avatar,
+                'user_avatar' => $user_avatar,
             );
 
             $msg = $data_item;
@@ -70,7 +70,7 @@ class UserDetail
     }
 
     public function getByUser($user_id, $tablename)
-    { 
+    {
         $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
@@ -87,7 +87,7 @@ class UserDetail
                 'user_id' => $user_id,
                 'unit_id' => $unit_id,
                 'role_id' => $role_id,
-                'user_avatar'=>$user_avatar,
+                'user_avatar' => $user_avatar,
             );
 
             $msg = $data_item;
@@ -113,35 +113,26 @@ class UserDetail
         '$role_id',) RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $num = $result->rowCount();
-
-        // jika ada hasil
-        if ($num > 0) {
-
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-
-                // Push to data_arr
-
-                $data_item = array(
-                    'id' => $id,
-                    'user_id' => $user_id,
-                    'unit_id' => $unit_id,
-                    'role_id' => $role_id,
-                    'user_avatar'=>$user_avatar,
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
+        $row = $result->fetchRow();
+        if (empty($row)) {
+            $msg = "Data Kosong";
+            return $msg;
         } else {
-            $msg = 'Data Kosong';
-        }
+            extract($row);
 
-        return $msg;
+            // Push to data_arr
+
+            $data_item = array(
+                'id' => $id,
+                'user_id' => $user_id,
+                'unit_id' => $unit_id,
+                'role_id' => $role_id,
+                'user_avatar' => $user_avatar,
+            );
+
+            $msg = $data_item;
+            return $msg;
+        }
 
     }
 
@@ -178,7 +169,7 @@ class UserDetail
                     'user_id' => $user_id,
                     'unit_id' => $unit_id,
                     'role_id' => $role_id,
-                    
+
                 );
 
                 array_push($data_arr, $data_item);
