@@ -78,6 +78,8 @@ class Organization
             $$item = $request[0]->{$item};
         }
 
+        die($name);
+
         $query = "INSERT INTO $tablename (name, code)";
         $query .= "VALUES ('$name', '$code') RETURING *";
         // die($query);
