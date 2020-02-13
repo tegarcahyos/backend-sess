@@ -100,10 +100,14 @@ class UserDetail
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
+        $variable = array('role_id', 'unit_id', 'user_id');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "422";
+            }
 
-        $user_id = $request[0]->user_id;
-        $unit_id = $request[0]->unit_id;
-        $role_id = $request[0]->role_id;
+            $$item = $request[0]->{$item};
+        }
 
         $query = 'INSERT INTO ' . $tablename . ' (user_id,
         unit_id,
