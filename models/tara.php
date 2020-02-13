@@ -44,11 +44,10 @@ class Tara
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        die($row);
-        if (empty($row)) {
+        if (empty($result)) {
             $msg = "Data Kosong";
         } else {
+            $row = $result->fetchRow();
             extract($row);
 
             // Push to data_arr
