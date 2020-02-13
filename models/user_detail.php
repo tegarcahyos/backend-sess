@@ -111,11 +111,11 @@ class UserDetail
 
         $query = 'INSERT INTO ' . $tablename . ' (user_id,
         unit_id,
-        role_id,) ';
+        role_id) ';
         $query .= "VALUES ('$user_id',
         '$unit_id',
         '$role_id') RETURNING *";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
 
         if (is_bool($result)) {
