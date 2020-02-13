@@ -211,7 +211,7 @@ class StraIn
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            $msg = "Data Kosong";
             return $msg;
         } else {
             extract($row);
@@ -386,7 +386,7 @@ class StraIn
             if ($res == true) {
                 return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
             } else {
-                return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+                return $msg = "Data Kosong";
             }
         }
     }

@@ -332,7 +332,7 @@ class GroupMember
         if ($res == true) {
             return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            return $msg = "Data Kosong";
         }
     }
 }

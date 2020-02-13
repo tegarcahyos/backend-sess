@@ -110,7 +110,7 @@ class Upload
         $result = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            $msg = "Data Kosong";
             return $msg;
         } else {
             extract($row);

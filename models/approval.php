@@ -46,7 +46,7 @@ class Approval
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
         if (empty($result)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            $msg = "Data Kosong";
             return $msg;
         } else {
             $row = $result->fetchRow();
@@ -70,7 +70,7 @@ class Approval
         $query = "SELECT * FROM $tablename WHERE pc_id = '$pc_id'";
         $result = $this->db->execute($query);
         if (empty($result)) {
-            $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+            $msg = "Data Kosong";
             return $msg;
         } else {
             $row = $result->fetchRow();
@@ -126,7 +126,7 @@ class Approval
             $getPC = "SELECT * FROM program_charter WHERE id = '$pc_id'";
             $PC = $this->db->execute($getPC);
             if (empty($PC)) {
-                $msg = array("message" => 'Data Tidak Ditemukan', "code" => 400);
+                $msg = "Data Kosong";
                 return $msg;
             } else {
                 $row = $PC->fetchRow();
@@ -278,7 +278,7 @@ class Approval
         if ($res == true) {
             return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
         } else {
-            return $msg = array("message" => 'Data tidak ditemukan', "code" => 400);
+            return $msg = "Data Kosong";
         }
     }
 
