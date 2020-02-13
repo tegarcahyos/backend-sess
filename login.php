@@ -112,11 +112,9 @@ class Login
         );
         $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
 
-        
         $select_nik = "SELECT * FROM employee WHERE n_nik = '$username'";
-        $result = $this->db->execute($query);
-        die(print_r($result));
-        if(!empty($result)){
+        $result = $this->db->execute($select_nik);
+        if (!empty($result)) {
             $response = json_decode($login);
             if ($response->login != 0) {
                 $query = "SELECT * FROM employee WHERE n_nik = '$username'";
@@ -124,10 +122,9 @@ class Login
             } else {
                 $result = "506";
             }
-        }else {
+        } else {
             $result = "203";
         }
-        
 
         return $result;
     }
