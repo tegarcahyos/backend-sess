@@ -115,7 +115,7 @@ class UserDetail
         $query .= "VALUES ('$user_id',
         '$unit_id',
         '$role_id') RETURNING *";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
 
         if (is_bool($result)) {
