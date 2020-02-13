@@ -22,81 +22,99 @@ class Login
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
-
         if ($num > 0) {
-            while ($row = $result->fetchRow()) {
-                $user_id = $row['id'];
-                $name = $row['name'];
-                $email = $row['email'];
-                $phone = $row['phone'];
-                $password2 = $row['password'];
-            }
-            // die($password2);
-            if (password_verify($password, $password2)) {
-                $secret_key = "YOUR_SECRET_KEY";
-                $issuer_claim = "THE_ISSUER"; // this can be the servername
-                $audience_claim = "THE_AUDIENCE";
-                $issuedat_claim = time(); // issued at
-                $notbefore_claim = $issuedat_claim + 10; //not before in seconds
-                $expire_claim = $issuedat_claim + 36000; // expire time in seconds
-                $token = array(
-                    "iss" => $issuer_claim,
-                    "aud" => $audience_claim,
-                    "iat" => $issuedat_claim,
-                    "nbf" => $notbefore_claim,
-                    "exp" => $expire_claim,
-                    "data" => array(
-                        "name" => $name,
-                        "username" => $username,
-                    ));
-
-                $jwt = JWT::encode($token, $secret_key);
-                $insert_token = "UPDATE users SET token = '$jwt', expire_at = '$expire_claim' WHERE id = '$user_id'";
-                // die($insert_token);
-                $this->db->execute($insert_token);
-                $update_expireAt = "UPDATE users SET expire_at = '$expire_claim' WHERE id = '$user_id'";
-                $this->db->execute($update_expireAt);
-
-                // GET USER UNIT
-                $query2 = "SELECT * FROM user_detail WHERE user_id = '$user_id'";
-                // die($query2);
-                $result = $this->db->execute($query2);
-                $row = $result->fetchRow();
-                if (is_bool($row)) {
-                    $unit_id = null;
-                    $unit_code = null;
-                    $unit_name = null;
-                    $role_id = null;
-                    $role_name = null;
-                } else {
-                    extract($row);
-                    $unit_id = $row['unit_id'];
-                    $role_id = $row['role_id'];
-                }
-
-                $msg = array(
-                    "message" => "Successful login.",
-                    "id" => $user_id,
-                    "name" => $name,
-                    "username" => $username,
-                    "password" => $password,
-                    "email" => $email,
-                    "phone" => $phone,
-                    "expireAt" => $expire_claim,
-                    "role_id" => $role_id,
-                    "unit_id" => $unit_id,
-                    "token" => $jwt,
-                );
-
-            } else {
-
-                // http_response_code(401);
-                $msg = "506";
-            }
+            $this->data_user($result, $username, $password);
         } else {
-            $msg = "203";
+            $check = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
+            $result = $this->db->execute($check);
+            $row = $result->fetchRow();
+            if (is_bool($row)) {
+                $msg = "203";
+            } else {
+                // MIGRATE EMP TO USR
+                $password = password_hash($password, PASSWORD_BCRYPT);
+                $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $data_item['nama_karyawan'] . "', '" . $data_item['nik'] . "', '$password')";
+                $this->db->execute($migrate_user);
+                // LOGIN
+                $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
+                $result = $this->db->execute($query);
+                $this->data_user($result, $username, $password);
+            }
         }
         return $msg;
+    }
+
+    private function data_user($result, $username, $password)
+    {
+        while ($row = $result->fetchRow()) {
+            $user_id = $row['id'];
+            $name = $row['name'];
+            $email = $row['email'];
+            $phone = $row['phone'];
+            $password2 = $row['password'];
+        }
+        // die($password2);
+        if (password_verify($password, $password2)) {
+            $secret_key = "YOUR_SECRET_KEY";
+            $issuer_claim = "THE_ISSUER"; // this can be the servername
+            $audience_claim = "THE_AUDIENCE";
+            $issuedat_claim = time(); // issued at
+            $notbefore_claim = $issuedat_claim + 10; //not before in seconds
+            $expire_claim = $issuedat_claim + 36000; // expire time in seconds
+            $token = array(
+                "iss" => $issuer_claim,
+                "aud" => $audience_claim,
+                "iat" => $issuedat_claim,
+                "nbf" => $notbefore_claim,
+                "exp" => $expire_claim,
+                "data" => array(
+                    "name" => $name,
+                    "username" => $username,
+                ));
+
+            $jwt = JWT::encode($token, $secret_key);
+            $insert_token = "UPDATE users SET token = '$jwt', expire_at = '$expire_claim' WHERE id = '$user_id'";
+            // die($insert_token);
+            $this->db->execute($insert_token);
+            $update_expireAt = "UPDATE users SET expire_at = '$expire_claim' WHERE id = '$user_id'";
+            $this->db->execute($update_expireAt);
+
+            // GET USER UNIT
+            $query2 = "SELECT * FROM user_detail WHERE user_id = '$user_id'";
+            // die($query2);
+            $result = $this->db->execute($query2);
+            $row = $result->fetchRow();
+            if (is_bool($row)) {
+                $unit_id = null;
+                $unit_code = null;
+                $unit_name = null;
+                $role_id = null;
+                $role_name = null;
+            } else {
+                extract($row);
+                $unit_id = $row['unit_id'];
+                $role_id = $row['role_id'];
+            }
+
+            $msg = array(
+                "message" => "Successful login.",
+                "id" => $user_id,
+                "name" => $name,
+                "username" => $username,
+                "password" => $password,
+                "email" => $email,
+                "phone" => $phone,
+                "expireAt" => $expire_claim,
+                "role_id" => $role_id,
+                "unit_id" => $unit_id,
+                "token" => $jwt,
+            );
+
+        } else {
+
+            // http_response_code(401);
+            $msg = "506";
+        }
     }
 
     public function LDAPLogin()
@@ -120,7 +138,21 @@ class Login
             if ($response->login != 0) {
                 $query = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
                 $result = $this->db->execute($query);
+                $row = $result->fetchRow();
+                extract($row);
 
+                $data_item = array(
+                    'nik' => $n_nik,
+                    'nama_karyawan' => $v_nama_karyawan,
+                );
+
+                if ($row['exists'] == 't') {
+                    $this->authenticate('users');
+                } else {
+                    $password = password_hash($password, PASSWORD_BCRYPT);
+                    $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $data_item['nama_karyawan'] . "', '" . $data_item['nik'] . "', '$password')";
+                    $this->db->execute($migrate_user);
+                }
             } else {
                 $result = "506";
             }
