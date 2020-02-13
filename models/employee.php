@@ -66,7 +66,6 @@ class Employee
             $msg = "Data Kosong";
         } else {
             $row = $result->fetchRow();
-            die(print_r($row));
             extract($row);
 
             $data_item = array(
@@ -87,9 +86,7 @@ class Employee
                 'v_jenis_kelamin' => $v_jenis_kelamin,
                 'v_personnel_subarea' => $v_personnel_subarea,
             );
-
-            array_push($data_arr, $data_item);
-            $msg = $data_arr;
+            $msg = $data_item;
         }
 
         return $msg;
