@@ -220,7 +220,6 @@ class Router
             $r->get('/api/index.php/stakeholders/get', 'Stakeholders/get');
             $r->get('/api/index.php/stakeholders/find_id/{id}', 'Stakeholders/findById');
             $r->get('/api/index.php/stakeholders/find_unit_id/{id}', 'Stakeholders/findByUnitId');
-            $r->get('/api/index.php/stakeholders/find_id/{id}', 'Stakeholders/findById');
             $r->get('/api/index.php/stakeholders/delete/{id}', 'Stakeholders/delete');
             $r->post('/api/index.php/stakeholders/insert', 'Stakeholders/insert');
             $r->post('/api/index.php/stakeholders/update/{id}', 'Stakeholders/update');
