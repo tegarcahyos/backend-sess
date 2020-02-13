@@ -115,8 +115,7 @@ class Login
         $select_nik = "SELECT * FROM employee WHERE n_nik = '$username'";
         $result = $this->db->execute($select_nik);
         $num = $result->rowCount();
-        die(empty($num));
-        if (!empty($result)) {
+        if (!empty($num)) {
             $response = json_decode($login);
             if ($response->login != 0) {
                 $query = "SELECT * FROM employee WHERE n_nik = '$username'";
