@@ -643,6 +643,9 @@ class Router
                 } else if (
                     $explodeUri[4] == "find_by_pc") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['pc_id'], $explodeUri[3]));
+                } else if (
+                    $explodeUri[4] == "find") {
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['value'], $explodeUri[3]));
                 }
                 break;
         }
