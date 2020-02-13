@@ -74,7 +74,7 @@ class PriorityCriteria
         $variable = array('criteria');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -87,7 +87,7 @@ class PriorityCriteria
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 
@@ -121,7 +121,7 @@ class PriorityCriteria
         $variable = array('criteria');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -133,7 +133,7 @@ class PriorityCriteria
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 

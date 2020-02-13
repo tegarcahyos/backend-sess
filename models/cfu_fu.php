@@ -113,7 +113,7 @@ class CfuFu
         $variable = array('organization_id', 'name', 'code');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -126,7 +126,7 @@ class CfuFu
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
             if ($num > 0) {
@@ -163,7 +163,7 @@ class CfuFu
         $variable = array('name', 'code', 'organization');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -173,7 +173,7 @@ class CfuFu
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
             if ($num > 0) {

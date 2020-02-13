@@ -116,7 +116,7 @@ class Tara
         $variable = array('data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -129,7 +129,7 @@ class Tara
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 
@@ -169,7 +169,7 @@ class Tara
         $variable = array('data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -183,7 +183,7 @@ class Tara
 
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 

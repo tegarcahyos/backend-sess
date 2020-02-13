@@ -76,7 +76,7 @@ class UnitTarget
         $variable = array('unit_id', 'kpi_id', 'target');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -87,7 +87,7 @@ class UnitTarget
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 
@@ -129,7 +129,7 @@ class UnitTarget
         $variable = array('unit_id', 'kpi_id', 'target');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -141,7 +141,7 @@ class UnitTarget
 
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 

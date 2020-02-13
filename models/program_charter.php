@@ -328,7 +328,7 @@ class ProgramCharter
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 

@@ -77,7 +77,7 @@ class PriorityData
         $variable = array('id_program', 'program_name', 'data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -90,7 +90,7 @@ class PriorityData
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 
@@ -126,7 +126,7 @@ class PriorityData
         $variable = array('id_program', 'program_name', 'data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -138,7 +138,7 @@ class PriorityData
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 

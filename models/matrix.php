@@ -121,7 +121,7 @@ class Matrix
         $variable = array('si_id', 'unit_id', 'matrix');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -129,10 +129,10 @@ class Matrix
 
         $query = 'INSERT INTO ' . $tablename . ' (si_id, unit_id, matrix) ';
         $query .= "VALUES ('$si_id','$unit_id', '$matrix') RETURNING *";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 
@@ -174,7 +174,7 @@ class Matrix
         $variable = array('si_id', 'unit_id', 'matrix');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -184,7 +184,7 @@ class Matrix
 
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
 

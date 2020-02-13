@@ -279,7 +279,7 @@ class Unit
         $variable = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -292,7 +292,7 @@ class Unit
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
             if ($num > 0) {
@@ -331,7 +331,7 @@ class Unit
         $variable = array('organization_id', 'cfu_fu_id', 'parent_id', 'name', 'code');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
-                return "402";
+                return "422";
             }
 
             $$item = $request[0]->{$item};
@@ -341,7 +341,7 @@ class Unit
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
-            return "402";
+            return "422";
         } else {
             $num = $result->rowCount();
             if ($num > 0) {
