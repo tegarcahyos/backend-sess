@@ -117,11 +117,12 @@ class UserDetail
         '$role_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
+
+        if (is_bool($result)) {
             $msg = "Data Kosong";
             return $msg;
         } else {
+            $row = $result->fetchRow();
             extract($row);
 
             // Push to data_arr
