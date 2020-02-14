@@ -1,5 +1,5 @@
 <?php
-include 'transformer_connect.php';
+// include 'transformer_connect.php';
 
 class ProgramCharter
 {
@@ -9,7 +9,7 @@ class ProgramCharter
     public function __construct($db)
     {
         $this->db = $db;
-        $this->db_transformer = new TransformerConnect();
+        // $this->db_transformer = new TransformerConnect();
     }
 
     public function get($tablename)
