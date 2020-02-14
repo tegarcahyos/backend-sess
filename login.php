@@ -38,7 +38,6 @@ class Login
                 $this->db->execute($migrate_user);
                 // LOGIN
                 $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
-                die($query);
                 $result = $this->db->execute($query);
                 $this->data_user($result, $username, $password);
             }
@@ -47,6 +46,7 @@ class Login
 
     private function data_user($result, $username, $password)
     {
+        die($result);
         while ($row = $result->fetchRow()) {
             $user_id = $row['id'];
             $name = $row['name'];
