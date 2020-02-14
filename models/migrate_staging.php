@@ -51,8 +51,6 @@ class MigrateStaging
                     'status' => $status,
                     'generator_id' => $generator_id,
                 );
-
-                die(print_r(count($data_item)));
                 for ($i = 0; $i < count($data_item); $i++) {
                     $title = $data_item[$i]['title'];
                     $strategic_initiative = $data_item[$i]['strategic_initiative'];
