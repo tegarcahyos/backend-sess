@@ -32,31 +32,33 @@ class MigrateStaging
             $data_arr = array();
 
             while ($row = $result->fetchRow()) {
-                // extract($row);
+                extract($row);
 
-                // $data_item = array(
-                //     'id' => $id,
-                //     'title' => $title,
-                //     'code' => $code,
-                //     'strategic_initiative' => $strategic_initiative,
-                //     'unit_id' => $unit_id,
-                //     'weight' => $weight,
-                //     'description' => $description,
-                //     'refer_to' => json_decode($refer_to),
-                //     'stakeholders' => json_decode($stakeholders),
-                //     'kpi' => json_decode($kpi),
-                //     'main_activities' => json_decode($main_activities),
-                //     'key_asks' => json_decode($key_asks),
-                //     'risks' => $risks,
-                //     'status' => $status,
-                //     'generator_id' => $generator_id,
-                // );
+                $data_item = array(
+                    'id' => $id,
+                    'title' => $title,
+                    'code' => $code,
+                    'strategic_initiative' => $strategic_initiative,
+                    'unit_id' => $unit_id,
+                    'weight' => $weight,
+                    'description' => $description,
+                    'refer_to' => json_decode($refer_to),
+                    'stakeholders' => json_decode($stakeholders),
+                    'kpi' => json_decode($kpi),
+                    'main_activities' => json_decode($main_activities),
+                    'key_asks' => json_decode($key_asks),
+                    'risks' => $risks,
+                    'status' => $status,
+                    'generator_id' => $generator_id,
+                );
 
-                $title = $row['title'];
-                $strategic_initiative = $row['strategic_initiative'];
-                $description = $row['description'];
-                $risks = $row['risks'];
-                $generator_id = $row['generator_id'];
+            }
+            for ($i = 0; $i < count($data_item); $i++) {
+                $title = $data_item[$i]['title'];
+                $strategic_initiative = $data_item[$i]['strategic_initiative'];
+                $description = $data_item[$i]['description'];
+                $risks = $data_item[$i]['risks'];
+                $generator_id = $data_item[$i]['generator_id'];
                 $get_data_generator = "SELECT * FROM users WHERE id = '$generator_id'";
                 $data_generator = $this->db->execute($get_data_generator);
                 $row = $data_generator->fetchRow();
@@ -65,9 +67,8 @@ class MigrateStaging
                 $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
                 $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
 
-                // die(print_r($db_transformer));
+                die(print_r($db_transformer));
                 $db_transformer->execute($query_staging);
-
             }
 
         }
