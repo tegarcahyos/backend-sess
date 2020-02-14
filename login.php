@@ -146,13 +146,15 @@ class Login
                     'nama_karyawan' => $v_nama_karyawan,
                 );
 
-                if ($row['exists'] == 't') {
-                    $this->authenticate('users');
-                } else {
-                    $password = password_hash($password, PASSWORD_BCRYPT);
-                    $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $data_item['nama_karyawan'] . "', '" . $data_item['nik'] . "', '$password')";
-                    $this->db->execute($migrate_user);
-                }
+                $result = $data_item;
+
+                // if ($row['exists'] == 't') {
+                //     $this->authenticate('users');
+                // } else {
+                //     $password = password_hash($password, PASSWORD_BCRYPT);
+                //     $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $data_item['nama_karyawan'] . "', '" . $data_item['nik'] . "', '$password')";
+                //     $this->db->execute($migrate_user);
+                // }
             } else {
                 $result = "506";
             }
