@@ -46,11 +46,11 @@ class Matrix
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
-        if (empty($result)) {
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
             $msg = "Data Kosong";
             return $msg;
         } else {
-            $row = $result->fetchRow();
             extract($row);
 
             // Push to data_arr
