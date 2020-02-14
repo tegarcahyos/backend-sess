@@ -23,7 +23,7 @@ class Login
         $result = $this->db->execute($query);
         $num = $result->rowCount();
         if ($num > 0) {
-            $data_user = $this->data_user($result, $username, $password);
+            $msg = $this->data_user($result, $username, $password);
         } else {
             $check = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
             // die($check);
@@ -39,11 +39,11 @@ class Login
                 // LOGIN
                 $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
                 $result = $this->db->execute($query);
-                $data_user = $this->data_user($result, $username, $password);
+                $msg = $this->data_user($result, $username, $password);
             }
         }
 
-        return $data_user;
+        return $msg;
     }
 
     private function data_user($result, $username, $password)
