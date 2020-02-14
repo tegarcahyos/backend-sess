@@ -31,29 +31,41 @@ class MigrateStaging
             $data_arr = array();
 
             while ($row = $result->fetchRow()) {
-                extract($row);
+                // extract($row);
 
-                $data_item = array(
-                    'id' => $id,
-                    'title' => $title,
-                    'code' => $code,
-                    'strategic_initiative' => $strategic_initiative,
-                    'unit_id' => $unit_id,
-                    'weight' => $weight,
-                    'description' => $description,
-                    'refer_to' => json_decode($refer_to),
-                    'stakeholders' => json_decode($stakeholders),
-                    'kpi' => json_decode($kpi),
-                    'main_activities' => json_decode($main_activities),
-                    'key_asks' => json_decode($key_asks),
-                    'risks' => $risks,
-                    'status' => $status,
-                    'generator_id' => $generator_id,
-                );
+                // $data_item = array(
+                //     'id' => $id,
+                //     'title' => $title,
+                //     'code' => $code,
+                //     'strategic_initiative' => $strategic_initiative,
+                //     'unit_id' => $unit_id,
+                //     'weight' => $weight,
+                //     'description' => $description,
+                //     'refer_to' => json_decode($refer_to),
+                //     'stakeholders' => json_decode($stakeholders),
+                //     'kpi' => json_decode($kpi),
+                //     'main_activities' => json_decode($main_activities),
+                //     'key_asks' => json_decode($key_asks),
+                //     'risks' => $risks,
+                //     'status' => $status,
+                //     'generator_id' => $generator_id,
+                // );
 
-                die($data_item['risks']);
-                $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, inititative_id, generator, programType, organization_id)";
-                $query_staging .= "VALUES (1, )";
+                $title = $row['title'];
+                $strategic_initiative = $row['strategic_initiative'];
+                $description = $row['description'];
+                $risks = $row['risks'];
+                $generator_id = $row['generator_id'];
+                $get_data_generator = "SELECT * FROM users WHERE id = $generator_id";
+                $this->db->execute($get_data_generator);
+                $row = $result->fetchRow();
+                $name = $row['name'];
+
+                $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
+                $query_staging .= "VALUES (1, $risks, $description, $title, $name, btp)";
+
+                die($query_staging);
+                $this->db_transformer->execute($query_staging);
 
             }
 
