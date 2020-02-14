@@ -9,12 +9,13 @@ class MigrateStaging
     public function __construct($db)
     {
         $this->db = $db;
+        $this->$db_transformer = new TransformerStaging();
     }
 
     public function get($tablename)
     {
-        $db_transformer = new TransformerStaging();
-        die(print_r($db_transformer->transformer_connect()));
+
+        // die(print_r($db_transformer->transformer_connect()));
         $query = "SELECT
            *
           FROM
@@ -50,14 +51,12 @@ class MigrateStaging
                     'generator_id' => $generator_id,
                 );
 
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
+                die($data_item['risks']);
+                $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, inititative_id, generator, programType, organization_id)";
+                $query_staging .= "VALUES (1, )";
+
             }
 
-        } else {
-            $msg = 'Data Kosong';
         }
-
-        return $msg;
     }
 }
