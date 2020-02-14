@@ -26,13 +26,14 @@ class Login
             $this->data_user($result, $username, $password);
         } else {
             $check = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
-            die($check);
+            // die($check);
             $result = $this->db->execute($check);
             $row = $result->fetchRow();
             if (is_bool($row)) {
                 $msg = "203";
             } else {
                 // MIGRATE EMP TO USR
+                die($password);
                 $password = password_hash($password, PASSWORD_BCRYPT);
                 $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password')";
                 $this->db->execute($migrate_user);
