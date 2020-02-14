@@ -34,7 +34,7 @@ class Login
             } else {
                 // MIGRATE EMP TO USR
                 $password = password_hash($password, PASSWORD_BCRYPT);
-                $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $data_item['nama_karyawan'] . "', '" . $data_item['nik'] . "', '$password')";
+                $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password')";
                 $this->db->execute($migrate_user);
                 // LOGIN
                 $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
