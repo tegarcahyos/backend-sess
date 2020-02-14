@@ -8,6 +8,7 @@ class MigrateStaging
 
     public function __construct($db)
     {
+        echo "ASU";
         $this->db = $db;
     }
 
