@@ -13,9 +13,8 @@ class MigrateStaging
 
     public function get($tablename)
     {
-        echo "GOBLOK";
         $db_transformer = new TransformerStaging();
-        die(print_r($db_transformer));
+        die(print_r($db_transformer->transformer_connect()));
         $query = "SELECT
            *
           FROM
