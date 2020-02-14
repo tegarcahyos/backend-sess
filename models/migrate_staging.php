@@ -52,7 +52,7 @@ class MigrateStaging
                     'generator_id' => $generator_id,
                 );
                 // for ($i = 0; $i < count($data_item); $i++) {
-                die($data_item['title']);
+                // die($data_item['title']);
                 $title = $data_item['title'];
                 $strategic_initiative = $data_item['strategic_initiative'];
                 $description = $data_item['description'];
