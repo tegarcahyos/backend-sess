@@ -49,8 +49,6 @@ class Login
         while ($row = $result->fetchRow()) {
             $user_id = $row['id'];
             $name = $row['name'];
-            $email = $row['email'];
-            $phone = $row['phone'];
             $password2 = $row['password'];
         }
         // die($password2);
@@ -102,8 +100,6 @@ class Login
                 "name" => $name,
                 "username" => $username,
                 "password" => $password,
-                "email" => $email,
-                "phone" => $phone,
                 "expireAt" => $expire_claim,
                 "role_id" => $role_id,
                 "unit_id" => $unit_id,
