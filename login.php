@@ -33,7 +33,6 @@ class Login
                 $msg = "203";
             } else {
                 // MIGRATE EMP TO USR
-                die($password);
                 $password = password_hash($password, PASSWORD_BCRYPT);
                 $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password')";
                 $this->db->execute($migrate_user);
