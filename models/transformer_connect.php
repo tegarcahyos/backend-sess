@@ -12,8 +12,8 @@ class TransformerStaging
         $db_username = 'transformer';
         $db_password = 'transform$001';
         $db_name_transformer = 'transformer';
-        die(print_r($db_name_transformer));
         $this->db_transformer = newADOConnection('mysqli');
+        die(print_r($this->db_transformer));
         $this->db_transformer->connect($db_host, $db_username, $db_password, $db_name_transformer);
 
         return $this->db_transformer;
