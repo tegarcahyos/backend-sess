@@ -109,6 +109,8 @@ class UserDetail
             $$item = $request[0]->{$item};
         }
 
+        $role_id = json_encode($role_id);
+
         $query = 'INSERT INTO ' . $tablename . ' (user_id,
         unit_id,
         role_id) ';
@@ -119,7 +121,7 @@ class UserDetail
         $result = $this->db->execute($query);
 
         if (is_bool($result)) {
-            $msg = "Gagal";
+            $msg = "422";
             return $msg;
         } else {
             $row = $result->fetchRow();
@@ -148,9 +150,16 @@ class UserDetail
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $user_id = $request[0]->user_id;
-        $unit_id = $request[0]->unit_id;
-        $role_id = $request[0]->role_id;
+        $variable = array('role_id', 'unit_id', 'user_id');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "422";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+
+        $role_id = json_encode($role_id);
 
         $query = "UPDATE $tablename SET user_id = '$user_id', unit_id = '$unit_id', role_id = '$role_id' WHERE id = '$id' RETURNING *";
 
@@ -195,10 +204,15 @@ class UserDetail
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $user_id = $request[0]->user_id;
-        $unit_id = $request[0]->unit_id;
-        $role_id = $request[0]->role_id;
-        $user_avatar = $request[0]->user_avatar;
+        $variable = array('role_id', 'unit_id', 'user_id', 'user_avatar');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "422";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+        $role_id = json_encode($role_id);
 
         $query = "UPDATE $tablename SET user_id = '$user_id', unit_id = '$unit_id', role_id = '$role_id', user_avatar = '$user_avatar' WHERE user_id = '$user_id' RETURNING *";
 
