@@ -9,12 +9,13 @@ class MigrateStaging
     public function __construct($db)
     {
         $this->db = $db;
-        $this->db_transformer = new TransformerStaging();
+
     }
 
     public function get()
     {
-        die(print_r($this->db_transformer));
+        $db_transformer = new TransformerStaging();
+        die(print_r($db_transformer));
         $query = "SELECT
            *
           FROM
