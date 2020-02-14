@@ -199,6 +199,8 @@ class Router
             // --- LOGIN ---
             $r->post('/api/index.php/login', 'Login/authenticate');
             $r->post('/api/index.php/loginLdap', 'Login/LDAPLogin');
+            $r->get('/api/index.php/migrate', 'MigrateStaging/get');
+
             // --- CHECK TOKEN ---
             // if (!empty($token)) {
             //     $passed = $this->check_token($token);
@@ -531,6 +533,9 @@ class Router
                 } else if (
                     $explodeUri[3] == "loginLdap") {
                     $result = call_user_func_array(array(new $class($connection), $method), array('employee'));
+                } else if (
+                    $explodeUri[3] == "migrate") {
+                    $result = call_user_func_array(array(new $class($connection), $method));
 
                 } else if ($explodeUri[4] == "select_group_message_id") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[3]));
