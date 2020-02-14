@@ -23,7 +23,7 @@ class Login
         $result = $this->db->execute($query);
         $num = $result->rowCount();
         if ($num > 0) {
-            $this->data_user($result, $username, $password);
+            $data_user = $this->data_user($result, $username, $password);
         } else {
             $check = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
             // die($check);
@@ -39,9 +39,11 @@ class Login
                 // LOGIN
                 $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
                 $result = $this->db->execute($query);
-                $this->data_user($result, $username, $password);
+                $data_user = $this->data_user($result, $username, $password);
             }
         }
+
+        return $data_user;
     }
 
     private function data_user($result, $username, $password)
@@ -53,7 +55,7 @@ class Login
             $password2 = $row['password'];
         }
         // die($password2);
-        die(password_verify($password, $password2));
+        // die(password_verify($password, $password2));
         if (password_verify($password, $password2)) {
             $secret_key = "YOUR_SECRET_KEY";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
