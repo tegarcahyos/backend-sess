@@ -15,6 +15,7 @@ class TransformerStaging
 
         $this->db_transformer = newADOConnection('mysql');
         $this->db_transformer->connect($db_host, $db_username, $db_password, $db_name_transformer);
+        die(print_r($this->db_transformer));
         return $this->db_transformer;
     }
 }

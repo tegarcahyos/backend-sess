@@ -9,7 +9,6 @@ class MigrateStaging
     public function __construct($db)
     {
         $this->db = $db;
-
     }
 
     public function get()
