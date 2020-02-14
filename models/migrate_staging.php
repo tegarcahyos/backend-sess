@@ -15,6 +15,7 @@ class MigrateStaging
     public function get($tablename)
     {
         $db_transformer = new TransformerStaging();
+        $db_transformer = $db_transformer->transformer_connect();
         // die(print_r($db_transformer->transformer_connect()));
         $query = "SELECT
            *
