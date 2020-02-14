@@ -52,24 +52,25 @@ class MigrateStaging
                     'generator_id' => $generator_id,
                 );
 
-            }
-            die(print_r($data_item));
-            for ($i = 0; $i < count($data_item); $i++) {
-                $title = $data_item[$i]['title'];
-                $strategic_initiative = $data_item[$i]['strategic_initiative'];
-                $description = $data_item[$i]['description'];
-                $risks = $data_item[$i]['risks'];
-                $generator_id = $data_item[$i]['generator_id'];
-                $get_data_generator = "SELECT * FROM users WHERE id = '$generator_id'";
-                $data_generator = $this->db->execute($get_data_generator);
-                $row = $data_generator->fetchRow();
-                $name = $row['name'];
+                die(print_r($data_item));
+                for ($i = 0; $i < count($data_item); $i++) {
+                    $title = $data_item[$i]['title'];
+                    $strategic_initiative = $data_item[$i]['strategic_initiative'];
+                    $description = $data_item[$i]['description'];
+                    $risks = $data_item[$i]['risks'];
+                    $generator_id = $data_item[$i]['generator_id'];
+                    $get_data_generator = "SELECT * FROM users WHERE id = '$generator_id'";
+                    $data_generator = $this->db->execute($get_data_generator);
+                    $row = $data_generator->fetchRow();
+                    $name = $row['name'];
 
-                $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
-                $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
+                    $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
+                    $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
 
-                // die(print_r($db_transformer));
-                $db_transformer->execute($query_staging);
+                    // die(print_r($db_transformer));
+                    $db_transformer->execute($query_staging);
+                }
+
             }
 
         }
