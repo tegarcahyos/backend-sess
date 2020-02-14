@@ -48,7 +48,6 @@ class Login
     {
 
         while ($row = $result->fetchRow()) {
-            die($row['id']);
             $user_id = $row['id'];
             $name = $row['name'];
             $password2 = $row['password'];
@@ -107,6 +106,7 @@ class Login
                 "unit_id" => $unit_id,
                 "token" => $jwt,
             );
+            die($msg);
 
         } else {
 
