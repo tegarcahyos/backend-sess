@@ -136,8 +136,6 @@ class Login
         if (!empty($num)) {
             $response = json_decode($login);
             if ($response->login != 0) {
-                $query = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
-                $result = $this->db->execute($query);
                 $row = $result->fetchRow();
                 extract($row);
 
