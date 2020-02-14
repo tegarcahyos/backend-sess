@@ -536,7 +536,7 @@ class Router
                     $result = call_user_func_array(array(new $class($connection), $method), array('employee'));
                 } else if (
                     $explodeUri[3] == "migrate") {
-                    $result = call_user_func_array(array(new $class($connection), $method));
+                    $result = call_user_func_array(array(new $class($connection), $method), array('program_charter'));
 
                 } else if ($explodeUri[4] == "select_group_message_id") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[3]));

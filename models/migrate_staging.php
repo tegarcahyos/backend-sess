@@ -8,11 +8,10 @@ class MigrateStaging
 
     public function __construct($db)
     {
-        echo "ASU";
         $this->db = $db;
     }
 
-    public function get()
+    public function get($tablename)
     {
         echo "GOBLOK";
         $db_transformer = new TransformerStaging();
@@ -20,7 +19,7 @@ class MigrateStaging
         $query = "SELECT
            *
           FROM
-             program_charter order by updated_at desc";
+             $tablename order by updated_at desc";
 
         // die($query);
         $result = $this->db->execute($query);
