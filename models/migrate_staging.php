@@ -9,7 +9,7 @@ class MigrateStaging
     public function __construct($db)
     {
         $this->db = $db;
-        $this->db_transformer = new TransformerConnect();
+        $this->db_transformer = new TransformerStaging();
     }
 
     public function get()

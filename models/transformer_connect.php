@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . "/../adodb/adodb.inc.php";
 
-class TransformerConnect
+class TransformerStaging
 {
     public $db_transformer;
 
