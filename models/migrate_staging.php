@@ -57,8 +57,8 @@ class MigrateStaging
                 $risks = $row['risks'];
                 $generator_id = $row['generator_id'];
                 $get_data_generator = "SELECT * FROM users WHERE id = $generator_id";
-                $this->db->execute($get_data_generator);
-                $row = $result->fetchRow();
+                $data_generator = $this->db->execute($get_data_generator);
+                $row = $data_generator->fetchRow();
                 die(print_r($row));
                 $name = $row['name'];
 
