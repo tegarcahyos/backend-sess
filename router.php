@@ -23,6 +23,7 @@ include "models/priority_data.php";
 include "models/priority_criteria.php";
 include "models/ceo_notes.php";
 include "models/user_detail.php";
+include "models/migrate_staging.php";
 include "models/kpi.php";
 include "models/si_target.php";
 include "models/unit_target.php";
