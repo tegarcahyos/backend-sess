@@ -106,7 +106,7 @@ class Login
                 "unit_id" => $unit_id,
                 "token" => $jwt,
             );
-            die($msg);
+            die(print_r($msg));
 
         } else {
 
