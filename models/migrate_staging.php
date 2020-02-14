@@ -59,6 +59,7 @@ class MigrateStaging
                 $get_data_generator = "SELECT * FROM users WHERE id = $generator_id";
                 $this->db->execute($get_data_generator);
                 $row = $result->fetchRow();
+                die(print_r($row));
                 $name = $row['name'];
 
                 $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
