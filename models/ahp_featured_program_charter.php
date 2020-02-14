@@ -1,6 +1,6 @@
 <?php
 
-class AHPData
+class AHPFeaturedPC
 {
     public $db;
 
@@ -30,8 +30,7 @@ class AHPData
 
                 $data_item = array(
                     'id' => $id,
-                    'pc_id' => $pc_id,
-                    'cfu_fu_id' => $cfu_fu_id,
+                    'organization_id' => $organization_id,
                     'data' => json_decode($data),
                 );
 
@@ -59,8 +58,7 @@ class AHPData
 
             $data_item = array(
                 'id' => $id,
-                'pc_id' => $pc_id,
-                'cfu_fu_id' => $cfu_fu_id,
+                'organization_id' => $organization_id,
                 'data' => json_decode($data),
             );
             return $data_item;
@@ -74,7 +72,7 @@ class AHPData
         //
         $request = json_decode($data);
 
-        $variable = array('pc_id', 'cfu_fu_id', 'data');
+        $variable = array('organization_id', 'data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -85,8 +83,8 @@ class AHPData
 
         $data = json_encode($data);
 
-        $query = "INSERT INTO $tablename (pc_id, cfu_fu_id, data)";
-        $query .= "VALUES ('$pc_id', '$cfu_fu_id', '$data') RETURNING *";
+        $query = "INSERT INTO $tablename (organization_id, data)";
+        $query .= "VALUES ('$organization_id', '$data') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -103,8 +101,7 @@ class AHPData
 
                     $data_item = array(
                         'id' => $id,
-                        'pc_id' => $pc_id,
-                        'cfu_fu_id' => $cfu_fu_id,
+                        'organization_id' => $organization_id,
                         'data' => json_decode($data),
                     );
 
@@ -123,7 +120,7 @@ class AHPData
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $variable = array('pc_id', 'cfu_fu_id', 'data');
+        $variable = array('organization_id', 'data');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -134,7 +131,7 @@ class AHPData
 
         $data = json_encode($data);
 
-        $query = "UPDATE $tablename SET pc_id = '$pc_id', cfu_fu_id = '$cfu_fu_id', data = '$data' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET organization_id = '$organization_id', data = '$data' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -151,8 +148,7 @@ class AHPData
 
                     $data_item = array(
                         'id' => $id,
-                        'pc_id' => $pc_id,
-                        'cfu_fu_id' => $cfu_fu_id,
+                        'organization_id' => $organization_id,
                         'data' => json_decode($data),
                     );
 
