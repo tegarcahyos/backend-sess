@@ -33,8 +33,8 @@ class Login
                 $msg = "203";
             } else {
                 // MIGRATE EMP TO USR
-                $password = password_hash($password, PASSWORD_BCRYPT);
-                $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password')";
+                $password_hash = password_hash($password, PASSWORD_BCRYPT);
+                $migrate_user = "INSERT INTO users (name, username, password) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password_hash')";
                 $this->db->execute($migrate_user);
                 // LOGIN
                 $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
