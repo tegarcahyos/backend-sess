@@ -52,7 +52,7 @@ class Login
             $name = $row['name'];
             $password2 = $row['password'];
         }
-        die($password);
+        // die($password);
         // die(password_verify($password, $password2));
         if (password_verify($password, $password2)) {
             $secret_key = "YOUR_SECRET_KEY";
