@@ -71,6 +71,7 @@ class MigrateStaging
                 WHERE NOT EXISTS (
                     SELECT name FROM staging_program WHERE title = '$title'
                 ) LIMIT 1";
+                die($query_staging);
 
                 // die(print_r($db_transformer));
                 $db_transformer->execute($query_staging);
