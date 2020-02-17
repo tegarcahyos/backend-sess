@@ -70,7 +70,7 @@ class MigrateStaging
                 SELECT * FROM (SELECT 1, '$risks', '$description', '$title', '$name', 'btp') AS tmp
                 WHERE NOT EXISTS (
                     SELECT name FROM staging_program WHERE title = '$title'
-                ) LIMIT 1";
+                )";
                 die($query_staging);
 
                 // die(print_r($db_transformer));
