@@ -105,36 +105,43 @@ class CfuFu
     public function getAllUsers($id, $tablename)
     {
         $query = "SELECT * FROM unit WHERE cfu_fu_id = '$id'";
-        die($query);
         $listUnit = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
-            $msg = "Data Kosong";
-            return $msg;
-        } else {
-            extract($row);
+        $num = $result->rowCount();
 
-            $unitArray = array(
-                'id' => $id,
-                'parent_id' => $parent_id,
-                'name' => $name,
-            );
+        if ($num > 0) {
 
-            for ($i = 0; $i < count($unitArray); $i++) {
-                $user = "SELECT * FROM user_detail WHERE unit_id = '" . $unitArray['id'] . "'";
-                $listUser = $this->db->execute($user);
-                $row = $result->fetchRow();
-                if (is_bool($row)) {
-                    $msg = "Data Kosong";
-                    return $msg;
-                } else {
-                    extract($row);
-                    $userArray = array(
-                        'user_id' => $user_id,
-                    );
+            $unitArray = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                );
+
+                array_push($unitArray, $data_item);
+
+                for ($i = 0; $i < count($unitArray); $i++) {
+                    $user = "SELECT * FROM user_detail WHERE unit_id = '" . $unitArray['id'] . "'";
+                    $listUser = $this->db->execute($user);
+                    $row = $result->fetchRow();
+                    if (is_bool($row)) {
+                        $msg = "Data Kosong";
+                        return $msg;
+                    } else {
+                        extract($row);
+                        $userArray = array(
+                            'user_id' => $user_id,
+                        );
+                    }
                 }
+                return $userArray;
             }
-            return $userArray;
+
+        } else {
+            $msg = [];
         }
     }
 
