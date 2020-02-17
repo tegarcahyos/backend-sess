@@ -102,6 +102,41 @@ class CfuFu
         }
     }
 
+    public function getAllUsers($id, $tablename)
+    {
+        $query = "SELECT * FROM unit WHERE cfu_fu_id = '$id'";
+        $listUnit = $this->db->execute($query);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            $msg = "Data Kosong";
+            return $msg;
+        } else {
+            extract($row);
+
+            $unitArray = array(
+                'id' => $id,
+                'parent_id' => $parent_id,
+                'name' => $name,
+            );
+
+            for ($i = 0; $i < count($unitArray); $i++) {
+                $user = "SELECT * FROM user_detail WHERE unit_id = '" . $unitArray['id'] . "'";
+                $listUser = $this->db->execute($user);
+                $row = $result->fetchRow();
+                if (is_bool($row)) {
+                    $msg = "Data Kosong";
+                    return $msg;
+                } else {
+                    extract($row);
+                    $userArray = array(
+                        'user_id' => $user_id,
+                    );
+                }
+            }
+            return $userArray;
+        }
+    }
+
     public function insert($tablename)
     {
         // get data input from frontend

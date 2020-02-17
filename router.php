@@ -320,6 +320,7 @@ class Router
 
             // CFU FU
             $r->get('/api/index.php/cfu_fu/get', 'CfuFu/get');
+            $r->get('/api/index.php/cfu_fu/get_users/{id}', 'CfuFu/getAllUsers');
             $r->get('/api/index.php/cfu_fu/find_id/{id}', 'CfuFu/findById');
             $r->get('/api/index.php/cfu_fu/get_by_organization/{org_id}', 'CfuFu/findByOrgId');
             $r->get('/api/index.php/cfu_fu/delete/{id}', 'CfuFu/delete');
@@ -578,6 +579,7 @@ class Router
                     $explodeUri[4] == "select_attachment" ||
                     $explodeUri[4] == "select" ||
                     $explodeUri[4] == "find_id" ||
+                    $explodeUri[4] == "get_users" ||
                     $explodeUri[4] == "find_unit_id" ||
                     $explodeUri[4] == "check_notif" ||
                     $explodeUri[4] == "select_group_chat" ||
