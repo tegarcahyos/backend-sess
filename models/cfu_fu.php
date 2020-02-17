@@ -144,17 +144,19 @@ class CfuFu
                             );
 
                             array_push($userArray, $data_item);
-
+                            $msg = $userArray;
                         }
 
                     }
+
                 }
-                return $userArray;
             }
 
         } else {
             $msg = [];
         }
+
+        return $msg;
     }
 
     public function insert($tablename)
