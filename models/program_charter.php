@@ -433,9 +433,6 @@ class ProgramCharter
 
     public function delete($id_pc, $tablename)
     {
-        $query = "DELETE FROM $tablename WHERE id = '$id_pc'";
-        // die($query);
-        $result = $this->db->execute($query);
 
         // Delete Notification Where Has PC ID
         $delete_notif = "DELETE FROM log_notification WHERE pc_id = '$id_pc'";
@@ -533,10 +530,13 @@ class ProgramCharter
 
         // Delete data priority AHP where has PC ID
 
-        $delete_ahp = "DELETE FROM ahp_data WHERE pc_id = '$id_pc'";
+        $delete_ahp = "DELETE FROM ahp_featured_program_charter WHERE pc_id = '$id_pc'";
         $this->db->execute($delete_ahp);
 
         //
+        $query = "DELETE FROM $tablename WHERE id = '$id_pc'";
+        // die($query);
+        $result = $this->db->execute($query);
 
         $res = $this->db->affected_rows();
 
