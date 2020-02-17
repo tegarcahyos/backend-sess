@@ -582,6 +582,7 @@ class Router
                     $explodeUri[4] == "select" ||
                     $explodeUri[4] == "find_id" ||
                     $explodeUri[4] == "get_users" ||
+                    $explodeUri[4] == "get_units" ||
                     $explodeUri[4] == "find_unit_id" ||
                     $explodeUri[4] == "check_notif" ||
                     $explodeUri[4] == "select_group_chat" ||
