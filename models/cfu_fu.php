@@ -126,6 +126,7 @@ class CfuFu
 
             for ($i = 0; $i < count($unitArray); $i++) {
                 $user = "SELECT * FROM user_detail WHERE unit_id = '" . $unitArray[$i]['id'] . "'";
+                die($user);
                 $listUser = $this->db->execute($user);
                 $num = $listUser->rowCount();
 
