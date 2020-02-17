@@ -224,9 +224,8 @@ class CfuFu
     {
         $data = file_get_contents("php://input");
         $request = json_decode($data);
-        die(print_r($request));
 
-        $variable = array('name', 'code', 'organization');
+        $variable = array('name', 'code', 'organization_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
