@@ -319,7 +319,9 @@ class Unit
                 } else {
                     $userArray = [];
                 }
-                array_push($resultUsers, $userArray);
+                if (!empty($userArray)) {
+                    array_push($resultUsers, $userArray);
+                }
                 $msg = $resultUsers;
             }
 
