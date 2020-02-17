@@ -663,10 +663,9 @@ class Router
                 } else if (
                     $explodeUri[4] == "find") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['value'], $explodeUri[3]));
-                }
                 } else if (
-                    $explodeUri[4] == "select_by_title") {
-                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['title'], $explodeUri[3]));
+                    $explodeUri[4] == "find") {
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['value'], $explodeUri[3]));
                 }
                 break;
         }
