@@ -235,7 +235,7 @@ class CfuFu
         }
 
         $query = "UPDATE $tablename SET name = '$name', code = '$code', organization_id = '$organization_id' WHERE id = '$id' RETURNING *";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "422";
