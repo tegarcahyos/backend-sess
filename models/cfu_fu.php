@@ -105,6 +105,7 @@ class CfuFu
     public function getAllUsers($id, $tablename)
     {
         $query = "SELECT * FROM unit WHERE cfu_fu_id = '$id'";
+        die($query);
         $listUnit = $this->db->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
