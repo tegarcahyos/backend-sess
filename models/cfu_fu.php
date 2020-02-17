@@ -106,13 +106,13 @@ class CfuFu
     {
         $query = "SELECT * FROM unit WHERE cfu_fu_id = '$id'";
         $listUnit = $this->db->execute($query);
-        $num = $result->rowCount();
+        $num = $listUnit->rowCount();
 
         if ($num > 0) {
 
             $unitArray = array();
 
-            while ($row = $result->fetchRow()) {
+            while ($row = $listUnit->fetchRow()) {
                 extract($row);
 
                 $data_item = array(
