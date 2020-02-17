@@ -144,13 +144,11 @@ class CfuFu
                         );
 
                         array_push($userArray, $data_item);
-
+                        $msg = $userArray;
                     }
 
                 }
             }
-
-            $msg = $userArray;
 
         } else {
             $msg = [];
