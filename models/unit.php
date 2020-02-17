@@ -320,7 +320,9 @@ class Unit
                     $userArray = [];
                 }
                 if (!empty($userArray)) {
-                    array_push($resultUsers, $userArray);
+                    for ($i = 0; $i < count($userArray); $i++) {
+                        array_push($resultUsers, $userArray[$i]);
+                    }
                 }
                 $msg = $resultUsers;
             }
