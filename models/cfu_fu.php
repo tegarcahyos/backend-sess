@@ -155,8 +155,6 @@ class CfuFu
                 array_push($resultUsers, $userArray);
             }
 
-            die(print_r($resultUsers));
-
         } else {
             $msg = [];
         }
