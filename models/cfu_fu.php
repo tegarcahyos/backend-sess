@@ -153,6 +153,7 @@ class CfuFu
                     $userArray = [];
                 }
                 array_push($resultUsers, $userArray);
+                $msg = $resultUsers;
             }
 
         } else {
