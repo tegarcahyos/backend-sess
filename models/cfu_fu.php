@@ -122,33 +122,33 @@ class CfuFu
                 );
 
                 array_push($unitArray, $data_item);
-                die(print_r($unitArray));
-                for ($i = 0; $i < count($unitArray); $i++) {
-                    $user = "SELECT * FROM user_detail WHERE unit_id = '" . $unitArray[$i]['id'] . "'";
-                    $listUser = $this->db->execute($user);
-                    $num = $listUser->rowCount();
+            }
 
-                    if ($num > 0) {
+            for ($i = 0; $i < count($unitArray); $i++) {
+                $user = "SELECT * FROM user_detail WHERE unit_id = '" . $unitArray[$i]['id'] . "'";
+                $listUser = $this->db->execute($user);
+                $num = $listUser->rowCount();
 
-                        $userArray = array();
+                if ($num > 0) {
 
-                        while ($row = $listUser->fetchRow()) {
-                            extract($row);
+                    $userArray = array();
 
-                            $data_item = array(
-                                'id' => $id,
-                                'user_id' => $user_id,
-                                'unit_id' => $unit_id,
-                                'role_id' => json_decode($role_id),
-                            );
+                    while ($row = $listUser->fetchRow()) {
+                        extract($row);
 
-                            array_push($userArray, $data_item);
+                        $data_item = array(
+                            'id' => $id,
+                            'user_id' => $user_id,
+                            'unit_id' => $unit_id,
+                            'role_id' => json_decode($role_id),
+                        );
 
-                        }
+                        array_push($userArray, $data_item);
 
                     }
-                    $msg = $userArray;
+
                 }
+                $msg = $userArray;
             }
 
         } else {
