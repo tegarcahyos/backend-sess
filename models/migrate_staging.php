@@ -63,14 +63,14 @@ class MigrateStaging
                 $row = $data_generator->fetchRow();
                 $name = $row['name'];
 
-                // $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
-                // $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
+                $query_staging = "INSERT IGNORE INTO staging_program (btp, businessRisk, description, title, generator, programType)";
+                $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
 
-                $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)
-                SELECT * FROM (SELECT 1, '$risks', '$description', '$title', '$name', 'btp') AS tmp
-                WHERE NOT EXISTS (
-                    SELECT name FROM staging_program WHERE title = '$title'
-                )";
+                // $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)
+                // SELECT * FROM (SELECT 1, '$risks', '$description', '$title', '$name', 'btp') AS tmp
+                // WHERE NOT EXISTS (
+                //     SELECT name FROM staging_program WHERE title = '$title'
+                // )";
                 die($query_staging);
 
                 // die(print_r($db_transformer));
