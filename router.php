@@ -434,6 +434,7 @@ class Router
 
             //GROUP CHAT
             $r->get('/api/index.php/group_chat/select_group_chat/{id}', 'GroupChat/findById');
+            $r->get('/api/index.php/group_chat/select_by_title/{title}', 'GroupChat/findByTitle');
             $r->get('/api/index.php/group_chat/select_all_group_chat', 'GroupChat/get');
             $r->get('/api/index.php/group_chat/delete/{id}', 'GroupChat/delete');
             $r->post('/api/index.php/group_chat/insert_group_chat', 'GroupChat/insert');
@@ -662,6 +663,10 @@ class Router
                 } else if (
                     $explodeUri[4] == "find") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['value'], $explodeUri[3]));
+                }
+                } else if (
+                    $explodeUri[4] == "select_by_title") {
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['title'], $explodeUri[3]));
                 }
                 break;
         }

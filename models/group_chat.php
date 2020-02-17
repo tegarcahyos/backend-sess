@@ -91,6 +91,43 @@ class GroupChat
 
         return $msg;
     }
+    public function findByTitle($title, $tablename)
+    {
+        $query = "SELECT * FROM  $tablename  WHERE title ilike '%$title%' ";
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'title' => $title,
+                    'message_last' => $message_last,
+                    'message_last_date' => $message_last_date,
+                    'message_last_time' => $message_last_time,
+                    'message_sender_id' => $message_sender_id,
+                    'message_sender_name ' => $message_sender_name,
+                    'last_seen_date' => $last_seen_date,
+                    'last_seen_time' => $last_seen_time,
+                    'last_seen_user_id' => $last_seen_user_id,
+                    'last_seen_user_name' => $last_seen_user_name,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
     public function join_chat($user_id, $group_id, $group_chat, $group_member)
     {
         $query_count = "SELECT group_id, count(user_id)  from group_member where group_id in $group_id group by group_id HAVING count(user_id) = 2";
