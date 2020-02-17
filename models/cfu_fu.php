@@ -137,10 +137,9 @@ class CfuFu
 
                             $data_item = array(
                                 'id' => $id,
-                                'name' => $name,
-                                'email' => $email,
-                                'phone' => $phone,
-                                'username' => $username,
+                                'user_id' => $user_id,
+                                'unit_id' => $unit_id,
+                                'role_id' => $role_id,
                             );
 
                             array_push($userArray, $data_item);
