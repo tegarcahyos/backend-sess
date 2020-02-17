@@ -139,7 +139,7 @@ class CfuFu
                                 'id' => $id,
                                 'user_id' => $user_id,
                                 'unit_id' => $unit_id,
-                                'role_id' => $role_id,
+                                'role_id' => json_encode($role_id),
                             );
 
                             array_push($userArray, $data_item);
