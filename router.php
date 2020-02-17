@@ -321,6 +321,7 @@ class Router
             // CFU FU
             $r->get('/api/index.php/cfu_fu/get', 'CfuFu/get');
             $r->get('/api/index.php/cfu_fu/get_users/{id}', 'CfuFu/getAllUsers');
+            $r->get('/api/index.php/cfu_fu/get_units/{id}', 'CfuFu/getAllUnits');
             $r->get('/api/index.php/cfu_fu/find_id/{id}', 'CfuFu/findById');
             $r->get('/api/index.php/cfu_fu/get_by_organization/{org_id}', 'CfuFu/findByOrgId');
             $r->get('/api/index.php/cfu_fu/delete/{id}', 'CfuFu/delete');

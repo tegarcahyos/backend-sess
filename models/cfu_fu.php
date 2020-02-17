@@ -102,6 +102,44 @@ class CfuFu
         }
     }
 
+    public function getAllUnits($id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE cfu_fu = '$id'";
+
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'cfu_fu_id' => $cfu_fu_id,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+    }
+
     public function getAllUsers($id, $tablename)
     {
         $query = "SELECT * FROM unit WHERE cfu_fu_id = '$id'";
