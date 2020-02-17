@@ -107,7 +107,7 @@ class CfuFu
         $query = "SELECT
            *
           FROM
-             $tablename WHERE cfu_fu = '$id'";
+             unit WHERE cfu_fu_id = '$id'";
 
         $result = $this->db->execute($query);
 
