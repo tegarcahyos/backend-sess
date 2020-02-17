@@ -269,6 +269,67 @@ class Unit
         }
     }
 
+    public function getAllUsers($id, $tablename)
+    {
+        $query = "SELECT * FROM unit WHERE parent_id = '$id'";
+        $listUnit = $this->db->execute($query);
+        $num = $listUnit->rowCount();
+
+        if ($num > 0) {
+
+            $unitArray = array();
+
+            while ($row = $listUnit->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                );
+
+                array_push($unitArray, $data_item);
+            }
+
+            $resultUsers = array();
+
+            for ($i = 0; $i < count($unitArray); $i++) {
+                $user = "SELECT * FROM user_detail WHERE unit_id = '" . $unitArray[$i]['id'] . "'";
+                $listUser = $this->db->execute($user);
+                $num = $listUser->rowCount();
+
+                if ($num > 0) {
+
+                    $userArray = array();
+
+                    while ($row = $listUser->fetchRow()) {
+                        extract($row);
+
+                        $data_item = array(
+                            'id' => $id,
+                            'user_id' => $user_id,
+                            'unit_id' => $unit_id,
+                            'role_id' => json_decode($role_id),
+                        );
+
+                        array_push($userArray, $data_item);
+
+                    }
+
+                } else {
+                    $userArray = [];
+                }
+                array_push($resultUsers, $userArray);
+                $msg = $resultUsers;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+    }
+
     public function insert($tablename)
     {
         // get data input from frontend

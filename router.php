@@ -410,6 +410,7 @@ class Router
             $r->get('/api/index.php/unit/get', 'Unit/get');
             $r->get('/api/index.php/unit/get_leaf_unit', 'Unit/getLeafUnit');
             $r->get('/api/index.php/unit/find_id/{id}', 'Unit/findById');
+            $r->get('/api/index.php/unit/get_users/{id}', 'Unit/getAllUsers');
             $r->get('/api/index.php/unit/get_by_parent_unit_id/{parent_id}', 'Unit/getByParent');
             $r->get('/api/index.php/unit/get_root_parent/{id}', 'Unit/getRootParent');
             $r->get('/api/index.php/unit/get_by_organization/{org_id}', 'Unit/findByOrgId');
