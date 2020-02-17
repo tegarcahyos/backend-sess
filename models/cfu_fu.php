@@ -152,7 +152,7 @@ class CfuFu
 
             $resultUsers = array();
             array_push($resultUsers, $userArray);
-            die($resultUsers);
+            die(print_r($resultUsers));
 
         } else {
             $msg = [];
