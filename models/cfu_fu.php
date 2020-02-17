@@ -124,6 +124,8 @@ class CfuFu
                 array_push($unitArray, $data_item);
             }
 
+            $resultUsers = array();
+
             for ($i = 0; $i < count($unitArray); $i++) {
                 $user = "SELECT * FROM user_detail WHERE unit_id = '" . $unitArray[$i]['id'] . "'";
                 $listUser = $this->db->execute($user);
@@ -148,10 +150,9 @@ class CfuFu
                     }
 
                 }
+                array_push($resultUsers, $userArray);
             }
 
-            $resultUsers = array();
-            array_push($resultUsers, $userArray);
             die(print_r($resultUsers));
 
         } else {
