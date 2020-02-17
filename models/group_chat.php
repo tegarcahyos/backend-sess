@@ -94,7 +94,7 @@ class GroupChat
     public function findByTitle($title, $tablename)
     {
         $query = "SELECT * FROM  $tablename  WHERE title ilike '%$title%' ";
-        die($query);
+        // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
