@@ -271,7 +271,7 @@ class Unit
 
     public function getAllUsers($id, $tablename)
     {
-        $query = "SELECT * FROM unit WHERE parent_id = '$id'";
+        $query = "SELECT * FROM unit WHERE parent_id = '$id' OR id = '$id'";
         $listUnit = $this->db->execute($query);
         $num = $listUnit->rowCount();
 
