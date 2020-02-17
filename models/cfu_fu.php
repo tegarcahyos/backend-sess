@@ -126,15 +126,27 @@ class CfuFu
                 for ($i = 0; $i < count($unitArray); $i++) {
                     $user = "SELECT * FROM user_detail WHERE unit_id = '" . $unitArray[$i]['id'] . "'";
                     $listUser = $this->db->execute($user);
-                    $row = $result->fetchRow();
-                    if (is_bool($row)) {
-                        $msg = "Data Kosong";
-                        return $msg;
-                    } else {
-                        extract($row);
-                        $userArray = array(
-                            'user_id' => $user_id,
-                        );
+                    $num = $listUser->rowCount();
+
+                    if ($num > 0) {
+
+                        $userArray = array();
+
+                        while ($row = $listUser->fetchRow()) {
+                            extract($row);
+
+                            $data_item = array(
+                                'id' => $id,
+                                'name' => $name,
+                                'email' => $email,
+                                'phone' => $phone,
+                                'username' => $username,
+                            );
+
+                            array_push($userArray, $data_item);
+
+                        }
+
                     }
                 }
                 return $userArray;
