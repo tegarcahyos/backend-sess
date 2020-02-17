@@ -14,13 +14,6 @@ class TransformerStaging
         $db_name_transformer = 'transformer';
         $this->db_transformer = newADOConnection('mysqli');
         $this->db_transformer->connect($db_host, $db_username, $db_password, $db_name_transformer);
-        // die(print_r($this->db_transformer));
-        // $mysqli = mysqli_connect($db_host, $db_username, $db_password, $db_name_transformer);
-        // if (mysqli_connect_errno()) {
-        //     echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        //     exit();
-        // } else {
-        // }
 
         return $this->db_transformer;
     }
