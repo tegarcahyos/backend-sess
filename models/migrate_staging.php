@@ -62,8 +62,8 @@ class MigrateStaging
                 $row = $data_generator->fetchRow();
                 $name = $row['name'];
 
-                $query_get = "SELECT EXISTS(SELECT * FROM staging_program WHERE title = '$title'";
-                die($query_get);
+                $query_get = "SELECT EXISTS(SELECT * FROM staging_program WHERE title = '$title')";
+                // die($query_get);
                 $get_result = $db_transformer->execute($query_get);
                 // die(json_encode($get_result == false));
                 if ($get_result === false) {
