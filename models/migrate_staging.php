@@ -65,7 +65,7 @@ class MigrateStaging
 
                 $query_get = "SELECT EXISTS(SELECT * FROM staging_program WHERE title = '$title'";
                 $get_result = $db_transformer->execute($query_get);
-                die($get_result == false);
+                die(json_encode($get_result == false));
                 if ($get_result == true)
                 // $query_staging = "INSERT IGNORE INTO staging_program (btp, businessRisk, description, title, generator, programType)";
                 // $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
