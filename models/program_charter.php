@@ -76,24 +76,23 @@ class ProgramCharter
                 extract($row);
 
                 $data_item = array(
-                    'id' => $id,
+                    'id_unit' => $id,
                 );
 
                 array_push($data_arr, $data_item);
             }
 
             $resultPC = array();
-            $pc_array = array();
 
             for ($i = 0; $i < count($data_arr); $i++) {
-                $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_arr[$i]['id'] . "'";
+                $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_arr[$i]['id_unit'] . "'";
 
                 $pcs = $this->db->execute($select_pc);
 
                 $num = $pcs->rowCount();
 
                 if ($num > 0) {
-
+                    $pc_array = array();
                     while ($row = $pcs->fetchRow()) {
                         extract($row);
 
@@ -122,15 +121,13 @@ class ProgramCharter
                     $pc_array = [];
                 }
 
-                die(print_r($pc_array));
-            }
-            die(print_r($pc_array));
-            if (!empty($pc_array)) {
-                for ($i = 0; $i < count($pc_array); $i++) {
-                    array_push($resultPC, $pc_array[$i]);
+                if (!empty($pc_array)) {
+                    for ($i = 0; $i < count($pc_array); $i++) {
+                        array_push($resultPC, $pc_array[$i]);
+                    }
                 }
+                $msg = $resultPC;
             }
-            $msg = $resultPC;
 
         } else {
             $msg = [];
