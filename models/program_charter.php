@@ -123,6 +123,8 @@ class ProgramCharter
                 }
             }
 
+            die(print_r($data_arr));
+
             return $msg;
         }
     }
