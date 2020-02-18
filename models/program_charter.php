@@ -123,8 +123,7 @@ class ProgramCharter
                     $pc_array = [];
                 }
             }
-
-            die(json_encode(count($pc_array)));
+            die(print_r($pc_array));
             if (!empty($pc_array)) {
                 for ($i = 0; $i < count($pc_array); $i++) {
                     array_push($resultPC, $pc_array[$i]);
