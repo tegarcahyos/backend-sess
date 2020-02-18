@@ -77,7 +77,7 @@ class ProgramCharter
                 extract($row);
 
                 $data_item = array(
-                    'id_unit' => $id,
+                    'unit_id' => $id,
                 );
 
                 array_push($unit_arr, $data_item);
@@ -106,15 +106,17 @@ class ProgramCharter
             }
         }
 
-        die(print_r($pc_arr));
-        // $tes = ;
+        // die(print_r($pc_arr));
+        $resultPc = array();
         for ($i = 0; $i < count($unit_arr); $i++) {
             for ($j = 0; $j < count($pc_arr); $j++) {
-                $result = array_intersect($unit_arr[$i], $pc_arr[$j]);
+                if ($unit_arr[$i]['unit_id'] == $pc_arr[$i]['unit_id']) {
+                    array_push($resultPc, $pc_arr[$i]);
+                }
             }
         }
 
-        die(print_r($result));
+        die(print_r($resultPc));
 
     }
 
