@@ -98,20 +98,6 @@ class ProgramCharter
 
                         $data_item = array(
                             'id' => $id,
-                            'title' => $title,
-                            'code' => $code,
-                            'strategic_initiative' => $strategic_initiative,
-                            'unit_id' => $unit_id,
-                            'weight' => $weight,
-                            'description' => $description,
-                            'refer_to' => json_decode($refer_to),
-                            'stakeholders' => json_decode($stakeholders),
-                            'kpi' => json_decode($kpi),
-                            'main_activities' => json_decode($main_activities),
-                            'key_asks' => json_decode($key_asks),
-                            'risks' => $risks,
-                            'status' => $status,
-                            'generator_id' => $generator_id,
                         );
 
                         array_push($pc_array, $data_item);
