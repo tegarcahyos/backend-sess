@@ -82,7 +82,7 @@ class ProgramCharter
                 array_push($data_arr, $data_item);
             }
 
-            die(print_r($data_arr));
+            $resultPC = array();
 
             for ($i = 0; $i < count($data_arr); $i++) {
                 $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_arr[$i]['id'] . "'";
@@ -93,7 +93,7 @@ class ProgramCharter
 
                 if ($num > 0) {
 
-                    $data_arr = array();
+                    $pc_array = array();
 
                     while ($row = $result->fetchRow()) {
                         extract($row);
@@ -116,17 +116,24 @@ class ProgramCharter
                             'generator_id' => $generator_id,
                         );
 
-                        array_push($data_arr, $data_item);
-                        $msg = $data_arr;
+                        array_push($pc_array, $data_item);
                     }
 
                 } else {
-                    $msg = "Data Kosong";
+                    $pc_array = [];
                 }
+                if (!empty($pc_array)) {
+                    for ($i = 0; $i < count($pc_array); $i++) {
+                        array_push($resultPC, $pc_array[$i]);
+                    }
+                }
+                $msg = $resultPC;
             }
 
-            return $msg;
+        } else {
+            $msg = [];
         }
+        return $msg;
     }
 
     public function findById($id, $tablename)
