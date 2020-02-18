@@ -64,7 +64,7 @@ class ProgramCharter
     {
 
         $get_unit = "SELECT * FROM unit WHERE cfu_fu_id = '$id'";
-        $result = $this->db->execute($query);
+        $result = $this->db->execute($get_unit);
 
         $num = $result->rowCount();
 
@@ -81,7 +81,7 @@ class ProgramCharter
 
                 $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_item['id'] . "'";
 
-                $result = $this->db->execute($query);
+                $result = $this->db->execute($select_pc);
 
                 $num = $result->rowCount();
 
