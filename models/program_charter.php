@@ -87,15 +87,15 @@ class ProgramCharter
             for ($i = 0; $i < count($data_arr); $i++) {
                 $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_arr[$i]['id'] . "'";
 
-                $result = $this->db->execute($select_pc);
+                $pcs = $this->db->execute($select_pc);
 
-                $num = $result->rowCount();
+                $num = $pcs->rowCount();
 
                 if ($num > 0) {
 
                     $pc_array = array();
 
-                    while ($row = $result->fetchRow()) {
+                    while ($row = $pcs->fetchRow()) {
                         extract($row);
 
                         $data_item = array(
