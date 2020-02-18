@@ -82,6 +82,8 @@ class ProgramCharter
                 array_push($data_arr, $data_item);
             }
 
+            die(print_r($data_arr));
+
             for ($i = 0; $i < count($data_arr); $i++) {
                 $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_arr[$i]['id'] . "'";
 
@@ -122,8 +124,6 @@ class ProgramCharter
                     $msg = "Data Kosong";
                 }
             }
-
-            die(print_r($data_arr));
 
             return $msg;
         }
