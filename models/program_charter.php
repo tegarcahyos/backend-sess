@@ -82,6 +82,8 @@ class ProgramCharter
 
                 array_push($unit_arr, $data_item);
             }
+        } else {
+            $unit_arr = [];
         }
 
         // SELECT PC
@@ -105,6 +107,8 @@ class ProgramCharter
 
                 array_push($pc_arr, $pc_item);
             }
+        } else {
+            $pc_arr = [];
         }
 
         $resultPc = array();
