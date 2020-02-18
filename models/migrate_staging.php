@@ -76,15 +76,8 @@ class MigrateStaging
 
                 }
 
-                die($query_staging);
-                $db_transformer->execute($query_staging);
-
-                // $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)
-                // SELECT * FROM (SELECT 1, '$risks', '$description', '$title', '$name', 'btp') AS tmp
-                // WHERE NOT EXISTS (
-                //     SELECT name FROM staging_program WHERE title = '$title'
-                // )";
                 // die($query_staging);
+                $db_transformer->execute($query_staging);
 
             }
 
