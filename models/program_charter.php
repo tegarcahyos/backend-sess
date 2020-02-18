@@ -80,48 +80,49 @@ class ProgramCharter
                 );
 
                 array_push($data_arr, $data_item);
-
-                die(print_r($data_arr));
-                $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_item['id'] . "'";
-
-                $result = $this->db->execute($select_pc);
-
-                $num = $result->rowCount();
-
-                if ($num > 0) {
-
-                    $data_arr = array();
-
-                    while ($row = $result->fetchRow()) {
-                        extract($row);
-
-                        $data_item = array(
-                            'id' => $id,
-                            'title' => $title,
-                            'code' => $code,
-                            'strategic_initiative' => $strategic_initiative,
-                            'unit_id' => $unit_id,
-                            'weight' => $weight,
-                            'description' => $description,
-                            'refer_to' => json_decode($refer_to),
-                            'stakeholders' => json_decode($stakeholders),
-                            'kpi' => json_decode($kpi),
-                            'main_activities' => json_decode($main_activities),
-                            'key_asks' => json_decode($key_asks),
-                            'risks' => $risks,
-                            'status' => $status,
-                            'generator_id' => $generator_id,
-                        );
-
-                        array_push($data_arr, $data_item);
-                        $msg = $data_arr;
-                    }
-
-                } else {
-                    $msg = "Data Kosong";
-                }
-                return $msg;
             }
+
+            die(print_r($data_arr));
+
+            $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_item['id'] . "'";
+
+            $result = $this->db->execute($select_pc);
+
+            $num = $result->rowCount();
+
+            if ($num > 0) {
+
+                $data_arr = array();
+
+                while ($row = $result->fetchRow()) {
+                    extract($row);
+
+                    $data_item = array(
+                        'id' => $id,
+                        'title' => $title,
+                        'code' => $code,
+                        'strategic_initiative' => $strategic_initiative,
+                        'unit_id' => $unit_id,
+                        'weight' => $weight,
+                        'description' => $description,
+                        'refer_to' => json_decode($refer_to),
+                        'stakeholders' => json_decode($stakeholders),
+                        'kpi' => json_decode($kpi),
+                        'main_activities' => json_decode($main_activities),
+                        'key_asks' => json_decode($key_asks),
+                        'risks' => $risks,
+                        'status' => $status,
+                        'generator_id' => $generator_id,
+                    );
+
+                    array_push($data_arr, $data_item);
+                    $msg = $data_arr;
+                }
+
+            } else {
+                $msg = "Data Kosong";
+            }
+            return $msg;
         }
     }
 
