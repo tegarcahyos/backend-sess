@@ -83,6 +83,7 @@ class ProgramCharter
             }
 
             $resultPC = array();
+            $pc_array = array();
 
             for ($i = 0; $i < count($data_arr); $i++) {
                 $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_arr[$i]['id'] . "'";
@@ -92,8 +93,6 @@ class ProgramCharter
                 $num = $pcs->rowCount();
 
                 if ($num > 0) {
-
-                    $pc_array = array();
 
                     while ($row = $pcs->fetchRow()) {
                         extract($row);
