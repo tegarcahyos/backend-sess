@@ -65,7 +65,8 @@ class MigrateStaging
                 $query_get = "SELECT EXISTS(SELECT * FROM staging_program WHERE title = '$title')";
                 // die($query_get);
                 $get_result = $db_transformer->execute($query_get);
-                die(json_encode($get_result));
+                $row = $get_result->fetchRow();
+                die(json_encode($row[0]));
                 if ($get_result == false) {
                     echo "KESINI KAMPRET";
                     $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
