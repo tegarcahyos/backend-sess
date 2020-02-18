@@ -111,8 +111,8 @@ class ProgramCharter
         for ($i = 0; $i < count($unit_arr); $i++) {
             for ($j = 0; $j < count($pc_arr); $j++) {
                 if ($pc_arr[$j]['unit_id'] === $unit_arr[$i]['unit_id']) {
-                    // array_push($resultPc, $pc_arr[$i]);
-                    echo json_encode($pc_arr[$j]['unit_id']) . "===" . json_encode($unit_arr[$i]['unit_id']);
+                    array_push($resultPc, $pc_arr[$j]);
+                    // echo json_encode($pc_arr[$j]['unit_id']) . "===" . json_encode($unit_arr[$i]['unit_id']);
                 }
             }
         }
