@@ -107,7 +107,7 @@ class ProgramCharter
             }
         }
 
-        // die(print_r($pc_arr));
+        die(print_r($unit_arr));
         $resultPc = array();
         for ($i = 0; $i < count($unit_arr); $i++) {
             for ($j = 0; $j < count($pc_arr); $j++) {
