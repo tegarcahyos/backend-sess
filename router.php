@@ -353,6 +353,7 @@ class Router
 
             // Program Charter
             $r->get('/api/index.php/program_charter/get', 'ProgramCharter/get');
+            $r->get('/api/index.php/program_charter/get_by_cfu/{id}', 'ProgramCharter/get');
             $r->get('/api/index.php/program_charter/find_id/{id}', 'ProgramCharter/findById');
 
             $r->get('/api/index.php/program_charter/delete/{id}', 'ProgramCharter/delete');
@@ -581,6 +582,7 @@ class Router
                     $explodeUri[4] == "select_attachment" ||
                     $explodeUri[4] == "select" ||
                     $explodeUri[4] == "find_id" ||
+                    $explodeUri[4] == "get_by_cfu" ||
                     $explodeUri[4] == "get_users" ||
                     $explodeUri[4] == "get_units" ||
                     $explodeUri[4] == "find_unit_id" ||
