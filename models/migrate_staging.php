@@ -66,13 +66,13 @@ class MigrateStaging
                 // die($query_get);
                 $get_result = $db_transformer->execute($query_get);
                 // die(print_r($get_result == false));
-                if ($get_result === false) {
-                    $query_staging = "UPDATE staging_program SET btp = 1, businessRisk = '$risks', description = '$description', title = '$title', generator = '$name', programType = 'btp' WHERE title = '$title' AND generator = '$name'";
-                    // die($query_staging);
-                    $db_transformer->execute($query_staging);
-                } else {
+                if ($get_result == false) {
                     $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
                     $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
+                    // die($query_staging);
+                    $db_transformer->execute($query_staging);
+                } elseif ($get_result == true) {
+                    $query_staging = "UPDATE staging_program SET btp = 1, businessRisk = '$risks', description = '$description', title = '$title', generator = '$name', programType = 'btp' WHERE title = '$title' AND generator = '$name'";
                     // die($query_staging);
                     $db_transformer->execute($query_staging);
                 }
