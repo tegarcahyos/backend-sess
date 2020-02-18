@@ -106,14 +106,13 @@ class ProgramCharter
             }
         }
         // $tes = ;
-        print_r(array_intersect($unit_arr, $pc_arr));
         // for ($i = 0; $i < count($unit_arr); $i++) {
         //     for ($j = 0; $j < count($pc_arr); $j++) {
 
         //     }
         // }
 
-        die();
+        die(print_r(array_intersect($unit_arr, $pc_arr)));
 
     }
 
