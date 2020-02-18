@@ -97,22 +97,22 @@ class ProgramCharter
             while ($row = $result->fetchRow()) {
                 extract($row);
 
-                $data_item = array(
+                $pc_item = array(
                     'id' => $id,
                     'unit_id' => $unit_id,
                 );
 
-                array_push($pc_arr, $data_item);
+                array_push($pc_arr, $pc_item);
             }
         }
+
+        die(print_r($pc_item));
         // $tes = ;
         for ($i = 0; $i < count($unit_arr); $i++) {
             for ($j = 0; $j < count($pc_arr); $j++) {
                 $result = array_intersect($unit_arr[$i], $pc_arr[$j]);
             }
         }
-
-        // die(print_r($pc_arr));
 
         die(print_r($result));
 
