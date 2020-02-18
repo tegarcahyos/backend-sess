@@ -122,14 +122,15 @@ class ProgramCharter
                 } else {
                     $pc_array = [];
                 }
-                die(json_encode(count($pc_array)));
-                if (!empty($pc_array)) {
-                    for ($i = 0; $i < count($pc_array); $i++) {
-                        array_push($resultPC, $pc_array[$i]);
-                    }
-                }
-                $msg = $resultPC;
             }
+
+            die(json_encode(count($pc_array)));
+            if (!empty($pc_array)) {
+                for ($i = 0; $i < count($pc_array); $i++) {
+                    array_push($resultPC, $pc_array[$i]);
+                }
+            }
+            $msg = $resultPC;
 
         } else {
             $msg = [];
