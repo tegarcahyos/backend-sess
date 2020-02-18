@@ -112,7 +112,7 @@ class ProgramCharter
             for ($j = 0; $j < count($pc_arr); $j++) {
                 if ($pc_arr[$j]['unit_id'] === $unit_arr[$i]['unit_id']) {
                     // array_push($resultPc, $pc_arr[$i]);
-                    echo "$pc_arr[$j]['unit_id'] === $unit_arr[$i]['unit_id']";
+                    print_r("$pc_arr[$j]['unit_id'] === $unit_arr[$i]['unit_id']");
                 }
             }
         }
