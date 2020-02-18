@@ -85,7 +85,7 @@ class ProgramCharter
             $resultPC = array();
 
             for ($i = 0; $i < count($data_arr); $i++) {
-                die($data[1]['id']);
+                die($data_arr[1]['id']);
                 $select_pc = "SELECT * FROM $tablename WHERE unit_id = '" . $data_arr[$i]['id'] . "'";
 
                 $result = $this->db->execute($select_pc);
