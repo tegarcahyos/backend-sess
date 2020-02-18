@@ -71,7 +71,7 @@ class MigrateStaging
                     die($query_staging);
                     $db_transformer->execute($query_staging);
                 } else {
-                    $query_staging = "UPDATE staging_program SET btp = 1, businessRisk = '$risks', description = '$description', title = '$title', generator = '$name', programType = 'btp'";
+                    $query_staging = "UPDATE staging_program SET btp = 1, businessRisk = '$risks', description = '$description', title = '$title', generator = '$name', programType = 'btp' WHERE title = '$title' AND generator = '$name'";
                     die($query_staging);
                     $db_transformer->execute($query_staging);
                 }
