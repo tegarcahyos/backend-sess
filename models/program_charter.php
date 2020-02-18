@@ -112,8 +112,8 @@ class ProgramCharter
         //     }
         // }
 
-        // $unit_arr = json_encode($unit_arr);
-        $pc_arr = json_encode($pc_arr);
+        $unit_arr = json_encode($unit_arr);
+        // $pc_arr = json_encode($pc_arr);
 
         die(print_r(array_intersect($unit_arr, $pc_arr)));
 
