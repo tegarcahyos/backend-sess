@@ -110,9 +110,9 @@ class ProgramCharter
         $resultPc = array();
         for ($i = 0; $i < count($unit_arr); $i++) {
             for ($j = 0; $j < count($pc_arr); $j++) {
-                // die(print_r($pc_arr[$i]['unit_id']));
                 if ($pc_arr[$j]['unit_id'] === $unit_arr[$i]['unit_id']) {
-                    array_push($resultPc, $pc_arr[$i]);
+                    // array_push($resultPc, $pc_arr[$i]);
+                    echo "$pc_arr[$j]['unit_id'] === $unit_arr[$i]['unit_id']";
                 }
             }
         }
