@@ -51,8 +51,7 @@ class MigrateStaging
                     'status' => $status,
                     'generator_id' => $generator_id,
                 );
-                // for ($i = 0; $i < count($data_item); $i++) {
-                // die($data_item['title']);
+
                 $title = $data_item['title'];
                 $strategic_initiative = $data_item['strategic_initiative'];
                 $description = $data_item['description'];
@@ -65,10 +64,17 @@ class MigrateStaging
 
                 $query_get = "SELECT EXISTS(SELECT * FROM staging_program WHERE title = '$title'";
                 $get_result = $db_transformer->execute($query_get);
-                die(json_encode($get_result == false));
-                if ($get_result == true)
-                // $query_staging = "INSERT IGNORE INTO staging_program (btp, businessRisk, description, title, generator, programType)";
-                // $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
+                // die(json_encode($get_result == false));
+                if ($get_result == true) {
+                    $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
+                    $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
+                    die($query_staging);
+                    $db_transformer->execute($query_staging);
+                } else {
+                    $query_staging = "UPDATE staging_program SET btp = 1, businessRisk = '$risks', description = '$description', title = '$title', generator = '$name', programType = 'btp'";
+                    die($query_staging);
+                    $db_transformer->execute($query_staging);
+                }
 
                 // $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)
                 // SELECT * FROM (SELECT 1, '$risks', '$description', '$title', '$name', 'btp') AS tmp
@@ -76,13 +82,6 @@ class MigrateStaging
                 //     SELECT name FROM staging_program WHERE title = '$title'
                 // )";
                 // die($query_staging);
-
-                // die(print_r($db_transformer));
-                {
-                    $db_transformer->execute($query_staging);
-                }
-
-                // }
 
             }
 
