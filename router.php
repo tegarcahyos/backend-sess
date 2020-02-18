@@ -31,6 +31,7 @@ include "models/upload_file.php";
 include "models/expert_judgement.php";
 include "models/ahp_criteria.php";
 include "models/ahp_featured_program_charter.php";
+include "models/ahp_expert_judgement.php";
 include "models/approval.php";
 include "models/reviewer_plan.php";
 include "models/quadran.php";
@@ -256,6 +257,13 @@ class Router
             $r->get('/api/index.php/ahp_featured_program_charter/delete/{id}', 'AHPFeaturedPC/delete');
             $r->post('/api/index.php/ahp_featured_program_charter/insert', 'AHPFeaturedPC/insert');
             $r->post('/api/index.php/ahp_featured_program_charter/update/{id}', 'AHPFeaturedPC/update');
+
+            // AHP Expert Judgement
+            $r->get('/api/index.php/ahp_expert_judgement/get', 'AHPExpertJudgement/get');
+            $r->get('/api/index.php/ahp_expert_judgement/find_id/{id}', 'AHPExpertJudgement/findById');
+            $r->get('/api/index.php/ahp_expert_judgement/delete/{id}', 'AHPExpertJudgement/delete');
+            $r->post('/api/index.php/ahp_expert_judgement/insert', 'AHPExpertJudgement/insert');
+            $r->post('/api/index.php/ahp_expert_judgement/update/{id}', 'AHPExpertJudgement/update');
 
             // --- QUADRAn ---
             $r->get('/api/index.php/quadran/get', 'Quadran/get');
