@@ -68,7 +68,6 @@ class MigrateStaging
                 $row = $get_result->fetchRow();
                 // die(json_encode($row[0]));
                 if ($row[0] == "0") {
-                    echo "KESINI KAMPRET";
                     $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
                     $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
                 } elseif ($row[0] == "1") {
