@@ -108,13 +108,13 @@ class ProgramCharter
         // $tes = ;
         for ($i = 0; $i < count($unit_arr); $i++) {
             for ($j = 0; $j < count($pc_arr); $j++) {
-                die(array_intersect($unit_arr[$i], $pc_arr[$j]));
+                $result = array_intersect($unit_arr[$i], $pc_arr[$j]);
             }
         }
 
         // die(print_r($pc_arr));
 
-        die(print_r());
+        die(print_r($result));
 
     }
 
