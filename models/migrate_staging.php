@@ -66,7 +66,7 @@ class MigrateStaging
                 // die($query_get);
                 $get_result = $db_transformer->execute($query_get);
                 $row = $get_result->fetchRow();
-                die(print_r($row));
+                die(print_r($row[0] == 1));
                 if ($get_result === false) {
                     $query_staging = "INSERT INTO staging_program (btp, businessRisk, description, title, generator, programType)";
                     $query_staging .= "VALUES (1, '$risks', '$description', '$title', '$name', 'btp')";
