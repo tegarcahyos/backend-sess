@@ -121,6 +121,8 @@ class ProgramCharter
                 } else {
                     $pc_array = [];
                 }
+
+                die(print_r($pc_array));
             }
             die(print_r($pc_array));
             if (!empty($pc_array)) {
