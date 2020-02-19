@@ -31,6 +31,8 @@ class AHPCriteria
                 $data_item = array(
                     'id' => $id,
                     'criteria' => json_decode($criteria),
+                    'periode_id' => $periode_id,
+                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -58,6 +60,8 @@ class AHPCriteria
             $data_item = array(
                 'id' => $id,
                 'criteria' => json_decode($criteria),
+                'periode_id' => $periode_id,
+                'organization_id' => $organization_id,
             );
             return $data_item;
         }
@@ -70,7 +74,7 @@ class AHPCriteria
         //
         $request = json_decode($data);
         // $criteria = json_encode($request[0]->criteria);
-        $variable = array('criteria');
+        $variable = array('criteria', 'periode_id', 'organization_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -80,7 +84,7 @@ class AHPCriteria
         }
         $criteria = json_encode($criteria);
 
-        $query = "INSERT INTO $tablename (criteria)";
+        $query = "INSERT INTO $tablename (criteria, periode_id, organization_id)";
         $query .= "VALUES ('$criteria') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
@@ -99,6 +103,8 @@ class AHPCriteria
                     $data_item = array(
                         'id' => $id,
                         'criteria' => json_decode($criteria),
+                        'periode_id' => $periode_id,
+                        'organization_id' => $organization_id,
                     );
 
                     array_push($data_arr, $data_item);
@@ -116,7 +122,7 @@ class AHPCriteria
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $variable = array('criteria');
+        $variable = array('criteria', 'periode_id', 'organization_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -127,7 +133,7 @@ class AHPCriteria
 
         $criteria = json_encode($criteria);
 
-        $query = "UPDATE $tablename SET criteria = '$criteria' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET criteria = '$criteria', periode_id = '$periode_id', organization_id = '$organization_id' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -145,6 +151,8 @@ class AHPCriteria
                     $data_item = array(
                         'id' => $id,
                         'criteria' => json_decode($criteria),
+                        'periode_id' => $periode_id,
+                        'organization_id' => $organization_id,
                     );
 
                     array_push($data_arr, $data_item);
