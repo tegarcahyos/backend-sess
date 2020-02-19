@@ -175,22 +175,30 @@ class Periode
         $activate = "UPDATE $tablename SET name = '$name',  code = '$code' ,organization_id = '$organization_id', status_active = '$status_active' WHERE id = '$idP' RETURNING *";
         // die($activate);
         $result = $this->db->execute($activate);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
-            $msg = "Data Kosong";
-            return $msg;
-        } else {
-            extract($row);
+        $num = $result->rowCount();
+        if ($num > 0) {
 
-            $data_item = array(
-                'id' => $idP,
-                'name' => $name,
-                'code' => $code,
-                'status_active' => $status_active,
-                'organization_id' => $organization_id,
-            );
-            return $data_item;
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'code' => $code,
+                    'status_active' => $status_active,
+                    'organization_id' => $organization_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = '0';
         }
+        return $msg;
     }
 
     public function delete($id, $tablename)
