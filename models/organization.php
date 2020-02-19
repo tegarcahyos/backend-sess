@@ -155,7 +155,11 @@ class Organization
 
     public function delete($id, $tablename)
     {
-        $get_unit = "SELECT EXISTS(SELECT * FROM unit WHERE organization_id = '$id')";
+        $get_unit = "SELECT EXISTS(SELECT 1
+        from (
+            select organization_id::text as organization_id from unit
+            union all
+            select organization_id::text from ahp_criteria) a where organization_id = '$id'";
         $result = $this->db->execute($get_unit);
         $row = $result->fetchRow();
         if ($row['exists'] == 't') {

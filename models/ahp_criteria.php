@@ -166,16 +166,24 @@ class AHPCriteria
 
     public function delete($id, $tablename)
     {
-        $query = "DELETE FROM $tablename WHERE id = '$id'";
-        // die($query);
-        $result = $this->db->execute($query);
-        // return $result;
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        $get_refs = "SELECT EXISTS(SELECT * FROM ahp_featured_program_charter WHERE criteria_id = '$id')";
+        $result = $this->db->execute($get_refs);
+        $row = $result->fetchRow();
+        if ($row['exists'] == 't') {
+            return "403";
         } else {
-            return $msg = "Data Kosong";
+            $query = "DELETE FROM $tablename WHERE id = '$id'";
+            // die($query);
+            $result = $this->db->execute($query);
+
+            // return $result;
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+            } else {
+                return $msg = "Data Kosong";
+            }
         }
     }
 }
