@@ -103,6 +103,7 @@ class ProgramCharter
                     'id' => $id,
                     'unit_id' => $unit_id,
                     'title' => $title,
+                    'weight' => $weight
                 );
 
                 array_push($pc_arr, $pc_item);
