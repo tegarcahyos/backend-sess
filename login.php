@@ -98,6 +98,8 @@ class Login
                 $role_id = $row['role_id'];
             }
 
+            die(empty($employee_id));
+
             $msg = array(
                 "message" => "Successful login.",
                 "id" => $user_id,
