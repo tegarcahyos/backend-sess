@@ -159,9 +159,14 @@ class ProgramCharter
 
                 $data_item = array(
                     'id' => $id,
+                    'organization_id' => $organization_id,
                 );
 
                 array_push($unitArray, $data_item);
+            }
+
+            for ($j = 0; $j < count($unitArray); $j++) {
+                $get_periode_active_from_organization = "SELECT * FROM ";
             }
 
             $resultPC = array();
