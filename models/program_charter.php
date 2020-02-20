@@ -183,6 +183,7 @@ class ProgramCharter
 
                     array_push($periodeArr, $data_item);
                 }
+                $siArr = array();
 
                 for ($k = 0; $k < count($periodeArr); $k++) {
                     $get_si = "SELECT * FROM strategic_initiative WHERE periode_id = '" . $periodeArr[$k]['id'] . "'";
@@ -206,7 +207,6 @@ class ProgramCharter
                     }
                 }
 
-                die(print_r($siArr));
                 $resultPC = array();
 
                 for ($i = 0; $i < count($unitArray); $i++) {
