@@ -53,6 +53,7 @@ class Login
             $user_id = $row['id'];
             $name = $row['name'];
             $password2 = $row['password'];
+            $employee_id = $row['employee_id'];
         }
         // die($password2);
         // die(password_verify($password, $password2));
@@ -98,33 +99,18 @@ class Login
                 $role_id = $row['role_id'];
             }
 
-            if (!is_null($employee_id)) {
-                $msg = array(
-                    "message" => "Successful login.",
-                    "id" => $user_id,
-                    "employee_id" => $employee_id,
-                    "name" => $name,
-                    "username" => $username,
-                    "password" => $password,
-                    "expireAt" => $expire_claim,
-                    "role_id" => $role_id,
-                    "unit_id" => $unit_id,
-                    "token" => $jwt,
-                );
-            } else {
-                $msg = array(
-                    "message" => "Successful login.",
-                    "id" => $user_id,
-                    "employee_id" => "",
-                    "name" => $name,
-                    "username" => $username,
-                    "password" => $password,
-                    "expireAt" => $expire_claim,
-                    "role_id" => $role_id,
-                    "unit_id" => $unit_id,
-                    "token" => $jwt,
-                );
-            }
+            $msg = array(
+                "message" => "Successful login.",
+                "id" => $user_id,
+                "employee_id" => $employee_id,
+                "name" => $name,
+                "username" => $username,
+                "password" => $password,
+                "expireAt" => $expire_claim,
+                "role_id" => $role_id,
+                "unit_id" => $unit_id,
+                "token" => $jwt,
+            );
 
         } else {
 
