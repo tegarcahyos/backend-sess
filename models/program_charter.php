@@ -208,6 +208,7 @@ class ProgramCharter
 
             }
 
+            die(print_r($siArr));
             $resultPC = array();
 
             for ($i = 0; $i < count($unitArray); $i++) {
