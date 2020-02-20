@@ -98,20 +98,33 @@ class Login
                 $role_id = $row['role_id'];
             }
 
-            die(empty($employee_id));
-
-            $msg = array(
-                "message" => "Successful login.",
-                "id" => $user_id,
-                "employee_id" => $employee_id,
-                "name" => $name,
-                "username" => $username,
-                "password" => $password,
-                "expireAt" => $expire_claim,
-                "role_id" => $role_id,
-                "unit_id" => $unit_id,
-                "token" => $jwt,
-            );
+            if (!empty($employee_id)) {
+                $msg = array(
+                    "message" => "Successful login.",
+                    "id" => $user_id,
+                    "employee_id" => $employee_id,
+                    "name" => $name,
+                    "username" => $username,
+                    "password" => $password,
+                    "expireAt" => $expire_claim,
+                    "role_id" => $role_id,
+                    "unit_id" => $unit_id,
+                    "token" => $jwt,
+                );
+            } else {
+                $msg = array(
+                    "message" => "Successful login.",
+                    "id" => $user_id,
+                    "employee_id" => "",
+                    "name" => $name,
+                    "username" => $username,
+                    "password" => $password,
+                    "expireAt" => $expire_claim,
+                    "role_id" => $role_id,
+                    "unit_id" => $unit_id,
+                    "token" => $jwt,
+                );
+            }
 
         } else {
 
