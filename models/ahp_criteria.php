@@ -46,6 +46,80 @@ class AHPCriteria
         return $msg;
     }
 
+    public function getByOrganization($id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE organization_id = '$id' ORDER BY updated_at desc limit 1";
+
+        // die($query);
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'criteria' => json_decode($criteria),
+                    'periode_id' => $periode_id,
+                    'organization_id' => $organization_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
+    public function getByPeriode($id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE periode_id = '$id' ORDER BY updated_at desc limit 1";
+
+        // die($query);
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'criteria' => json_decode($criteria),
+                    'periode_id' => $periode_id,
+                    'organization_id' => $organization_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";

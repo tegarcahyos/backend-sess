@@ -246,6 +246,8 @@ class Router
 
             // --- AHP ---
             $r->get('/api/index.php/ahp_criteria/get', 'AHPCriteria/get');
+            $r->get('/api/index.php/ahp_criteria/get_by_organization/{id}', 'AHPCriteria/getByOrganization');
+            $r->get('/api/index.php/ahp_criteria/get_by_periode/{id}', 'AHPCriteria/getByPeriode');
             $r->get('/api/index.php/ahp_criteria/find_id/{id}', 'AHPCriteria/findById');
             $r->get('/api/index.php/ahp_criteria/delete/{id}', 'AHPCriteria/delete');
             $r->post('/api/index.php/ahp_criteria/insert', 'AHPCriteria/insert');
@@ -253,7 +255,9 @@ class Router
 
             // AHP Featured Porgram Charter
             $r->get('/api/index.php/ahp_featured_program_charter/get', 'AHPFeaturedPC/get');
-            $r->get('/api/index.php/ahp_featured_program_charter/find_id/{id}', 'AHPFeaturedPC/findById');
+            $r->get('/api/index.php/ahp_featured_program_charter/get_by_organization/{id}', 'AHPFeaturedPC/getByOrganization');
+            $r->get('/api/index.php/ahp_featured_program_charter/get_by_periode/{id}', 'AHPFeaturedPC/getByPeriode');
+            $r->get('/api/index.php/ahp_featured_program_charter/get_by_criteria/{id}', 'AHPFeaturedPC/getByCriteria');
             $r->get('/api/index.php/ahp_featured_program_charter/delete/{id}', 'AHPFeaturedPC/delete');
             $r->post('/api/index.php/ahp_featured_program_charter/insert', 'AHPFeaturedPC/insert');
             $r->post('/api/index.php/ahp_featured_program_charter/update/{id}', 'AHPFeaturedPC/update');
@@ -610,7 +614,10 @@ class Router
                     $explodeUri[4] == "select_id_get" ||
                     $explodeUri[4] == "get_root_parent" ||
                     $explodeUri[4] == "get_leaf_by_root_id" ||
-                    $explodeUri[4] == "read_notification"
+                    $explodeUri[4] == "read_notification" ||
+                    $explodeUri[4] == "get_by_organization" ||
+                    $explodeUri[4] == "get_by_periode" ||
+                    $explodeUri[4] == "get_by_criteria"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
                 } else if (

@@ -49,6 +49,126 @@ class AHPFeaturedPC
         return $msg;
     }
 
+    public function getByCriteria($id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE criteria_id = '$id'";
+
+        // die($query);
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'data' => json_decode($data),
+                    'judgement' => json_decode($judgement),
+                    'name' => $name,
+                    'periode_id' => $periode_id,
+                    'criteria_id' => $criteria_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
+    public function getByOrganization($id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE organization_id = '$id'";
+
+        // die($query);
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'data' => json_decode($data),
+                    'judgement' => json_decode($judgement),
+                    'name' => $name,
+                    'periode_id' => $periode_id,
+                    'criteria_id' => $criteria_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
+    public function getByPeriode($id, $tablename)
+    {
+        $query = "SELECT
+           *
+          FROM
+             $tablename WHERE periode_id = '$id'";
+
+        // die($query);
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'data' => json_decode($data),
+                    'judgement' => json_decode($judgement),
+                    'name' => $name,
+                    'periode_id' => $periode_id,
+                    'criteria_id' => $criteria_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
