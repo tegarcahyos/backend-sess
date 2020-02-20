@@ -234,16 +234,12 @@ class ProgramCharter
                             }
 
                         }
-                        print_r($pcArray);
-                        // else {
-                        //     $pcArray = [];
-                        // }
-                        // if (!empty($pcArray)) {
-                        //     for ($i = 0; $i < count($pcArray); $i++) {
-                        //         array_push($resultPC, $pcArray[$i]);
-                        //     }
-                        // }
-                        // $msg = $resultPC;
+                        if (!empty($pcArray)) {
+                            for ($i = 0; $i < count($pcArray); $i++) {
+                                array_push($resultPC, $pcArray[$i]);
+                            }
+                        }
+                        $msg = $resultPC;
                     }
 
                 }
