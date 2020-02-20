@@ -207,6 +207,7 @@ class ProgramCharter
                 }
 
                 $resultPC = array();
+                $pcArray = array();
                 // die(print_r($siArr));
                 for ($i = 0; $i < count($unitArray); $i++) {
                     for ($l = 0; $l < count($siArr); $l++) {
@@ -215,7 +216,7 @@ class ProgramCharter
                         $listPC = $this->db->execute($pc);
                         $num = $listPC->rowCount();
                         // echo $num;
-                        $pcArray = array();
+
                         if ($num > 0) {
 
                             while ($row = $listPC->fetchRow()) {
