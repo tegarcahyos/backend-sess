@@ -309,7 +309,8 @@ class ProgramCharter
         key_asks,
         risks,
         status,
-        generator_id)";
+        generator_id,
+        type)";
         $query .= "VALUES (
             '$title',
             '$code',
@@ -324,7 +325,8 @@ class ProgramCharter
             '$key_asks',
             NULLIF('$risks', 'NULL'),
             '$status',
-            '$generator_id'
+            '$generator_id',
+            'BTP';
             ) RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
@@ -456,6 +458,7 @@ class ProgramCharter
         $risks = $request[0]->risks;
         $status = $request[0]->status;
         $generator_id = $request[0]->generator_id;
+        $type = 'BTP';
 
         if (empty($description)) {
             $description = 'NULL';
@@ -481,7 +484,8 @@ class ProgramCharter
             key_asks = '$key_asks' ,
             risks = NULLIF('$risks', 'NULL'),
             status = '$status',
-            generator_id = '$generator_id'
+            generator_id = '$generator_id',
+            type = '$type'
         WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
@@ -516,6 +520,7 @@ class ProgramCharter
                         'risks' => $risks,
                         'status' => $status,
                         'generator_id' => $generator_id,
+                        'type' => $type,
                     );
 
                     array_push($data_arr, $data_item);
