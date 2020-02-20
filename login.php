@@ -98,7 +98,7 @@ class Login
                 $role_id = $row['role_id'];
             }
 
-            if (!empty($employee_id)) {
+            if (!is_null($employee_id)) {
                 $msg = array(
                     "message" => "Successful login.",
                     "id" => $user_id,
