@@ -184,7 +184,6 @@ class ProgramCharter
                     array_push($periodeArr, $data_item);
                 }
                 $siArr = array();
-                // die(print_r($periodeArr));
                 for ($k = 0; $k < count($periodeArr); $k++) {
                     $get_si = "SELECT * FROM strategic_initiative WHERE periode_id = '" . $periodeArr[$k]['id'] . "'";
                     $result = $this->db->execute($get_si);
@@ -207,7 +206,6 @@ class ProgramCharter
                     }
                 }
 
-                die(print_r($siArr));
                 $resultPC = array();
 
                 for ($i = 0; $i < count($unitArray); $i++) {
