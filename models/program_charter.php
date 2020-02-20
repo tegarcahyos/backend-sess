@@ -125,7 +125,7 @@ class ProgramCharter
 
     }
 
-    public function getByRootUnit($id, $tablename)
+    public function getByRootUnit($id, $periode_id, $tablename)
     {
         $query = "WITH RECURSIVE children AS (
             SELECT
@@ -167,47 +167,45 @@ class ProgramCharter
                 array_push($unitArray, $data_item);
             }
 
-            for ($j = 0; $j < count($unitArray); $j++) {
-                $get_periode_active_from_organization = "SELECT * FROM periode WHERE organization_id = '" . $unitArray[$j]['organization_id'] . "' AND status_active = true";
-                $result = $this->db->execute($get_periode_active_from_organization);
-                $num = $result->rowCount();
-                if ($num > 0) {
+            $get_periode = "SELECT * FROM periode WHERE id = '$periode_id'";
+            $result = $this->db->execute($get_periode);
+            $num = $result->rowCount();
+            if ($num > 0) {
 
-                    $periodeArr = array();
+                $periodeArr = array();
 
-                    while ($row = $result->fetchRow()) {
-                        extract($row);
+                while ($row = $result->fetchRow()) {
+                    extract($row);
 
-                        $data_item = array(
-                            'id' => $id,
-                        );
+                    $data_item = array(
+                        'id' => $id,
+                    );
 
-                        array_push($periodeArr, $data_item);
-                    }
-
-                    for ($k = 0; $k < count($periodeArr); $k++) {
-                        $get_si = "SELECT * FROM strategic_initiative WHERE periode_id = '" . $periodeArr[$k]['id'] . "'";
-                        $result = $this->db->execute($get_si);
-                        $num = $result->rowCount();
-
-                        if ($num > 0) {
-
-                            $siArr = array();
-
-                            while ($row = $result->fetchRow()) {
-                                extract($row);
-
-                                $data_item = array(
-                                    'id' => $id,
-                                );
-
-                                array_push($siArr, $data_item);
-                            }
-
-                        }
-                    }
-
+                    array_push($periodeArr, $data_item);
                 }
+
+                for ($k = 0; $k < count($periodeArr); $k++) {
+                    $get_si = "SELECT * FROM strategic_initiative WHERE periode_id = '" . $periodeArr[$k]['id'] . "'";
+                    $result = $this->db->execute($get_si);
+                    $num = $result->rowCount();
+
+                    if ($num > 0) {
+
+                        $siArr = array();
+
+                        while ($row = $result->fetchRow()) {
+                            extract($row);
+
+                            $data_item = array(
+                                'id' => $id,
+                            );
+
+                            array_push($siArr, $data_item);
+                        }
+
+                    }
+                }
+
             }
 
             $resultPC = array();

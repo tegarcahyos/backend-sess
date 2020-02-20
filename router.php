@@ -367,7 +367,7 @@ class Router
             // Program Charter
             $r->get('/api/index.php/program_charter/get', 'ProgramCharter/get');
             $r->get('/api/index.php/program_charter/get_by_cfu/{id}', 'ProgramCharter/getByCfu');
-            $r->get('/api/index.php/program_charter/get_by_root/{id}', 'ProgramCharter/getByRootUnit');
+            $r->get('/api/index.php/program_charter/get_by_root/{id}/{periode_id}', 'ProgramCharter/getByRootUnit');
             $r->get('/api/index.php/program_charter/find_id/{id}', 'ProgramCharter/findById');
 
             $r->get('/api/index.php/program_charter/delete/{id}', 'ProgramCharter/delete');
@@ -584,6 +584,9 @@ class Router
                 } else if ($explodeUri[4] == "select_push_id") {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['push_id'], $explodeUri[3]));
+                } else if ($explodeUri[4] == "get_by_root") {
+
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $vars['periode_id'], $explodeUri[3]));
 
                 } else if (
                     $explodeUri[4] == "select_device" ||
@@ -598,7 +601,6 @@ class Router
                     $explodeUri[4] == "select" ||
                     $explodeUri[4] == "find_id" ||
                     $explodeUri[4] == "get_by_cfu" ||
-                    $explodeUri[4] == "get_by_root" ||
                     $explodeUri[4] == "get_users" ||
                     $explodeUri[4] == "get_units" ||
                     $explodeUri[4] == "find_unit_id" ||
