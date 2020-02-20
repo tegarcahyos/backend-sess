@@ -215,9 +215,8 @@ class ProgramCharter
                         $listPC = $this->db->execute($pc);
                         $num = $listPC->rowCount();
                         // echo $num;
+                        $pcArray = array();
                         if ($num > 0) {
-
-                            $pcArray = array();
 
                             while ($row = $listPC->fetchRow()) {
                                 extract($row);
@@ -234,6 +233,7 @@ class ProgramCharter
                             }
 
                         }
+                        // $msg = $pcArray;
                         if (!empty($pcArray)) {
                             for ($i = 0; $i < count($pcArray); $i++) {
                                 array_push($resultPC, $pcArray[$i]);
