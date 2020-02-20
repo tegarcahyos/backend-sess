@@ -444,7 +444,7 @@ class Router
 
             //PERIOD
             $r->get('/api/index.php/periode/get', 'Periode/get');
-            $r->get('/api/index.php/periode/select/{id}', 'Periode/select_id');
+            $r->get('/api/index.php/periode/find_id/{id}', 'Periode/select_id');
             $r->get('/api/index.php/periode/select_org_id/{org_id}', 'Periode/select_org_id');
             $r->get('/api/index.php/periode/select_active/{org_id}', 'Periode/select_active');
             $r->get('/api/index.php/periode/delete/{id}', 'Periode/delete');
