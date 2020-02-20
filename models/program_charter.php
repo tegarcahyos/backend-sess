@@ -103,7 +103,7 @@ class ProgramCharter
                     'id' => $id,
                     'unit_id' => $unit_id,
                     'title' => $title,
-                    'weight' => $weight
+                    'weight' => $weight,
                 );
 
                 array_push($pc_arr, $pc_item);
@@ -123,6 +123,99 @@ class ProgramCharter
 
         return $resultPc;
 
+    }
+
+    public function getByRootUnit($id, $tablename)
+    {
+        $query = "WITH RECURSIVE children AS (
+            SELECT
+               id,
+                0               AS number_of_ancestors,
+               parent_id,
+               code,
+               name
+            FROM  unit where id = '$id'
+           UNION
+            SELECT
+               tp.id,
+               c.number_of_ancestors + 1                   AS ancestry_size,
+               tp.parent_id,
+               tp.code,
+               tp.name
+            FROM  unit tp
+            JOIN children c ON tp.parent_id::text = c.id::text
+           )
+           SELECT *
+            FROM children t1";
+        $listUnit = $this->db->execute($query);
+        $num = $listUnit->rowCount();
+
+        if ($num > 0) {
+
+            $unitArray = array();
+
+            while ($row = $listUnit->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                );
+
+                array_push($unitArray, $data_item);
+            }
+
+            $resultPC = array();
+
+            for ($i = 0; $i < count($unitArray); $i++) {
+                $pc = "SELECT * FROM program_charter WHERE unit_id = '" . $unitArray[$i]['id'] . "'";
+                $listPC = $this->db->execute($pc);
+                $num = $listPC->rowCount();
+
+                if ($num > 0) {
+
+                    $pcArray = array();
+
+                    while ($row = $listPC->fetchRow()) {
+                        extract($row);
+
+                        $data_item = array(
+                            'id' => $id,
+                            'title' => $title,
+                            'code' => $code,
+                            'strategic_initiative' => $strategic_initiative,
+                            'unit_id' => $unit_id,
+                            'weight' => $weight,
+                            'description' => $description,
+                            'refer_to' => json_decode($refer_to),
+                            'stakeholders' => json_decode($stakeholders),
+                            'kpi' => json_decode($kpi),
+                            'main_activities' => json_decode($main_activities),
+                            'key_asks' => json_decode($key_asks),
+                            'risks' => $risks,
+                            'status' => $status,
+                            'generator_id' => $generator_id,
+                        );
+
+                        array_push($pcArray, $data_item);
+
+                    }
+
+                } else {
+                    $pcArray = [];
+                }
+                if (!empty($pcArray)) {
+                    for ($i = 0; $i < count($pcArray); $i++) {
+                        array_push($resultPC, $pcArray[$i]);
+                    }
+                }
+                $msg = $resultPC;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
     }
 
     public function findById($id, $tablename)
