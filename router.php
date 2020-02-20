@@ -246,8 +246,6 @@ class Router
 
             // --- AHP ---
             $r->get('/api/index.php/ahp_criteria/get', 'AHPCriteria/get');
-            $r->get('/api/index.php/ahp_criteria/get_by_organization/{org_id}', 'AHPCriteria/getByOrganization');
-            $r->get('/api/index.php/ahp_criteria/get_by_periode_id/{periode_id}', 'AHPCriteria/getByPeriode');
             $r->get('/api/index.php/ahp_criteria/find_id/{id}', 'AHPCriteria/findById');
             $r->get('/api/index.php/ahp_criteria/delete/{id}', 'AHPCriteria/delete');
             $r->post('/api/index.php/ahp_criteria/insert', 'AHPCriteria/insert');
