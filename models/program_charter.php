@@ -214,26 +214,28 @@ class ProgramCharter
                         // echo $pc;
                         $listPC = $this->db->execute($pc);
                         $num = $listPC->rowCount();
-                        echo $num;
-                        // if ($num > 0) {
+                        // echo $num;
+                        if ($num > 0) {
 
-                        //     $pcArray = array();
+                            $pcArray = array();
 
-                        //     while ($row = $listPC->fetchRow()) {
-                        //         extract($row);
+                            while ($row = $listPC->fetchRow()) {
+                                extract($row);
 
-                        //         $data_item = array(
-                        //             'id' => $id,
-                        //             'strategic_initiative' => $strategic_initiative,
-                        //             'unit_id' => $unit_id,
-                        //             'weight' => $weight,
-                        //         );
+                                $data_item = array(
+                                    'id' => $id,
+                                    'strategic_initiative' => $strategic_initiative,
+                                    'unit_id' => $unit_id,
+                                    'weight' => $weight,
+                                );
 
-                        //         array_push($pcArray, $data_item);
+                                array_push($pcArray, $data_item);
 
-                        //     }
+                            }
 
-                        // } else {
+                        }
+                        print_r($pcArray);
+                        // else {
                         //     $pcArray = [];
                         // }
                         // if (!empty($pcArray)) {
