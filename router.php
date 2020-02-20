@@ -445,6 +445,7 @@ class Router
             $r->get('/api/index.php/periode/get', 'Periode/get');
             $r->get('/api/index.php/periode/select/{id}', 'Periode/select_id');
             $r->get('/api/index.php/periode/select_org_id/{org_id}', 'Periode/select_org_id');
+            $r->get('/api/index.php/periode/select_org_id/{org_id}', 'Periode/select_active');
             $r->get('/api/index.php/periode/delete/{id}', 'Periode/delete');
             $r->post('/api/index.php/periode/insert', 'Periode/insert');
             $r->post('/api/index.php/periode/update/{id}', 'Periode/update');
@@ -559,7 +560,7 @@ class Router
                 } else if ($explodeUri[4] == "select_group_message_id") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[3]));
 
-                } else if ($explodeUri[4] == "select_org_id") {
+                } else if ($explodeUri[4] == "select_org_id" || $explodeUri[4] == "select_active") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['org_id'], $explodeUri[3]));
 
                 } else if ($explodeUri[4] == "select_group_id" ||

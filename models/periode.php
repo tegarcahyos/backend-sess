@@ -96,6 +96,35 @@ class Periode
         }
         return $msg;
     }
+    public function select_active($org_id, $tablename)
+    {
+        $query = "SELECT * FROM $tablename WHERE organization_id = '$org_id' AND status_active = true";
+        $result = $this->db->execute($query);
+        $num = $result->rowCount();
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'code' => $code,
+                    'status_active' => $status_active,
+                    'organization_id' => $organization_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = '0';
+        }
+        return $msg;
+    }
 
     public function insert($tablename)
     {
