@@ -26,7 +26,7 @@ class Login
             $msg = $this->data_user($result, $username, $password);
         } else {
             $check = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
-            // die($check);
+            die($check);
             $result = $this->db->execute($check);
             $row = $result->fetchRow();
             if (is_bool($row)) {
