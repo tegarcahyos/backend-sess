@@ -151,7 +151,7 @@ class ProgramCharter
             FROM children t1";
         $listUnit = $this->db->execute($query);
         $num = $listUnit->rowCount();
-
+        $siArr = array();
         if ($num > 0) {
 
             $unitArray = array();
@@ -190,8 +190,6 @@ class ProgramCharter
                     $num = $result->rowCount();
 
                     if ($num > 0) {
-
-                        $siArr = array();
 
                         while ($row = $result->fetchRow()) {
                             extract($row);
