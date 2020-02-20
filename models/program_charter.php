@@ -215,7 +215,7 @@ class ProgramCharter
             for ($i = 0; $i < count($unitArray); $i++) {
                 for ($l = 0; $l < count($siArr); $l++) {
                     $pc = "SELECT * FROM program_charter WHERE unit_id = '" . $unitArray[$i]['id'] . "' AND strategic_initiative = '" . $siArr[$l]['id'] . "'";
-                    die($pc);
+                    // die($pc);
                     $listPC = $this->db->execute($pc);
                     $num = $listPC->rowCount();
 
