@@ -133,7 +133,8 @@ class ProgramCharter
                 0               AS number_of_ancestors,
                parent_id,
                code,
-               name
+               name,
+               organization_id
             FROM  unit where id = '$id'
            UNION
             SELECT
@@ -141,7 +142,8 @@ class ProgramCharter
                c.number_of_ancestors + 1                   AS ancestry_size,
                tp.parent_id,
                tp.code,
-               tp.name
+               tp.name,
+               tp.organization_id
             FROM  unit tp
             JOIN children c ON tp.parent_id::text = c.id::text
            )
