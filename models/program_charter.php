@@ -166,54 +166,97 @@ class ProgramCharter
             }
 
             for ($j = 0; $j < count($unitArray); $j++) {
-                $get_periode_active_from_organization = "SELECT * FROM ";
+                $get_periode_active_from_organization = "SELECT * FROM periode WHERE organization_id = '" . $unitArray[$j]['organization_id'] . "' AND status_active = true";
+                $result = $this->db->execute($get_periode_active_from_organization);
+                $num = $result->rowCount();
+                if ($num > 0) {
+
+                    $periodeArr = array();
+
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
+
+                        $data_item = array(
+                            'id' => $id,
+                        );
+
+                        array_push($periodeArr, $data_item);
+                    }
+
+                    for ($k = 0; $k < count($periodeArr); $k++) {
+                        $get_si = "SELECT * FROM strategic_initiative WHERE periode_id = '" . $periodeArr[$k]['id'] . "'";
+                        $result = $this->db->execute($get_si);
+                        $num = $result->rowCount();
+
+                        if ($num > 0) {
+
+                            $siArr = array();
+
+                            while ($row = $result->fetchRow()) {
+                                extract($row);
+
+                                $data_item = array(
+                                    'id' => $id,
+                                );
+
+                                array_push($siArr, $data_item);
+                            }
+
+                        }
+                    }
+
+                }
             }
 
             $resultPC = array();
 
             for ($i = 0; $i < count($unitArray); $i++) {
-                $pc = "SELECT * FROM program_charter WHERE unit_id = '" . $unitArray[$i]['id'] . "'";
-                $listPC = $this->db->execute($pc);
-                $num = $listPC->rowCount();
+                for ($l = 0; $l < count($siArr); $l++) {
+                    $pc = "SELECT * FROM program_charter WHERE unit_id = '" . $unitArray[$i]['id'] . "' AND strategic_initiative = '" . $siArr[$l]['id'] . "'";
+                    die($pc);
+                    $listPC = $this->db->execute($pc);
+                    $num = $listPC->rowCount();
 
-                if ($num > 0) {
+                    if ($num > 0) {
 
-                    $pcArray = array();
+                        $pcArray = array();
 
-                    while ($row = $listPC->fetchRow()) {
-                        extract($row);
+                        while ($row = $listPC->fetchRow()) {
+                            extract($row);
 
-                        $data_item = array(
-                            'id' => $id,
-                            'title' => $title,
-                            'code' => $code,
-                            'strategic_initiative' => $strategic_initiative,
-                            'unit_id' => $unit_id,
-                            'weight' => $weight,
-                            'description' => $description,
-                            'refer_to' => json_decode($refer_to),
-                            'stakeholders' => json_decode($stakeholders),
-                            'kpi' => json_decode($kpi),
-                            'main_activities' => json_decode($main_activities),
-                            'key_asks' => json_decode($key_asks),
-                            'risks' => $risks,
-                            'status' => $status,
-                            'generator_id' => $generator_id,
-                        );
+                            $data_item = array(
+                                'id' => $id,
+                                'title' => $title,
+                                'code' => $code,
+                                'strategic_initiative' => $strategic_initiative,
+                                'unit_id' => $unit_id,
+                                'weight' => $weight,
+                                'description' => $description,
+                                'refer_to' => json_decode($refer_to),
+                                'stakeholders' => json_decode($stakeholders),
+                                'kpi' => json_decode($kpi),
+                                'main_activities' => json_decode($main_activities),
+                                'key_asks' => json_decode($key_asks),
+                                'risks' => $risks,
+                                'status' => $status,
+                                'generator_id' => $generator_id,
+                            );
 
-                        array_push($pcArray, $data_item);
+                            array_push($pcArray, $data_item);
 
+                        }
+
+                    } else {
+                        $pcArray = [];
                     }
-
-                } else {
-                    $pcArray = [];
-                }
-                if (!empty($pcArray)) {
-                    for ($i = 0; $i < count($pcArray); $i++) {
-                        array_push($resultPC, $pcArray[$i]);
+                    if (!empty($pcArray)) {
+                        for ($i = 0; $i < count($pcArray); $i++) {
+                            array_push($resultPC, $pcArray[$i]);
+                        }
                     }
+                    $msg = $resultPC;
                 }
-                $msg = $resultPC;
+
             }
 
         } else {
