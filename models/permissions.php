@@ -1,6 +1,6 @@
 <?php
 
-class AppFeatures_id
+class Permissions
 {
     public $db;
 

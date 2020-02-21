@@ -38,6 +38,8 @@ include "models/quadran.php";
 include "models/periode.php";
 include "models/tara.php";
 include "models/help.php";
+include "models/app_features.php";
+include "models/permissions.php";
 include "login.php";
 if (file_exists('settings.php')) {
     include 'settings.php';
@@ -395,6 +397,20 @@ class Router
             $r->get('/api/index.php/si_target/delete/{id}', 'SITarget/delete');
             $r->post('/api/index.php/si_target/insert', 'SITarget/insert');
             $r->post('/api/index.php/si_target/update/{id}', 'SITarget/update');
+
+            // APP FEATURES
+            $r->get('/api/index.php/app_features/get', 'AppFeatures/get');
+            $r->get('/api/index.php/app_features/find_id/{id}', 'AppFeatures/findById');
+            $r->get('/api/index.php/app_features/delete/{id}', 'AppFeatures/delete');
+            $r->post('/api/index.php/app_features/insert', 'AppFeatures/insert');
+            $r->post('/api/index.php/app_features/update/{id}', 'AppFeatures/update');
+
+            // PERMISSIONS
+            $r->get('/api/index.php/permissions/get', 'Permissions/get');
+            $r->get('/api/index.php/permissions/find_id/{id}', 'Permissions/findById');
+            $r->get('/api/index.php/permissions/delete/{id}', 'Permissions/delete');
+            $r->post('/api/index.php/permissions/insert', 'Permissions/insert');
+            $r->post('/api/index.php/permissions/update/{id}', 'Permissions/update');
 
             // UNIT TARGET
             $r->get('/api/index.php/unit_target/get', 'UnitTarget/get');
