@@ -45,6 +45,42 @@ class Permissions
         return $msg;
     }
 
+    public function findByRole($id, $tablename)
+    {
+        $query = "SELECT * FROM  $tablename WHERE role_id = '$id'";
+        // die($query);
+        $result = $this->db->execute($query);
+        // hitung result
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'features_id' => $features_id,
+                    'role_id' => $role_id,
+                    'read' => $read,
+                    'write' => $write,
+                    'delete' => $delete,
+                    'approve' => $approve,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";

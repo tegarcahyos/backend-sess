@@ -408,6 +408,7 @@ class Router
             // PERMISSIONS
             $r->get('/api/index.php/permissions/get', 'Permissions/get');
             $r->get('/api/index.php/permissions/find_id/{id}', 'Permissions/findById');
+            $r->get('/api/index.php/permissions/find_by_role/{id}', 'Permissions/findByRole');
             $r->get('/api/index.php/permissions/delete/{id}', 'Permissions/delete');
             $r->post('/api/index.php/permissions/insert', 'Permissions/insert');
             $r->post('/api/index.php/permissions/update/{id}', 'Permissions/update');
@@ -636,7 +637,8 @@ class Router
                     $explodeUri[4] == "get_root_parent" ||
                     $explodeUri[4] == "get_leaf_by_root_id" ||
                     $explodeUri[4] == "read_notification" ||
-                    $explodeUri[4] == "get_by_criteria"
+                    $explodeUri[4] == "get_by_criteria" ||
+                    $explodeUri[4] == "find_by_role"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
                 } else if (
