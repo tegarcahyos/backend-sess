@@ -31,6 +31,7 @@ class Stakeholders
                     'controller' => $controller,
                     'coordinator' => $coordinator,
                     'program_leader' => $program_leader,
+                    'si_id' => $si_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -64,6 +65,7 @@ class Stakeholders
                 'controller' => $controller,
                 'coordinator' => $coordinator,
                 'program_leader' => $program_leader,
+                'si_id' => $si_id,
             );
 
             $msg = $data_item;
@@ -90,6 +92,7 @@ class Stakeholders
                 'controller' => $controller,
                 'coordinator' => $coordinator,
                 'program_leader' => $program_leader,
+                'si_id' => $si_id,
             );
 
             $msg = $data_item;
@@ -101,7 +104,7 @@ class Stakeholders
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $variable = array('boe', 'unit_id', 'controller', 'coordinator', 'program_leader');
+        $variable = array('boe', 'unit_id', 'controller', 'coordinator', 'program_leader', 'si_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -110,8 +113,8 @@ class Stakeholders
             $$item = $request[0]->{$item};
         }
 
-        $query = 'INSERT INTO ' . $tablename . ' (boe, unit_id, controller, coordinator, program_leader) ';
-        $query .= "VALUES ('$boe','$unit_id', '$controller', '$coordinator', '$program_leader') RETURNING *";
+        $query = 'INSERT INTO ' . $tablename . ' (boe, unit_id, controller, coordinator, program_leader, si_id) ';
+        $query .= "VALUES ('$boe','$unit_id', '$controller', '$coordinator', '$program_leader', '$si_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -136,6 +139,7 @@ class Stakeholders
                         'controller' => $controller,
                         'coordinator' => $coordinator,
                         'program_leader' => $program_leader,
+                        'si_id' => $si_id,
                     );
 
                     array_push($data_arr, $data_item);
@@ -156,7 +160,7 @@ class Stakeholders
 
         $request = json_decode($data);
 
-        $variable = array('boe', 'unit_id', 'controller', 'coordinator', 'program_leader');
+        $variable = array('boe', 'unit_id', 'controller', 'coordinator', 'program_leader', 'si_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -165,7 +169,7 @@ class Stakeholders
             $$item = $request[0]->{$item};
         }
 
-        $query = "UPDATE $tablename SET boe = '$boe', unit_id = '$unit_id',controller = '$controller', coordinator = '$coordinator', program_leader = '$program_leader' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET boe = '$boe', unit_id = '$unit_id',controller = '$controller', coordinator = '$coordinator', program_leader = '$program_leader', si_id = '$si_id' WHERE id = '$id' RETURNING *";
 
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -190,6 +194,7 @@ class Stakeholders
                         'controller' => $controller,
                         'coordinator' => $coordinator,
                         'program_leader' => $program_leader,
+                        'si_id' => $si_id,
                     );
 
                     array_push($data_arr, $data_item);
