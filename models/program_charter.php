@@ -225,6 +225,7 @@ class ProgramCharter
                                 $data_item = array(
                                     'id' => $id,
                                     'strategic_initiative' => $strategic_initiative,
+                                    'title' => $title,
                                     'unit_id' => $unit_id,
                                     'weight' => $weight,
                                 );
