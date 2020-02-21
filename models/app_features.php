@@ -1,6 +1,6 @@
 <?php
 
-class CeoNotes
+class AppFeatures
 {
     public $db;
 
@@ -26,7 +26,7 @@ class CeoNotes
 
                 $data_item = array(
                     'id' => $id,
-                    'data' => json_decode($data),
+                    'features' => $features,
                 );
 
                 array_push($data_arr, $data_item);
@@ -55,56 +55,11 @@ class CeoNotes
 
             $data_item = array(
                 'id' => $id,
-                'data' => json_decode($data),
+                'features' => $features,
             );
 
             $msg = $data_item;
         }
-        return $msg;
-    }
-
-    public function getByValues($attr, $val, $tablename)
-    {
-
-        $query = "SELECT * FROM $tablename WHERE ";
-        $values = explode('AND', $val);
-        $attr = explode('AND', $attr);
-        for ($i = 0; $i < count($attr); $i++) {
-            if ($i == 0) {
-
-            } else {
-                $query .= " AND ";
-            }
-            // $query .= "values @> '{\"" . $attr[$i] . "\": \"" . $values[$i] . "\"}'";
-            $query .= "values ->> '" . $attr[$i] . "' = '" . $values[$i] . "'";
-
-        }
-
-        $query_real = str_replace("%20", " ", $query);
-        die($query_real);
-        $result = $this->db->execute($query_real);
-
-        $num = $result->rowCount();
-
-        if ($num > 0) {
-            $data_arr = array();
-
-            while ($row = $result->fetchRow()) {
-                extract($row);
-                $data_item = array(
-                    'id' => $id,
-                    'name' => $name,
-                    'values' => json_decode($values),
-                );
-
-                array_push($data_arr, $data_item);
-                $msg = $data_arr;
-            }
-
-        } else {
-            $msg = 'Data Kosong';
-        }
-
         return $msg;
     }
 
@@ -113,7 +68,7 @@ class CeoNotes
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $variable = array('data');
+        $variable = array('features');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -122,10 +77,8 @@ class CeoNotes
             $$item = $request[0]->{$item};
         }
 
-        $data = json_encode($data);
-
-        $query = 'INSERT INTO ' . $tablename . ' (data) ';
-        $query .= "VALUES ('$data') RETURNING *";
+        $query = 'INSERT INTO ' . $tablename . ' (features) ';
+        $query .= "VALUES ('$features') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -145,7 +98,7 @@ class CeoNotes
 
                     $data_item = array(
                         'id' => $id,
-                        'data' => json_decode($data),
+                        'features' => $features,
                     );
 
                     array_push($data_arr, $data_item);
@@ -167,7 +120,7 @@ class CeoNotes
 
         $request = json_decode($data);
 
-        $variable = array('data');
+        $variable = array('features');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -176,9 +129,7 @@ class CeoNotes
             $$item = $request[0]->{$item};
         }
 
-        $data = json_encode($data);
-
-        $query = "UPDATE $tablename SET data = '$data' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET features = '$features' WHERE id = '$id' RETURNING *";
 
         // die($query);
 
@@ -200,7 +151,7 @@ class CeoNotes
 
                     $data_item = array(
                         'id' => $id,
-                        'data' => json_decode($data),
+                        'features' => $features,
                     );
 
                     array_push($data_arr, $data_item);
