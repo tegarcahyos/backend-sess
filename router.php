@@ -298,6 +298,7 @@ class Router
             //Employee
             $r->get('/api/index.php/employee/get', 'Employee/get');
             $r->get('/api/index.php/employee/find/{value}', 'Employee/find');
+            $r->get('/api/index.php/employee/find_id/{id}', 'Employee/findById');
 
             // Approval
             $r->get('/api/index.php/approval/get', 'Approval/get');
