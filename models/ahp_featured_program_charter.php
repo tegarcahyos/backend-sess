@@ -36,6 +36,7 @@ class AHPFeaturedPC
                     'name' => $name,
                     'periode_id' => $periode_id,
                     'criteria_id' => $criteria_id,
+                    'user_id' => $user_id
                 );
 
                 array_push($data_arr, $data_item);
@@ -76,6 +77,7 @@ class AHPFeaturedPC
                     'name' => $name,
                     'periode_id' => $periode_id,
                     'criteria_id' => $criteria_id,
+                    'user_id' => $user_id
                 );
 
                 array_push($data_arr, $data_item);
@@ -116,6 +118,7 @@ class AHPFeaturedPC
                     'name' => $name,
                     'periode_id' => $periode_id,
                     'criteria_id' => $criteria_id,
+                    'user_id' => $user_id
                 );
 
                 array_push($data_arr, $data_item);
@@ -156,6 +159,7 @@ class AHPFeaturedPC
                     'name' => $name,
                     'periode_id' => $periode_id,
                     'criteria_id' => $criteria_id,
+                    'user_id' => $user_id
                 );
 
                 array_push($data_arr, $data_item);
@@ -188,6 +192,7 @@ class AHPFeaturedPC
                 'name' => $name,
                 'periode_id' => $periode_id,
                 'criteria_id' => $criteria_id,
+                'user_id' => $user_id
             );
             return $data_item;
         }
@@ -200,7 +205,7 @@ class AHPFeaturedPC
         //
         $request = json_decode($data);
 
-        $variable = array('organization_id', 'data', 'judgement', 'periode_id', 'name', 'criteria_id');
+        $variable = array('organization_id', 'data', 'judgement', 'periode_id', 'name', 'criteria_id', 'user_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -212,8 +217,8 @@ class AHPFeaturedPC
         $data = json_encode($data);
         $judgement = json_encode($judgement);
 
-        $query = "INSERT INTO $tablename (organization_id, data, judgement, periode_id, name, criteria_id)";
-        $query .= "VALUES ('$organization_id', '$data', '$judgement', '$periode_id', '$name', '$criteria_id') RETURNING *";
+        $query = "INSERT INTO $tablename (organization_id, data, judgement, periode_id, name, criteria_id, user_id)";
+        $query .= "VALUES ('$organization_id', '$data', '$judgement', '$periode_id', '$name', '$criteria_id', '$user_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -236,6 +241,7 @@ class AHPFeaturedPC
                         'name' => $name,
                         'periode_id' => $periode_id,
                         'criteria_id' => $criteria_id,
+                        'user_id' => $user_id
                     );
 
                     array_push($data_arr, $data_item);
@@ -265,7 +271,7 @@ class AHPFeaturedPC
         $data = json_encode($data);
         $judgement = json_encode($judgement);
 
-        $query = "UPDATE $tablename SET organization_id = '$organization_id', data = '$data', judgement = '$judgement', periode_id = '$periode_id', name = '$name', criteria_id = '$criteria_id' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET organization_id = '$organization_id', data = '$data', judgement = '$judgement', periode_id = '$periode_id', name = '$name', criteria_id = '$criteria_id', user_id = '$user_id' WHERE id = '$id' RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -288,6 +294,7 @@ class AHPFeaturedPC
                         'name' => $name,
                         'periode_id' => $periode_id,
                         'criteria_id' => $criteria_id,
+                        'user_id' => $user_id
                     );
 
                     array_push($data_arr, $data_item);
