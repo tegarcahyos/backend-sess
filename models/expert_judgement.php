@@ -28,7 +28,7 @@ class ExpertJudgement
                     'id' => $id,
                     'user_id' => $user_id,
                     'program_charter' => $program_charter,
-                    'organization_id' => $organization_id,
+                    'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
                 );
 
@@ -61,7 +61,7 @@ class ExpertJudgement
                 'id' => $id,
                 'user_id' => $user_id,
                 'program_charter' => $program_charter,
-                'organization_id' => $organization_id,
+                'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
             );
 
@@ -88,7 +88,7 @@ class ExpertJudgement
                 'id' => $id,
                 'user_id' => $user_id,
                 'program_charter' => $program_charter,
-                'organization_id' => $organization_id,
+                'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
             );
 
@@ -106,7 +106,7 @@ class ExpertJudgement
         $user_id = $request[0]->user_id;
         $program_charter = json_encode($request[0]->program_charter);
 
-        $variable = array('user_id', 'program_charter', 'organization_id', 'periode_id');
+        $variable = array('user_id', 'program_charter', 'unit_id', 'periode_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -117,8 +117,8 @@ class ExpertJudgement
 
         // die($program_charter);
 
-        $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter, organization_id, periode_id) ';
-        $query .= "VALUES ('$user_id', '$program_charter', '$organization_id', '$periode_id') RETURNING *";
+        $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter, unit_id, periode_id) ';
+        $query .= "VALUES ('$user_id', '$program_charter', '$unit_id', '$periode_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -140,7 +140,7 @@ class ExpertJudgement
                         'id' => $id,
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
-                        'organization_id' => $organization_id,
+                        'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
                     );
 
@@ -163,7 +163,7 @@ class ExpertJudgement
 
         $request = json_decode($data);
 
-        $variable = array('user_id', 'program_charter', 'organization_id', 'periode_id');
+        $variable = array('user_id', 'program_charter', 'unit_id', 'periode_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -174,7 +174,7 @@ class ExpertJudgement
 
         $program_charter = json_encode($program_charter);
 
-        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter', organization_id = '$organization_id', periode_id = '$periode_id' WHERE id = '$id' RETURNING *";
+        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter', unit_id = '$unit_id', periode_id = '$periode_id' WHERE id = '$id' RETURNING *";
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "422";
@@ -195,7 +195,7 @@ class ExpertJudgement
                         'id' => $id,
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
-                        'organization_id' => $organization_id,
+                        'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
                     );
 
