@@ -35,7 +35,6 @@ class Notification
             $result = $this->findById($id, $tablename);
             if (++$counterCheck == $limitCheck || count($result) > 0) {
                 return $result;
-                break;
             } else {
                 sleep(1);
             }
