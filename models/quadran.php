@@ -28,6 +28,8 @@ class Quadran
                     'id' => $id,
                     'user_id' => $user_id,
                     'program_charter' => $program_charter,
+                    'organization_id' => $organization_id,
+                    'periode_id' => $periode_id,
                 );
 
                 array_push($data_arr, $data_item);
@@ -58,6 +60,8 @@ class Quadran
                 'id' => $id,
                 'user_id' => $user_id,
                 'program_charter' => $program_charter,
+                'organization_id' => $organization_id,
+                    'periode_id' => $periode_id,
             );
 
             $msg = $data_item;
@@ -82,6 +86,8 @@ class Quadran
                 'id' => $id,
                 'user_id' => $user_id,
                 'program_charter' => $program_charter,
+                'organization_id' => $organization_id,
+                    'periode_id' => $periode_id,
             );
 
             $msg = $data_item;
@@ -94,8 +100,9 @@ class Quadran
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
+        $program_charter = json_encode($request[0]->program_charter);
 
-        $variable = array('user_id', 'program_charter');
+        $variable = array('user_id', 'program_charter', 'organization_id', 'periode_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -104,8 +111,10 @@ class Quadran
             $$item = $request[0]->{$item};
         }
 
-        $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter) ';
-        $query .= "VALUES ('$user_id', '$program_charter') RETURNING *";
+        // die($program_charter);
+
+        $query = 'INSERT INTO ' . $tablename . ' (user_id, program_charter, organization_id, periode_id) ';
+        $query .= "VALUES ('$user_id', '$program_charter', '$organization_id', '$periode_id') RETURNING *";
         // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
@@ -127,6 +136,8 @@ class Quadran
                         'id' => $id,
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
+                        'organization_id' => $organization_id,
+                    'periode_id' => $periode_id,
                     );
 
                     array_push($data_arr, $data_item);
@@ -147,7 +158,7 @@ class Quadran
         $data = file_get_contents("php://input");
 
         $request = json_decode($data);
-        $variable = array('user_id', 'program_charter');
+        $variable = array('user_id', 'program_charter', 'organization_id', 'periode_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
@@ -156,10 +167,9 @@ class Quadran
             $$item = $request[0]->{$item};
         }
 
-        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter' WHERE id = '$id' RETURNING *";
+        $program_charter = json_encode($program_charter);
 
-        // die($query);
-
+        $query = "UPDATE $tablename SET user_id = '$user_id', program_charter = '$program_charter', organization_id = '$organization_id', periode_id = '$periode_id' WHERE id = '$id' RETURNING *";
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "422";
@@ -180,6 +190,8 @@ class Quadran
                         'id' => $id,
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
+                        'organization_id' => $organization_id,
+                    'periode_id' => $periode_id,
                     );
 
                     array_push($data_arr, $data_item);
