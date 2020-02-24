@@ -36,7 +36,7 @@ class Notification
             if (++$counterCheck == $limitCheck || count($result) > 0) {
                 return $result;
             } else {
-                sleep(1);
+                sleep(5);
             }
         }
     }
