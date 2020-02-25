@@ -34,31 +34,31 @@ class Quadran
 
                 array_push($data_arr, $data_item);
                 
-                $result_arr = array();
-                for ($i=0; $i < count($data_arr); $i++) {
-                    $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
-                    echo $unit;
-                    $result = $this->db->execute($unit);
-                    $row = $result->fetchRow();
-                        extract($row);
-                        $data_unit = array(
-                            'unit_name' => $name,
-                        );
+                // $result_arr = array();
+                // for ($i=0; $i < count($data_arr); $i++) {
+                //     $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
+                //     echo $unit;
+                //     $result = $this->db->execute($unit);
+                //     $row = $result->fetchRow();
+                //         extract($row);
+                //         $data_unit = array(
+                //             'unit_name' => $name,
+                //         );
 
-                        array_push($data_arr, $data_unit);
+                //         array_push($data_arr, $data_unit);
 
-                    $periode = "SELECT * FROM periode WHERE id = '".$data_arr[$i]['periode_id']."'";
-                    $result = $this->db->execute($periode);
-                    $row = $result->fetchRow();
-                        extract($row);
-                        $data_periode = array(
-                            'periode_name' => $name,
-                        );
-                        array_push($data_arr, $data_periode);
+                //     $periode = "SELECT * FROM periode WHERE id = '".$data_arr[$i]['periode_id']."'";
+                //     $result = $this->db->execute($periode);
+                //     $row = $result->fetchRow();
+                //         extract($row);
+                //         $data_periode = array(
+                //             'periode_name' => $name,
+                //         );
+                //         array_push($data_arr, $data_periode);
                         
-                }
-                array_push($result_arr, $data_item);
-                $msg = $result_arr;
+                // }
+                // array_push($result_arr, $data_item);
+                $msg = $data_arr;
             }
 
         } else {
