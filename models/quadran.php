@@ -29,7 +29,9 @@ class Quadran
                     'user_id' => $user_id,
                     'program_charter' => $program_charter,
                     'unit_id' => $unit_id,
+                    'unit_name' => null,
                     'periode_id' => $periode_id,
+                    'priode_name' => null,
                 );
 
                 array_push($data_arr, $data_item);
@@ -59,12 +61,11 @@ class Quadran
                 }
                 if (!empty($result_arr)) {
                     for ($i = 0; $i < count($result_arr); $i++) {
-                        die($result_arr[$i]['unit_name']);
                         if($result_arr[$i]['unit_name']){
-                            array_push($data_arr[0], $result_arr[$i]['unit_name']);
+                            array_push($data_arr['unit_name'], $result_arr[$i]['unit_name']);
                         }
                         if($result_arr[$i]['periode_name']){
-                            array_push($data_arr[0], $result_arr[$i]['periode_name']);
+                            array_push($data_arr['periode_name'], $result_arr[$i]['periode_name']);
                         }
                     }
                 }
