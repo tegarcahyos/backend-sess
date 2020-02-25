@@ -11,7 +11,7 @@ class Quadran
 
     public function get($tablename)
     {
-        $query = "SELECT * FROM  $tablename ";
+        $query = "SELECT * FROM  $tablename";
         // die($query);
         $result = $this->db->execute($query);
         // hitung result
@@ -59,11 +59,12 @@ class Quadran
                 }
                 if (!empty($result_arr)) {
                     for ($i = 0; $i < count($result_arr); $i++) {
+                        die($result_arr[$i]['unit_name']);
                         if($result_arr[$i]['unit_name']){
-                            array_push($data_arr['unit_name'], $result_arr[$i]['unit_name']);
+                            array_push($data_arr[0], $result_arr[$i]['unit_name']);
                         }
                         if($result_arr[$i]['periode_name']){
-                            array_push($data_arr['periode_name'], $result_arr[$i]['periode_name']);
+                            array_push($data_arr[0], $result_arr[$i]['periode_name']);
                         }
                     }
                 }
