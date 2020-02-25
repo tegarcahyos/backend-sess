@@ -36,6 +36,7 @@ class Quadran
                 
 
                 for ($i=0; $i < count($data_arr); $i++) {
+                    die($data_arr[$i]['unit_id']);
                     $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
                     $result = $this->db->execute($unit);
                     $row = $result->fetchRow();
