@@ -55,7 +55,7 @@ class Quadran
                 
                 // die(print_r($data_item));
                 array_push($result_arr, $data_item);
-                $msg = $data_arr;
+                $msg = $result_arr;
             }
 
         } else {
