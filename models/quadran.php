@@ -57,10 +57,14 @@ class Quadran
                         array_push($result_arr, $data_periode);
                         
                 }
-                die(print_r($result_arr));
                 if (!empty($result_arr)) {
                     for ($i = 0; $i < count($result_arr); $i++) {
-                        array_push($data_arr, $result_arr[$i]);
+                        if($result_arr[$i]['unit_name']){
+                            array_push($data_arr, $result_arr[$i]['unit_name']);
+                        }
+                        if($result_arr[$i]['periode_name']){
+                            array_push($data_arr, $result_arr[$i]['periode_name']);
+                        }
                     }
                 }
                 // array_push($result_arr, $data_item);
