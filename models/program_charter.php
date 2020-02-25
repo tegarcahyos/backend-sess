@@ -417,6 +417,7 @@ class ProgramCharter
                 }
 
                 // KURANG REVIEWERRRRR
+                // $get_approval = "SELECT * FROM";
 
                 for ($i = 0; $i < count($stakeholders_push); $i++) {
                     array_push($user_push, $stakeholders_push[$i]);

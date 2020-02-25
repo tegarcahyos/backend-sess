@@ -114,7 +114,7 @@ class Permissions
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        die(print_r($request));
+        // die(print_r($request));
         $variable = array('features_id', 'role_id', 'read', 'write', 'delete', 'approve');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
