@@ -427,6 +427,7 @@ class Router
             // ORGANIZATION
             $r->get('/api/index.php/organization/get', 'Organization/get');
             $r->get('/api/index.php/organization/find_id/{id}', 'Organization/findById');
+            $r->get('/api/index.php/organization/find_unit/{id}', 'Organization/findUnit');
             $r->get('/api/index.php/organization/delete/{id}', 'Organization/delete');
             $r->post('/api/index.php/organization/insert', 'Organization/insert');
             $r->post('/api/index.php/organization/update/{id}', 'Organization/update');
@@ -638,6 +639,7 @@ class Router
                     $explodeUri[4] == "get_leaf_by_root_id" ||
                     $explodeUri[4] == "read_notification" ||
                     $explodeUri[4] == "get_by_criteria" ||
+                    $explodeUri[4] == "find_unit" ||
                     $explodeUri[4] == "find_by_role"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
