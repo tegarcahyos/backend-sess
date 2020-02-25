@@ -35,6 +35,7 @@ class Login
                 // MIGRATE EMP TO USR
                 $password_hash = password_hash($password, PASSWORD_BCRYPT);
                 $migrate_user = "INSERT INTO users (name, username, password, employee_id) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password_hash','" . $row['id'] . "' RETURNING *)";
+                die($migrate_user);
                 $resultUser = $this->db->execute($migrate_user);
                 $user = $resultUser->fetchRow();
 
