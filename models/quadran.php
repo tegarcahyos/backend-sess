@@ -31,8 +31,6 @@ class Quadran
                     'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
                 );
-
-                array_push($data_arr, $data_item);
                 
                 $result_arr = array();
                 for ($i=0; $i < count($data_arr); $i++) {
@@ -62,6 +60,7 @@ class Quadran
                             array_push($data_item, $result_arr[$i]);
                     }
                 }
+                array_push($data_arr, $data_item);
                 // array_push($result_arr, $data_item);
                 $msg = $data_arr;
             }
