@@ -59,7 +59,7 @@ class Quadran
                 }
                 if (!empty($result_arr)) {
                     for ($i = 0; $i < count($result_arr); $i++) {
-                        array_push($data_arr[], $result_arr[$i]);
+                        array_push($data_arr, $result_arr[$i]);
                     }
                 }
                 // array_push($result_arr, $data_item);
