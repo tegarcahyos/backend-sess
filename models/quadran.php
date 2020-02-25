@@ -51,10 +51,9 @@ class Quadran
                         // );
                         $data_item['periode_name'] = $periode['name'];
                         // array_push($data_arr, $data_periode);
-                        
                 }
                 
-                
+                die(print_r($data_item));
                 // array_push($result_arr, $data_item);
                 $msg = $data_arr;
             }
