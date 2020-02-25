@@ -34,34 +34,24 @@ class Quadran
 
 
                 $data_item['unit_name'] = 'adasas';
-                
-                die(print_r($data_item));
                 for ($i=0; $i < count($data_arr); $i++) {
                     $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
                     // echo $unit;
                     $result = $this->db->execute($unit);
-                    $row = $result->fetchRow();
-                        extract($row);
-                        $data_unit = array(
-                            'unit_name' => $name,
-                        );
+                    $unit = $result->fetchRow();
+                    $data_item['unit_name'] = $unit['name'];
 
-                        // array_push($result_arr, $data_unit);
-                        if (!empty($data_unit)) {
-                            array_push($data_item, $data_unit);
-                        }
+                        // array_push($data_arr, $data_unit);
 
-                    $periode = "SELECT * FROM periode WHERE id = '".$data_arr[$i]['periode_id']."'";
+                    $periode = "SELECT * FROM periode WHERE id = '$data_arr[$i]['periode_id']'";
                     $result = $this->db->execute($periode);
-                    $row = $result->fetchRow();
-                        extract($row);
-                        $data_periode = array(
-                            'periode_name' => $name,
-                        );
-                        // array_push($result_arr, $data_periode);
-                        if (!empty($data_unit)) {
-                            array_push($data_item, $data_periode);
-                        }
+                    $periode = $result->fetchRow();
+                        // extract($row);
+                        // $data_periode = array(
+                        //     'periode_name' => $name,
+                        // );
+                        $data_item['periode_name'] = $periode['name'];
+                        // array_push($data_arr, $data_periode);
                         
                 }
                 
