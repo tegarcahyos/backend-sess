@@ -15,10 +15,10 @@ class Permissions
         id, 
         features_id, 
         role_id, 
-        case when read = true then true else false end as read,
-        case when write = true then true else false end as write,
-        case when delete = true then true else false end as delete,
-        case when approve = true then true else false end as approve
+        case when read = true then 'true' else 'false' end as read,
+        case when write = true then 'true' else 'false' end as write,
+        case when delete = true then 'true' else 'false' end as delete,
+        case when approve = true then 'true' else 'false' end as approve
         FROM  $tablename ";
         // die($query);
         $result = $this->db->execute($query);
