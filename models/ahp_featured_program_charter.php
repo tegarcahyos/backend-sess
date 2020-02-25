@@ -259,7 +259,7 @@ class AHPFeaturedPC
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $variable = array('organization_id', 'data', 'judgement', 'periode_id', 'name', 'criteria_id');
+        $variable = array('organization_id', 'data', 'judgement', 'periode_id', 'name', 'criteria_id', 'user_id');
         foreach ($variable as $item) {
             if (!isset($request[0]->{$item})) {
                 return "422";
