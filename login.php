@@ -33,18 +33,17 @@ class Login
                 $msg = "203";
             } else {
                 // MIGRATE EMP TO USR
-                // $password_hash = password_hash($password, PASSWORD_BCRYPT);
-                // $migrate_user = "INSERT INTO users (name, username, password, employee_id) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password_hash','" . $row['id'] . "' RETURINING id)";
-                // $this->db->execute($migrate_user);
-                // $resultUser = $this->db->execute($check);
-                // $user = $resultUser->fetchRow();
+                $password_hash = password_hash($password, PASSWORD_BCRYPT);
+                $migrate_user = "INSERT INTO users (name, username, password, employee_id) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password_hash','" . $row['id'] . "' RETURINING id)";
+                $resultUser = $this->db->execute($migrate_user);
+                $user = $resultUser->fetchRow();
 
                 $get_unit = "SELECT * FROM unit WHERE LOWER(code) = LOWER('".$row['c_kode_unit']."')";
-                $result = $this->db->execute($check);
+                $result = $this->db->execute($get_unit);
                 $unit = $result->fetchRow();
-                die(print_r($unit['c_kode_unit']));
 
-                $insert_detail = "INSERT INTO user_detail (user_id, unit_id) VALUES ('".$user['id']."', '".$row['c_kode_unit']."')";
+                $insert_detail = "INSERT INTO user_detail (user_id, unit_id) VALUES ('".$user['id']."', '".$unit['c_kode_unit']."')";
+                $result = $this->db->execute($insert_detail);
                 // LOGIN
                 $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
                 $result = $this->db->execute($query);
