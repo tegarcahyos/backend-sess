@@ -31,6 +31,11 @@ class Quadran
                     'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
                 );
+
+
+                $data_item['unit_name'] = 'adasas';
+                
+                die(print_r($data_item));
                 for ($i=0; $i < count($data_arr); $i++) {
                     $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
                     // echo $unit;
@@ -119,9 +124,6 @@ class Quadran
                     'periode_id' => $periode_id,
                 );
 
-                $data_item['unit_name'] = 'adasas';
-                
-                die(print_r($data_item));
 
                 for ($i=0; $i < count($data_arr); $i++) { 
                     $unit = "SELECT * FROM unit WHERE id = '$data_arr[$i]['unit_id']'";
