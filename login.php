@@ -42,7 +42,7 @@ class Login
                 $get_unit = "SELECT * FROM unit WHERE LOWER(code) = LOWER('".$row['c_kode_unit']."')";
                 $result = $this->db->execute($check);
                 $unit = $result->fetchRow();
-                die(print_r($unit));
+                die(print_r($unit['c_kode_unit']));
 
                 $insert_detail = "INSERT INTO user_detail (user_id, unit_id) VALUES ('".$user['id']."', '".$row['c_kode_unit']."')";
                 // LOGIN
