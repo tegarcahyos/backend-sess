@@ -39,7 +39,7 @@ class Quadran
                     $result = $this->db->execute($unit);
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
-                    die(print_r($data_item));
+                    // die(print_r($data_item));
                         // array_push($data_arr, $data_unit);
 
                     $periode = "SELECT * FROM periode WHERE id = '$data_arr[$i]['periode_id']'";
