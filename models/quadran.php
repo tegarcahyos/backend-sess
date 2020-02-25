@@ -33,6 +33,29 @@ class Quadran
                 );
 
                 array_push($data_arr, $data_item);
+                
+
+                for ($i=0; $i < count($data_arr); $i++) { 
+                    $unit = "SELECT * FROM unit WHERE id = '$data_arr[$i]['unit_id']'";
+                    $result = $this->db->execute($unit);
+                    $row = $result->fetchRow();
+                        extract($row);
+                        $data_unit = array(
+                            'unit_name' => $name,
+                        );
+
+                        array_push($data_arr, $data_unit);
+
+                    $periode = "SELECT * FROM periode WHERE id = '$data_arr[$i]['periode_id']'";
+                    $result = $this->db->execute($periode);
+                    $row = $result->fetchRow();
+                        extract($row);
+                        $data_periode = array(
+                            'periode_name' => $name,
+                        );
+                        array_push($data_arr, $data_periode);
+                        
+                }
                 $msg = $data_arr;
             }
 
@@ -61,7 +84,7 @@ class Quadran
                 'user_id' => $user_id,
                 'program_charter' => $program_charter,
                 'unit_id' => $unit_id,
-                    'periode_id' => $periode_id,
+                'periode_id' => $periode_id,
             );
 
             $msg = $data_item;
@@ -73,26 +96,55 @@ class Quadran
     {
         $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
-            $msg = "Data Kosong";
-            return $msg;
-        } else {
-            extract($row);
+        $num = $result->rowCount();
 
-            // Push to data_arr
+        if ($num > 0) {
 
-            $data_item = array(
-                'id' => $id,
-                'user_id' => $user_id,
-                'program_charter' => $program_charter,
-                'unit_id' => $unit_id,
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'user_id' => $user_id,
+                    'program_charter' => $program_charter,
+                    'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
-            );
+                );
 
-            $msg = $data_item;
-            return $msg;
+                array_push($data_arr, $data_item);
+                
+
+                for ($i=0; $i < count($data_arr); $i++) { 
+                    $unit = "SELECT * FROM unit WHERE id = '$data_arr[$i]['unit_id']'";
+                    $result = $this->db->execute($unit);
+                    $row = $result->fetchRow();
+                        extract($row);
+                        $data_unit = array(
+                            'unit_name' => $name,
+                        );
+
+                        array_push($data_arr, $data_unit);
+
+                    $periode = "SELECT * FROM periode WHERE id = '$data_arr[$i]['periode_id']'";
+                    $result = $this->db->execute($periode);
+                    $row = $result->fetchRow();
+                        extract($row);
+                        $data_periode = array(
+                            'periode_name' => $name,
+                        );
+                        array_push($data_arr, $data_periode);
+                        
+                }
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
         }
+
+        return $msg;
     }
 
     public function insert($tablename)
