@@ -32,7 +32,7 @@ class Quadran
                     'periode_id' => $periode_id,
                 );
                 array_push($data_arr, $data_item);
-                // echo "kampret";
+                $result_arr = array();
                 for ($i=0; $i < count($data_arr); $i++) {
                     $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
                     // echo $unit;
@@ -53,8 +53,8 @@ class Quadran
                         // array_push($data_arr, $data_periode);
                 }
                 
-                die(print_r($data_item));
-                // array_push($result_arr, $data_item);
+                // die(print_r($data_item));
+                array_push($result_arr, $data_item);
                 $msg = $data_arr;
             }
 
