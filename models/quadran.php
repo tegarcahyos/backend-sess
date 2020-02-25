@@ -31,9 +31,7 @@ class Quadran
                     'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
                 );
-
-
-                $data_item['unit_name'] = 'adasas';
+                
                 for ($i=0; $i < count($data_arr); $i++) {
                     $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
                     // echo $unit;
