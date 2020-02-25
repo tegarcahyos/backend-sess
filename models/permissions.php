@@ -11,7 +11,15 @@ class Permissions
 
     public function get($tablename)
     {
-        $query = "SELECT * FROM  $tablename ";
+        $query = "SELECT 
+        id, 
+        features_id, 
+        role_id, 
+        case when read = true then true else false end as read,
+        case when write = true then true else false end as write,
+        case when delete = true then true else false end as delete,
+        case when approve = true then true else false end as approve
+        FROM  $tablename ";
         // die($query);
         $result = $this->db->execute($query);
         // hitung result
@@ -24,6 +32,7 @@ class Permissions
             while ($row = $result->fetchRow()) {
                 extract($row);
 
+                
                 $data_item = array(
                     'id' => $id,
                     'features_id' => $features_id,
