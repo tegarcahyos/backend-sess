@@ -57,6 +57,7 @@ class Quadran
                         array_push($result_arr, $data_periode);
                         
                 }
+                die(print_r($result_arr));
                 if (!empty($result_arr)) {
                     for ($i = 0; $i < count($result_arr); $i++) {
                         array_push($data_arr, $result_arr[$i]);
