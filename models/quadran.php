@@ -35,8 +35,8 @@ class Quadran
                 array_push($data_arr, $data_item);
                 
 
-                for ($i=0; $i < count($data_arr); $i++) { 
-                    $unit = "SELECT * FROM unit WHERE id = '$data_arr[$i]['unit_id']'";
+                for ($i=0; $i < count($data_arr); $i++) {
+                    $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
                     $result = $this->db->execute($unit);
                     $row = $result->fetchRow();
                         extract($row);
@@ -46,7 +46,7 @@ class Quadran
 
                         array_push($data_arr, $data_unit);
 
-                    $periode = "SELECT * FROM periode WHERE id = '$data_arr[$i]['periode_id']'";
+                    $periode = "SELECT * FROM periode WHERE id = '".$data_arr[$i]['periode_id']."'";
                     $result = $this->db->execute($periode);
                     $row = $result->fetchRow();
                         extract($row);
