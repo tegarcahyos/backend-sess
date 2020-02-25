@@ -402,6 +402,7 @@ class ProgramCharter
 
                 $unit_push = array();
                 $user_push = array();
+                $approval_push = array();
                 $main_activities_push = array();
 
                 // STAKEHOLDER
@@ -412,12 +413,15 @@ class ProgramCharter
 
                 );
 
+                // MEMBER
                 for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
                     array_push($user_push, $data_item['stakeholders']->member[$i]);
                 }
 
                 // KURANG REVIEWERRRRR
-                // $get_approval = "SELECT * FROM";
+                for ($i=0; $i < count($data_item['stakeholders']->reviewer); $i++) { 
+                    array_push($approval_push, $data_item['stakeholders']->reviewer[$i]);
+                }
 
                 for ($i = 0; $i < count($stakeholders_push); $i++) {
                     array_push($user_push, $stakeholders_push[$i]);
@@ -435,6 +439,7 @@ class ProgramCharter
 
                 $data_push = array(
                     "user_id" => $user_push,
+                    "approval_id" => $approval_push,
                     "unit_id" => $unit_push,
                     "main_activities" => $main_activities_push,
                 );
@@ -445,6 +450,15 @@ class ProgramCharter
                         $pushKeyAsk = "INSERT INTO log_notification (unit_id_or_user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
                         // die($pushKeyAsk);
                         $this->db->execute($pushKeyAsk);
+                    }
+                }
+
+                if (!empty($data_push['approval_id'])) {
+                    // KEY ASK INSERT
+                    for ($i = 0; $i < count($data_push['approval_id']); $i++) {
+                        $pushApproval = "INSERT INTO log_notification (unit_id_or_user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['approval_id'][$i] . "', '$id', 'Approval', 0, '$generator_id')";
+                        // die($pushApproval);
+                        $this->db->execute($pushApproval);
                     }
                 }
 
