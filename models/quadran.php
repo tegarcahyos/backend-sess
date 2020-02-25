@@ -118,29 +118,30 @@ class Quadran
                     'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
                 );
+
+                $data_item['unit_name'] = 'adasas';
                 
+                die(print_r($data_item));
 
                 for ($i=0; $i < count($data_arr); $i++) { 
                     $unit = "SELECT * FROM unit WHERE id = '$data_arr[$i]['unit_id']'";
                     $result = $this->db->execute($unit);
-                    $row = $result->fetchRow();
-                    $data_item['unit_name'] = $row['name'];
+                    $unit = $result->fetchRow();
+                    $data_item['unit_name'] = $unit['name'];
 
                         // array_push($data_arr, $data_unit);
 
                     $periode = "SELECT * FROM periode WHERE id = '$data_arr[$i]['periode_id']'";
                     $result = $this->db->execute($periode);
-                    $row = $result->fetchRow();
+                    $periode = $result->fetchRow();
                         // extract($row);
                         // $data_periode = array(
                         //     'periode_name' => $name,
                         // );
-                        $data_item['periode_name'] = $row['name'];
+                        $data_item['periode_name'] = $periode['name'];
                         // array_push($data_arr, $data_periode);
                         
                 }
-
-                die(print_r($data_item));
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
