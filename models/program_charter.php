@@ -208,7 +208,6 @@ class ProgramCharter
 
                 $resultPC = array();
                 $pcArray = array();
-                // die(print_r($siArr));
                 for ($i = 0; $i < count($unitArray); $i++) {
                     for ($l = 0; $l < count($siArr); $l++) {
                         $pc = "SELECT * FROM program_charter WHERE unit_id = '" . $unitArray[$i]['id'] . "' AND strategic_initiative = '" . $siArr[$l]['id'] . "'";
@@ -235,12 +234,6 @@ class ProgramCharter
                             }
 
                         }
-                        // $msg = $pcArray;
-                        // if (!empty($pcArray)) {
-                        //     for ($i = 0; $i < count($pcArray); $i++) {
-                        //         array_push($resultPC, $pcArray[$i]);
-                        //     }
-                        // }
                         $msg = $pcArray;
                     }
 
