@@ -14,7 +14,7 @@ class Role
         $query = "SELECT
            *
           FROM
-             $tablename";
+             $tablename ORDER BY created_at DESC";
 
         $result = $this->db->execute($query);
 
