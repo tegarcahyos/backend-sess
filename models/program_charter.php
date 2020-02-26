@@ -275,7 +275,7 @@ class ProgramCharter
                 'status' => $status,
                 'generator_id' => $generator_id,
             );
-            $get_user_pmo = "SELECT * FROM user_detail WHERE unit_id = '".$data_item['unit_id']."'";
+            $get_user_pmo = "SELECT * FROM user_detail WHERE unit_id = '" . $data_item['unit_id'] . "' AND role_id LIKE '%7b4e9e79-5e43-42b3-9f88-0886871dcf0b%'";
             $user_pmo = $this->db->execute($get_user_pmo);
             $res = $user_pmo->fetchRow();
             die(print_r($res));
@@ -409,8 +409,6 @@ class ProgramCharter
                     $data_item['stakeholders']->program_leader,
 
                 );
-
-                
 
                 // MEMBER
                 for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
@@ -581,10 +579,10 @@ class ProgramCharter
                     }
 
                     // Approval (Reviewer)
-                    for ($i=0; $i < count($data_item['stakeholders']->reviewer); $i++) { 
+                    for ($i = 0; $i < count($data_item['stakeholders']->reviewer); $i++) {
                         array_push($approval_push, $data_item['stakeholders']->reviewer[$i]);
                     }
-    
+
                     for ($i = 0; $i < count($stakeholders_push); $i++) {
                         array_push($user_push, $stakeholders_push[$i]);
                     }
