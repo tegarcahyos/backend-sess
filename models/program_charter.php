@@ -252,10 +252,10 @@ class ProgramCharter
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
         $result = $this->db->execute($query);
-        if (empty($result)) {
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
             return "0";
         } else {
-            $row = $result->fetchRow();
             extract($row);
 
             $data_item = array(
@@ -275,6 +275,10 @@ class ProgramCharter
                 'status' => $status,
                 'generator_id' => $generator_id,
             );
+            $get_user_pmo = "SELECT * FROM user_detail WHERE unit_id = '".$data_item['unit_id']."'";
+            $user_pmo = $this->db->execute($get_user_pmo);
+            $res = $user_pmo->fetchRow();
+            die($res);
             return $data_item;
         }
     }
@@ -395,6 +399,7 @@ class ProgramCharter
 
                 $unit_push = array();
                 $user_push = array();
+                $pmo_push = array();
                 $main_activities_push = array();
 
                 // STAKEHOLDER
@@ -404,6 +409,8 @@ class ProgramCharter
                     $data_item['stakeholders']->program_leader,
 
                 );
+
+                
 
                 // MEMBER
                 for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
