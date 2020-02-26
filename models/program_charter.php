@@ -278,7 +278,7 @@ class ProgramCharter
             $get_user_pmo = "SELECT * FROM user_detail WHERE unit_id = '".$data_item['unit_id']."'";
             $user_pmo = $this->db->execute($get_user_pmo);
             $res = $user_pmo->fetchRow();
-            die($res);
+            die(print_r($res));
             return $data_item;
         }
     }
