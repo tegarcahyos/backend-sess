@@ -11,7 +11,7 @@ class AppFeatures
 
     public function get($tablename)
     {
-        $query = "SELECT * FROM  $tablename ";
+        $query = "SELECT * FROM  $tablename ORDER BY created_at DESC";
         // die($query);
         $result = $this->db->execute($query);
         // hitung result
