@@ -275,10 +275,7 @@ class ProgramCharter
                 'status' => $status,
                 'generator_id' => $generator_id,
             );
-            $get_user_pmo = "SELECT * FROM user_detail WHERE unit_id = '" . $data_item['unit_id'] . "' AND role_id LIKE '%7b4e9e79-5e43-42b3-9f88-0886871dcf0b%'";
-            $user_pmo = $this->db->execute($get_user_pmo);
-            $res = $user_pmo->fetchRow();
-            die(print_r($res));
+
             return $data_item;
         }
     }
@@ -410,6 +407,11 @@ class ProgramCharter
 
                 );
 
+                $get_user_pmo = "SELECT * FROM user_detail WHERE unit_id = '" . $data_item['unit_id'] . "' AND role_id LIKE '%7b4e9e79-5e43-42b3-9f88-0886871dcf0b%'";
+                $user_pmo = $this->db->execute($get_user_pmo);
+                $res = $user_pmo->fetchRow();
+                array_push($pmo_push, $res['user_id']);
+
                 // MEMBER
                 for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
                     array_push($user_push, $data_item['stakeholders']->member[$i]);
@@ -432,6 +434,7 @@ class ProgramCharter
                 $data_push = array(
                     "user_id" => $user_push,
                     "unit_id" => $unit_push,
+                    "pmo_id" => $pmo_push,
                     "main_activities" => $main_activities_push,
                 );
 
@@ -441,6 +444,15 @@ class ProgramCharter
                         $pushKeyAsk = "INSERT INTO log_notification (unit_id_or_user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['unit_id'][$i] . "', '$id', 'Key Ask', 0, '$generator_id')";
                         // die($pushKeyAsk);
                         $this->db->execute($pushKeyAsk);
+                    }
+                }
+
+                if (!empty($data_push['pmo_id'])) {
+                    // KEY ASK INSERT
+                    for ($i = 0; $i < count($data_push['pmo_id']); $i++) {
+                        $pushPmo = "INSERT INTO log_notification (unit_id_or_user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['pmo_id'][$i] . "', '$id', 'PMO', 0, '$generator_id')";
+                        // die($pushPmo);
+                        $this->db->execute($pushPmo);
                     }
                 }
 
@@ -563,6 +575,7 @@ class ProgramCharter
                     $unit_push = array();
                     $user_push = array();
                     $approval_push = array();
+                    $pmo_push = array();
                     $main_activities_push = array();
 
                     // STAKEHOLDER
@@ -572,6 +585,11 @@ class ProgramCharter
                         $data_item['stakeholders']->program_leader,
 
                     );
+
+                    $get_user_pmo = "SELECT * FROM user_detail WHERE unit_id = '" . $data_item['unit_id'] . "' AND role_id LIKE '%7b4e9e79-5e43-42b3-9f88-0886871dcf0b%'";
+                    $user_pmo = $this->db->execute($get_user_pmo);
+                    $res = $user_pmo->fetchRow();
+                    array_push($pmo_push, $res['user_id']);
 
                     // Member
                     for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
@@ -600,6 +618,7 @@ class ProgramCharter
                     $data_push = array(
                         "user_id" => $user_push,
                         "unit_id" => $unit_push,
+                        "pmo_id" => $pmo_push,
                         "approval_id" => $approval_push,
                         "main_activities" => $main_activities_push,
                     );
@@ -620,6 +639,15 @@ class ProgramCharter
                             $pushApproval = "INSERT INTO log_notification (unit_id_or_user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['approval_id'][$i] . "', '$id', 'Approval', 0, '$generator_id')";
                             // die($pushApproval);
                             $this->db->execute($pushApproval);
+                        }
+                    }
+
+                    if (!empty($data_push['pmo_id'])) {
+                        // KEY ASK INSERT
+                        for ($i = 0; $i < count($data_push['pmo_id']); $i++) {
+                            $pushpmo = "INSERT INTO log_notification (unit_id_or_user_id, pc_id, type, status, sender_id) VALUES ('" . $data_push['pmo_id'][$i] . "', '$id', 'pmo', 0, '$generator_id')";
+                            // die($pushpmo);
+                            $this->db->execute($pushpmo);
                         }
                     }
 
