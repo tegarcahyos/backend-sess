@@ -51,9 +51,9 @@ class Quadran
                         $num = $result->rowCount();
                         if ($num > 0) {
                             while ($row = $result->fetchRow()) {
-                                die(print_r($row));
-                                $data_item['program_charter_id'] = $getQuadranA[$j];
-                                $data_item['program_charter_name'] = $row;
+                                $data_item['program_charter_id'] = $row['id'];
+                                $data_item['program_charter_title'] = $row['title'];
+                                $data_item['program_charter_weight'] = $row['weight'];
                             }
                         }
                     }
