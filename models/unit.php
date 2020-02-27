@@ -56,7 +56,7 @@ class Unit
             0               AS number_of_ancestors,
             NULL :: TEXT AS parent_id,
             id              AS root_id,
-            name            AS root_name
+            name            AS root_name,
             organization_id AS organization_id
           FROM unit
           WHERE
@@ -80,7 +80,7 @@ class Unit
           root_name,
           organization_id
         FROM parents  where id = '$id' AND number_of_ancestors = (select max(parents.number_of_ancestors) from parents where id = '$id')";
-        die($query);
+
         $result = $this->db->execute($query);
 
         $num = $result->rowCount();
