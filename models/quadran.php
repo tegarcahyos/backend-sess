@@ -39,6 +39,8 @@ class Quadran
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
 
+                    $get_id_pc = json_decode($data_arr[$i]['program_charter']);
+                    die(print_r($get_id_pc->A));
                     // for ($j=0; $j < $data_arr[$i]['program_charter']; $j++) {
                     //     # code...
                     // }
@@ -119,9 +121,6 @@ class Quadran
                     $result = $this->db->execute($unit);
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
-
-                    $get_id_pc = json_decode($data_arr[$i]['program_charter']);
-                    die(print_r($get_id_pc->A));
 
                     $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
                     $result = $this->db->execute($periode);
