@@ -40,7 +40,15 @@ class Quadran
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
                     $get_id_pc = json_decode($data_arr[$i]['program_charter']);
-                    die(print_r(count((array) $get_id_pc)));
+                    $pc = (array) $get_id_pc;
+                    for ($i = 0; $i < count($pc); $i++) {
+                        if (!empty($pc[$i])) {
+                            die(print_r($pc[$i]));
+                            for ($j = 0; $j < count($pc[$i]); $j++) {
+
+                            }
+                        }
+                    }
                     // $getQuadranA = $get_id_pc->A;
                     // $getQuadranB = $get_id_pc->B;
                     // $getQuadranC = $get_id_pc->C;
