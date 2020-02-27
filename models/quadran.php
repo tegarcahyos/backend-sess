@@ -85,8 +85,8 @@ class Quadran
                         }
                     }
 
-                    for ($m = 0; $m < count($getQuadranC); $m++) {
-                        $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranC[$m] . "'";
+                    for ($m = 0; $m < count($getQuadranD); $m++) {
+                        $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranD[$m] . "'";
                         $result = $this->db->execute($pc);
                         $num = $result->rowCount();
                         if ($num > 0) {
