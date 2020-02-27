@@ -45,9 +45,9 @@ class Quadran
                     $data_item['periode_name'] = $periode['name'];
 
                     $user = "SELECT * FROM user WHERE id = '" . $data_arr[$i]['user_id'] . "'";
-                    $result = $this->db->execute($periode);
-                    $periode = $result->fetchRow();
-                    $data_item['periode_name'] = $periode['name'];
+                    $result = $this->db->execute($user);
+                    $user = $result->fetchRow();
+                    $data_item['user_name'] = $user['name'];
                 }
 
                 // die(print_r($data_item));
@@ -122,9 +122,9 @@ class Quadran
                     $data_item['periode_name'] = $periode['name'];
 
                     $user = "SELECT * FROM user WHERE id = '" . $data_arr[$i]['user_id'] . "'";
-                    $result = $this->db->execute($periode);
-                    $periode = $result->fetchRow();
-                    $data_item['periode_name'] = $periode['name'];
+                    $result = $this->db->execute($user);
+                    $user = $result->fetchRow();
+                    $data_item['user_name'] = $user['name'];
                 }
 
                 // die(print_r($data_item));
