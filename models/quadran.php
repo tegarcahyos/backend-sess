@@ -47,14 +47,14 @@ class Quadran
                     $getQuadranD = $get_id_pc->D;
 
                     for ($j = 0; $j < count($getQuadranA); $j++) {
-                        $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranA[$j] . "'";
-                        $result = $this->db->execute($pc);
+                        $pcA = "SELECT * FROM program_charter WHERE id = '" . $getQuadranA[$j] . "'";
+                        $result = $this->db->execute($pcA);
                         $num = $result->rowCount();
                         if ($num > 0) {
-                            while ($row = $result->fetchRow()) {
-                                $data_item['detail_pc'][$j]['id'] = $row['id'];
-                                $data_item['detail_pc'][$j]['title'] = $row['title'];
-                                $data_item['detail_pc'][$j]['weight'] = $row['weight'];
+                            while ($rowA = $result->fetchRow()) {
+                                $data_item['detail_pc'][$j]['id'] = $rowA['id'];
+                                $data_item['detail_pc'][$j]['title'] = $rowA['title'];
+                                $data_item['detail_pc'][$j]['weight'] = $rowA['weight'];
                             }
                         }
                     }
