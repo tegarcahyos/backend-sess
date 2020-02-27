@@ -36,6 +36,7 @@ class ExpertJudgement
                 $result_arr = array();
                 for ($i = 0; $i < count($data_arr); $i++) {
                     $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
+                    die($unit);
                     $result = $this->db->execute($unit);
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
