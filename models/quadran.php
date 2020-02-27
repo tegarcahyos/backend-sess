@@ -43,8 +43,6 @@ class Quadran
                     $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                     $getQuadranA = $get_id_pc->A;
                     $getQuadranB = $get_id_pc->B;
-                    die(print_r($getQuadranB));
-
                     $getQuadranC = $get_id_pc->C;
                     $getQuadranD = $get_id_pc->D;
 
@@ -72,7 +70,7 @@ class Quadran
                                 $data_item['detail_pc']['B'][$j]['weight'] = $row['weight'];
                             }
                         } else {
-                            $data_item['detail_pc']['B'][$j] = [];
+                            $data_item['detail_pc']['B'] = $getQuadranB;
                         }
                     }
 
