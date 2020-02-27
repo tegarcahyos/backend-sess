@@ -40,8 +40,8 @@ class Quadran
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
                     $get_id_pc = json_decode($data_arr[$i]['program_charter']);
-                    $pc = (array) $get_id_pc;
-                    die(print_r(array_values($pc)));
+                    $pc = array_values((array) $get_id_pc);
+                    // die(print_r($pc));
                     for ($j = 0; $j < count($pc); $j++) {
                         die(print_r($pc[$j]));
                         if (!empty($pc[$j])) {
