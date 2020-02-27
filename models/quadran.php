@@ -52,9 +52,9 @@ class Quadran
                         $num = $result->rowCount();
                         if ($num > 0) {
                             while ($row = $result->fetchRow()) {
-                                $data_item['detail_pc']['A']['id'] = $row['id'];
-                                $data_item['detail_pc']['A']['title'] = $row['title'];
-                                $data_item['detail_pc']['A']['weight'] = $row['weight'];
+                                $data_item['detail_pc']['A'][$j]['id'] = $row['id'];
+                                $data_item['detail_pc']['A'][$j]['title'] = $row['title'];
+                                $data_item['detail_pc']['A'][$j]['weight'] = $row['weight'];
                             }
                         }
                     }
