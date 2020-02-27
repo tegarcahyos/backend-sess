@@ -40,6 +40,25 @@ class ExpertJudgement
                     $result = $this->db->execute($unit);
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
+                    $get_id_pc = json_decode($data_arr[$i]['program_charter']);
+                    $pc = array_values((array) $get_id_pc);
+                    // die(print_r($pc));
+                    for ($j = 0; $j < count($pc); $j++) {
+                        if (!empty($pc[$j])) {
+                            for ($k = 0; $k < count($pc[$j]); $k++) {
+                                // die(print_r($pc[$j][$k]));
+                                $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j][$k] . "'";
+                                $result = $this->db->execute($get_pc);
+                                $num = $result->rowCount();
+                                if ($num > 0) {
+                                    while ($row = $result->fetchRow()) {
+                                        $data_item['detail_pc'][$row['id']]['title'] = $row['title'];
+                                        $data_item['detail_pc'][$row['id']]['weight'] = $row['weight'];
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
                     $result = $this->db->execute($periode);

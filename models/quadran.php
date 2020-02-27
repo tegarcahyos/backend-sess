@@ -53,69 +53,11 @@ class Quadran
                                     while ($row = $result->fetchRow()) {
                                         $data_item['detail_pc'][$row['id']]['title'] = $row['title'];
                                         $data_item['detail_pc'][$row['id']]['weight'] = $row['weight'];
-                                        // $data_item['detail_pc'][$j][$k]['title'] = ;
-                                        // $data_item['detail_pc'][$j][$k]['weight'] = $row['weight'];
                                     }
                                 }
                             }
                         }
                     }
-                    // $getQuadranA = $get_id_pc->A;
-                    // $getQuadranB = $get_id_pc->B;
-                    // $getQuadranC = $get_id_pc->C;
-                    // $getQuadranD = $get_id_pc->D;
-
-                    // for ($j = 0; $j < count($getQuadranA); $j++) {
-                    //     $pcA = "SELECT * FROM program_charter WHERE id = '" . $getQuadranA[$j] . "'";
-                    //     $result = $this->db->execute($pcA);
-                    //     $num = $result->rowCount();
-                    //     if ($num > 0) {
-                    //         while ($rowA = $result->fetchRow()) {
-                    //             $data_item['detail_pc'][$j]['id'] = $rowA['id'];
-                    //             $data_item['detail_pc'][$j]['title'] = $rowA['title'];
-                    //             $data_item['detail_pc'][$j]['weight'] = $rowA['weight'];
-                    //         }
-                    //     }
-                    // }
-
-                    // for ($k = 0; $k < count($getQuadranB); $k++) {
-                    //     $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranB[$k] . "'";
-                    //     $result = $this->db->execute($pc);
-                    //     $num = $result->rowCount();
-                    //     if ($num > 0) {
-                    //         while ($row = $result->fetchRow()) {
-                    //             $data_item['detail_pc'][$k]['id'] = $row['id'];
-                    //             $data_item['detail_pc'][$k]['title'] = $row['title'];
-                    //             $data_item['detail_pc'][$k]['weight'] = $row['weight'];
-                    //         }
-                    //     }
-                    // }
-
-                    // for ($l = 0; $l < count($getQuadranC); $l++) {
-                    //     $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranC[$l] . "'";
-                    //     $result = $this->db->execute($pc);
-                    //     $num = $result->rowCount();
-                    //     if ($num > 0) {
-                    //         while ($row = $result->fetchRow()) {
-                    //             $data_item['detail_pc'][$l]['id'] = $row['id'];
-                    //             $data_item['detail_pc'][$l]['title'] = $row['title'];
-                    //             $data_item['detail_pc'][$l]['weight'] = $row['weight'];
-                    //         }
-                    //     }
-                    // }
-
-                    // for ($m = 0; $m < count($getQuadranD); $m++) {
-                    //     $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranD[$m] . "'";
-                    //     $result = $this->db->execute($pc);
-                    //     $num = $result->rowCount();
-                    //     if ($num > 0) {
-                    //         while ($row = $result->fetchRow()) {
-                    //             $data_item['detail_pc'][$m]['id'] = $row['id'];
-                    //             $data_item['detail_pc'][$m]['title'] = $row['title'];
-                    //             $data_item['detail_pc'][$m]['weight'] = $row['weight'];
-                    //         }
-                    //     }
-                    // }
 
                     $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
                     $result = $this->db->execute($periode);
