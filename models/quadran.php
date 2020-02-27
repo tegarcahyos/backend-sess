@@ -40,10 +40,19 @@ class Quadran
                     $data_item['unit_name'] = $unit['name'];
 
                     $get_id_pc = json_decode($data_arr[$i]['program_charter']);
-                    die(print_r($get_id_pc->A));
-                    // for ($j=0; $j < $data_arr[$i]['program_charter']; $j++) {
-                    //     # code...
-                    // }
+                    $getQuadranA = $get_id_pc->A;
+                    $getQuadranB = $get_id_pc->B;
+                    $getQuadranC = $get_id_pc->C;
+                    $getQuadranD = $get_id_pc->D;
+
+                    for ($j = 0; $j < $getQuadranA; $j++) {
+                        $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranA[$j] . "'";
+                        $result = $this->db->execute($pc);
+                        $num = $result->rowCount();
+                        if ($num > 0) {
+                            $data_item['program_charter_id'] = $pc[$j];
+                        }
+                    }
 
                     $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
                     $result = $this->db->execute($periode);

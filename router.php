@@ -218,6 +218,7 @@ class Router
             // --- USER ---
             $r->get('/api/index.php/users/get', 'User/get');
             $r->get('/api/index.php/users/find_id/{id}', 'User/findById');
+            $r->get('/api/index.php/users/search_user/{value}', 'User/searchUser');
             $r->get('/api/index.php/users/delete/{id}', 'User/delete');
             $r->post('/api/index.php/users/insert', 'User/insert');
             $r->post('/api/index.php/users/update/{id}', 'User/update');
@@ -443,6 +444,7 @@ class Router
             $r->get('/api/index.php/unit/get', 'Unit/get');
             $r->get('/api/index.php/unit/get_leaf_unit', 'Unit/getLeafUnit');
             $r->get('/api/index.php/unit/find_id/{id}', 'Unit/findById');
+            $r->get('/api/index.php/unit/search_unit/{value}', 'Unit/searchUnit');
             $r->get('/api/index.php/unit/get_users/{id}', 'Unit/getAllUsers');
             $r->get('/api/index.php/unit/get_by_parent_unit_id/{parent_id}', 'Unit/getByParent');
             $r->get('/api/index.php/unit/get_root_parent/{id}', 'Unit/getRootParent');
@@ -706,7 +708,7 @@ class Router
                     $explodeUri[4] == "find_by_pc") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['pc_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[4] == "find") {
+                    $explodeUri[4] == "find" || $explodeUri[4] == "search_unit" || $explodeUri[4] == "search_user") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['value'], $explodeUri[3]));
                 } else if (
                     $explodeUri[4] == "select_by_title") {

@@ -93,7 +93,7 @@ class Unit
                     'number_of_ancestors' => $number_of_ancestors,
                     'parent_id' => $parent_id,
                     'root_id' => $root_id,
-                    'root_name' => $root_name
+                    'root_name' => $root_name,
                 );
 
                 array_push($data_arr, $data_item);
@@ -131,6 +131,41 @@ class Unit
             // Cari atasnya
             $this->getParentUnitBy($idParentTemp);
         }
+    }
+
+    public function searchUnit($value, $tablename)
+    {
+        $query = "SELECT * FROM $tablename WHERE code ilike '%$value%' OR name ilike '%$value%'";
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'cfu_fu_id' => $cfu_fu_id,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+
     }
 
     public function getByParent($parent_id, $tablename)
