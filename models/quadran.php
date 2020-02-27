@@ -42,8 +42,8 @@ class Quadran
                     $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                     $pc = (array) $get_id_pc;
                     for ($j = 0; $j < count($pc); $j++) {
+                        die(print_r($pc[$j]));
                         if (!empty($pc[$j])) {
-                            die(print_r($pc[$j]));
                             for ($k = 0; $k < count($pc[$j]); $k++) {
 
                             }
