@@ -62,7 +62,7 @@ class ExpertJudgement
                 'user_id' => $user_id,
                 'program_charter' => $program_charter,
                 'unit_id' => $unit_id,
-                    'periode_id' => $periode_id,
+                'periode_id' => $periode_id,
             );
 
             $msg = $data_item;
@@ -74,27 +74,32 @@ class ExpertJudgement
     {
         $query = "SELECT * FROM $tablename WHERE user_id = '$user_id'";
         $result = $this->db->execute($query);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
-            $msg = "Data Kosong";
-            return $msg;
-        } else {
+        $num = $result->rowCount();
 
-            extract($row);
+        if ($num > 0) {
 
-            // Push to data_arr
+            $data_arr = array();
 
-            $data_item = array(
-                'id' => $id,
-                'user_id' => $user_id,
-                'program_charter' => $program_charter,
-                'unit_id' => $unit_id,
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'user_id' => $user_id,
+                    'program_charter' => $program_charter,
+                    'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
-            );
+                );
 
-            $msg = $data_item;
-            return $msg;
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = 'Data Kosong';
         }
+
+        return $msg;
     }
 
     public function insert($tablename)
@@ -141,7 +146,7 @@ class ExpertJudgement
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
                         'unit_id' => $unit_id,
-                    'periode_id' => $periode_id,
+                        'periode_id' => $periode_id,
                     );
 
                     array_push($data_arr, $data_item);
@@ -196,7 +201,7 @@ class ExpertJudgement
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
                         'unit_id' => $unit_id,
-                    'periode_id' => $periode_id,
+                        'periode_id' => $periode_id,
                     );
 
                     array_push($data_arr, $data_item);
