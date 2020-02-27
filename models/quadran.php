@@ -59,15 +59,41 @@ class Quadran
                         }
                     }
 
-                    for ($j = 0; $j < count($getQuadranB); $j++) {
-                        $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranB[$j] . "'";
+                    for ($k = 0; $k < count($getQuadranB); $k++) {
+                        $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranB[$k] . "'";
                         $result = $this->db->execute($pc);
                         $num = $result->rowCount();
                         if ($num > 0) {
                             while ($row = $result->fetchRow()) {
-                                $data_item['detail_pc']['B'][$j]['id'] = $row['id'];
-                                $data_item['detail_pc']['B'][$j]['title'] = $row['title'];
-                                $data_item['detail_pc']['B'][$j]['weight'] = $row['weight'];
+                                $data_item['detail_pc'][$k]['id'] = $row['id'];
+                                $data_item['detail_pc'][$k]['title'] = $row['title'];
+                                $data_item['detail_pc'][$k]['weight'] = $row['weight'];
+                            }
+                        }
+                    }
+
+                    for ($l = 0; $l < count($getQuadranC); $l++) {
+                        $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranC[$l] . "'";
+                        $result = $this->db->execute($pc);
+                        $num = $result->rowCount();
+                        if ($num > 0) {
+                            while ($row = $result->fetchRow()) {
+                                $data_item['detail_pc'][$l]['id'] = $row['id'];
+                                $data_item['detail_pc'][$l]['title'] = $row['title'];
+                                $data_item['detail_pc'][$l]['weight'] = $row['weight'];
+                            }
+                        }
+                    }
+
+                    for ($m = 0; $m < count($getQuadranC); $m++) {
+                        $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranC[$m] . "'";
+                        $result = $this->db->execute($pc);
+                        $num = $result->rowCount();
+                        if ($num > 0) {
+                            while ($row = $result->fetchRow()) {
+                                $data_item['detail_pc'][$m]['id'] = $row['id'];
+                                $data_item['detail_pc'][$m]['title'] = $row['title'];
+                                $data_item['detail_pc'][$m]['weight'] = $row['weight'];
                             }
                         }
                     }
