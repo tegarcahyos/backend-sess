@@ -70,7 +70,7 @@ class Quadran
                                 $data_item['detail_pc']['B'][$j]['weight'] = $row['weight'];
                             }
                         } else {
-                            $data_item['detail_pc']['B'] = [];
+                            $data_item['detail_pc']['B'][$j] = [];
                         }
                     }
 
