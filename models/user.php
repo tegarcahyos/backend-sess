@@ -14,7 +14,7 @@ class User
         $query = "SELECT
            *
           FROM
-             $tablename";
+             $tablename LIMIT 100";
 
         $result = $this->db->execute($query);
 
