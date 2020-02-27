@@ -32,7 +32,7 @@ class Quadran
                     'periode_id' => $periode_id,
                 );
                 array_push($data_arr, $data_item);
-                $data_item['program_charter'] = array();
+                $data_item['detail_pc'] = array();
                 $result_arr = array();
                 for ($i = 0; $i < count($data_arr); $i++) {
                     $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
