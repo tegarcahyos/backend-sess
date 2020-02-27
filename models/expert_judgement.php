@@ -45,7 +45,7 @@ class ExpertJudgement
                     $periode = $result->fetchRow();
                     $data_item['periode_name'] = $periode['name'];
 
-                    $user = "SELECT * FROM user WHERE id = '" . $data_arr[$i]['user_id'] . "'";
+                    $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
                     $result = $this->db->execute($user);
                     $user = $result->fetchRow();
                     $data_item['user_name'] = $user['name'];
@@ -124,7 +124,7 @@ class ExpertJudgement
                     $periode = $result->fetchRow();
                     $data_item['periode_name'] = $periode['name'];
 
-                    $user = "SELECT * FROM user WHERE id = '" . $data_arr[$i]['user_id'] . "'";
+                    $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
                     $result = $this->db->execute($user);
                     $user = $result->fetchRow();
                     $data_item['user_name'] = $user['name'];
