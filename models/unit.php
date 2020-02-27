@@ -97,6 +97,7 @@ class Unit
                     'parent_id' => $parent_id,
                     'root_id' => $root_id,
                     'root_name' => $root_name,
+                    'organization_id' => $organization_id,
                 );
 
                 array_push($data_arr, $data_item);
