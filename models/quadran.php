@@ -45,7 +45,17 @@ class Quadran
                     for ($j = 0; $j < count($pc); $j++) {
                         if (!empty($pc[$j])) {
                             for ($k = 0; $k < count($pc[$j]); $k++) {
-                                die(print_r($pc[$j][$k]));
+                                // die(print_r($pc[$j][$k]));
+                                $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j][$k] . "'";
+                                $result = $this->db->execute($get_pc);
+                                $num = $result->rowCount();
+                                if ($num > 0) {
+                                    while ($row = $result->fetchRow()) {
+                                        $data_item['detail_pc'][$k]['id'] = $row['id'];
+                                        $data_item['detail_pc'][$k]['title'] = $row['title'];
+                                        $data_item['detail_pc'][$k]['weight'] = $row['weight'];
+                                    }
+                                }
                             }
                         }
                     }
