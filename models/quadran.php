@@ -45,7 +45,7 @@ class Quadran
                     $getQuadranC = $get_id_pc->C;
                     $getQuadranD = $get_id_pc->D;
 
-                    for ($j = 0; $j < $getQuadranA; $j++) {
+                    for ($j = 0; $j < count($getQuadranA); $j++) {
                         $pc = "SELECT * FROM program_charter WHERE id = '" . $getQuadranA[$j] . "'";
                         $result = $this->db->execute($pc);
                         $num = $result->rowCount();
