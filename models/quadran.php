@@ -27,7 +27,7 @@ class Quadran
                 $data_item = array(
                     'id' => $id,
                     'user_id' => $user_id,
-                    'program_charter' => $program_charter,
+                    json_decode('program_charter' => $program_charter),
                     'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
                 );
@@ -38,6 +38,10 @@ class Quadran
                     $result = $this->db->execute($unit);
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
+
+                    // for ($j=0; $j < $data_arr[$i]['program_charter']; $j++) { 
+                    //     # code...
+                    // }
 
                     $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
                     $result = $this->db->execute($periode);
