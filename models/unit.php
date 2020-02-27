@@ -57,7 +57,8 @@ class Unit
             NULL :: TEXT AS parent_id,
             id              AS root_id,
             name            AS root_name,
-            organization_id AS organization_id
+            organization_id AS organization_id,
+            cfu_fu_id       AS cfu_fu_id
           FROM unit
           WHERE
             parent_id::text IS NOT NULL
@@ -68,7 +69,8 @@ class Unit
             child.parent_id::text                              AS parent_id,
             coalesce(p.root_id::uuid, child.parent_id::uuid) AS root_id,
             p.root_name,
-            p.organization_id
+            p.organization_id,
+            p.cfu_fu_id
           FROM unit child
             INNER JOIN parents p ON p.id::text = child.parent_id::text
         )
@@ -78,7 +80,8 @@ class Unit
           parent_id,
           root_id,
           root_name,
-          organization_id
+          organization_id,
+          cfu_fu_id
         FROM parents  where id = '$id' AND number_of_ancestors = (select max(parents.number_of_ancestors) from parents where id = '$id')";
 
         $result = $this->db->execute($query);
@@ -98,6 +101,7 @@ class Unit
                     'root_id' => $root_id,
                     'root_name' => $root_name,
                     'organization_id' => $organization_id,
+                    'cfu_fu_id' => $cfu_fu_id,
                 );
 
                 array_push($data_arr, $data_item);
