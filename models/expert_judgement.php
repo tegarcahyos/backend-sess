@@ -33,7 +33,27 @@ class ExpertJudgement
                 );
 
                 array_push($data_arr, $data_item);
-                $msg = $data_arr;
+                $result_arr = array();
+                for ($i = 0; $i < count($data_arr); $i++) {
+                    $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
+                    $result = $this->db->execute($unit);
+                    $unit = $result->fetchRow();
+                    $data_item['unit_name'] = $unit['name'];
+
+                    $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
+                    $result = $this->db->execute($periode);
+                    $periode = $result->fetchRow();
+                    $data_item['periode_name'] = $periode['name'];
+
+                    $user = "SELECT * FROM user WHERE id = '" . $data_arr[$i]['user_id'] . "'";
+                    $result = $this->db->execute($periode);
+                    $periode = $result->fetchRow();
+                    $data_item['periode_name'] = $periode['name'];
+                }
+
+                // die(print_r($data_item));
+                array_push($result_arr, $data_item);
+                $msg = $result_arr;
             }
 
         } else {
@@ -92,7 +112,27 @@ class ExpertJudgement
                 );
 
                 array_push($data_arr, $data_item);
-                $msg = $data_arr;
+                $result_arr = array();
+                for ($i = 0; $i < count($data_arr); $i++) {
+                    $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
+                    $result = $this->db->execute($unit);
+                    $unit = $result->fetchRow();
+                    $data_item['unit_name'] = $unit['name'];
+
+                    $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
+                    $result = $this->db->execute($periode);
+                    $periode = $result->fetchRow();
+                    $data_item['periode_name'] = $periode['name'];
+
+                    $user = "SELECT * FROM user WHERE id = '" . $data_arr[$i]['user_id'] . "'";
+                    $result = $this->db->execute($periode);
+                    $periode = $result->fetchRow();
+                    $data_item['periode_name'] = $periode['name'];
+                }
+
+                // die(print_r($data_item));
+                array_push($result_arr, $data_item);
+                $msg = $result_arr;
             }
 
         } else {

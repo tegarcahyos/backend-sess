@@ -33,18 +33,23 @@ class Quadran
                 );
                 array_push($data_arr, $data_item);
                 $result_arr = array();
-                for ($i=0; $i < count($data_arr); $i++) {
-                    $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
+                for ($i = 0; $i < count($data_arr); $i++) {
+                    $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
                     $result = $this->db->execute($unit);
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
 
-                    $periode = "SELECT * FROM periode WHERE id = '".$data_arr[$i]['periode_id']."'";
+                    $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
                     $result = $this->db->execute($periode);
                     $periode = $result->fetchRow();
-                        $data_item['periode_name'] = $periode['name'];
+                    $data_item['periode_name'] = $periode['name'];
+
+                    $user = "SELECT * FROM user WHERE id = '" . $data_arr[$i]['user_id'] . "'";
+                    $result = $this->db->execute($periode);
+                    $periode = $result->fetchRow();
+                    $data_item['periode_name'] = $periode['name'];
                 }
-                
+
                 // die(print_r($data_item));
                 array_push($result_arr, $data_item);
                 $msg = $result_arr;
@@ -105,18 +110,23 @@ class Quadran
                 );
                 array_push($data_arr, $data_item);
                 $result_arr = array();
-                for ($i=0; $i < count($data_arr); $i++) {
-                    $unit = "SELECT * FROM unit WHERE id = '".$data_arr[$i]['unit_id']."'";
+                for ($i = 0; $i < count($data_arr); $i++) {
+                    $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
                     $result = $this->db->execute($unit);
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
 
-                    $periode = "SELECT * FROM periode WHERE id = '".$data_arr[$i]['periode_id']."'";
+                    $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
                     $result = $this->db->execute($periode);
                     $periode = $result->fetchRow();
-                        $data_item['periode_name'] = $periode['name'];
+                    $data_item['periode_name'] = $periode['name'];
+
+                    $user = "SELECT * FROM user WHERE id = '" . $data_arr[$i]['user_id'] . "'";
+                    $result = $this->db->execute($periode);
+                    $periode = $result->fetchRow();
+                    $data_item['periode_name'] = $periode['name'];
                 }
-                
+
                 // die(print_r($data_item));
                 array_push($result_arr, $data_item);
                 $msg = $result_arr;
@@ -171,7 +181,7 @@ class Quadran
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
                         'unit_id' => $unit_id,
-                    'periode_id' => $periode_id,
+                        'periode_id' => $periode_id,
                     );
 
                     array_push($data_arr, $data_item);
@@ -225,7 +235,7 @@ class Quadran
                         'user_id' => $user_id,
                         'program_charter' => $program_charter,
                         'unit_id' => $unit_id,
-                    'periode_id' => $periode_id,
+                        'periode_id' => $periode_id,
                     );
 
                     array_push($data_arr, $data_item);
@@ -243,7 +253,7 @@ class Quadran
         $query = "DELETE FROM $tablename WHERE id = '$id'";
 
         $result = $this->db->execute($query);
-        
+
         // return $result;
         $res = $this->db->affected_rows();
 
