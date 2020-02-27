@@ -39,9 +39,8 @@ class Quadran
                     $result = $this->db->execute($unit);
                     $unit = $result->fetchRow();
                     $data_item['unit_name'] = $unit['name'];
-
-                    die(count(json_decode($data_arr[$i]['program_charter'])));
-                    // $get_id_pc = json_decode($data_arr[$i]['program_charter']);
+                    $get_id_pc = json_decode($data_arr[$i]['program_charter']);
+                    die(print_r(count($get_id_pc)));
                     // $getQuadranA = $get_id_pc->A;
                     // $getQuadranB = $get_id_pc->B;
                     // $getQuadranC = $get_id_pc->C;
