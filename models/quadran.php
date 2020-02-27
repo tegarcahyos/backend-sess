@@ -43,10 +43,9 @@ class Quadran
                     $pc = array_values((array) $get_id_pc);
                     // die(print_r($pc));
                     for ($j = 0; $j < count($pc); $j++) {
-                        die(print_r($pc[$j]));
                         if (!empty($pc[$j])) {
                             for ($k = 0; $k < count($pc[$j]); $k++) {
-
+                                die(print_r($pc[$j][$k]));
                             }
                         }
                     }
