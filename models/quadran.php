@@ -27,7 +27,7 @@ class Quadran
                 $data_item = array(
                     'id' => $id,
                     'user_id' => $user_id,
-                    'program_charter' => json_decode($program_charter),
+                    'program_charter' => json_encode($program_charter),
                     'unit_id' => $unit_id,
                     'periode_id' => $periode_id,
                 );
