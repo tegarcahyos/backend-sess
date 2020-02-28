@@ -55,23 +55,25 @@ class ExpertJudgement
                 $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                 $pc = array_values((array) $get_id_pc);
                 // die(print_r($pc));
-                $pc_arr = array();
-                if (!empty($pc)) {
-                    for ($j = 0; $j < count($pc); $j++) {
-                        $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j] . "'";
-                        $result = $this->db->execute($get_pc);
-                        $num = $result->rowCount();
-                        if ($num > 0) {
-                            while ($row = $result->fetchRow()) {
-                                $data_item['detail_pc'][$row['id']]['title'] = $row['title'];
-                                $data_item['detail_pc'][$row['id']]['weight'] = $row['weight'];
-                            }
+                // $pc_arr = array();
+                // if (!empty($pc)) {
+                //     for ($j = 0; $j < count($pc); $j++) {
+                //         $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j] . "'";
+                //         $result = $this->db->execute($get_pc);
+                //         $num = $result->rowCount();
+                //         if ($num > 0) {
+                //             while ($row = $result->fetchRow()) {
+                //                 $data_item['detail_pc'][$row['id']]['title'] = $row['title'];
+                //                 $data_item['detail_pc'][$row['id']]['weight'] = $row['weight'];
+                //             }
 
-                        }
-                    }
-                    array_push($result_arr, $data_item);
+                //         }
+                //     }
+                //     // array_push($result_arr, $data_item);
 
-                }
+                // }
+
+                array_push($result_arr, $data_item);
 
             }
             $msg = $result_arr;
