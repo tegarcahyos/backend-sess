@@ -84,8 +84,6 @@ class ExpertJudgement
                     $result = $this->db->execute($user);
                     $user = $result->fetchRow();
                     $data_item['user_name'] = $user['name'];
-
-                    array_push($result_arr, $data_item);
                 }
             }
             $msg = $result_arr;
