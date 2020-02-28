@@ -76,8 +76,8 @@ class ExpertJudgement
                     }
 
                 }
+                $msg = $result_arr;
             }
-            $msg = $result_arr;
 
         } else {
             $msg = 'Data Kosong';
