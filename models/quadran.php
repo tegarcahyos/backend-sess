@@ -57,7 +57,7 @@ class Quadran
 
                 if (!empty($pc[$i])) {
                     for ($j = 0; $j < count($pc[$i]); $j++) {
-                        die($pc[2]);
+                        die(print_r($pc[2]));
                         $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$i][$j] . "'";
                         $result = $this->db->execute($get_pc);
                         $num = $result->rowCount();
