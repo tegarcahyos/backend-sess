@@ -14,7 +14,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename LIMIT $n OFFSET $y";
+             $tablename LIMIT 100";
 
         $result = $this->db->execute($query);
 
