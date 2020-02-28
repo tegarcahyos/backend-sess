@@ -51,9 +51,11 @@ class ExpertJudgement
                 $result = $this->db->execute($user);
                 $user = $result->fetchRow();
                 $data_item['user_name'] = $user['name'];
+
                 $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                 $pc = array_values((array) $get_id_pc);
                 // die(print_r($pc));
+                $pc_arr = array();
                 if (!empty($pc)) {
                     for ($j = 0; $j < count($pc); $j++) {
                         $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j] . "'";
@@ -61,14 +63,18 @@ class ExpertJudgement
                         $num = $result->rowCount();
                         if ($num > 0) {
                             while ($row = $result->fetchRow()) {
-                                $data_item['detail_pc'][$row['id']]['title'] = $row['title'];
-                                $data_item['detail_pc'][$row['id']]['weight'] = $row['weight'];
+                                $data = array(
+                                    $data_item['detail_pc'][$row['id']]['title'] => $row['title'],
+                                    $data_item['detail_pc'][$row['id']]['weight'] => $row['weight'],
+                                );
                             }
                         }
+
+                        array_push($pc_arr, $data_arr);
                     }
 
                 }
-                array_push($result_arr, $data_item);
+                array_push($result_arr, $data_item, $pc_arr);
 
             }
             $msg = $result_arr;
