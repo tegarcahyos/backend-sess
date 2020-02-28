@@ -68,8 +68,8 @@ class ExpertJudgement
                             }
 
                         }
-                        array_push($result_arr, $data_item);
                     }
+                    array_push($result_arr, $data_item);
 
                 }
 
