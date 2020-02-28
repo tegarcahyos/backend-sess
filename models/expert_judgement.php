@@ -67,8 +67,8 @@ class ExpertJudgement
                                 $data_item['detail_pc'][$row['id']]['weight'] = $row['weight'];
                             }
 
-                            array_push($result_arr, $data_item);
                         }
+                        array_push($result_arr, $data_item);
                     }
 
                 }
