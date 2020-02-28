@@ -35,7 +35,7 @@ class ExpertJudgement
             }
 
             $result_arr = array();
-            die(print_r($data_arr));
+            // die(print_r($data_arr));
             for ($i = 0; $i < count($data_arr); $i++) {
                 $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
                 // die($unit);
@@ -53,7 +53,7 @@ class ExpertJudgement
                 $user = $result->fetchRow();
                 $data_item['user_name'] = $user['name'];
 
-                array_push($result_arr, $data_item);
+                array_push($data_arr[$i], $data_item);
 
                 $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                 $pc = array_values((array) $get_id_pc);
