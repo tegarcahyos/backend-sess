@@ -53,7 +53,7 @@ class Quadran
                 $data_arr[$i]['user_name'] = $user['name'];
 
                 $get_id_pc = json_decode(json_encode($data_arr[1]['program_charter']));
-                $pc = array_values((array) $get_id_pc);
+                $pc = array_values((array) $get_id_pc[$i]);
                 die(print_r($pc));
                 if (!empty($pc)) {
                     for ($j = 0; $j < count($pc); $j++) {
