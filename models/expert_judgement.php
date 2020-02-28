@@ -56,9 +56,6 @@ class ExpertJudgement
                     // die(print_r($pc));
                     if (!empty($pc)) {
                         for ($j = 0; $j < count($pc); $j++) {
-                            // if (!empty($pc[$j])) {
-                            //     for ($k = 0; $k < count($pc[$j]); $k++) {
-                            // die(print_r($pc[$j][$k]));
                             $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j] . "'";
                             $result = $this->db->execute($get_pc);
                             $num = $result->rowCount();
@@ -68,8 +65,6 @@ class ExpertJudgement
                                     $data_item['detail_pc'][$row['id']]['weight'] = $row['weight'];
                                 }
                             }
-                            //     }
-                            // }
                             array_push($result_arr, $data_item);
                         }
 
