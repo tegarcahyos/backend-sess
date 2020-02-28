@@ -54,10 +54,11 @@ class ExpertJudgement
                 $data_item['user_name'] = $user['name'];
 
                 // die(print_r($data_arr[$i]));
+                die(print_r($data_item));
                 array_push($data_arr[$i], $data_item);
 
-                $get_id_pc = json_decode($data_arr[$i]['program_charter']);
-                $pc = array_values((array) $get_id_pc);
+                // $get_id_pc = json_decode($data_arr[$i]['program_charter']);
+                // $pc = array_values((array) $get_id_pc);
                 // die(print_r($pc));
                 // $pc_arr = array();
                 // if (!empty($pc)) {
@@ -78,6 +79,7 @@ class ExpertJudgement
                 // }
 
             }
+            die(print_r($data_arr));
             $msg = $data_arr;
 
         } else {
