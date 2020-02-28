@@ -73,6 +73,8 @@ class Quadran
                 }
 
             }
+
+            die(print_r($data_arr));
             $msg = $data_arr;
 
         } else {
