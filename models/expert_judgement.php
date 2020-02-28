@@ -53,7 +53,7 @@ class ExpertJudgement
                 $user = $result->fetchRow();
                 $data_item['user_name'] = $user['name'];
 
-                die(print_r($data_arr[$i]));
+                // die(print_r($data_arr[$i]));
                 array_push($data_arr[$i], $data_item);
 
                 $get_id_pc = json_decode($data_arr[$i]['program_charter']);
@@ -78,7 +78,7 @@ class ExpertJudgement
                 // }
 
             }
-            $msg = $result_arr;
+            $msg = $data_arr;
 
         } else {
             $msg = 'Data Kosong';
