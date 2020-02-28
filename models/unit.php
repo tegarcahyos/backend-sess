@@ -14,7 +14,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename LIMIT 100";
+             $tablename LIMIT $n OFFSET $y";
 
         $result = $this->db->execute($query);
 
@@ -99,6 +99,74 @@ class Unit
                     'number_of_ancestors' => $number_of_ancestors,
                     'parent_id' => $parent_id,
                     'root_id' => $root_id,
+                    'root_name' => $root_name,
+                    'organization_id' => $organization_id,
+                    'cfu_fu_id' => $cfu_fu_id,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+
+    }
+
+    public function getAllParent($id)
+    {
+        $query = "WITH RECURSIVE parents AS
+        (
+          SELECT
+            id              AS id,
+            0               AS number_of_ancestors,
+            NULL :: TEXT AS parent_id,
+            id              AS root_id,
+            name            AS root_name,
+            organization_id AS organization_id,
+            cfu_fu_id       AS cfu_fu_id
+          FROM unit
+          WHERE
+            parent_id::text IS NOT NULL
+          UNION
+          SELECT
+            child.id                                    AS id,
+            p.number_of_ancestors + 1                   AS ancestry_size,
+            child.parent_id::text                              AS parent_id,
+            coalesce(p.root_id::uuid, child.parent_id::uuid) AS root_id,
+            p.root_name,
+            p.organization_id,
+            p.cfu_fu_id
+          FROM unit child
+            INNER JOIN parents p ON p.id::text = child.parent_id::text
+        )
+        SELECT
+          root_id AS id,
+          number_of_ancestors,
+          parent_id,
+          root_name,
+          organization_id,
+          cfu_fu_id
+        FROM parents  where id = '$id'";
+
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+                $data_item = array(
+                    'id' => $id,
+                    'number_of_ancestors' => $number_of_ancestors,
+                    'parent_id' => $parent_id,
+                    // 'root_id' => $root_id,
                     'root_name' => $root_name,
                     'organization_id' => $organization_id,
                     'cfu_fu_id' => $cfu_fu_id,

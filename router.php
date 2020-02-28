@@ -448,6 +448,7 @@ class Router
             $r->get('/api/index.php/unit/get_users/{id}', 'Unit/getAllUsers');
             $r->get('/api/index.php/unit/get_by_parent_unit_id/{parent_id}', 'Unit/getByParent');
             $r->get('/api/index.php/unit/get_root_parent/{id}', 'Unit/getRootParent');
+            $r->get('/api/index.php/unit/get_parent/{id}', 'Unit/getAllParent');
             $r->get('/api/index.php/unit/get_by_organization/{org_id}', 'Unit/findByOrgId');
             $r->get('/api/index.php/unit/delete/{id}', 'Unit/delete');
             $r->post('/api/index.php/unit/insert', 'Unit/insert');
@@ -638,6 +639,7 @@ class Router
                     $explodeUri[4] == "update_id" ||
                     $explodeUri[4] == "select_id_get" ||
                     $explodeUri[4] == "get_root_parent" ||
+                    $explodeUri[4] == "get_parent" ||
                     $explodeUri[4] == "get_leaf_by_root_id" ||
                     $explodeUri[4] == "read_notification" ||
                     $explodeUri[4] == "get_by_criteria" ||
