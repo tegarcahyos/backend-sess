@@ -52,7 +52,7 @@ class Quadran
                 $user = $result->fetchRow();
                 $data_arr[$i]['user_name'] = $user['name'];
 
-                $get_id_pc = json_decode($data_arr[$i]['program_charter']);
+                $get_id_pc = json_decode(json_encode($data_arr[$i]['program_charter']));
                 $pc = array_values((array) $get_id_pc);
 
                 if (!empty($pc)) {
