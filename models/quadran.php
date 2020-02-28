@@ -51,7 +51,7 @@ class Quadran
                 $result = $this->db->execute($user);
                 $user = $result->fetchRow();
                 $data_arr[$i]['user_name'] = $user['name'];
-                die(print_r($data_arr[1]['program_charter']));
+                // die(print_r($data_arr[1]['program_charter']));
                 $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                 // die(print_r($get_id_pc));
                 $pc = array_values((array) $get_id_pc);
