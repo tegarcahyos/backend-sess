@@ -55,7 +55,7 @@ class Quadran
                 $get_id_pc = json_decode($data_arr[1]['program_charter']);
                 // die(print_r($get_id_pc));
                 $pc = array_values((array) $get_id_pc);
-                die(print_r($pc));
+                // die(print_r($pc));
                 if (!empty($pc)) {
                     for ($j = 0; $j < count($pc); $j++) {
                         $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j] . "'";
