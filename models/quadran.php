@@ -53,25 +53,26 @@ class Quadran
                 $data_arr[$i]['user_name'] = $user['name'];
 
                 $get_id_pc = json_decode($data_arr[$i]['program_charter']);
-                die(print_r($get_id_pc));
+                // die(print_r($get_id_pc));
                 $pc = array_values((array) $get_id_pc);
+                for ($k = 0; $k < count($pc); $k++) {
+                    if (!empty($pc[$k])) {
+                        for ($j = 0; $j < count($pc[$k]); $j++) {
+                            // die(print_r($pc[2][0]));
+                            $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$k][$j] . "'";
+                            // print_r($get_pc);
+                            $result = $this->db->execute($get_pc);
+                            $num = $result->rowCount();
+                            if ($num > 0) {
+                                while ($row = $result->fetchRow()) {
+                                    $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
+                                    $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
+                                }
 
-                if (!empty($pc[$i])) {
-                    for ($j = 0; $j < count($pc[$i]); $j++) {
-                        // die(print_r($pc[2][0]));
-                        $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$i][$j] . "'";
-                        print_r($get_pc);
-                        $result = $this->db->execute($get_pc);
-                        $num = $result->rowCount();
-                        if ($num > 0) {
-                            while ($row = $result->fetchRow()) {
-                                $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
-                                $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
                             }
-
                         }
-                    }
 
+                    }
                 }
 
             }
