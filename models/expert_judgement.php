@@ -41,21 +41,21 @@ class ExpertJudgement
                 // die($unit);
                 $result = $this->db->execute($unit);
                 $unit = $result->fetchRow();
-                $data_item['unit_name'] = $unit['name'];
+                $data_arr[$i]['unit_name'] = $unit['name'];
 
                 $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
                 $result = $this->db->execute($periode);
                 $periode = $result->fetchRow();
-                $data_item['periode_name'] = $periode['name'];
+                $data_arr[$i]['periode_name'] = $periode['name'];
 
                 $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
                 $result = $this->db->execute($user);
                 $user = $result->fetchRow();
-                $data_item['user_name'] = $user['name'];
+                $data_arr[$i]['user_name'] = $user['name'];
 
                 // die(print_r($data_arr[$i]));
-                die(print_r($data_item));
-                array_push($data_arr[$i], $data_item);
+                // die(print_r($data_item));
+                // array_push($data_arr[$i], $data_item);
 
                 // $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                 // $pc = array_values((array) $get_id_pc);
