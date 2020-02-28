@@ -51,11 +51,14 @@ class Quadran
                 $result = $this->db->execute($user);
                 $user = $result->fetchRow();
                 $data_arr[$i]['user_name'] = $user['name'];
+
                 $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                 $pc = array_values((array) $get_id_pc);
+
                 if (!empty($pc[$i])) {
                     for ($j = 0; $j < count($pc[$i]); $j++) {
-                        $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$i][2] . "'";
+                        die($pc[2]);
+                        $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$i][$j] . "'";
                         $result = $this->db->execute($get_pc);
                         $num = $result->rowCount();
                         if ($num > 0) {
@@ -69,8 +72,8 @@ class Quadran
 
                 }
 
-                $msg = $data_arr;
             }
+            $msg = $data_arr;
 
         } else {
             $msg = 'Data Kosong';
