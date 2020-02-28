@@ -53,9 +53,9 @@ class Quadran
                 $data_arr[$i]['user_name'] = $user['name'];
                 $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                 $pc = array_values((array) $get_id_pc);
-                if (!empty($pc)) {
-                    for ($j = 0; $j < count($pc); $j++) {
-                        $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j] . "'";
+                if (!empty($pc[$i])) {
+                    for ($j = 0; $j < count($pc[$i]); $j++) {
+                        $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$i][2] . "'";
                         $result = $this->db->execute($get_pc);
                         $num = $result->rowCount();
                         if ($num > 0) {
