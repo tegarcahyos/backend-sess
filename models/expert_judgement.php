@@ -69,13 +69,17 @@ class ExpertJudgement
                     $result = $this->db->execute($user);
                     $user = $result->fetchRow();
                     $data_item['user_name'] = $user['name'];
+
+                    array_push($data_arr, $data_item);
                 }
+
+                die(print_r(count($data_arr)));
 
                 // die(print_r($data_item));
                 array_push($result_arr, $data_item);
 
             }
-            die(print_r(count($result_arr)));
+            // die(print_r(count($result_arr)));
 
         } else {
             $msg = 'Data Kosong';
