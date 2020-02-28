@@ -339,6 +339,7 @@ class Router
             $r->get('/api/index.php/cfu_fu/get_units/{id}', 'CfuFu/getAllUnits');
             $r->get('/api/index.php/cfu_fu/find_id/{id}', 'CfuFu/findById');
             $r->get('/api/index.php/cfu_fu/get_by_organization/{org_id}', 'CfuFu/findByOrgId');
+            $r->get('/api/index.php/cfu_fu/search/{value}', 'CfuFu/searchCFU');
             $r->get('/api/index.php/cfu_fu/delete/{id}', 'CfuFu/delete');
             $r->post('/api/index.php/cfu_fu/insert', 'CfuFu/insert');
             $r->post('/api/index.php/cfu_fu/update/{id}', 'CfuFu/update');
@@ -429,6 +430,7 @@ class Router
             $r->get('/api/index.php/organization/get', 'Organization/get');
             $r->get('/api/index.php/organization/find_id/{id}', 'Organization/findById');
             $r->get('/api/index.php/organization/find_unit/{id}', 'Organization/findUnit');
+            $r->get('/api/index.php/organization/search/{value}', 'Organization/searchOrganization');
             $r->get('/api/index.php/organization/delete/{id}', 'Organization/delete');
             $r->post('/api/index.php/organization/insert', 'Organization/insert');
             $r->post('/api/index.php/organization/update/{id}', 'Organization/update');
@@ -710,7 +712,7 @@ class Router
                     $explodeUri[4] == "find_by_pc") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['pc_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[4] == "find" || $explodeUri[4] == "search" || $explodeUri[4] == "search") {
+                    $explodeUri[4] == "find" || $explodeUri[4] == "search") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['value'], $explodeUri[3]));
                 } else if (
                     $explodeUri[4] == "select_by_title") {
