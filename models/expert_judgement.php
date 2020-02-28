@@ -50,12 +50,12 @@ class ExpertJudgement
             $result_arr = array();
             // die(print_r($pc));
             for ($o = 0; $o < count($pc_array); $o++) {
-                if (!empty($pc[$o])) {
-                    for ($j = 0; $j < count($pc[$o]); $j++) {
-                        if (!empty($pc[$o][$j])) {
-                            for ($k = 0; $k < count($pc[$o][$j]); $k++) {
-                                // die(print_r($pc[$j][$k]));
-                                $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$o][$j][$k] . "'";
+                if (!empty($pc_array[$o])) {
+                    for ($j = 0; $j < count($pc_array[$o]); $j++) {
+                        if (!empty($pc_array[$o][$j])) {
+                            for ($k = 0; $k < count($pc_array[$o][$j]); $k++) {
+                                // die(print_r($pc_array[$j][$k]));
+                                $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc_array[$o][$j][$k] . "'";
                                 $result = $this->db->execute($get_pc);
                                 $num = $result->rowCount();
                                 if ($num > 0) {
