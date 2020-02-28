@@ -73,18 +73,9 @@ class ExpertJudgement
                     $user = $result->fetchRow();
                     $data_item['user_name'] = $user['name'];
 
-                    array_push($result_arr, $data_item);
-                } else {
-                    $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
-                    $result = $this->db->execute($periode);
-                    $periode = $result->fetchRow();
-                    $data_item['periode_name'] = $periode['name'];
-
-                    $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
-                    $result = $this->db->execute($user);
-                    $user = $result->fetchRow();
-                    $data_item['user_name'] = $user['name'];
                 }
+
+                array_push($result_arr, $data_item);
             }
             $msg = $result_arr;
 
