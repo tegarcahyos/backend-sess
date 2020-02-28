@@ -47,39 +47,39 @@ class ExpertJudgement
                 array_push($pc_array, $pc);
             }
 
-            die(print_r($pc_array));
-
             $result_arr = array();
             // die(print_r($pc));
-            if (!empty($pc)) {
-                for ($j = 0; $j < count($pc); $j++) {
-                    if (!empty($pc[$j])) {
-                        for ($k = 0; $k < count($pc[$j]); $k++) {
-                            // die(print_r($pc[$j][$k]));
-                            $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j][$k] . "'";
-                            $result = $this->db->execute($get_pc);
-                            $num = $result->rowCount();
-                            if ($num > 0) {
-                                while ($row = $result->fetchRow()) {
-                                    $data_item['detail_pc'][$row['id']]['title'] = $row['title'];
-                                    $data_item['detail_pc'][$row['id']]['weight'] = $row['weight'];
+            for ($o = 0; $o < count($pc_array); $o++) {
+                if (!empty($pc[$o])) {
+                    for ($j = 0; $j < count($pc[$o]); $j++) {
+                        if (!empty($pc[$o][$j])) {
+                            for ($k = 0; $k < count($pc[$o][$j]); $k++) {
+                                // die(print_r($pc[$j][$k]));
+                                $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$o][$j][$k] . "'";
+                                $result = $this->db->execute($get_pc);
+                                $num = $result->rowCount();
+                                if ($num > 0) {
+                                    while ($row = $result->fetchRow()) {
+                                        $data_item['detail_pc'][$row['id']]['title'] = $row['title'];
+                                        $data_item['detail_pc'][$row['id']]['weight'] = $row['weight'];
+                                    }
                                 }
                             }
                         }
                     }
+
+                    $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
+                    $result = $this->db->execute($periode);
+                    $periode = $result->fetchRow();
+                    $data_item['periode_name'] = $periode['name'];
+
+                    $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
+                    $result = $this->db->execute($user);
+                    $user = $result->fetchRow();
+                    $data_item['user_name'] = $user['name'];
+
+                    array_push($result_arr, $data_item);
                 }
-
-                $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
-                $result = $this->db->execute($periode);
-                $periode = $result->fetchRow();
-                $data_item['periode_name'] = $periode['name'];
-
-                $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
-                $result = $this->db->execute($user);
-                $user = $result->fetchRow();
-                $data_item['user_name'] = $user['name'];
-
-                array_push($result_arr, $data_item);
             }
 
             $msg = $result_arr;
