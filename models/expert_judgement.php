@@ -126,7 +126,7 @@ class ExpertJudgement
         // die(print_r($getOrg));
 
         for ($m = 0; $m < count($getOrg); $m++) {
-            $query = "SELECT * FROM  $tablename WHERE periode_id = '$id' AND unit_id = '" . $getOrg[$m]['id'] . "'";
+            $query = "SELECT * FROM  $tablename WHERE periode_id = '$periode_id' AND unit_id = '" . $getOrg[$m]['id'] . "'";
             // die($query);
             $result = $this->db->execute($query);
             // hitung result
