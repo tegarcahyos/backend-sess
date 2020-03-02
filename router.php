@@ -66,7 +66,7 @@ class Router
         return $this->db;
     }
 
-    // MESSAGES
+    // Custom Message Ke Frontend
     public function msg($header, $type = null, $msg, $keterangan, $status)
     {
         if ($type == 200) {
@@ -165,6 +165,7 @@ class Router
         }
     }
 
+    // Verifikasi token user
     public function check_token($token)
     {
         $tempDb = $this->core_connect();
@@ -186,7 +187,15 @@ class Router
         }
     }
 
-    // REQUEST
+    // Tahapan Membuat API
+    // >>>> Buat Route
+    // ----- SCHEMA ROUTING -----
+    // $r->(post/get)('api/index.php/{url}', 'Model/fungsi');
+    // >>>> Daftarkan url ke URL PARSER dibawah sesuai dengan parameter dari url
+    //  contoh: $r->get('api/index.php/users/find_id/{id}', 'User/findById');
+    //  URL PARSER: cari variable $vars dengan bentuk $vars['id'] (jika parameter bernama id) lalu tambahkan $explodeUri[4] = url (contoh: find_id)
+
+    // REQUEST Dari Model
     public function request()
     {
 
@@ -572,6 +581,7 @@ class Router
 
                 list($class, $method) = explode("/", $handler, 2);
 
+                // --------- URL PARSER ------------
                 if ($explodeUri[3] == 'login') {
                     $result = call_user_func_array(array(new $class($connection), $method), array('users'));
 
@@ -728,6 +738,7 @@ class Router
 
         // die($result == 'Data Kosong');
 
+        // Pesan yang di lempar ke frontend (http_response_code harus terdaftar dalam Custom Message diatas)
         try {
             if ($result == [] || $result === "Data Kosong" || $result == '0') {
                 $this->msg(http_response_code(404), 404, $result, "gagal", 0);
