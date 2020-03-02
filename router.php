@@ -287,6 +287,7 @@ class Router
             $r->get('/api/index.php/quadran/get', 'Quadran/get');
             $r->get('/api/index.php/quadran/find_id/{id}', 'Quadran/findById');
             $r->get('/api/index.php/quadran/get_by_user/{user_id}', 'Quadran/findByUserId');
+            $r->get('/api/index.php/quadran/get_by_periode_and_organization/{periode_id}/{organization_id}', 'Quadran/getByPeriodeAndOrganization');
             $r->get('/api/index.php/quadran/delete/{id}', 'Quadran/delete');
             $r->get('/api/index.php/quadran/delete_by_user/{user_id}', 'Quadran/deleteByUserId');
             $r->post('/api/index.php/quadran/insert', 'Quadran/insert');
