@@ -188,6 +188,7 @@ class Router
     }
 
     // Tahapan Membuat API
+    // >>>> include file Model di paling atas
     // >>>> Buat Route
     // ----- SCHEMA ROUTING -----
     // $r->(post/get)('api/index.php/{url}', 'Model/fungsi');
