@@ -149,7 +149,7 @@ class ExpertJudgement
                     array_push($data_arr, $data_item);
                 }
 
-                die(print_r($data_arr));
+                // die(print_r($data_arr));
 
                 $result_arr = array();
                 for ($i = 0; $i < count($data_arr); $i++) {
