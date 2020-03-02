@@ -59,6 +59,7 @@ class Router
     public function core_connect()
     {
 
+        // Koneksi Dengan ADODB
         $this->db = newADOConnection('pgsql');
         $this->db->connect(db_host, db_username, db_password, db_name_sess);
 
@@ -242,6 +243,7 @@ class Router
             $r->get('/api/index.php/expert_judgement/get', 'ExpertJudgement/get');
             $r->get('/api/index.php/expert_judgement/find_id/{id}', 'ExpertJudgement/findById');
             $r->get('/api/index.php/expert_judgement/get_by_user/{user_id}', 'ExpertJudgement/findByUserId');
+            $r->get('/api/index.php/expert_judgement/get_by_periode_and_organization/{periode_id}/{organization_id}', 'ExpertJudgement/getByPeriodeAndOrganization');
             $r->get('/api/index.php/expert_judgement/delete/{id}', 'ExpertJudgement/delete');
             $r->get('/api/index.php/expert_judgement/delete_by_user/{user_id}', 'ExpertJudgement/deleteByUserId');
             $r->post('/api/index.php/expert_judgement/insert', 'ExpertJudgement/insert');
@@ -717,6 +719,9 @@ class Router
                 } else if (
                     $explodeUri[4] == "select_by_title") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['title'], $explodeUri[3]));
+                } else if (
+                    $explodeUri[4] == "get_by_periode_and_organization") {
+                    $result = call_user_func_array(array(new $class($connection), $method), array($vars['periode_id'], $vars['organization_id'], $explodeUri[3]));
                 }
                 break;
         }

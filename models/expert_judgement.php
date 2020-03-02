@@ -81,6 +81,119 @@ class ExpertJudgement
         return $msg;
     }
 
+    public function getOrg($org_id)
+    {
+        $query = "SELECT
+           *
+          FROM
+             unit WHERE organization_id = '$org_id'";
+
+        $result = $this->db->execute($query);
+
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'organization_id' => $organization_id,
+                    'cfu_fu_id' => $cfu_fu_id,
+                    'parent_id' => $parent_id,
+                    'name' => $name,
+                    'code' => $code,
+                );
+
+                array_push($data_arr, $data_item);
+                $msg = $data_arr;
+            }
+
+        } else {
+            $msg = [];
+        }
+
+        return $msg;
+    }
+
+    public function getByPeriodeAndOrganization($periode_id, $org_id, $tablename)
+    {
+
+        $getOrg = $this->getOrg($org_id);
+        die(print_r($getOrg));
+        $query = "SELECT * FROM  $tablename WHERE periode_id = '$id' AND ";
+        // die($query);
+        $result = $this->db->execute($query);
+        // hitung result
+        $num = $result->rowCount();
+
+        if ($num > 0) {
+
+            $data_arr = array();
+
+            while ($row = $result->fetchRow()) {
+                extract($row);
+
+                $data_item = array(
+                    'id' => $id,
+                    'user_id' => $user_id,
+                    'program_charter' => $program_charter,
+                    'unit_id' => $unit_id,
+                    'periode_id' => $periode_id,
+                );
+                array_push($data_arr, $data_item);
+            }
+
+            $result_arr = array();
+            for ($i = 0; $i < count($data_arr); $i++) {
+                $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
+                // die($unit);
+                $result = $this->db->execute($unit);
+                $unit = $result->fetchRow();
+                $data_arr[$i]['unit_name'] = $unit['name'];
+
+                $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
+                $result = $this->db->execute($periode);
+                $periode = $result->fetchRow();
+                $data_arr[$i]['periode_name'] = $periode['name'];
+
+                $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
+                $result = $this->db->execute($user);
+                $user = $result->fetchRow();
+                $data_arr[$i]['user_name'] = $user['name'];
+
+                $get_id_pc = json_decode($data_arr[$i]['program_charter']);
+                $pc = array_values((array) $get_id_pc);
+
+                if (!empty($pc)) {
+                    for ($j = 0; $j < count($pc); $j++) {
+                        $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$j] . "'";
+                        $result = $this->db->execute($get_pc);
+                        $num = $result->rowCount();
+                        if ($num > 0) {
+                            while ($row = $result->fetchRow()) {
+                                $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
+                                $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
+                            }
+
+                        }
+                    }
+
+                }
+
+            }
+            $msg = $data_arr;
+
+        } else {
+            $msg = 'Data Kosong';
+        }
+
+        return $msg;
+    }
+
     public function findById($id, $tablename)
     {
         $query = "SELECT * FROM $tablename WHERE id = '$id'";
