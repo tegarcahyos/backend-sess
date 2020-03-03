@@ -226,8 +226,8 @@ class Organization
         from (
             select organization_id::text as organization_id from unit
             union all
-            select organization_id::text from ahp_criteria) a where organization_id = '$id')";
-        die(print_r($get_unit));
+            select organization_id::text from ahp_featured_program_charter) a where organization_id = '$id')";
+        // die(print_r($get_unit));
         $get = $this->db->execute($get_unit);
         $row = $get->fetchRow();
         if ($row['exists'] == 't') {
