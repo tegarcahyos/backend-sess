@@ -232,7 +232,7 @@ class Approval
 
         $data = json_encode($data);
 
-        $query = "UPDATE $tablename SET data = '$data', pc_id = '$pc_id' WHERE pc_id = '$pc_id' RETURNING *";
+        $query = "UPDATE $tablename SET data = '$data', pc_id = '$pc_id' WHERE id = '$id' RETURNING *";
 
         // die($query);
 
