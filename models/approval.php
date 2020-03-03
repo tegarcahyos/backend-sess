@@ -234,7 +234,7 @@ class Approval
 
         $query = "UPDATE $tablename SET data = '$data', pc_id = '$pc_id' WHERE id = '$id' RETURNING *";
 
-        die($query);
+        // die($query);
 
         $result = $this->db->execute($query);
         if (empty($result)) {
