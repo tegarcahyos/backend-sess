@@ -32,9 +32,22 @@ class Matrix
                 );
 
                 array_push($data_arr, $data_item);
-                $msg = $data_arr;
+
             }
 
+            for ($i = 0; $i < count($data_arr); $i++) {
+                $get_si = "SELECT * FROM strategic_initiative WHERE id = '" . $data_arr[$i]['si_id'] . "'";
+                $result = $this->db->execute($get_si);
+                $si = $result->fetchRow();
+                $data_arr[$i]['si_name'] = $si['name'];
+
+                $get_unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
+                $result = $this->db->execute($get_unit);
+                $unit = $result->fetchRow();
+                $data_arr[$i]['unit_name'] = $unit['name'];
+            }
+
+            $msg = $data_arr;
         } else {
             $msg = 'Data Kosong';
         }
