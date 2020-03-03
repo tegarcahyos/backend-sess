@@ -312,14 +312,14 @@ class Unit
                 );
 
                 array_push($data_arr, $data_item);
-                echo count($data_arr);
+
                 $msg = $data_arr;
             }
 
         } else {
             $msg = [];
         }
-
+        echo count($msg);
         return $msg;
 
     }
