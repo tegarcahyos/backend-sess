@@ -226,26 +226,24 @@ class Organization
         from (
             select organization_id::text as organization_id from unit
             union all
-            select organization_id::text from ahp_criteria) a where organization_id = '$id'";
-        die(print_r($get_unit));
+            select organization_id::text from ahp_criteria) a where organization_id = '$id')";
+        // die(print_r($get_unit));
         $get = $this->db->execute($get_unit);
         $row = $get->fetchRow();
-        if (!is_bool($row)) {
-            if ($row['exists'] == 't') {
-                return "403";
-            } else {
-                $query = "DELETE FROM $tablename WHERE id = '$id'";
-                // die($query);
-                $result = $this->db->execute($query);
-                // return $result;
-                $res = $this->db->affected_rows();
-
-                if ($res == true) {
-                    return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
-                }
-            }
+        if ($row['exists'] == 't') {
+            return "403";
         } else {
-            return $msg = "Data Kosong";
+            $query = "DELETE FROM $tablename WHERE id = '$id'";
+            // die($query);
+            $result = $this->db->execute($query);
+            // return $result;
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+            } else {
+                return $msg = "Data Kosong";
+            }
         }
 
     }
