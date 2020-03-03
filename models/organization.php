@@ -228,8 +228,8 @@ class Organization
             union all
             select organization_id::text from ahp_criteria) a where organization_id = '$id'";
         $result = $this->db->execute($get_unit);
-        $row = $result->fetchRow();
-        if (!is_bool($row)) {
+        if (!is_bool($result)) {
+            $row = $result->fetchRow();
             if ($row['exists'] == 't') {
                 return "403";
             } else {
@@ -238,7 +238,7 @@ class Organization
                 $result = $this->db->execute($query);
                 // return $result;
                 $res = $this->db->affected_rows();
-    
+
                 if ($res == true) {
                     return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
                 }
@@ -246,6 +246,6 @@ class Organization
         } else {
             return $msg = "Data Kosong";
         }
-       
+
     }
 }
