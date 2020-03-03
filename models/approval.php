@@ -217,9 +217,9 @@ class Approval
     {
         // init attribute dan values
 
-        $data = file_get_contents("php://input");
+        $data_input = file_get_contents("php://input");
 
-        $request = json_decode($data);
+        $request = json_decode($data_input);
 
         $variable = array('data', 'pc_id');
         foreach ($variable as $item) {
