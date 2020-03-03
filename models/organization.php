@@ -229,20 +229,23 @@ class Organization
             select organization_id::text from ahp_criteria) a where organization_id = '$id'";
         $result = $this->db->execute($get_unit);
         $row = $result->fetchRow();
-        if ($row['exists'] == 't') {
-            return "403";
-        } else {
-            $query = "DELETE FROM $tablename WHERE id = '$id'";
-            // die($query);
-            $result = $this->db->execute($query);
-            // return $result;
-            $res = $this->db->affected_rows();
-
-            if ($res == true) {
-                return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+        if (!is_bool($row)) {
+            if ($row['exists'] == 't') {
+                return "403";
             } else {
-                return $msg = "Data Kosong";
+                $query = "DELETE FROM $tablename WHERE id = '$id'";
+                // die($query);
+                $result = $this->db->execute($query);
+                // return $result;
+                $res = $this->db->affected_rows();
+    
+                if ($res == true) {
+                    return $msg = array("message" => 'Data Berhasil Dihapus', "code" => 200);
+                }
             }
+        } else {
+            return $msg = "Data Kosong";
         }
+       
     }
 }
