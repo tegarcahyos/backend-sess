@@ -290,7 +290,7 @@ class Unit
         *
        FROM
           $tablename t1
-           WHERE NOT EXISTS (SELECT * FROM $tablename t2 WHERE t1.id::text = t2.parent_id::text)";
+           WHERE NOT EXISTS (SELECT * FROM $tablename t2 WHERE t1.id::text = t2.parent_id::text) LIMIT 100";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -319,7 +319,7 @@ class Unit
         } else {
             $msg = [];
         }
-        echo count($msg);
+        // echo count($msg);
         return $msg;
 
     }
