@@ -74,6 +74,15 @@ class Matrix
                 'unit_id' => $unit_id,
                 'matrix' => $matrix,
             );
+            $get_si = "SELECT * FROM strategic_initiative WHERE id = '" . $data_item['si_id'] . "'";
+            $result = $this->db->execute($get_si);
+            $si = $result->fetchRow();
+            $data_item['si_name'] = $si['name'];
+
+            $get_unit = "SELECT * FROM unit WHERE id = '" . $data_item['unit_id'] . "'";
+            $result = $this->db->execute($get_unit);
+            $unit = $result->fetchRow();
+            $data_item['unit_name'] = $unit['name'];
 
             $msg = $data_item;
             return $msg;
