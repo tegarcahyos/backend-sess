@@ -227,9 +227,10 @@ class Organization
             select organization_id::text as organization_id from unit
             union all
             select organization_id::text from ahp_criteria) a where organization_id = '$id'";
-        $result = $this->db->execute($get_unit);
-        if (!is_bool($result)) {
-            $row = $result->fetchRow();
+        $get = $this->db->execute($get_unit);
+        die(print_r($get));
+        $row = $get->fetchRow();
+        if (!is_bool($row)) {
             if ($row['exists'] == 't') {
                 return "403";
             } else {
