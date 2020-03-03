@@ -262,7 +262,9 @@ class Approval
                     $msg = $data_arr;
                 }
 
-            };
+            } else {
+                $msg = 'Data Kosong';
+            }
         }
 
         return $msg;
