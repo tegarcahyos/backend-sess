@@ -144,13 +144,13 @@ class Login
             "privatekey" => $password,
         );
         $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
-
-        die($login);
+        $response = json_decode($login);
+        die(print_r($response));
         // $select_nik = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
         // $result = $this->db->execute($select_nik);
         // $num = $result->rowCount();
         // if (!empty($num)) {
-        //     $response = json_decode($login);
+
         //     if ($response->login != 0) {
         //         $row = $result->fetchRow();
         //         extract($row);
