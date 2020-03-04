@@ -36,7 +36,7 @@ class Login
             } else {
                 // MIGRATE EMP TO USR
                 $password_hash = password_hash($password, PASSWORD_BCRYPT);
-                $migrate_user = "INSERT INTO users (name, username, password, employee_id) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password_hash','" . $row['id'] . "') RETURNING *";
+                $migrate_user = "INSERT INTO request_account (name, username, password, employee_id) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password_hash','" . $row['id'] . "') RETURNING *";
                 $resultUser = $this->db->execute($migrate_user);
                 $user = $resultUser->fetchRow();
 
@@ -132,82 +132,82 @@ class Login
         return $msg;
     }
 
-    // public function LDAPLogin()
-    // {
-    //     $data = json_decode(file_get_contents("php://input"));
+    public function LDAPLogin()
+    {
+        $data = json_decode(file_get_contents("php://input"));
 
-    //     $username = $data->username;
-    //     $password = $data->password;
+        $username = $data->username;
+        $password = $data->password;
 
-    //     $data_array = array(
-    //         "account" => $username,
-    //         "privatekey" => $password,
-    //     );
-    //     $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
+        $data_array = array(
+            "account" => $username,
+            "privatekey" => $password,
+        );
+        $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
 
-    //     $select_nik = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
-    //     $result = $this->db->execute($select_nik);
-    //     $num = $result->rowCount();
-    //     if (!empty($num)) {
-    //         $response = json_decode($login);
-    //         if ($response->login != 0) {
-    //             $row = $result->fetchRow();
-    //             extract($row);
+        $select_nik = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
+        $result = $this->db->execute($select_nik);
+        $num = $result->rowCount();
+        if (!empty($num)) {
+            $response = json_decode($login);
+            if ($response->login != 0) {
+                $row = $result->fetchRow();
+                extract($row);
 
-    //             $data_item = array(
-    //                 'nik' => $n_nik,
-    //                 'nama_karyawan' => $v_nama_karyawan,
-    //             );
+                $data_item = array(
+                    'nik' => $n_nik,
+                    'nama_karyawan' => $v_nama_karyawan,
+                );
 
-    //             $result = $data_item;
-    //         } else {
-    //             $result = "506";
-    //         }
-    //     } else {
-    //         $result = "203";
-    //     }
+                $result = $data_item;
+            } else {
+                $result = "506";
+            }
+        } else {
+            $result = "203";
+        }
 
-    //     return $result;
-    // }
+        return $result;
+    }
 
-    // public function callAPI($method, $url, $data)
-    // {
-    //     $curl = curl_init();
-    //     switch ($method) {
-    //         case "POST":
-    //             curl_setopt($curl, CURLOPT_POST, 1);
-    //             if ($data) {
-    //                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    //             }
+    public function callAPI($method, $url, $data)
+    {
+        $curl = curl_init();
+        switch ($method) {
+            case "POST":
+                curl_setopt($curl, CURLOPT_POST, 1);
+                if ($data) {
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                }
 
-    //             break;
-    //         case "PUT":
-    //             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-    //             if ($data) {
-    //                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    //             }
+                break;
+            case "PUT":
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+                if ($data) {
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                }
 
-    //             break;
-    //         default:
-    //             if ($data) {
-    //                 $url = sprintf("%s?%s", $url, http_build_query($data));
-    //             }
+                break;
+            default:
+                if ($data) {
+                    $url = sprintf("%s?%s", $url, http_build_query($data));
+                }
 
-    //     }
+        }
 
-    //     // OPTIONS:
-    //     curl_setopt($curl, CURLOPT_URL, $url);
-    //     curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-    //         'Content-Type: application/json',
-    //         // 'x-authorization: ' . $this->apiKey,
-    //     ));
-    //     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    //     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    //     // EXECUTE:
-    //     $result = curl_exec($curl);
-    //     // die("ini token" . $this->apiKey);
-    //     if (!$result) {die("Connection Failure");}
-    //     curl_close($curl);
-    //     return $result;
-    // }
+        // OPTIONS:
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            // 'x-authorization: ' . $this->apiKey,
+        ));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        // EXECUTE:
+        $result = curl_exec($curl);
+        // die("ini token" . $this->apiKey);
+        if (!$result) {die("Connection Failure");}
+        curl_close($curl);
+        return $result;
+    }
 }
