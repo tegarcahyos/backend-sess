@@ -145,29 +145,30 @@ class Login
         );
         $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
 
-        $select_nik = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
-        $result = $this->db->execute($select_nik);
-        $num = $result->rowCount();
-        if (!empty($num)) {
-            $response = json_decode($login);
-            if ($response->login != 0) {
-                $row = $result->fetchRow();
-                extract($row);
+        die(print_r($login));
+        // $select_nik = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
+        // $result = $this->db->execute($select_nik);
+        // $num = $result->rowCount();
+        // if (!empty($num)) {
+        //     $response = json_decode($login);
+        //     if ($response->login != 0) {
+        //         $row = $result->fetchRow();
+        //         extract($row);
 
-                $data_item = array(
-                    'nik' => $n_nik,
-                    'nama_karyawan' => $v_nama_karyawan,
-                );
+        //         $data_item = array(
+        //             'nik' => $n_nik,
+        //             'nama_karyawan' => $v_nama_karyawan,
+        //         );
 
-                $result = $data_item;
-            } else {
-                $result = "506";
-            }
-        } else {
-            $result = "203";
-        }
+        //         $result = $data_item;
+        //     } else {
+        //         $result = "506";
+        //     }
+        // } else {
+        //     $result = "203";
+        // }
 
-        return $result;
+        // return $result;
     }
 
     public function callAPI($method, $url, $data)
