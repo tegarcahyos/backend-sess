@@ -145,7 +145,7 @@ class Login
         );
         $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
 
-        die(print_r($login));
+        die($login);
         // $select_nik = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
         // $result = $this->db->execute($select_nik);
         // $num = $result->rowCount();
