@@ -26,7 +26,7 @@ class Login
         if ($num > 0) {
             $msg = $this->data_user($result, $username, $password);
         } else {
-            $msg = "506";
+            $msg = "203";
             // // Jika data tidak ditemukan
             // $check = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
             // // die($check);
