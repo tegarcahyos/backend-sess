@@ -26,31 +26,31 @@ class Login
         if ($num > 0) {
             $msg = $this->data_user($result, $username, $password);
         } else {
-            // Jika data tidak ditemukan
-            $check = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
-            // die($check);
-            $result = $this->db->execute($check);
-            $row = $result->fetchRow();
-            if (is_bool($row)) {
-                $msg = "203";
-            } else {
-                // MIGRATE EMP TO USR
-                $password_hash = password_hash($password, PASSWORD_BCRYPT);
-                $migrate_user = "INSERT INTO request_account (name, username, password, employee_id) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password_hash','" . $row['id'] . "') RETURNING *";
-                $resultUser = $this->db->execute($migrate_user);
-                $user = $resultUser->fetchRow();
+            // // Jika data tidak ditemukan
+            // $check = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
+            // // die($check);
+            // $result = $this->db->execute($check);
+            // $row = $result->fetchRow();
+            // if (is_bool($row)) {
+            //     $msg = "203";
+            // } else {
+            //     // MIGRATE EMP TO USR
+            //     $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            //     $migrate_user = "INSERT INTO request_account (name, username, password, employee_id) VALUES ('" . $row['v_nama_karyawan'] . "', '" . $row['n_nik'] . "', '$password_hash','" . $row['id'] . "') RETURNING *";
+            //     $resultUser = $this->db->execute($migrate_user);
+            //     $user = $resultUser->fetchRow();
 
-                $get_unit = "SELECT * FROM unit WHERE LOWER(code) = LOWER('" . $row['c_kode_unit'] . "')";
-                $result = $this->db->execute($get_unit);
-                $unit = $result->fetchRow();
+            //     $get_unit = "SELECT * FROM unit WHERE LOWER(code) = LOWER('" . $row['c_kode_unit'] . "')";
+            //     $result = $this->db->execute($get_unit);
+            //     $unit = $result->fetchRow();
 
-                $insert_detail = "INSERT INTO user_detail (user_id, unit_id) VALUES ('" . $user['id'] . "', '" . $unit['id'] . "')";
-                $result = $this->db->execute($insert_detail);
-                // LOGIN
-                $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
-                $result = $this->db->execute($query);
-                $msg = $this->data_user($result, $username, $password);
-            }
+            //     $insert_detail = "INSERT INTO user_detail (user_id, unit_id) VALUES ('" . $user['id'] . "', '" . $unit['id'] . "')";
+            //     $result = $this->db->execute($insert_detail);
+            //     // LOGIN
+            //     $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
+            //     $result = $this->db->execute($query);
+            //     $msg = $this->data_user($result, $username, $password);
+            // }
         }
 
         return $msg;
@@ -145,30 +145,17 @@ class Login
         );
         $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
         $response = json_decode($login);
-        die(print_r($response));
-        // $select_nik = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
-        // $result = $this->db->execute($select_nik);
-        // $num = $result->rowCount();
-        // if (!empty($num)) {
+        // die(print_r($response));
 
-        //     if ($response->login != 0) {
-        //         $row = $result->fetchRow();
-        //         extract($row);
+        if ($response->login != 0) {
+            $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
+            $result = $this->db->execute($query);
+            $msg = $this->data_user($result, $username, $password);
+        } else {
+            $msg = "506";
+        }
 
-        //         $data_item = array(
-        //             'nik' => $n_nik,
-        //             'nama_karyawan' => $v_nama_karyawan,
-        //         );
-
-        //         $result = $data_item;
-        //     } else {
-        //         $result = "506";
-        //     }
-        // } else {
-        //     $result = "203";
-        // }
-
-        // return $result;
+        return $msg;
     }
 
     public function callAPI($method, $url, $data)
