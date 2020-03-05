@@ -276,6 +276,7 @@ class ProgramCharter
                 'generator_id' => $generator_id,
             );
 
+            die(print_r($data_item));
             return $data_item;
         }
     }
