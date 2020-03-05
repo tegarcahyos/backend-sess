@@ -149,6 +149,7 @@ class Login
 
         if ($response->login != 0) {
             $query = "SELECT * FROM 'users' WHERE username = '$username' LIMIT 1 ";
+            die($query);
             $result = $this->db->execute($query);
             $msg = $this->data_user($result, $username, $password);
         } else {
