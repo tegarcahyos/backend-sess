@@ -276,7 +276,7 @@ class ProgramCharter
                 'generator_id' => $generator_id,
             );
 
-            die(print_r($data_item));
+            // die(print_r($data_item));
             return $data_item;
         }
     }
@@ -401,25 +401,35 @@ class ProgramCharter
                 $main_activities_push = array();
 
                 // STAKEHOLDER
-                $stakeholders_push = array(
-                    $data_item['stakeholders']->boe,
-                    $data_item['stakeholders']->controller,
-                    $data_item['stakeholders']->program_leader,
+                // $stakeholders_push = array(
+                //     $data_item['stakeholders']->controller,
+                //     $data_item['stakeholders']->program_leader,
 
-                );
+                // );
 
                 $get_user_pmo = "SELECT * FROM user_detail WHERE unit_id = '" . $data_item['unit_id'] . "' AND role_id LIKE '%7b4e9e79-5e43-42b3-9f88-0886871dcf0b%'";
                 $user_pmo = $this->db->execute($get_user_pmo);
                 $res = $user_pmo->fetchRow();
                 array_push($pmo_push, $res['user_id']);
 
+                // BOE
+                for ($i = 0; $i < count($data_item['stakeholders']->boe); $i++) {
+                    array_push($user_push, $data_item['stakeholders']->boe[$i]);
+                }
+
+                // Controller
+                for ($i = 0; $i < count($data_item['stakeholders']->controller); $i++) {
+                    array_push($user_push, $data_item['stakeholders']->controller[$i]);
+                }
+
+                // Coordinator
+                for ($i = 0; $i < count($data_item['stakeholders']->coordinator); $i++) {
+                    array_push($user_push, $data_item['stakeholders']->coordinator[$i]);
+                }
+
                 // MEMBER
                 for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
                     array_push($user_push, $data_item['stakeholders']->member[$i]);
-                }
-
-                for ($i = 0; $i < count($stakeholders_push); $i++) {
-                    array_push($user_push, $stakeholders_push[$i]);
                 }
 
                 // MAIN ACTIVITIES
@@ -580,19 +590,34 @@ class ProgramCharter
                     $main_activities_push = array();
 
                     // STAKEHOLDER
-                    $stakeholders_push = array(
-                        $data_item['stakeholders']->boe,
-                        $data_item['stakeholders']->controller,
-                        $data_item['stakeholders']->program_leader,
+                    // $stakeholders_push = array(
+                    //     $data_item['stakeholders']->boe,
+                    //     $data_item['stakeholders']->controller,
+                    //     $data_item['stakeholders']->program_leader,
 
-                    );
+                    // );
 
                     $get_user_pmo = "SELECT * FROM user_detail WHERE unit_id = '" . $data_item['unit_id'] . "' AND role_id LIKE '%7b4e9e79-5e43-42b3-9f88-0886871dcf0b%'";
                     $user_pmo = $this->db->execute($get_user_pmo);
                     $res = $user_pmo->fetchRow();
                     array_push($pmo_push, $res['user_id']);
 
-                    // Member
+                    // BOE
+                    for ($i = 0; $i < count($data_item['stakeholders']->boe); $i++) {
+                        array_push($user_push, $data_item['stakeholders']->boe[$i]);
+                    }
+
+                    // Controller
+                    for ($i = 0; $i < count($data_item['stakeholders']->controller); $i++) {
+                        array_push($user_push, $data_item['stakeholders']->controller[$i]);
+                    }
+
+                    // Coordinator
+                    for ($i = 0; $i < count($data_item['stakeholders']->coordinator); $i++) {
+                        array_push($user_push, $data_item['stakeholders']->coordinator[$i]);
+                    }
+
+                    // MEMBER
                     for ($i = 0; $i < count($data_item['stakeholders']->member); $i++) {
                         array_push($user_push, $data_item['stakeholders']->member[$i]);
                     }
@@ -602,9 +627,9 @@ class ProgramCharter
                         array_push($approval_push, $data_item['stakeholders']->reviewer[$i]);
                     }
 
-                    for ($i = 0; $i < count($stakeholders_push); $i++) {
-                        array_push($user_push, $stakeholders_push[$i]);
-                    }
+                    // for ($i = 0; $i < count($stakeholders_push); $i++) {
+                    //     array_push($user_push, $stakeholders_push[$i]);
+                    // }
 
                     // MAIN ACTIVITIES
                     for ($i = 0; $i < count($data_item['main_activities']->mainAct->task->data); $i++) {
