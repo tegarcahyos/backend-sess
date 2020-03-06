@@ -19,20 +19,19 @@ class Login
         $username = $data->username;
         $password = $data->password;
 
-        $query = "SELECT * FROM $tablename WHERE username = '$username' AND password is not null LIMIT 1 ";
+        $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
-
-        $get_user_request = "SELECT * FROM $tablename WHERE username = '$username' AND password is null LIMIT 1 ";
-        // die($get_user_request);
-        $result_req = $this->db->execute($get_user_request);
-        $num_req = $result_req->rowCount();
+        $row = $result->fetchRow();
+        // $get_user_request = "SELECT * FROM $tablename WHERE username = '$username' AND password is null LIMIT 1 ";
+        // // die($get_user_request);
+        // $result_req = $this->db->execute($get_user_request);
+        // $num_req = $result_req->rowCount();
         if ($num > 0) {
             $msg = $this->data_user($result, $username, $password);
-        } else if ($num_req > 0) {
+        } else if (empty($row['password'])) {
 
-            $row = $result_req->fetchRow();
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
             $insert_password = "UPDATE users SET password = $password_hash WHERE id = '" . $row['id'] . "'";
             $this->db->execute($insert_password);
