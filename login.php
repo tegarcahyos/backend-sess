@@ -31,7 +31,7 @@ class Login
             if (empty($row_get['password'])) {
                 // echo "goblok";
                 $password_hash = password_hash($password, PASSWORD_BCRYPT);
-                $insert_password = "UPDATE users SET password = $password_hash WHERE id = '" . $row['id'] . "'";
+                $insert_password = "UPDATE users SET password = $password_hash WHERE id = '" . $row_get['id'] . "'";
                 // die($insert_password);
                 $this->db->execute($insert_password);
                 // LOGIN
