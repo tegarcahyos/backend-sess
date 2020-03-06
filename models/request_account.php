@@ -200,7 +200,11 @@ class RequestAccount
                 'unit_id' => $unit_id,
             );
 
-            $insert_user = "INSERT INTO users (name, username) VALUES ('" . $data_item['name'] . "', '" . $data_item['username'] . "') RETURNING *";
+            $get_employee = "SELECT * FROM employee WHERE n_nik = '$username'";
+            $get = $this->db->execute($get_employee);
+            $row_get = $get->fetchRow();
+
+            $insert_user = "INSERT INTO users (name, username, employee_id) VALUES ('" . $data_item['name'] . "', '" . $data_item['username'] . "', '" . $row_get['id'] . "') RETURNING *";
             $handle = $this->db->prepare($insert_user);
             $result = $this->db->execute($handle);
             $row = $result->fetchRow();
