@@ -100,9 +100,14 @@ class RequestAccount
         // $unit_id = $request[0]->unit_id;
         // $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        $get_req = "SELECT * FROM $tablename WHERE username = '$nik' AND status = 1";
+        $get_req = "SELECT * FROM $tablename WHERE username = '$nik'";
         $result = $this->db->execute($get_req);
         $req = $result->fetchRow();
+
+        $check_status = "SELECT * FROM $tablename WHERE username = '$nik' AND status = 1";
+        $result = $this->db->execute($check_status);
+        $check_status = $result->fetchRow();
+
         if (is_bool($req)) {
 
             $get_employee = "SELECT DISTINCT * FROM employee WHERE n_nik = '$nik'";
@@ -169,6 +174,8 @@ class RequestAccount
                 }
                 $msg = $data_arr;
             }
+        } else if (is_bool($check_status)) {
+            $msg = '507';
         } else {
             $msg = '508';
         }
