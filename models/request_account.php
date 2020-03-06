@@ -98,70 +98,77 @@ class RequestAccount
         // $unit_id = $request[0]->unit_id;
         // $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        $get_employee = "SELECT DISTINCT * FROM employee WHERE n_nik = '$nik'";
+        $get_req = "SELECT * FROM $tablename WHERE username = '$nik'";
+        $result = $this->db->execute($get_req);
+        $req = $result->fetchRow();
+        if (is_bool($req)) {
+            $get_employee = "SELECT DISTINCT * FROM employee WHERE n_nik = '$nik'";
 
-        $result = $this->db->execute($get_employee);
-        $row = $result->fetchRow();
-        if (is_bool($row)) {
-            $msg = "Data Kosong";
-        } else {
-            extract($row);
-
-            $data_item = array(
-                'c_company_code' => $c_company_code,
-                'v_company_code' => $v_company_code,
-                'c_kode_divisi' => $c_kode_divisi,
-                'v_short_divisi' => $v_short_divisi,
-                'c_kode_unit' => $c_kode_unit,
-                'v_short_unit' => $v_short_unit,
-                'v_long_unit' => $v_long_unit,
-                'objidposisi' => $objidposisi,
-                'c_kode_posisi' => $c_kode_posisi,
-                'v_short_posisi' => $v_short_posisi,
-                'v_long_posisi' => $v_long_posisi,
-                'c_flag_chief' => $c_flag_chief,
-                'n_nik' => $n_nik,
-                'v_nama_karyawan' => $v_nama_karyawan,
-                'v_jenis_kelamin' => $v_jenis_kelamin,
-                'v_personnel_subarea' => $v_personnel_subarea,
-            );
-
-            $get_unit = $get_unit = "SELECT * FROM unit WHERE LOWER(code) = LOWER('" . $data_item['c_kode_unit'] . "')";
-            $result = $this->db->execute($get_unit);
-            $unit = $result->fetchRow();
-
-            $query = "INSERT INTO $tablename (name, username, unit_id)";
-            $query .= "VALUES ('" . $data_item['v_nama_karyawan'] . "','$nik', '" . $unit['id'] . "') RETURNING *";
-            // die($query);
-            $result = $this->db->execute($query);
-            if (empty($result)) {
-                return "422";
+            $result = $this->db->execute($get_employee);
+            $row = $result->fetchRow();
+            if (is_bool($row)) {
+                $msg = "Data Kosong";
             } else {
-                $num = $result->rowCount();
+                extract($row);
 
-                if ($num > 0) {
+                $data_item = array(
+                    'c_company_code' => $c_company_code,
+                    'v_company_code' => $v_company_code,
+                    'c_kode_divisi' => $c_kode_divisi,
+                    'v_short_divisi' => $v_short_divisi,
+                    'c_kode_unit' => $c_kode_unit,
+                    'v_short_unit' => $v_short_unit,
+                    'v_long_unit' => $v_long_unit,
+                    'objidposisi' => $objidposisi,
+                    'c_kode_posisi' => $c_kode_posisi,
+                    'v_short_posisi' => $v_short_posisi,
+                    'v_long_posisi' => $v_long_posisi,
+                    'c_flag_chief' => $c_flag_chief,
+                    'n_nik' => $n_nik,
+                    'v_nama_karyawan' => $v_nama_karyawan,
+                    'v_jenis_kelamin' => $v_jenis_kelamin,
+                    'v_personnel_subarea' => $v_personnel_subarea,
+                );
 
-                    $data_arr = array();
+                $get_unit = $get_unit = "SELECT * FROM unit WHERE LOWER(code) = LOWER('" . $data_item['c_kode_unit'] . "')";
+                $result = $this->db->execute($get_unit);
+                $unit = $result->fetchRow();
 
-                    while ($row = $result->fetchRow()) {
-                        extract($row);
+                $query = "INSERT INTO $tablename (name, username, unit_id)";
+                $query .= "VALUES ('" . $data_item['v_nama_karyawan'] . "','$nik', '" . $unit['id'] . "') RETURNING *";
+                // die($query);
+                $result = $this->db->execute($query);
+                if (empty($result)) {
+                    return "422";
+                } else {
+                    $num = $result->rowCount();
 
-                        $data_item = array(
-                            'id' => $id,
-                            'name' => $name,
-                            'username' => $username,
-                            'unit_id' => $unit_id,
-                        );
+                    if ($num > 0) {
 
-                        array_push($data_arr, $data_item);
-                        $msg = $data_arr;
+                        $data_arr = array();
+
+                        while ($row = $result->fetchRow()) {
+                            extract($row);
+
+                            $data_item = array(
+                                'id' => $id,
+                                'name' => $name,
+                                'username' => $username,
+                                'unit_id' => $unit_id,
+                            );
+
+                            array_push($data_arr, $data_item);
+
+                        }
+
                     }
-
                 }
+                $msg = $data_arr;
             }
-            return $msg;
+        } else {
+            $msg = '508';
         }
-
+        return $msg;
     }
 
     public function update($id, $tablename)

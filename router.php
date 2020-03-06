@@ -101,6 +101,14 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
+        } else if ($type == 508) {
+            $array = array(
+                'type' => $type,
+                'error_msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
         } else if ($type == 204) {
             $array = array(
                 'type' => $type,
@@ -756,6 +764,8 @@ class Router
                 $this->msg(http_response_code(405), 405, 'Method Not Allowed', "gagal", 0);
             } else if ($result == "506") {
                 $this->msg(http_response_code(506), 506, 'Wrong Password Or Account Not Registered', "gagal", 0);
+            } else if ($result == "508") {
+                $this->msg(http_response_code(508), 508, 'Account Already Requested', "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
