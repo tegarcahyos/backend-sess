@@ -171,6 +171,63 @@ class RequestAccount
         return $msg;
     }
 
+    public function activateUser($id, $tablename)
+    {
+        $get_req = "SELECT * FROM $tablename WHERE id = '$id'";
+        $handle = $this->db->prepare($get_req);
+        $result = $this->db->execute($handle);
+        $row = $result->fetchRow();
+        if (is_bool($row)) {
+            $msg = "Data Kosong";
+            return $msg;
+        } else {
+            extract($row);
+            $data_item = array(
+                'id' => $id,
+                'name' => $name,
+                'username' => $username,
+                'unit_id' => $unit_id,
+            );
+
+            $insert_user = "INSERT INTO users (name, username) VALUES ('" . $data_item['name'] . "', '" . $data_item['username'] . "') RETURNING *";
+            $handle = $this->db->prepare($insert_user);
+            $result = $this->db->execute($handle);
+            $row = $result->fetchRow();
+            if (is_bool($row)) {
+                $msg = "Data Kosong";
+                return $msg;
+            } else {
+                extract($row);
+                $data_user = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'username' => $username,
+                );
+            }
+
+            $insert_user_detail = "INSERT INTO user_detail (user_id, unit_id) VALUES ('" . $data_user['id'] . "' ,'" . $data_item['unit_id'] . "') RETURNING *";
+            $handle = $this->db->prepare($insert_user_detail);
+            $result = $this->db->execute($handle);
+            $row = $result->fetchRow();
+            if (is_bool($row)) {
+                $msg = "Data Kosong";
+                return $msg;
+            } else {
+                extract($row);
+                $data_user_detail = array(
+                    'id' => $id,
+                    'user_id' => $user_id,
+                    'unit_id' => $unit_id,
+                );
+            }
+
+            $data_user['unit_id'] = $data_user_detail['unit_id'];
+        }
+
+        return $data_user;
+
+    }
+
     public function update($id, $tablename)
     {
         // get data input from frontend

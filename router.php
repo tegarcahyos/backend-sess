@@ -253,6 +253,7 @@ class Router
             // --- ACCOUNT REQUEST ---
             $r->get('/api/index.php/request_account/get', 'RequestAccount/get');
             $r->get('/api/index.php/request_account/find_id/{id}', 'RequestAccount/findById');
+            $r->get('/api/index.php/request_account/activate_user/{id}', 'RequestAccount/activateUser');
             $r->get('/api/index.php/request_account/delete/{id}', 'RequestAccount/delete');
             $r->post('/api/index.php/request_account/insert', 'RequestAccount/insert');
             $r->post('/api/index.php/request_account/update/{id}', 'RequestAccount/update');
@@ -668,6 +669,7 @@ class Router
                     $explodeUri[4] == "read_notification" ||
                     $explodeUri[4] == "get_by_criteria" ||
                     $explodeUri[4] == "find_unit" ||
+                    $explodeUri[4] == "activate_user" ||
                     $explodeUri[4] == "find_by_role"
                 ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $explodeUri[3]));
