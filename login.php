@@ -149,9 +149,9 @@ class Login
                 // http_response_code(401);
                 $msg = "506";
             }
+            return $msg;
         }
 
-        return $msg;
     }
 
     public function LDAPLogin()
