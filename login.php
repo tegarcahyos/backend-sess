@@ -40,7 +40,7 @@ class Login
                 $result = $this->db->execute($query);
                 $msg = $this->data_user($result, $username, $password);
             } else {
-                die("lebih goblok");
+                die("lebih goblok " . $password);
                 $msg = $this->data_user($result, $username, $password);
             }
         } else {
