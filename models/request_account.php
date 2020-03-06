@@ -80,48 +80,87 @@ class RequestAccount
         $data = file_get_contents("php://input");
         //
         $request = json_decode($data);
-        $name = $request[0]->name;
-        $email = $request[0]->email;
-        $phone = $request[0]->phone;
-        $username = $request[0]->username;
-        $password = $request[0]->password;
-        $role_id = $request[0]->role_id;
-        $unit_id = $request[0]->unit_id;
+        $variable = array('nik');
+        foreach ($variable as $item) {
+            if (!isset($request[0]->{$item})) {
+                return "422";
+            }
+
+            $$item = $request[0]->{$item};
+        }
+
+        // $name = $request[0]->name;
+        // $email = $request[0]->email;
+        // $phone = $request[0]->phone;
+        // $username = $request[0]->username;
+        // $password = $request[0]->password;
+        // $role_id = $request[0]->role_id;
+        // $unit_id = $request[0]->unit_id;
         // $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "INSERT INTO $tablename (name, email, phone, username, password, role_id, unit_id)";
-        $query .= "VALUES ('$name', '$email', $phone ,'$username', '$password', '$role_id', '$unit_id') RETURNING *";
-        // die($query);
-        $result = $this->db->execute($query);
+        $get_employee = "SELECT DISTINCT * FROM employee WHERE n_nik = '$nik'";
+
+        $result = $this->db->execute($get_employee);
         if (empty($result)) {
-            return "422";
+            $msg = "Data Kosong";
         } else {
-            $num = $result->rowCount();
+            $row = $result->fetchRow();
+            extract($row);
 
-            if ($num > 0) {
+            $data_item = array(
+                'c_company_code' => $c_company_code,
+                'v_company_code' => $v_company_code,
+                'c_kode_divisi' => $c_kode_divisi,
+                'v_short_divisi' => $v_short_divisi,
+                'c_kode_unit' => $c_kode_unit,
+                'v_short_unit' => $v_short_unit,
+                'v_long_unit' => $v_long_unit,
+                'objidposisi' => $objidposisi,
+                'c_kode_posisi' => $c_kode_posisi,
+                'v_short_posisi' => $v_short_posisi,
+                'v_long_posisi' => $v_long_posisi,
+                'c_flag_chief' => $c_flag_chief,
+                'n_nik' => $n_nik,
+                'v_nama_karyawan' => $v_nama_karyawan,
+                'v_jenis_kelamin' => $v_jenis_kelamin,
+                'v_personnel_subarea' => $v_personnel_subarea,
+            );
 
-                $data_arr = array();
+            $get_unit = $get_unit = "SELECT * FROM unit WHERE LOWER(code) = LOWER('" . $data_item['c_kode_unit'] . "')";
+            $result = $this->db->execute($get_unit);
+            $unit = $result->fetchRow();
 
-                while ($row = $result->fetchRow()) {
-                    extract($row);
+            $query = "INSERT INTO $tablename (name, username, unit_id)";
+            $query .= "VALUES ('" . $data_item['v_nama_karyawan'] . "','$nik', '" . $unit['id'] . "') RETURNING *";
+            // die($query);
+            $result = $this->db->execute($query);
+            if (empty($result)) {
+                return "422";
+            } else {
+                $num = $result->rowCount();
 
-                    $data_item = array(
-                        'id' => $id,
-                        'name' => $name,
-                        'email' => $email,
-                        'phone' => $phone,
-                        'username' => $username,
-                        'password' => $password,
-                        'role' => $role_id,
-                        'unit' => $unit_id,
-                    );
+                if ($num > 0) {
 
-                    array_push($data_arr, $data_item);
-                    $msg = $data_arr;
+                    $data_arr = array();
+
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
+
+                        $data_item = array(
+                            'id' => $id,
+                            'name' => $name,
+                            'username' => $username,
+                            'unit_id' => $unit_id,
+                        );
+
+                        array_push($data_arr, $data_item);
+                        $msg = $data_arr;
+                    }
+
                 }
-
             }
         }
+
         return $msg;
 
     }
