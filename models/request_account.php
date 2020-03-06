@@ -189,9 +189,6 @@ class RequestAccount
                 'unit_id' => $unit_id,
             );
 
-            $delete_req = "DELETE FROM $tablename WHERE id = " . $data_item['id'] . "";
-            die($delete_req);
-
             $insert_user = "INSERT INTO users (name, username) VALUES ('" . $data_item['name'] . "', '" . $data_item['username'] . "') RETURNING *";
             $handle = $this->db->prepare($insert_user);
             $result = $this->db->execute($handle);
