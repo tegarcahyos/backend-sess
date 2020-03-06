@@ -53,7 +53,7 @@ class Login
     // Detail User
     private function data_user($result, $username, $password)
     {
-        die(print_r($result));
+        // die(print_r($result));
 
         while ($row = $result->fetchRow()) {
             $user_id = $row['id'];
@@ -147,7 +147,12 @@ class Login
             $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
             // die($query);
             $result_get = $this->db->execute($query);
-            $msg = $this->data_user($result_get, $username, $password);
+            $num = $result_get->rowCount();
+            if ($num > 0) {
+                $msg = $this->data_user($result_get, $username, $password);
+            } else {
+                $msg = "203";
+            }
         } else {
             $msg = "203";
         }
