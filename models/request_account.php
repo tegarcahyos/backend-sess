@@ -222,6 +222,8 @@ class RequestAccount
             }
 
             $data_user['unit_id'] = $data_user_detail['unit_id'];
+
+            $this->delete($id, $tablename);
         }
 
         return $data_user;
