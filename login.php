@@ -30,7 +30,7 @@ class Login
             $row_get = $result->fetchRow();
             // die(print_r(!empty($row_get['password'])));
             if (empty($row_get['password'])) {
-                die("goblok");
+                // die("goblok");
                 $password_hash = password_hash($password, PASSWORD_BCRYPT);
                 $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '" . $row_get['id'] . "'";
                 // die($insert_password);
@@ -40,7 +40,7 @@ class Login
                 $result = $this->db->execute($query);
                 $msg = $this->data_user($result, $username, $password);
             } else {
-                die("lebih goblok " . $password);
+                // die("lebih goblok " . $password);
                 $msg = $this->data_user($result, $username, $password);
             }
         } else {
@@ -53,7 +53,7 @@ class Login
     // Detail User
     private function data_user($result, $username, $password)
     {
-
+        die(print_r($result->fetchRow()));
         while ($row = $result->fetchRow()) {
             $user_id = $row['id'];
             $name = $row['name'];
