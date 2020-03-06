@@ -24,25 +24,25 @@ class Login
         $result_user = $this->db->execute($query);
         $num = $result_user->rowCount();
         if ($num > 0) {
+            $msg = $this->data_user($result_user, $username, $password);
+            // $get_user = "SELECT * FROM $tablename WHERE username = '$username'";
+            // $result = $this->db->execute($query);
+            // $row_get = $result->fetchRow();
+            // // die(print_r(!empty($row_get['password'])));
+            // if (empty($row_get['password'])) {
+            //     // die("goblok");
+            //     $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            //     $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '" . $row_get['id'] . "'";
+            //     // die($insert_password);
+            //     $this->db->execute($insert_password);
+            //     // LOGIN
+            //     $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
+            //     $result_user = $this->db->execute($query);
+            //     $msg = $this->data_user($result_user, $username, $password);
+            // } else {
+            // die("lebih goblok " . $password);
 
-            $get_user = "SELECT * FROM $tablename WHERE username = '$username'";
-            $result = $this->db->execute($query);
-            $row_get = $result->fetchRow();
-            // die(print_r(!empty($row_get['password'])));
-            if (empty($row_get['password'])) {
-                // die("goblok");
-                $password_hash = password_hash($password, PASSWORD_BCRYPT);
-                $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '" . $row_get['id'] . "'";
-                // die($insert_password);
-                $this->db->execute($insert_password);
-                // LOGIN
-                $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-                $result_user = $this->db->execute($query);
-                $msg = $this->data_user($result_user, $username, $password);
-            } else {
-                // die("lebih goblok " . $password);
-                $msg = $this->data_user($result_user, $username, $password);
-            }
+            // }
         } else {
             $msg = "203";
         }
@@ -142,14 +142,26 @@ class Login
         $login = $this->callAPI('POST', 'https://auth.telkom.co.id/account/validate', json_encode($data_array));
         $response = json_decode($login);
         // die(print_r($response));
-
+        $result_user;
         if ($response->login != 0) {
             $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
             // die($query);
             $result_get = $this->db->execute($query);
             $num = $result_get->rowCount();
             if ($num > 0) {
-                $msg = $this->data_user($result_get, $username, $password);
+                $row_get = $result_get->fetchRow();
+                if (empty($row_get['password'])) {
+                    // die("goblok");
+                    $password_hash = password_hash($password, PASSWORD_BCRYPT);
+                    $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '" . $row_get['id'] . "'";
+                    $this->db->execute($insert_password);
+                    // LOGIN
+                    $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
+                    $result_user = $this->db->execute($query);
+                    $msg = $this->data_user($result_user, $username, $password);
+                } else {
+                    $msg = $this->data_user($result_user, $username, $password);
+                }
             } else {
                 $msg = "203";
             }
