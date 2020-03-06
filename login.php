@@ -28,9 +28,9 @@ class Login
             $get_user = "SELECT * FROM $tablename WHERE username = '$username'";
             $result = $this->db->execute($query);
             $row_get = $result->fetchRow();
-            die(print_r(!empty($row_get['password'])));
+            // die(print_r(!empty($row_get['password'])));
             if (empty($row_get['password'])) {
-                // echo "goblok";
+                die("goblok");
                 $password_hash = password_hash($password, PASSWORD_BCRYPT);
                 $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '" . $row_get['id'] . "'";
                 // die($insert_password);
@@ -40,6 +40,7 @@ class Login
                 $result = $this->db->execute($query);
                 $msg = $this->data_user($result, $username, $password);
             } else {
+                die("lebih goblok");
                 $msg = $this->data_user($result, $username, $password);
             }
         } else {
