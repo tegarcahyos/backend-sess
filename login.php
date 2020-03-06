@@ -28,7 +28,7 @@ class Login
             $get_user = "SELECT * FROM $tablename WHERE username = '$username'";
             $result = $this->db->execute($query);
             $row_get = $result->fetchRow();
-            die(print_r(empty($row_get['password'])));
+            die(print_r(!empty($row_get['password'])));
             if (empty($row_get['password'])) {
                 // echo "goblok";
                 $password_hash = password_hash($password, PASSWORD_BCRYPT);
