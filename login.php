@@ -24,7 +24,7 @@ class Login
         $result = $this->db->execute($query);
         $num = $result->rowCount();
 
-        $get_user_request = "SELECT * FROM $tablename WHERE username = '$username' AND password != null LIMIT 1 ";
+        $get_user_request = "SELECT * FROM $tablename WHERE username = '$username' AND password is null LIMIT 1 ";
         // die($get_user_request);
         $result_req = $this->db->execute($get_user_request);
         $num_req = $result_req->rowCount();
