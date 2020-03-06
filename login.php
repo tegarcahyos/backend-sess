@@ -21,8 +21,8 @@ class Login
 
         $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1";
         // die($query);
-        $result = $this->db->execute($query);
-        $num = $result->rowCount();
+        $result_user = $this->db->execute($query);
+        $num = $result_user->rowCount();
         if ($num > 0) {
 
             $get_user = "SELECT * FROM $tablename WHERE username = '$username'";
@@ -37,11 +37,11 @@ class Login
                 $this->db->execute($insert_password);
                 // LOGIN
                 $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-                $result = $this->db->execute($query);
-                $msg = $this->data_user($result, $username, $password);
+                $result_user = $this->db->execute($query);
+                $msg = $this->data_user($result_user, $username, $password);
             } else {
                 // die("lebih goblok " . $password);
-                $msg = $this->data_user($result, $username, $password);
+                $msg = $this->data_user($result_user, $username, $password);
             }
         } else {
             $msg = "203";
