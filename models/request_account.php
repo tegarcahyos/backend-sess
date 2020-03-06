@@ -223,7 +223,8 @@ class RequestAccount
 
             $data_user['unit_id'] = $data_user_detail['unit_id'];
 
-            $this->delete($id, $tablename);
+            $delete_req = "DELETE FROM $tablename WHERE id = $id";
+            $this->db->execute($delete_req);
         }
 
         return $data_user;
