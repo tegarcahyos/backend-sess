@@ -60,7 +60,7 @@ class Login
             $password2 = $row['password'];
             $employee_id = $row['employee_id'];
         }
-        // die(print_r($user_id));
+        die(print_r($user_id));
         // die($password2);
         // die(password_verify($password, $password2));
         if (password_verify($password, $password2)) {
