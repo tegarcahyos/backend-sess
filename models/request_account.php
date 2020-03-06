@@ -102,6 +102,7 @@ class RequestAccount
         $result = $this->db->execute($get_req);
         $req = $result->fetchRow();
         if (is_bool($req)) {
+
             $get_employee = "SELECT DISTINCT * FROM employee WHERE n_nik = '$nik'";
 
             $result = $this->db->execute($get_employee);
@@ -134,8 +135,8 @@ class RequestAccount
                 $result = $this->db->execute($get_unit);
                 $unit = $result->fetchRow();
 
-                $query = "INSERT INTO $tablename (name, username, unit_id)";
-                $query .= "VALUES ('" . $data_item['v_nama_karyawan'] . "','$nik', '" . $unit['id'] . "') RETURNING *";
+                $query = "INSERT INTO $tablename (name, username, unit_id, status)";
+                $query .= "VALUES ('" . $data_item['v_nama_karyawan'] . "','$nik', '" . $unit['id'] . "', 0) RETURNING *";
                 // die($query);
                 $result = $this->db->execute($query);
                 if (empty($result)) {
@@ -222,9 +223,9 @@ class RequestAccount
             }
 
             $data_user['unit_id'] = $data_user_detail['unit_id'];
+            $update_status = "UPDATE $tablename SET status = 1 WHERE id = " . $data_item['id'] . "";
+            $result = $this->db->execute($update_status);
 
-            $delete_req = "DELETE FROM $tablename WHERE id = " . $data_item['id'] . "";
-            $this->db->execute($delete_req);
         }
 
         return $data_user;
