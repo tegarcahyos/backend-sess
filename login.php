@@ -160,7 +160,9 @@ class Login
                     $result_user = $this->db->execute($query);
                     $msg = $this->data_user($result_user, $username, $password);
                 } else {
-                    $msg = $this->data_user($result_get, $username, $password);
+                    $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
+                    $result_user = $this->db->execute($query);
+                    $msg = $this->data_user($result_user, $username, $password);
                 }
             } else {
                 $msg = "203";
