@@ -100,7 +100,7 @@ class RequestAccount
         // $unit_id = $request[0]->unit_id;
         // $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        $get_req = "SELECT * FROM $tablename WHERE username = '$nik'";
+        $get_req = "SELECT * FROM $tablename WHERE username = '$nik' AND status = 1";
         $result = $this->db->execute($get_req);
         $req = $result->fetchRow();
         if (is_bool($req)) {

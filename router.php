@@ -767,7 +767,7 @@ class Router
             } else if ($result == "506") {
                 $this->msg(http_response_code(506), 506, 'Wrong Password Or Account Not Registered', "gagal", 0);
             } else if ($result == "508") {
-                $this->msg(http_response_code(508), 508, 'Account Already Requested', "gagal", 0);
+                $this->msg(http_response_code(508), 508, 'Account Already Requested / Active', "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
