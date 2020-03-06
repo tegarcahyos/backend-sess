@@ -160,7 +160,7 @@ class Login
                     $result_user = $this->db->execute($query);
                     $msg = $this->data_user($result_user, $username, $password);
                 } else {
-                    $msg = $this->data_user($result_user, $username, $password);
+                    $msg = $this->data_user($result_get, $username, $password);
                 }
             } else {
                 $msg = "203";
