@@ -23,10 +23,24 @@ class Login
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
+
+        $get_user_request = "SELECT * FROM $tablename WHERE username = '$username' AND password != null LIMIT 1 ";
+        // die($get_user_request);
+        $result_req = $this->db->execute($get_user_request);
+        $num_req = $result_req->rowCount();
         if ($num > 0) {
             $msg = $this->data_user($result, $username, $password);
-        } else {
-            $msg = "203";
+        } else if ($num_req > 0) {
+
+            $row = $result_req->fetchRow();
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            $insert_password = "UPDATE users SET password = $password_hash WHERE id = '" . $row['id'] . "'";
+            $this->db->execute($insert_password);
+            // LOGIN
+            $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
+            $result = $this->db->execute($query);
+            $msg = $this->data_user($result, $username, $password);
+
             // // Jika data tidak ditemukan
             // $check = "SELECT DISTINCT * FROM employee  WHERE n_nik = '$username'";
             // // die($check);
@@ -52,6 +66,8 @@ class Login
             //     $result = $this->db->execute($query);
             //     $msg = $this->data_user($result, $username, $password);
             // }
+        } else {
+            $msg = "203";
         }
 
         return $msg;
