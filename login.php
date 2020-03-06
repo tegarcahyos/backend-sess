@@ -83,7 +83,9 @@ class Login
             // LOGIN
             $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
             $result = $this->db->execute($query);
-            $msg = $this->data_user($result, $username, $password);
+            $row = $result->fetchRow();
+            $password2 = $row['password'];
+            // $msg = $this->data_user($result, $username, $password);
         } else {
             // die($password2);
             // die(password_verify($password, $password2));
