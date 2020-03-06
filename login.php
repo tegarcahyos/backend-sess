@@ -75,13 +75,13 @@ class Login
             $employee_id = $row['employee_id'];
         }
         if (empty($password2)) {
-            echo "goblok";
+            // echo "goblok";
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
             $insert_password = "UPDATE users SET password = $password_hash WHERE id = '" . $row['id'] . "'";
             // die($insert_password);
             $this->db->execute($insert_password);
             // LOGIN
-            $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
+            $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
             $result = $this->db->execute($query);
             $msg = $this->data_user($result, $username, $password);
         } else {
