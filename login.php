@@ -32,8 +32,10 @@ class Login
             $msg = $this->data_user($result, $username, $password);
         } else if (empty($row['password'])) {
 
+            echo "goblok";
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
             $insert_password = "UPDATE users SET password = $password_hash WHERE id = '" . $row['id'] . "'";
+            die($insert_password);
             $this->db->execute($insert_password);
             // LOGIN
             $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
