@@ -19,7 +19,7 @@ class Login
         $username = $data->username;
         $password = $data->password;
 
-        $query = "SELECT * FROM $tablename WHERE username = '$username' LIMIT 1 ";
+        $query = "SELECT * FROM $tablename WHERE username = '$username' AND password is not null LIMIT 1 ";
         // die($query);
         $result = $this->db->execute($query);
         $num = $result->rowCount();
@@ -33,7 +33,6 @@ class Login
         } else if ($num_req > 0) {
 
             $row = $result_req->fetchRow();
-            die(print_r($row));
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
             $insert_password = "UPDATE users SET password = $password_hash WHERE id = '" . $row['id'] . "'";
             $this->db->execute($insert_password);
