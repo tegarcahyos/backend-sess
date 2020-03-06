@@ -33,6 +33,7 @@ class Login
         } else if ($num_req > 0) {
 
             $row = $result_req->fetchRow();
+            die(print_r($row));
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
             $insert_password = "UPDATE users SET password = $password_hash WHERE id = '" . $row['id'] . "'";
             $this->db->execute($insert_password);
