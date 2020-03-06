@@ -32,7 +32,7 @@ class Login
                 // echo "goblok";
                 $password_hash = password_hash($password, PASSWORD_BCRYPT);
                 $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '" . $row_get['id'] . "'";
-                die($insert_password);
+                // die($insert_password);
                 $this->db->execute($insert_password);
                 // LOGIN
                 $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
