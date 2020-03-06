@@ -36,6 +36,7 @@ class RequestAccount
                     'password' => $password,
                     'role' => $role_id,
                     'unit' => $unit_id,
+                    'status' => $status,
                 );
 
                 array_push($data_arr, $data_item);
@@ -69,6 +70,7 @@ class RequestAccount
                 'password' => $password,
                 'role' => $role_id,
                 'unit' => $unit_id,
+                'status' => $status,
             );
             return $data_item;
         }
@@ -156,6 +158,7 @@ class RequestAccount
                                 'name' => $name,
                                 'username' => $username,
                                 'unit_id' => $unit_id,
+                                'status' => $status,
                             );
 
                             array_push($data_arr, $data_item);
