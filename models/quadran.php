@@ -188,11 +188,9 @@ class Quadran
                             }
                         }
                     }
-                    // $msg = $data_arr;
                     array_push($result_arr, $data_arr);
                 }
             }
-            die(json_encode($result_arr));
             $msg = $result_arr;
         } else {
             $msg = 'Data Kosong';
