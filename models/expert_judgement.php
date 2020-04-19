@@ -182,9 +182,8 @@ class ExpertJudgement
                     }
                     // array_push($result_arr, $data_item);
                 }
-                $data_arr;
+                $msg = $data_arr;
             }
-            $msg = $data_arr;
         } else {
             $msg = 'Data Kosong';
         }
