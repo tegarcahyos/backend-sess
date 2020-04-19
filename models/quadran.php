@@ -189,6 +189,7 @@ class Quadran
                 }
                 $msg = $data_arr;
             } else {
+                die("Gaada");
                 $msg = 'Data Kosong';
             }
         }
