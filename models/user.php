@@ -38,7 +38,6 @@ class User
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -94,7 +93,6 @@ class User
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -142,11 +140,9 @@ class User
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
         return $msg;
-
     }
 
     public function update($id, $tablename)
@@ -186,12 +182,11 @@ class User
                     );
 
                     array_push($data_arr, $data_item);
-                    $msg = $data_arr;
+                    return $data_arr;
                 }
-
             }
         }
-        return $msg;
+        // return $msg;
     }
 
     public function delete($id, $tablename)
@@ -233,6 +228,5 @@ class User
                 return $msg = "Data Kosong";
             }
         }
-
     }
 }
