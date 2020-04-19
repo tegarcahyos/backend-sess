@@ -122,7 +122,7 @@ class Quadran
     {
 
         $getOrg = $this->getOrg($org_id);
-        // die(print_r($getOrg));
+        die(print_r($getOrg));
         if (!empty($getOrg)) {
             for ($m = 0; $m < count($getOrg); $m++) {
                 $query = "SELECT * FROM  $tablename WHERE periode_id = '$periode_id' AND unit_id = '" . $getOrg[$m]['id'] . "'";
@@ -130,7 +130,7 @@ class Quadran
                 $result = $this->db->execute($query);
                 // hitung result
                 $num = $result->rowCount();
-                print_r($num);
+                // print_r($num);
                 if ($num > 0) {
 
                     $data_arr = array();
