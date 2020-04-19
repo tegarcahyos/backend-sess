@@ -123,7 +123,7 @@ class Quadran
 
         $getOrg = $this->getOrg($org_id);
         // die(print_r($getOrg));
-        $result_arr = array();
+        $data_arr = array();
         if (!empty($getOrg)) {
             for ($m = 0; $m < count($getOrg); $m++) {
                 $query = "SELECT * FROM  $tablename WHERE periode_id = '$periode_id' AND unit_id = '" . $getOrg[$m]['id'] . "'";
@@ -132,7 +132,7 @@ class Quadran
                 // hitung result
                 $num = $result->rowCount();
                 // print_r($num);
-                $data_arr = array();
+
                 if ($num > 0) {
 
 
@@ -188,10 +188,9 @@ class Quadran
                             }
                         }
                     }
-                    array_push($result_arr, $data_arr);
                 }
             }
-            $msg = $result_arr;
+            $msg = $data_arr;
         } else {
             $msg = 'Data Kosong';
         }

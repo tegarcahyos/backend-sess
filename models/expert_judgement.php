@@ -119,7 +119,6 @@ class ExpertJudgement
 
         $getOrg = $this->getOrg($org_id);
         // die(print_r($getOrg));
-        $result_arr = array();
         $data_arr = array();
         if (!empty($getOrg)) {
             for ($m = 0; $m < count($getOrg); $m++) {
@@ -128,8 +127,6 @@ class ExpertJudgement
                 $result = $this->db->execute($query);
                 // hitung result
                 $num = $result->rowCount();
-
-                // $data_arr = array();
                 if ($num > 0) {
 
 
@@ -181,7 +178,6 @@ class ExpertJudgement
                             }
                         }
                     }
-                    // array_push($result_arr, $data_item);
                 }
             }
             $msg = $data_arr;
