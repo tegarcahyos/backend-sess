@@ -145,8 +145,6 @@ class ExpertJudgement
                         array_push($data_arr, $data_item);
                     }
 
-                    // die(print_r($data_arr));
-
 
                     for ($i = 0; $i < count($data_arr); $i++) {
                         $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
@@ -182,10 +180,11 @@ class ExpertJudgement
                             }
                         }
                     }
-                    array_push($result_arr, $data_item);
+                    // array_push($result_arr, $data_item);
+                    $data_arr;
                 }
             }
-            $msg = $result_arr;
+            $msg = $data_arr;
         } else {
             $msg = 'Data Kosong';
         }
