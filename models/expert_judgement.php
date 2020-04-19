@@ -153,17 +153,17 @@ class ExpertJudgement
                         // die($unit);
                         $result = $this->db->execute($unit);
                         $unit = $result->fetchRow();
-                        $data_arr[$i]['unit_name'] = $unit['name'];
+                        $data_item[$i]['unit_name'] = $unit['name'];
 
                         $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
                         $result = $this->db->execute($periode);
                         $periode = $result->fetchRow();
-                        $data_arr[$i]['periode_name'] = $periode['name'];
+                        $data_item[$i]['periode_name'] = $periode['name'];
 
                         $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
                         $result = $this->db->execute($user);
                         $user = $result->fetchRow();
-                        $data_arr[$i]['user_name'] = $user['name'];
+                        $data_item[$i]['user_name'] = $user['name'];
 
                         $get_id_pc = json_decode($data_arr[$i]['program_charter']);
                         $pc = array_values((array) $get_id_pc);
@@ -175,14 +175,14 @@ class ExpertJudgement
                                 $num = $result->rowCount();
                                 if ($num > 0) {
                                     while ($row = $result->fetchRow()) {
-                                        $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
-                                        $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
+                                        $data_item[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
+                                        $data_item[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
                                     }
                                 }
                             }
                         }
                     }
-                    array_push($result_arr, $data_arr);
+                    array_push($result_arr, $data_item);
                 }
             }
             $msg = $result_arr;
