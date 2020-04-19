@@ -158,8 +158,8 @@ class User
         // $password = $request[0]->password;
         // $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "UPDATE $tablename SET name = '$name', email = '$email', phone = '$phone', username = ' $username' WHERE id = '$id'";
-        die($query);
+        $query = "UPDATE $tablename SET name = '$name', email = '$email', phone = '$phone', username = ' $username' WHERE id = '$id' RETURNING *";
+        // die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "422";
