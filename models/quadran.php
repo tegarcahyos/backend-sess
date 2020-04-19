@@ -187,8 +187,9 @@ class Quadran
                         }
                     }
 
-                    $msg = $data_arr;
+                    $result_arr = $data_arr;
                 }
+                $msg = $result_arr;
             } else {
                 $msg = 'Data Kosong';
             }
