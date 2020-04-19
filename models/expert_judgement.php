@@ -128,9 +128,9 @@ class ExpertJudgement
                 // hitung result
                 $num = $result->rowCount();
 
+                $data_arr = array();
                 if ($num > 0) {
 
-                    $data_arr = array();
 
                     while ($row = $result->fetchRow()) {
                         extract($row);
