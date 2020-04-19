@@ -189,13 +189,13 @@ class Quadran
 
                     $result_arr = $data_arr;
                 }
-                $msg = $result_arr;
+                return $result_arr;
             } else {
-                $msg = 'Data Kosong';
+                return 'Data Kosong';
             }
         }
 
-        return $msg;
+        // return $msg;
     }
 
     public function findById($id, $tablename)
