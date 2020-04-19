@@ -122,11 +122,11 @@ class Quadran
     {
 
         $getOrg = $this->getOrg($org_id);
-        // die(print_r($getOrg));
+        die(print_r($getOrg));
 
         for ($m = 0; $m < count($getOrg); $m++) {
             $query = "SELECT * FROM  $tablename WHERE periode_id = '$periode_id' AND unit_id = '" . $getOrg[$m]['id'] . "'";
-            print_r($query);
+            // print_r($query);
             $result = $this->db->execute($query);
             // hitung result
             $num = $result->rowCount();
