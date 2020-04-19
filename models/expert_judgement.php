@@ -119,6 +119,7 @@ class ExpertJudgement
 
         $getOrg = $this->getOrg($org_id);
         // die(print_r($getOrg));
+        $result_arr = array();
         if (!empty($getOrg)) {
             for ($m = 0; $m < count($getOrg); $m++) {
                 $query = "SELECT * FROM  $tablename WHERE periode_id = '$periode_id' AND unit_id = '" . $getOrg[$m]['id'] . "'";
@@ -146,7 +147,7 @@ class ExpertJudgement
 
                     // die(print_r($data_arr));
 
-                    $result_arr = array();
+
                     for ($i = 0; $i < count($data_arr); $i++) {
                         $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
                         // die($unit);
@@ -181,9 +182,10 @@ class ExpertJudgement
                             }
                         }
                     }
-                    $msg = $data_arr;
                 }
+                array_push($result_arr, $data_arr);
             }
+            $msg = $result_arr;
         } else {
             $msg = 'Data Kosong';
         }
