@@ -147,7 +147,7 @@ class Quadran
                         );
                         array_push($data_arr, $data_item);
                     }
-
+                    die(count($data_arr));
                     $result_arr = array();
                     for ($i = 0; $i < count($data_arr); $i++) {
                         $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
