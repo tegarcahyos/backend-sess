@@ -68,16 +68,12 @@ class Quadran
                                     $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
                                     $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
                                 }
-
                             }
                         }
-
                     }
                 }
-
             }
             $msg = $data_arr;
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -115,7 +111,6 @@ class Quadran
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
@@ -187,16 +182,13 @@ class Quadran
                                         $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
                                         $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
                                     }
-
                                 }
                             }
-
                         }
                     }
 
+                    $msg = $data_arr;
                 }
-                $msg = $data_arr;
-
             } else {
                 $msg = 'Data Kosong';
             }
@@ -274,7 +266,6 @@ class Quadran
                 array_push($result_arr, $data_item);
                 $msg = $result_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -329,12 +320,10 @@ class Quadran
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
 
         return $msg;
-
     }
 
     public function update($id, $tablename)
@@ -383,7 +372,6 @@ class Quadran
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
 
@@ -420,5 +408,4 @@ class Quadran
             return $msg = "Data Kosong";
         }
     }
-
 }
