@@ -130,7 +130,7 @@ class Quadran
                 $result = $this->db->execute($query);
                 // hitung result
                 $num = $result->rowCount();
-                die(print_r($num));
+                print_r($num);
                 if ($num > 0) {
 
                     $data_arr = array();
