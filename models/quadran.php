@@ -186,8 +186,8 @@ class Quadran
                                 }
                             }
                         }
+                        array_push($result_arr, $data_arr);
                     }
-                    array_push($result_arr, $data_arr);
                     $msg = $result_arr;
                 }
             }
