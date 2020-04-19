@@ -117,6 +117,14 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
+        } else if ($type == 511) {
+            $array = array(
+                'type' => $type,
+                'error_msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
         } else if ($type == 204) {
             $array = array(
                 'type' => $type,
@@ -190,7 +198,6 @@ class Router
         $result = $tempDb->execute($query);
         $row = $result->fetchRow();
         if (is_bool($row)) {
-
         } else {
             extract($row);
             $expireAt = $row['expire_at'];
@@ -603,25 +610,24 @@ class Router
                 // --------- URL PARSER ------------
                 if ($explodeUri[3] == 'login') {
                     $result = call_user_func_array(array(new $class($connection), $method), array('users'));
-
                 } else if (
-                    $explodeUri[3] == "loginLdap") {
+                    $explodeUri[3] == "loginLdap"
+                ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array('employee'));
                 } else if (
-                    $explodeUri[3] == "migrate") {
+                    $explodeUri[3] == "migrate"
+                ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array('program_charter'));
-
                 } else if ($explodeUri[4] == "select_group_message_id") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['message_id'], $explodeUri[3]));
-
                 } else if ($explodeUri[4] == "select_org_id" || $explodeUri[4] == "select_active") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['org_id'], $explodeUri[3]));
-
-                } else if ($explodeUri[4] == "select_group_id" ||
-                    $explodeUri[4] == "status_read") {
+                } else if (
+                    $explodeUri[4] == "select_group_id" ||
+                    $explodeUri[4] == "status_read"
+                ) {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['group_id'], $explodeUri[3]));
-
                 } else if (
                     $explodeUri[4] == "select_user_id" ||
                     $explodeUri[4] == "update_user_id" ||
@@ -629,21 +635,19 @@ class Router
                 ) {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $explodeUri[3]));
-
                 } else if ($explodeUri[4] == "select_unit_id") {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['unit_id'], $explodeUri[3]));
-
                 } else if ($explodeUri[4] == "select_push_id") {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['push_id'], $explodeUri[3]));
                 } else if ($explodeUri[4] == "get_by_root") {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['id'], $vars['periode_id'], $explodeUri[3]));
-
                 } else if (
                     $explodeUri[4] == "select_device" ||
-                    $explodeUri[4] == "delete_device") {
+                    $explodeUri[4] == "delete_device"
+                ) {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['device_id'], $explodeUri[3]));
                 } else if (
@@ -735,22 +739,27 @@ class Router
                     $result = call_user_func_array(array(new $class($connection), $method), array($explodeUri[3]));
                 } else if ($explodeUri[4] == "select_where_get") {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['attr'], $vars['val'], $explodeUri[3]));
-                } else if ($explodeUri[5] == "join_chat" ||
-                    $explodeUri[5] == "join_group_chat") {
+                } else if (
+                    $explodeUri[5] == "join_chat" ||
+                    $explodeUri[5] == "join_group_chat"
+                ) {
 
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['user_id'], $vars['group_id'], $explodeUri[3], $explodeUri[4]));
-
                 } else if (
-                    $explodeUri[4] == "find_by_pc") {
+                    $explodeUri[4] == "find_by_pc"
+                ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['pc_id'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[4] == "find" || $explodeUri[4] == "search") {
+                    $explodeUri[4] == "find" || $explodeUri[4] == "search"
+                ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['value'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[4] == "select_by_title") {
+                    $explodeUri[4] == "select_by_title"
+                ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['title'], $explodeUri[3]));
                 } else if (
-                    $explodeUri[4] == "get_by_periode_and_organization") {
+                    $explodeUri[4] == "get_by_periode_and_organization"
+                ) {
                     $result = call_user_func_array(array(new $class($connection), $method), array($vars['periode_id'], $vars['organization_id'], $explodeUri[3]));
                 }
                 break;
@@ -776,16 +785,15 @@ class Router
                 $this->msg(http_response_code(506), 506, 'Wrong Password Or Account Not Registered', "gagal", 0);
             } else if ($result == "508") {
                 $this->msg(http_response_code(508), 508, 'Account Already Requested', "gagal", 0);
+            } else if ($result == "511") {
+                $this->msg(http_response_code(508), 508, 'User Already Exists, Please Login Via LDAP', "gagal", 0);
             } else if ($result == "507") {
                 $this->msg(http_response_code(507), 507, 'Account Already Active', "gagal", 0);
             } else {
                 $this->msg(http_response_code(200), 200, $result, "berhasil", 1);
             }
-
         } catch (\Throwable $th) {
-            $this->msg(203, $th, "Terjadi Kesalahan");
+            $this->msg(203, $th, "Terjadi Kesalahan", 0);
         }
-
     }
-
 }

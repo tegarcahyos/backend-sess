@@ -42,7 +42,6 @@ class RequestAccount
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -76,6 +75,15 @@ class RequestAccount
         }
     }
 
+    public function findUser($nik)
+    {
+        $query = "SELECT * FROM users WHERE username = '$nik'";
+        $handle = $this->db->prepare($query);
+        $result = $this->db->execute($handle);
+        $row = $result->fetchRow();
+        return $row;
+    }
+
     public function insert($tablename)
     {
         // get data input from frontend
@@ -91,14 +99,12 @@ class RequestAccount
             $$item = $request[0]->{$item};
         }
 
-        // $name = $request[0]->name;
-        // $email = $request[0]->email;
-        // $phone = $request[0]->phone;
-        // $username = $request[0]->username;
-        // $password = $request[0]->password;
-        // $role_id = $request[0]->role_id;
-        // $unit_id = $request[0]->unit_id;
-        // $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        $getUser = $this->findUser($nik);
+
+        if (!empty($getUser)) {
+            return "511";
+        }
+
 
         $get_req = "SELECT * FROM $tablename WHERE username = '$nik'";
         $result = $this->db->execute($get_req);
@@ -167,9 +173,7 @@ class RequestAccount
                             );
 
                             array_push($data_arr, $data_item);
-
                         }
-
                     }
                 }
                 $msg = $data_arr;
@@ -239,11 +243,9 @@ class RequestAccount
             $data_user['unit_id'] = $data_user_detail['unit_id'];
             $update_status = "UPDATE $tablename SET status = 1 WHERE id = " . $data_item['id'] . "";
             $result = $this->db->execute($update_status);
-
         }
 
         return $data_user;
-
     }
 
     public function update($id, $tablename)
@@ -290,7 +292,6 @@ class RequestAccount
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
         return $msg;
