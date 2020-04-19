@@ -132,9 +132,9 @@ class Quadran
                 // hitung result
                 $num = $result->rowCount();
                 // print_r($num);
+                $data_arr = array();
                 if ($num > 0) {
 
-                    $data_arr = array();
 
                     while ($row = $result->fetchRow()) {
                         extract($row);
@@ -188,10 +188,11 @@ class Quadran
                             }
                         }
                     }
-                    array_push($result_arr, $data_arr);
                 }
+                $msg = $data_arr;
+                // array_push($result_arr, $data_arr);
             }
-            $msg = $result_arr;
+            // $msg = $result_arr;
         } else {
             $msg = 'Data Kosong';
         }
