@@ -102,7 +102,7 @@ class RequestAccount
         $getUser = $this->findUser($nik);
 
         if (!empty($getUser)) {
-            return "Gabisa bang";
+            return "511";
         }
 
 
