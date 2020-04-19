@@ -192,7 +192,7 @@ class Quadran
                     array_push($result_arr, $data_arr);
                 }
             }
-            die($result_arr);
+            die(json_encode($result_arr));
             $msg = $result_arr;
         } else {
             $msg = 'Data Kosong';
