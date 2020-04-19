@@ -128,78 +128,82 @@ class Quadran
 
         $getOrg = $this->getOrg($org_id);
         // die(print_r($getOrg));
+        
+        if (!empty($getOrg)){
+            for ($m = 0; $m < count($getOrg); $m++) {
+                $query = "SELECT * FROM  $tablename WHERE periode_id = '$periode_id' AND unit_id = '" . $getOrg[$m]['id'] . "'";
+                // die($query);
+                $result = $this->db->execute($query);
+                // hitung result
+                $num = $result->rowCount();
 
-        for ($m = 0; $m < count($getOrg); $m++) {
-            $query = "SELECT * FROM  $tablename WHERE periode_id = '$periode_id' AND unit_id = '" . $getOrg[$m]['id'] . "'";
-            // die($query);
-            $result = $this->db->execute($query);
-            // hitung result
-            $num = $result->rowCount();
+                if ($num > 0) {
 
-            if ($num > 0) {
+                    $data_arr = array();
 
-                $data_arr = array();
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
 
-                while ($row = $result->fetchRow()) {
-                    extract($row);
-
-                    $data_item = array(
-                        'id' => $id,
-                        'user_id' => $user_id,
-                        'program_charter' => json_decode($program_charter),
-                        'unit_id' => $unit_id,
-                        'periode_id' => $periode_id,
-                    );
-                    array_push($data_arr, $data_item);
-                }
-
-                $result_arr = array();
-                for ($i = 0; $i < count($data_arr); $i++) {
-                    $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
-                    // die($unit);
-                    $result = $this->db->execute($unit);
-                    $unit = $result->fetchRow();
-                    $data_arr[$i]['unit_name'] = $unit['name'];
-
-                    $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
-                    $result = $this->db->execute($periode);
-                    $periode = $result->fetchRow();
-                    $data_arr[$i]['periode_name'] = $periode['name'];
-
-                    $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
-                    $result = $this->db->execute($user);
-                    $user = $result->fetchRow();
-                    $data_arr[$i]['user_name'] = $user['name'];
-
-                    $get_id_pc = json_decode($data_arr[$i]['program_charter']);
-                    // die(print_r($get_id_pc));
-                    $pc = array_values((array) $get_id_pc);
-                    for ($k = 0; $k < count($pc); $k++) {
-                        if (!empty($pc[$k])) {
-                            for ($j = 0; $j < count($pc[$k]); $j++) {
-                                // die(print_r($pc[2][0]));
-                                $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$k][$j] . "'";
-                                // print_r($get_pc);
-                                $result = $this->db->execute($get_pc);
-                                $num = $result->rowCount();
-                                if ($num > 0) {
-                                    while ($row = $result->fetchRow()) {
-                                        $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
-                                        $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
-                                    }
-
-                                }
-                            }
-
-                        }
+                        $data_item = array(
+                            'id' => $id,
+                            'user_id' => $user_id,
+                            'program_charter' => json_decode($program_charter),
+                            'unit_id' => $unit_id,
+                            'periode_id' => $periode_id,
+                        );
+                        array_push($data_arr, $data_item);
                     }
 
-                }
-                $msg = $data_arr;
+                    $result_arr = array();
+                    for ($i = 0; $i < count($data_arr); $i++) {
+                        $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
+                        // die($unit);
+                        $result = $this->db->execute($unit);
+                        $unit = $result->fetchRow();
+                        $data_arr[$i]['unit_name'] = $unit['name'];
 
-            } else {
-                $msg = 'Data Kosong';
+                        $periode = "SELECT * FROM periode WHERE id = '" . $data_arr[$i]['periode_id'] . "'";
+                        $result = $this->db->execute($periode);
+                        $periode = $result->fetchRow();
+                        $data_arr[$i]['periode_name'] = $periode['name'];
+
+                        $user = "SELECT * FROM users WHERE id = '" . $data_arr[$i]['user_id'] . "'";
+                        $result = $this->db->execute($user);
+                        $user = $result->fetchRow();
+                        $data_arr[$i]['user_name'] = $user['name'];
+
+                        $get_id_pc = json_decode($data_arr[$i]['program_charter']);
+                        // die(print_r($get_id_pc));
+                        $pc = array_values((array) $get_id_pc);
+                        for ($k = 0; $k < count($pc); $k++) {
+                            if (!empty($pc[$k])) {
+                                for ($j = 0; $j < count($pc[$k]); $j++) {
+                                    // die(print_r($pc[2][0]));
+                                    $get_pc = "SELECT * FROM program_charter WHERE id = '" . $pc[$k][$j] . "'";
+                                    // print_r($get_pc);
+                                    $result = $this->db->execute($get_pc);
+                                    $num = $result->rowCount();
+                                    if ($num > 0) {
+                                        while ($row = $result->fetchRow()) {
+                                            $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
+                                            $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
+                                        }
+
+                                    }
+                                }
+
+                            }
+                        }
+
+                    }
+                    $msg = $data_arr;
+
+                } else {
+                    $msg = 'Data Kosong';
+                }
             }
+        }else {
+            $msg = 'Data Kosong';
         }
 
         return $msg;
