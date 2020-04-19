@@ -81,7 +81,6 @@ class RequestAccount
         $handle = $this->db->prepare($query);
         $result = $this->db->execute($handle);
         $row = $result->fetchRow();
-        die(!empty($row));
         return $row;
     }
 
