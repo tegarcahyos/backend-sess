@@ -186,16 +186,14 @@ class Quadran
                             }
                         }
                     }
-
-                    $result_arr = $data_arr;
                 }
-                return $result_arr;
+                $msg = $data_arr;
             } else {
-                return 'Data Kosong';
+                $msg = 'Data Kosong';
             }
         }
 
-        // return $msg;
+        return $msg;
     }
 
     public function findById($id, $tablename)
