@@ -159,7 +159,7 @@ class User
         // $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
         $query = "UPDATE $tablename SET name = '$name', email = '$email', phone = '$phone', username = ' $username' WHERE id = '$id'";
-        // die($query);
+        die($query);
         $result = $this->db->execute($query);
         if (empty($result)) {
             return "422";
@@ -182,11 +182,11 @@ class User
                     );
 
                     array_push($data_arr, $data_item);
-                    return $data_arr;
+                    $msg = $data_arr;
                 }
             }
         }
-        // return $msg;
+        return $msg;
     }
 
     public function delete($id, $tablename)
