@@ -39,7 +39,6 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -107,13 +106,11 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
 
         return $msg;
-
     }
 
     public function getAllParent($id)
@@ -175,13 +172,11 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
 
         return $msg;
-
     }
 
     private $parentArray = [""];
@@ -235,13 +230,11 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
 
         return $msg;
-
     }
 
     public function getByParent($parent_id, $tablename)
@@ -276,7 +269,6 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
@@ -315,13 +307,11 @@ class Unit
 
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
         // echo count($msg);
         return $msg;
-
     }
 
     public function findByOrgId($org_id, $tablename)
@@ -329,7 +319,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename WHERE organization_id = '$org_id'";
+             $tablename WHERE organization_id = '$org_id' AND parent_id = '0'";
 
         $result = $this->db->execute($query);
 
@@ -354,7 +344,6 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
@@ -429,9 +418,7 @@ class Unit
                         );
 
                         array_push($userArray, $data_item);
-
                     }
-
                 } else {
                     $userArray = [];
                 }
@@ -442,7 +429,6 @@ class Unit
                 }
                 $msg = $resultUsers;
             }
-
         } else {
             $msg = [];
         }
@@ -497,7 +483,6 @@ class Unit
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
 
@@ -546,7 +531,6 @@ class Unit
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
 
@@ -599,7 +583,6 @@ class Unit
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             } else {
                 $msg = 'Data Kosong';
             }
@@ -616,7 +599,6 @@ class Unit
             } else {
                 return $msg = "Data Kosong";
             }
-
         }
     }
 }
