@@ -42,7 +42,7 @@ class Login
     private function data_user($result, $username, $password)
     {
         $row = $result->fetchRow();
-        die(print_r($row));
+        die($row);
         while ($row = $result->fetchRow()) {
             $user_id = $row['id'];
             $name = $row['name'];
