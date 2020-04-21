@@ -89,6 +89,7 @@ class MainProgram
         }
 
         $check = $validate_code->checkIfExists($tablename, $code);
+        die($check);
         if (is_bool($check)) {
             $query = "INSERT INTO $tablename (title, code, unit_id, periode_id)";
             $query .= "VALUES ('$title', '$code','$unit_id','$periode_id') RETURNING *";
