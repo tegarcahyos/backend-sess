@@ -27,6 +27,7 @@ class Login
         if ($num > 0) {
             $row_get = $result_user->fetchRow();
             if (!empty($row_get['password'])) {
+                die("disini");
                 $msg = $this->data_user($result_user, $username, $password);
             } else {
                 $msg = $this->LDAPLogin($username, $password, $row_get['id']);
