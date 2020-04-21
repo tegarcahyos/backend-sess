@@ -41,7 +41,7 @@ class Login
     // Detail User
     private function data_user($result, $username, $password)
     {
-        die($result['password']);
+        die(print_r($result));
         while ($row = $result->fetchRow()) {
             $user_id = $row['id'];
             $name = $row['name'];
