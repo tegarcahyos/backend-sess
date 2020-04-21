@@ -27,8 +27,7 @@ class Login
         if ($num > 0) {
             $row_get = $result_user->fetchRow();
             if (!empty($row_get['password'])) {
-                die(print_r($result_user));
-                $msg = $this->data_user($result_user, $username, $password);
+                $msg = $this->data_user($username, $password);
             } else {
                 $msg = $this->LDAPLogin($username, $password, $row_get['id']);
             }
@@ -40,17 +39,18 @@ class Login
     }
 
     // Detail User
-    private function data_user($result, $username, $password)
+    private function data_user($username, $password)
     {
-        $row = $result->fetchRow();
-        die($row);
-        while ($row = $result->fetchRow()) {
+        $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
+        // die($query);
+        $result_user = $this->db->execute($query);
+        while ($row = $result_user->fetchRow()) {
             $user_id = $row['id'];
             $name = $row['name'];
             $password2 = $row['password'];
             $employee_id = $row['employee_id'];
         }
-        die("$password,  $user_id");
+        die("$password,  $password2");
         if (password_verify($password, $password2)) {
             $secret_key = "YOUR_SECRET_KEY";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
