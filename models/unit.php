@@ -266,6 +266,8 @@ class Unit
                     // 'parent_list' => $this->parentArray,
                 );
 
+                $child = $this->getByParent($id, $tablename);
+                $data_item['parent'] = $child;
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
