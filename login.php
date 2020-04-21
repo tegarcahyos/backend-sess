@@ -27,8 +27,8 @@ class Login
         if ($num > 0) {
             $msg = $this->data_user($result_user, $username, $password);
         } else {
-            $this->LDAPLogin($username, $password);
-            $msg = "203";
+            $msg = $this->LDAPLogin($username, $password);
+            // $msg = "203";
         }
 
         return $msg;
