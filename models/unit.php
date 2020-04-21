@@ -342,7 +342,7 @@ class Unit
                 );
 
                 $get_parent = $this->getByParent($id, $tablename);
-                print_r($get_parent);
+                $data_item['parent'] = $get_parent;
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
