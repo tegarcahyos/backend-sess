@@ -1,5 +1,5 @@
 <?php
-include 'isCodeExists.php';
+include_once 'isCodeExists.php';
 class Tara
 {
     public $db;
