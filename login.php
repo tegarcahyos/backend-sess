@@ -50,6 +50,7 @@ class Login
             $password2 = $row['password'];
             $employee_id = $row['employee_id'];
         }
+        die($password2);
         if (password_verify($password, $password2)) {
             $secret_key = "YOUR_SECRET_KEY";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
@@ -95,7 +96,7 @@ class Login
                 "employee_id" => $employee_id,
                 "name" => $name,
                 "username" => $username,
-                "password" => $password,
+                "password" => $password2,
                 "expireAt" => $expire_claim,
                 "role_id" => $role_id,
                 "unit_id" => $unit_id,
@@ -133,13 +134,10 @@ class Login
             $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '$id'";
             $this->db->execute($insert_password);
             // LOGIN
-            $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-            $result_user = $this->db->execute($query);
-            $msg = $this->data_user($result_user, $username, $password);
+            $msg = $this->data_user($username, $password);
+        } else {
+            $msg = "203";
         }
-        // } else {
-        //     $msg = "203";
-        // }
 
         return $msg;
     }
