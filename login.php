@@ -25,10 +25,14 @@ class Login
         $result_user = $this->db->execute($query);
         $num = $result_user->rowCount();
         if ($num > 0) {
-            $msg = $this->data_user($result_user, $username, $password);
+            $row_get = $result_user->fetchRow();
+            if (!empty($row_get['password'])) {
+                $msg = $this->data_user($result_user, $username, $password);
+            } else {
+                $msg = $this->LDAPLogin($username, $password, $row_get['id']);
+            }
         } else {
-            $msg = $this->LDAPLogin($username, $password);
-            // $msg = "203";
+            $msg = "203";
         }
 
         return $msg;
@@ -101,7 +105,7 @@ class Login
         return $msg;
     }
 
-    public function LDAPLogin($username, $password)
+    public function LDAPLogin($username, $password, $id)
     {
         // $data = json_decode(file_get_contents("php://input"));
 
@@ -117,31 +121,23 @@ class Login
         // die(print_r($response));
         $result_user;
         if ($response->login != 0) {
+            // $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
+            // // die($query);
+            // $result_get = $this->db->execute($query);
+            // $num = $result_get->rowCount();
+            // if ($num > 0) {
+            // $row_get = $result_get->fetchRow();
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '$id'";
+            $this->db->execute($insert_password);
+            // LOGIN
             $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-            // die($query);
-            $result_get = $this->db->execute($query);
-            $num = $result_get->rowCount();
-            if ($num > 0) {
-                $row_get = $result_get->fetchRow();
-                if (empty($row_get['password'])) {
-                    $password_hash = password_hash($password, PASSWORD_BCRYPT);
-                    $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '" . $row_get['id'] . "'";
-                    $this->db->execute($insert_password);
-                    // LOGIN
-                    $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-                    $result_user = $this->db->execute($query);
-                    $msg = $this->data_user($result_user, $username, $password);
-                } else {
-                    $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-                    $result_user = $this->db->execute($query);
-                    $msg = $this->data_user($result_user, $username, $password);
-                }
-            } else {
-                $msg = "203";
-            }
-        } else {
-            $msg = "203";
+            $result_user = $this->db->execute($query);
+            $msg = $this->data_user($result_user, $username, $password);
         }
+        // } else {
+        //     $msg = "203";
+        // }
 
         return $msg;
     }
