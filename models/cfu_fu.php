@@ -1,5 +1,5 @@
 <?php
-include 'isCodeExists.php';
+include_once 'isCodeExists.php';
 class CfuFu
 {
     public $db;
