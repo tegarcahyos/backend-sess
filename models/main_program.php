@@ -89,12 +89,8 @@ class MainProgram
         }
 
         $check = checkIfExists($tablename, $code, $this->db);
-        if (empty($check)) {
-            die("Kosong");
-        } else {
-            die("Ada");
-        }
-        if (is_bool($check)) {
+
+        if (!empty($check)) {
             $query = "INSERT INTO $tablename (title, code, unit_id, periode_id)";
             $query .= "VALUES ('$title', '$code','$unit_id','$periode_id') RETURNING *";
 
