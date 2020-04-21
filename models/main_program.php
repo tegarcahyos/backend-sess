@@ -6,11 +6,9 @@ class MainProgram
 {
 
     public $db;
-    public $validate_code;
 
     public function __construct($db)
     {
-        $this->validate_code = new isCodeExists();
         $this->db = $db;
     }
 
@@ -90,7 +88,7 @@ class MainProgram
             $$item = $request[0]->{$item};
         }
 
-        $check = $this->validate_code->checkIfExists($tablename, $code);
+        $check = checkIfExists($tablename, $code, $this->db);
         die($check);
         if (is_bool($check)) {
             $query = "INSERT INTO $tablename (title, code, unit_id, periode_id)";

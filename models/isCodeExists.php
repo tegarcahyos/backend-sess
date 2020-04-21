@@ -1,12 +1,9 @@
 <?php
 
-class isCodeExists
+function checkIfExists($tablename, $code, $db)
 {
-  public function checkIfExists($tablename, $code)
-  {
-    $query = "SELECT * FROM $tablename WHERE code = '$code'";
-    $result = $this->db->execute($query);
-    $row = $result->fetchRow();
-    return $row;
-  }
+  $query = "SELECT * FROM $tablename WHERE code = '$code'";
+  $result = $db->execute($query);
+  $row = $result->fetchRow();
+  return $row;
 }
