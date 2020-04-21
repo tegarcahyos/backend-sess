@@ -10,8 +10,8 @@ class MainProgram
 
     public function __construct($db)
     {
-        $this->db = $db;
         $this->validate_code = new isCodeExists();
+        $this->db = $db;
     }
 
     public function get($tablename)
