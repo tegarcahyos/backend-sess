@@ -1,5 +1,5 @@
 <?php
-
+include 'isCodeExists.php';
 class Unit
 {
     public $db;
@@ -451,42 +451,46 @@ class Unit
 
             $$item = $request[0]->{$item};
         }
-
-        $query = "INSERT INTO $tablename (
+        $check = checkIfExists($tablename, $code, $this->db);
+        if (empty($check)) {
+            $query = "INSERT INTO $tablename (
             parent_id, name, code, organization_id, cfu_fu_id)";
-        $query .= "VALUES (
+            $query .= "VALUES (
             '$parent_id' , '$name', '$code','$organization_id','$cfu_fu_id') RETURNING *";
-        // die($query);
-        $result = $this->db->execute($query);
-        if (empty($result)) {
-            return "422";
-        } else {
-            $num = $result->rowCount();
-            if ($num > 0) {
+            // die($query);
+            $result = $this->db->execute($query);
+            if (empty($result)) {
+                return "422";
+            } else {
+                $num = $result->rowCount();
+                if ($num > 0) {
 
-                $data_arr = array();
+                    $data_arr = array();
 
-                while ($row = $result->fetchRow()) {
-                    extract($row);
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
 
-                    // Push to data_arr
+                        // Push to data_arr
 
-                    $data_item = array(
-                        'id' => $id,
-                        'organization_id' => $organization_id,
-                        'cfu_fu_id' => $cfu_fu_id,
-                        'parent_id' => $parent_id,
-                        'name' => $name,
-                        'code' => $code,
-                    );
+                        $data_item = array(
+                            'id' => $id,
+                            'organization_id' => $organization_id,
+                            'cfu_fu_id' => $cfu_fu_id,
+                            'parent_id' => $parent_id,
+                            'name' => $name,
+                            'code' => $code,
+                        );
 
-                    array_push($data_arr, $data_item);
-                    $msg = $data_arr;
+                        array_push($data_arr, $data_item);
+                        $msg = $data_arr;
+                    }
                 }
             }
-        }
 
-        return $msg;
+            return $msg;
+        } else {
+            return "515";
+        }
     }
 
     public function update($id, $tablename)

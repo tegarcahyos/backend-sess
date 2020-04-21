@@ -1,5 +1,5 @@
 <?php
-
+include 'isCodeExists.php';
 class Periode
 {
     public $db;
@@ -38,7 +38,6 @@ class Periode
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -90,7 +89,6 @@ class Periode
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = '0';
         }
@@ -119,7 +117,6 @@ class Periode
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = '0';
         }
@@ -137,53 +134,56 @@ class Periode
         $status_active = $request[0]->status_active;
         $organization_id = $request[0]->organization_id;
 
-        $query_select_status = " SELECT id from $tablename where organization_id = '$organization_id' and status_active = '$status_active'";
+        $check = checkIfExists($tablename, $code, $this->db);
+        if (empty($check)) {
+            $query_select_status = "SELECT id from $tablename where organization_id = '$organization_id' and status_active = '$status_active'";
 
-        $result_select = $this->db->execute($query_select_status);
+            $result_select = $this->db->execute($query_select_status);
 
-        $num = $result_select->rowCount();
+            $num = $result_select->rowCount();
 
-        if ($num > 0) {
+            if ($num > 0) {
 
-            // $data_arr = array();
+                // $data_arr = array();
 
-            while ($row = $result_select->fetchRow()) {
-                extract($row);
+                while ($row = $result_select->fetchRow()) {
+                    extract($row);
 
-                $data_item = array(
-                    'id' => $id,
+                    $data_item = array(
+                        'id' => $id,
 
-                );
+                    );
 
-                // array_push($data_item);
-                $msg_item = $data_item;
+                    // array_push($data_item);
+                    $msg_item = $data_item;
+                }
+                $id_periode = implode('', $msg_item);
+
+                if ($status_active == true) {
+                    $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
+                    // die($query_set_status);
+                    $this->db->execute($query_set_status);
+                } else {
+                    $query_set_status = "UPDATE $tablename SET status_active = 'true' where id = '$id_periode'";
+                    // die($query_set_status);
+                    $this->db->execute($query_set_status);
+                }
             }
-            $id_periode = implode('', $msg_item);
 
-            if ($status_active == true) {
-                $query_set_status = "UPDATE $tablename SET status_active = 'false' where id = '$id_periode'";
-                // die($query_set_status);
-                $this->db->execute($query_set_status);
+            $query = "INSERT INTO $tablename (name, code, status_active,organization_id)";
+            $query .= "VALUES ('$name', '$code', '$status_active', '$organization_id')";
+            // die($query);
+            $result = $this->db->execute($query);
 
+            $res = $this->db->affected_rows();
+
+            if ($res == true) {
+                return array("message" => 'Data Berhasil Ditambah', "code" => 200);
             } else {
-                $query_set_status = "UPDATE $tablename SET status_active = 'true' where id = '$id_periode'";
-                // die($query_set_status);
-                $this->db->execute($query_set_status);
+                return "Data Kosong";
             }
-
-        }
-
-        $query = "INSERT INTO $tablename (name, code, status_active,organization_id)";
-        $query .= "VALUES ('$name', '$code', '$status_active', '$organization_id')";
-        // die($query);
-        $result = $this->db->execute($query);
-
-        $res = $this->db->affected_rows();
-
-        if ($res == true) {
-            return $msg = array("message" => 'Data Berhasil Ditambah', "code" => 200);
         } else {
-            return $msg = "Data Kosong";
+            return '515';
         }
     }
 
@@ -223,7 +223,6 @@ class Periode
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = '0';
         }

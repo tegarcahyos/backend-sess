@@ -796,7 +796,7 @@ class Router
             } else if ($result == "511") {
                 $this->msg(http_response_code(511), 511, 'User Already Exists, Please Login Via LDAP', "gagal", 0);
             } else if ($result == "515") {
-                $this->msg(http_response_code(515), 515, 'Data With Code is Already Exists', "gagal", 0);
+                $this->msg(http_response_code(515), 515, 'Data Already Exists', "gagal", 0);
             } else if ($result == "507") {
                 $this->msg(http_response_code(507), 507, 'Account Already Active', "gagal", 0);
             } else {

@@ -1,5 +1,5 @@
 <?php
-
+include 'isCodeExists.php';
 class StraIn
 {
     public $db;
@@ -37,7 +37,6 @@ class StraIn
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -105,7 +104,6 @@ class StraIn
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
@@ -144,7 +142,6 @@ class StraIn
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
@@ -197,7 +194,6 @@ class StraIn
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -256,13 +252,11 @@ class StraIn
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
 
         return $msg;
-
     }
 
     public function insert($tablename)
@@ -280,38 +274,41 @@ class StraIn
 
             $$item = $request[0]->{$item};
         }
+        $check = checkIfExists($tablename, $code, $this->db);
+        if (empty($check)) {
+            $query = "INSERT INTO $tablename (name, code, parent_id,periode_id)";
+            $query .= "VALUES ('$name', '$code', '$parent_id','$periode_id') RETURNING *";
+            // die($query);
+            $result = $this->db->execute($query);
+            if (empty($result)) {
+                return "422";
+            } else {
+                $num = $result->rowCount();
 
-        $query = "INSERT INTO $tablename (name, code, parent_id,periode_id)";
-        $query .= "VALUES ('$name', '$code', '$parent_id','$periode_id') RETURNING *";
-        // die($query);
-        $result = $this->db->execute($query);
-        if (empty($result)) {
-            return "422";
-        } else {
-            $num = $result->rowCount();
+                if ($num > 0) {
 
-            if ($num > 0) {
+                    $data_arr = array();
 
-                $data_arr = array();
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
 
-                while ($row = $result->fetchRow()) {
-                    extract($row);
+                        $data_item = array(
+                            'id' => $id,
+                            'name' => $name,
+                            'code' => $code,
+                            'parent_id' => $parent_id,
+                            'periode_id' => $periode_id,
+                        );
 
-                    $data_item = array(
-                        'id' => $id,
-                        'name' => $name,
-                        'code' => $code,
-                        'parent_id' => $parent_id,
-                        'periode_id' => $periode_id,
-                    );
-
-                    array_push($data_arr, $data_item);
-                    $msg = $data_arr;
+                        array_push($data_arr, $data_item);
+                        $msg = $data_arr;
+                    }
                 }
-
             }
+            return $msg;
+        } else {
+            return "515";
         }
-        return $msg;
     }
 
     public function update($id, $tablename)
@@ -355,7 +352,6 @@ class StraIn
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
         return $msg;
