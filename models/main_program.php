@@ -1,6 +1,6 @@
 <?php
 
-include './isCodeExists.php';
+include 'isCodeExists.php';
 $validate_code = new isCodeExists();
 class MainProgram
 {
