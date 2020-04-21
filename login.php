@@ -25,12 +25,12 @@ class Login
         $result_user = $this->db->execute($query);
         $num = $result_user->rowCount();
         if ($num > 0) {
-            $row_get = $result_user->fetchRow();
-            if (!empty($row_get['password'])) {
-                $msg = $this->data_user($result_user, $username, $password);
-            } else {
-                $msg = $this->LDAPLogin($username, $password, $row_get['id']);
-            }
+            // $row_get = $result_user->fetchRow();
+            // if (!empty($row_get['password'])) {
+            $msg = $this->data_user($result_user, $username, $password);
+            // } else {
+            //     $msg = $this->LDAPLogin($username, $password, $row_get['id']);
+            // }
         } else {
             $msg = "203";
         }
