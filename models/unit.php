@@ -341,6 +341,8 @@ class Unit
                     'code' => $code,
                 );
 
+                $get_parent = $this->getByParent($id, $tablename);
+                print_r($get_parent);
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
