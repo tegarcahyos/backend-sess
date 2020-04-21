@@ -1,15 +1,17 @@
 <?php
 
 include 'isCodeExists.php';
-$validate_code = new isCodeExists();
+
 class MainProgram
 {
 
     public $db;
+    public $validate_code;
 
     public function __construct($db)
     {
         $this->db = $db;
+        $this->validate_code = new isCodeExists();
     }
 
     public function get($tablename)
