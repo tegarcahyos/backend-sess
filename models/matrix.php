@@ -150,7 +150,7 @@ class Matrix
         }
 
         $queryCheckIfExist = "SELECT * FROM $tablename WHERE si_id = '$si_id' and unit_id = '$unit_id' and matrix = '$matrix'";
-        $resultCheck = $this->$db->execute($queryCheckIfExist);
+        $resultCheck = $this->db->execute($queryCheckIfExist);
         $rowCheck = $resultCheck->fetchRow();
         
         if (empty($rowCheck)) {
