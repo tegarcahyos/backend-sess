@@ -50,7 +50,6 @@ class Login
             $password2 = $row['password'];
             $employee_id = $row['employee_id'];
         }
-        die("$password,  $password2");
         if (password_verify($password, $password2)) {
             $secret_key = "YOUR_SECRET_KEY";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
