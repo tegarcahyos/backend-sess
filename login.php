@@ -43,12 +43,12 @@ class Login
     {
         while ($row = $result->fetchRow()) {
             $user_id = $row['id'];
-            print($row['id'] . $row['password']);
+
             $name = $row['name'];
             $password2 = $row['password'];
             $employee_id = $row['employee_id'];
         }
-        die("$password,  $password2");
+        die("$password,  $user_id");
         if (password_verify($password, $password2)) {
             $secret_key = "YOUR_SECRET_KEY";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
