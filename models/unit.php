@@ -1,5 +1,5 @@
 <?php
-
+include_once 'isCodeExists.php';
 class Unit
 {
     public $db;
@@ -39,7 +39,6 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -107,13 +106,11 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
 
         return $msg;
-
     }
 
     public function getAllParent($id)
@@ -175,13 +172,11 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
 
         return $msg;
-
     }
 
     private $parentArray = [""];
@@ -235,13 +230,11 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
 
         return $msg;
-
     }
 
     public function getByParent($parent_id, $tablename)
@@ -276,7 +269,6 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
@@ -315,13 +307,11 @@ class Unit
 
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
         // echo count($msg);
         return $msg;
-
     }
 
     public function findByOrgId($org_id, $tablename)
@@ -329,7 +319,7 @@ class Unit
         $query = "SELECT
            *
           FROM
-             $tablename WHERE organization_id = '$org_id'";
+             $tablename WHERE organization_id = '$org_id' AND parent_id = '0'";
 
         $result = $this->db->execute($query);
 
@@ -354,7 +344,6 @@ class Unit
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
@@ -429,9 +418,7 @@ class Unit
                         );
 
                         array_push($userArray, $data_item);
-
                     }
-
                 } else {
                     $userArray = [];
                 }
@@ -442,7 +429,6 @@ class Unit
                 }
                 $msg = $resultUsers;
             }
-
         } else {
             $msg = [];
         }
@@ -465,43 +451,46 @@ class Unit
 
             $$item = $request[0]->{$item};
         }
-
-        $query = "INSERT INTO $tablename (
+        $check = checkIfExists($tablename, $code, $this->db);
+        if (empty($check)) {
+            $query = "INSERT INTO $tablename (
             parent_id, name, code, organization_id, cfu_fu_id)";
-        $query .= "VALUES (
+            $query .= "VALUES (
             '$parent_id' , '$name', '$code','$organization_id','$cfu_fu_id') RETURNING *";
-        // die($query);
-        $result = $this->db->execute($query);
-        if (empty($result)) {
-            return "422";
-        } else {
-            $num = $result->rowCount();
-            if ($num > 0) {
+            // die($query);
+            $result = $this->db->execute($query);
+            if (empty($result)) {
+                return "422";
+            } else {
+                $num = $result->rowCount();
+                if ($num > 0) {
 
-                $data_arr = array();
+                    $data_arr = array();
 
-                while ($row = $result->fetchRow()) {
-                    extract($row);
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
 
-                    // Push to data_arr
+                        // Push to data_arr
 
-                    $data_item = array(
-                        'id' => $id,
-                        'organization_id' => $organization_id,
-                        'cfu_fu_id' => $cfu_fu_id,
-                        'parent_id' => $parent_id,
-                        'name' => $name,
-                        'code' => $code,
-                    );
+                        $data_item = array(
+                            'id' => $id,
+                            'organization_id' => $organization_id,
+                            'cfu_fu_id' => $cfu_fu_id,
+                            'parent_id' => $parent_id,
+                            'name' => $name,
+                            'code' => $code,
+                        );
 
-                    array_push($data_arr, $data_item);
-                    $msg = $data_arr;
+                        array_push($data_arr, $data_item);
+                        $msg = $data_arr;
+                    }
                 }
-
             }
-        }
 
-        return $msg;
+            return $msg;
+        } else {
+            return "515";
+        }
     }
 
     public function update($id, $tablename)
@@ -546,7 +535,6 @@ class Unit
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
 
@@ -599,7 +587,6 @@ class Unit
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             } else {
                 $msg = 'Data Kosong';
             }
@@ -616,7 +603,6 @@ class Unit
             } else {
                 return $msg = "Data Kosong";
             }
-
         }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 include "vendor/autoload.php";
+
 use \Firebase\JWT\JWT;
 
 class Login
@@ -24,25 +25,12 @@ class Login
         $result_user = $this->db->execute($query);
         $num = $result_user->rowCount();
         if ($num > 0) {
-            $msg = $this->data_user($result_user, $username, $password);
-            // $get_user = "SELECT * FROM $tablename WHERE username = '$username'";
-            // $result = $this->db->execute($query);
-            // $row_get = $result->fetchRow();
-            // // die(print_r(!empty($row_get['password'])));
-            // if (empty($row_get['password'])) {
-            //     // die("goblok");
-            //     $password_hash = password_hash($password, PASSWORD_BCRYPT);
-            //     $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '" . $row_get['id'] . "'";
-            //     // die($insert_password);
-            //     $this->db->execute($insert_password);
-            //     // LOGIN
-            //     $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-            //     $result_user = $this->db->execute($query);
-            //     $msg = $this->data_user($result_user, $username, $password);
-            // } else {
-            // die("lebih goblok " . $password);
-
-            // }
+            $row_get = $result_user->fetchRow();
+            if (!empty($row_get['password'])) {
+                $msg = $this->data_user($username, $password);
+            } else {
+                $msg = $this->LDAPLogin($username, $password, $row_get['id']);
+            }
         } else {
             $msg = "203";
         }
@@ -51,19 +39,17 @@ class Login
     }
 
     // Detail User
-    private function data_user($result, $username, $password)
+    private function data_user($username, $password)
     {
-        // die(print_r($result));
-
-        while ($row = $result->fetchRow()) {
+        $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
+        // die($query);
+        $result_user = $this->db->execute($query);
+        while ($row = $result_user->fetchRow()) {
             $user_id = $row['id'];
             $name = $row['name'];
             $password2 = $row['password'];
             $employee_id = $row['employee_id'];
         }
-        // die(print_r($password . "=" . $password2));
-        // die($password2);
-        // die(password_verify($password, $password2));
         if (password_verify($password, $password2)) {
             $secret_key = "YOUR_SECRET_KEY";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
@@ -80,7 +66,8 @@ class Login
                 "data" => array(
                     "name" => $name,
                     "username" => $username,
-                ));
+                )
+            );
 
             $jwt = JWT::encode($token, $secret_key);
             $insert_token = "UPDATE users SET token = '$jwt', expire_at = '$expire_claim' WHERE id = '$user_id'";
@@ -91,15 +78,11 @@ class Login
 
             // GET USER UNIT
             $query2 = "SELECT * FROM user_detail WHERE user_id = '$user_id'";
-            // die($query2);
             $result = $this->db->execute($query2);
             $row = $result->fetchRow();
             if (is_bool($row)) {
                 $unit_id = null;
-                $unit_code = null;
-                $unit_name = null;
                 $role_id = null;
-                $role_name = null;
             } else {
                 extract($row);
                 $unit_id = $row['unit_id'];
@@ -112,28 +95,24 @@ class Login
                 "employee_id" => $employee_id,
                 "name" => $name,
                 "username" => $username,
-                "password" => $password,
+                "password" => $password2,
                 "expireAt" => $expire_claim,
                 "role_id" => $role_id,
                 "unit_id" => $unit_id,
                 "token" => $jwt,
             );
-
         } else {
-
-            // http_response_code(401);
             $msg = "506";
         }
         return $msg;
-
     }
 
-    public function LDAPLogin()
+    public function LDAPLogin($username, $password, $id)
     {
-        $data = json_decode(file_get_contents("php://input"));
+        // $data = json_decode(file_get_contents("php://input"));
 
-        $username = $data->username;
-        $password = $data->password;
+        // $username = $data->username;
+        // $password = $data->password;
 
         $data_array = array(
             "account" => $username,
@@ -144,29 +123,17 @@ class Login
         // die(print_r($response));
         $result_user;
         if ($response->login != 0) {
-            $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-            // die($query);
-            $result_get = $this->db->execute($query);
-            $num = $result_get->rowCount();
-            if ($num > 0) {
-                $row_get = $result_get->fetchRow();
-                if (empty($row_get['password'])) {
-                    // die("goblok");
-                    $password_hash = password_hash($password, PASSWORD_BCRYPT);
-                    $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '" . $row_get['id'] . "'";
-                    $this->db->execute($insert_password);
-                    // LOGIN
-                    $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-                    $result_user = $this->db->execute($query);
-                    $msg = $this->data_user($result_user, $username, $password);
-                } else {
-                    $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1 ";
-                    $result_user = $this->db->execute($query);
-                    $msg = $this->data_user($result_user, $username, $password);
-                }
-            } else {
-                $msg = "203";
-            }
+            // $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
+            // // die($query);
+            // $result_get = $this->db->execute($query);
+            // $num = $result_get->rowCount();
+            // if ($num > 0) {
+            // $row_get = $result_get->fetchRow();
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            $insert_password = "UPDATE users SET password = '$password_hash' WHERE id = '$id'";
+            $this->db->execute($insert_password);
+            // LOGIN
+            $msg = $this->data_user($username, $password);
         } else {
             $msg = "203";
         }
@@ -196,7 +163,6 @@ class Login
                 if ($data) {
                     $url = sprintf("%s?%s", $url, http_build_query($data));
                 }
-
         }
 
         // OPTIONS:
@@ -210,7 +176,9 @@ class Login
         // EXECUTE:
         $result = curl_exec($curl);
         // die("ini token" . $this->apiKey);
-        if (!$result) {die("Connection Failure");}
+        if (!$result) {
+            die("Connection Failure");
+        }
         curl_close($curl);
         return $result;
     }

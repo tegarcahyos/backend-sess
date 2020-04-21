@@ -68,16 +68,12 @@ class Quadran
                                     $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
                                     $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
                                 }
-
                             }
                         }
-
                     }
                 }
-
             }
             $msg = $data_arr;
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -115,7 +111,6 @@ class Quadran
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = [];
         }
@@ -128,18 +123,18 @@ class Quadran
 
         $getOrg = $this->getOrg($org_id);
         // die(print_r($getOrg));
-        
-        if (!empty($getOrg)){
+        $data_arr = array();
+        if (!empty($getOrg)) {
             for ($m = 0; $m < count($getOrg); $m++) {
                 $query = "SELECT * FROM  $tablename WHERE periode_id = '$periode_id' AND unit_id = '" . $getOrg[$m]['id'] . "'";
-                // die($query);
+                // print_r($query);
                 $result = $this->db->execute($query);
                 // hitung result
                 $num = $result->rowCount();
+                // print_r($num);
 
                 if ($num > 0) {
 
-                    $data_arr = array();
 
                     while ($row = $result->fetchRow()) {
                         extract($row);
@@ -154,7 +149,7 @@ class Quadran
                         array_push($data_arr, $data_item);
                     }
 
-                    $result_arr = array();
+
                     for ($i = 0; $i < count($data_arr); $i++) {
                         $unit = "SELECT * FROM unit WHERE id = '" . $data_arr[$i]['unit_id'] . "'";
                         // die($unit);
@@ -188,21 +183,16 @@ class Quadran
                                             $data_arr[$i]['detail_pc'][$row['id']]['title'] = $row['title'];
                                             $data_arr[$i]['detail_pc'][$row['id']]['weight'] = $row['weight'];
                                         }
-
                                     }
                                 }
-
                             }
                         }
 
                     }
-                    $msg = $data_arr;
-
-                } else {
-                    $msg = 'Data Kosong';
                 }
             }
-        }else {
+            $msg = $data_arr;
+        } else {
             $msg = 'Data Kosong';
         }
 
@@ -278,7 +268,6 @@ class Quadran
                 array_push($result_arr, $data_item);
                 $msg = $result_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -333,12 +322,10 @@ class Quadran
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
 
         return $msg;
-
     }
 
     public function update($id, $tablename)
@@ -387,7 +374,6 @@ class Quadran
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
 
@@ -424,5 +410,4 @@ class Quadran
             return $msg = "Data Kosong";
         }
     }
-
 }

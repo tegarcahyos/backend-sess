@@ -1,5 +1,5 @@
 <?php
-
+include_once 'isCodeExists.php';
 class Tara
 {
     public $db;
@@ -32,7 +32,6 @@ class Tara
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -58,7 +57,6 @@ class Tara
             );
 
             $msg = $data_item;
-
         }
         return $msg;
     }
@@ -71,13 +69,11 @@ class Tara
         $attr = explode('AND', $attr);
         for ($i = 0; $i < count($attr); $i++) {
             if ($i == 0) {
-
             } else {
                 $query .= " AND ";
             }
             // $query .= "values @> '{\"" . $attr[$i] . "\": \"" . $values[$i] . "\"}'";
             $query .= "values ->> '" . $attr[$i] . "' = '" . $values[$i] . "'";
-
         }
 
         $query_real = str_replace("%20", " ", $query);
@@ -100,7 +96,6 @@ class Tara
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -123,40 +118,42 @@ class Tara
         }
 
         $data = json_encode($data);
+        $check = checkIfExists($tablename, $code, $this->db);
+        if (empty($check)) {
+            $query = 'INSERT INTO ' . $tablename . ' (data) ';
+            $query .= "VALUES ('$data') RETURNING *";
+            // die($query);
+            $result = $this->db->execute($query);
+            if (empty($result)) {
+                return "422";
+            } else {
+                $num = $result->rowCount();
 
-        $query = 'INSERT INTO ' . $tablename . ' (data) ';
-        $query .= "VALUES ('$data') RETURNING *";
-        // die($query);
-        $result = $this->db->execute($query);
-        if (empty($result)) {
-            return "422";
-        } else {
-            $num = $result->rowCount();
+                // jika ada hasil
+                if ($num > 0) {
 
-            // jika ada hasil
-            if ($num > 0) {
+                    $data_arr = array();
 
-                $data_arr = array();
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
 
-                while ($row = $result->fetchRow()) {
-                    extract($row);
+                        // Push to data_arr
 
-                    // Push to data_arr
+                        $data_item = array(
+                            'id' => $id,
+                            'data' => json_decode($data),
+                        );
 
-                    $data_item = array(
-                        'id' => $id,
-                        'data' => json_decode($data),
-                    );
-
-                    array_push($data_arr, $data_item);
-                    $msg = $data_arr;
+                        array_push($data_arr, $data_item);
+                        $msg = $data_arr;
+                    }
                 }
-
             }
+
+            return $msg;
+        } else {
+            return '515';
         }
-
-        return $msg;
-
     }
 
     public function update($id, $tablename)
@@ -205,7 +202,6 @@ class Tara
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
 
@@ -235,16 +231,13 @@ class Tara
         $query = "DELETE FROM  $tablename";
         for ($i = 0; $i < count($condition_attr); $i++) {
             if ($i == 0) {
-
             } else {
                 $query .= " AND ";
             }
             $query .= "values @> '{\"" . $condition_attr[$i] . "\": \"" . $condition_values[$i] . "\"}'";
-
         }
         $query_real = str_replace("%20", " ", $query);
         // die($query_real);
         return $this->db->execute($query_real);
     }
-
 }

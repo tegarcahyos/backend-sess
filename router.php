@@ -125,6 +125,14 @@ class Router
                 'status' => $status,
             );
             echo json_encode($array);
+        } else if ($type == 515) {
+            $array = array(
+                'type' => $type,
+                'error_msg' => $msg,
+                'keterangan' => $keterangan . '',
+                'status' => $status,
+            );
+            echo json_encode($array);
         } else if ($type == 204) {
             $array = array(
                 'type' => $type,
@@ -786,7 +794,9 @@ class Router
             } else if ($result == "508") {
                 $this->msg(http_response_code(508), 508, 'Account Already Requested', "gagal", 0);
             } else if ($result == "511") {
-                $this->msg(http_response_code(508), 508, 'User Already Exists, Please Login Via LDAP', "gagal", 0);
+                $this->msg(http_response_code(511), 511, 'User Already Exists, Please Login Via LDAP', "gagal", 0);
+            } else if ($result == "515") {
+                $this->msg(http_response_code(515), 515, 'Data Already Exists', "gagal", 0);
             } else if ($result == "507") {
                 $this->msg(http_response_code(507), 507, 'Account Already Active', "gagal", 0);
             } else {

@@ -1,4 +1,6 @@
 <?php
+
+include_once 'isCodeExists.php';
 class Organization
 {
     public $db;
@@ -35,7 +37,6 @@ class Organization
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -66,13 +67,11 @@ class Organization
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
 
         return $msg;
-
     }
 
     public function findById($id, $tablename)
@@ -121,13 +120,11 @@ class Organization
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
 
         return $msg;
-
     }
 
     public function insert($tablename)
@@ -145,35 +142,39 @@ class Organization
             $$item = $request[0]->{$item};
         }
 
-        $query = "INSERT INTO $tablename (name, code)";
-        $query .= "VALUES ('$name', '$code') RETURNING *";
-        // die($query);
-        $result = $this->db->execute($query);
-        if (empty($result)) {
-            return "422";
-        } else {
-            $num = $result->rowCount();
+        $check = checkIfExists($tablename, $code, $this->db);
+        if (empty($check)) {
+            $query = "INSERT INTO $tablename (name, code)";
+            $query .= "VALUES ('$name', '$code') RETURNING *";
+            // die($query);
+            $result = $this->db->execute($query);
+            if (empty($result)) {
+                return "422";
+            } else {
+                $num = $result->rowCount();
 
-            if ($num > 0) {
+                if ($num > 0) {
 
-                $data_arr = array();
+                    $data_arr = array();
 
-                while ($row = $result->fetchRow()) {
-                    extract($row);
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
 
-                    $data_item = array(
-                        'id' => $id,
-                        'name' => $name,
-                        'code' => $code,
-                    );
+                        $data_item = array(
+                            'id' => $id,
+                            'name' => $name,
+                            'code' => $code,
+                        );
 
-                    array_push($data_arr, $data_item);
-                    $msg = $data_arr;
+                        array_push($data_arr, $data_item);
+                        $msg = $data_arr;
+                    }
                 }
-
             }
+            return $msg;
+        } else {
+            return '515';
         }
-        return $msg;
     }
 
     public function update($id, $tablename)
@@ -214,7 +215,6 @@ class Organization
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
         return $msg;
@@ -245,6 +245,5 @@ class Organization
                 return $msg = "Data Kosong";
             }
         }
-
     }
 }
