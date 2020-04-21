@@ -1,7 +1,10 @@
 <?php
 
+include './isCodeExists.php';
+$validate_code = new isCodeExists();
 class MainProgram
 {
+
     public $db;
 
     public function __construct($db)
@@ -39,7 +42,6 @@ class MainProgram
                 array_push($data_arr, $data_item);
                 $msg = $data_arr;
             }
-
         } else {
             $msg = 'Data Kosong';
         }
@@ -69,6 +71,8 @@ class MainProgram
         }
     }
 
+
+
     public function insert($tablename)
     {
         // get data input from frontend
@@ -84,37 +88,41 @@ class MainProgram
             $$item = $request[0]->{$item};
         }
 
-        $query = "INSERT INTO $tablename (title, code, unit_id, periode_id)";
-        $query .= "VALUES ('$title', '$code','$unit_id','$periode_id') RETURNING *";
+        $check = $validate_code->checkIfExists($tablename, $code);
+        if (is_bool($check)) {
+            $query = "INSERT INTO $tablename (title, code, unit_id, periode_id)";
+            $query .= "VALUES ('$title', '$code','$unit_id','$periode_id') RETURNING *";
 
-        $result = $this->db->execute($query);
-        if (empty($result)) {
-            return "422";
-        } else {
-            $num = $result->rowCount();
+            $result = $this->db->execute($query);
+            if (empty($result)) {
+                return "422";
+            } else {
+                $num = $result->rowCount();
 
-            if ($num > 0) {
+                if ($num > 0) {
 
-                $data_arr = array();
+                    $data_arr = array();
 
-                while ($row = $result->fetchRow()) {
-                    extract($row);
+                    while ($row = $result->fetchRow()) {
+                        extract($row);
 
-                    $data_item = array(
-                        'id' => $id,
-                        'title' => $title,
-                        'code' => $code,
-                        'unit_id' => $unit_id,
-                        'periode_id' => $periode_id,
-                    );
+                        $data_item = array(
+                            'id' => $id,
+                            'title' => $title,
+                            'code' => $code,
+                            'unit_id' => $unit_id,
+                            'periode_id' => $periode_id,
+                        );
 
-                    array_push($data_arr, $data_item);
-                    $msg = $data_arr;
+                        array_push($data_arr, $data_item);
+                        $msg = $data_arr;
+                    }
                 }
-
             }
+            return $msg;
+        } else {
+            return "515";
         }
-        return $msg;
     }
 
     public function update($id, $tablename)
@@ -159,7 +167,6 @@ class MainProgram
                     array_push($data_arr, $data_item);
                     $msg = $data_arr;
                 }
-
             }
         }
         return $msg;
